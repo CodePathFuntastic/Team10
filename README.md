@@ -6,16 +6,15 @@ Charities create a challenge to raise funds it needs. The challenge is something
 
 # User Stories
 
-## User : Creator
+The Stories are organized based on the activities of the application.
 
-	1.	User should be able to review existing Challenges
-	2.	User should be able to view details of each challenge that he/she interact in
-	3.	User should be able to login and authenticate by the system
-	4.	User should be able to create a challenge
-	5.	Friend selection (most likely using facebook)
-	6.	Sending the challenge to selected friend.
+## Home Screen
 
-## User : Receiver
+1. Displays a list of challenges
+2. User should be able to browse the challenges by scrolling.
+3. When clicking on an item, it takes the user to the details screen.
+
+## Challege Details
 
 	1.	User receives the challenge when he/she logins the home-screen.
 	2.	User should be able to receive push notification for the challenge, if user is logged in.
