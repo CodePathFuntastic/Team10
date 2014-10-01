@@ -1,7 +1,7 @@
 Charity Challenger
 ===================
 
-Charities create a challenge to raise funds it needs. The challenge is something like "slap icecream on your face" or donate $10. The challenge is sent to people by the members of charities. When someone receives a challenge they can either accept the challenge or reject.
+Charities create a challenge to raise funds it needs. The challenge is something like "slap icecream on your face" or donate $10. The challenge is sent to people by the members of charities. When someone receives a challenge they can either accept the challenge or reject it. To reject the user needs to "donate" to the charity. To accept the challenge the user needs to perform the action and send the picture. 
 
 
 # User Stories
