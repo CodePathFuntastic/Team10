@@ -16,14 +16,10 @@ The Stories are organized based on the activities of the application.
 
 ## Challege Details
 
-	1.	User receives the challenge when he/she logins the home-screen.
-	2.	User should be able to receive push notification for the challenge, if user is logged in.
-	3.	Display all received challenges
-	4.	Display the detail of the challenge with "accept" and "reject" 
-	5.	“Accept" => receiver performs the action, e.g. dressed up accordingly, take the photo and send it back to sender. If sender accepts the results, then sender will make the payment. 
-	6.	“Reject" => user does the payment. 
+1. Displays the challenge "name" , "org name", "target amount", "amount raised", "description".
+2. Two buttons "Donate Now" and "Invite Friend for Challenge"
 
-
-## Payment
-1. User should able to send payment and accept payment 
+## Login Activity
+1. user will be redirected to facebook/twitter OAUth page
+2. user will be redirected to the app
 
