@@ -12,10 +12,12 @@ The Stories are organized based on the activities of the application.
 1. Displays a list of challenges
 2. User should be able to browse the challenges by scrolling.
 3. When clicking on an item, it takes the user to the details screen.
+![Alt text](https://github.com/CodePathFuntastic/Team10/blob/master/wireframe/IMG_1604.JPG "home screen")
 
 ## Challege Details
 1. Displays the challenge "name" , "org name", "target amount", "amount raised", "description".
 2. Two buttons "Donate Now" and "Invite Friend for Challenge"
+![Alt text](https://github.com/CodePathFuntastic/Team10/blob/master/wireframe/IMG_1603.JPG "details view")
 
 ## Login Activity
 1. user will be redirected to facebook/twitter OAUth page
@@ -54,6 +56,6 @@ The Stories are organized based on the activities of the application.
 1. At the end of "donate" or "accept" screen, ask the users to invite more users to take the challenge.
 2. This takes you the "invitation screen"
 
-![Alt text](https://github.com/CodePathFuntastic/Team10/blob/master/wireframe/IMG_1603.JPG "screen1.jpg")
-![Alt text](https://github.com/CodePathFuntastic/Team10/blob/master/wireframe/IMG_1604.JPG "screen1.jpg")
+
+
 ![Alt text](https://github.com/CodePathFuntastic/Team10/blob/master/wireframe/IMG_1605.JPG "screen1.jpg")
