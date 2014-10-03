@@ -56,6 +56,4 @@ The Stories are organized based on the activities of the application.
 1. At the end of "donate" or "accept" screen, ask the users to invite more users to take the challenge.
 2. This takes you the "invitation screen"
 
-
-
 ![Alt text](https://github.com/CodePathFuntastic/Team10/blob/master/wireframe/IMG_1605.JPG "screen1.jpg")
