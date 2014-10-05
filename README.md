@@ -49,9 +49,13 @@ The Stories are organized based on the activities of the application.
 2. Takes a selfie/picture of the actions according to the challenge
 3. "Send" button will be displayed
 
+![Alt text](https://github.com/CodePathFuntastic/Team10/blob/master/wireframe/IMG_1621.JPG "Action details view")
+
 ## Reject screen
 1. displays the amount to be donated.
 2. users click on "donate" button to pay.
+
+![Alt text](https://github.com/CodePathFuntastic/Team10/blob/master/wireframe/IMG_1622.JPG "donate details view")
 
 ## Donate Screen
 1. User provides payment information
