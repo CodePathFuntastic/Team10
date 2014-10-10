@@ -8,6 +8,11 @@ Charities create a challenge to raise funds it needs. The challenge is something
 
 The Stories are organized based on the activities of the application.
 
+## Overall Screen
+
+![Alt text](https://github.com/CodePathFuntastic/Team10/blob/master/wireframe/cc-flow.jpeg "cc-flow.jpeg")
+
+
 ## Home Screen
 1. Displays a list of challenges
 2. User should be able to browse the challenges by scrolling.
@@ -44,16 +49,28 @@ The Stories are organized based on the activities of the application.
 2. Takes a selfie/picture of the actions according to the challenge
 3. "Send" button will be displayed
 
+![Alt text](https://github.com/CodePathFuntastic/Team10/blob/master/wireframe/IMG_1621.JPG "Action details view")
+
 ## Reject screen
 1. displays the amount to be donated.
 2. users click on "donate" button to pay.
 
+![Alt text](https://github.com/CodePathFuntastic/Team10/blob/master/wireframe/IMG_1622.JPG "donate details view")
+
 ## Donate Screen
 1. User provides payment information
 2. presses the "donate" button.
+
+![Alt text](https://github.com/CodePathFuntastic/Team10/blob/master/wireframe/cc-confirm-pay.jpeg "donate view")
 
 ## Invite more users screen
 1. At the end of "donate" or "accept" screen, ask the users to invite more users to take the challenge.
 2. This takes you the "invitation screen"
 
 ![Alt text](https://github.com/CodePathFuntastic/Team10/blob/master/wireframe/IMG_1605.JPG "screen1.jpg")
+
+## Fun screen
+1. At the end of the donation screen, fun screen is displayed. 
+2. This takes you the "fun screen"
+
+![Alt text](https://github.com/CodePathFuntastic/Team10/blob/master/wireframe/cc-fun-screen.jpeg "cc-fun_screen.jpg")
