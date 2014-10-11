@@ -23,7 +23,7 @@ public class CharityChallengerApplication extends Application {
 	
 	private void initializeFb() {
 		// Set your Facebook App Id in strings.xml
-		ParseFacebookUtils.initialize("facebook-key");
+		ParseFacebookUtils.initialize( getString(R.string.facebook_app_id));
 
 	}
 
