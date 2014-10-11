@@ -6,6 +6,7 @@ import android.app.Application;
 
 import com.parse.Parse;
 import com.parse.ParseACL;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -15,10 +16,18 @@ public class CharityChallengerApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		
-		initializeDb();
+		initializeParseAndLocalDB();
+		
+		initializeFb();
 	}
 	
-	public void initializeDb(){
+	private void initializeFb() {
+		// Set your Facebook App Id in strings.xml
+		ParseFacebookUtils.initialize("facebook-key");
+
+	}
+
+	public void initializeParseAndLocalDB(){
 
 		// enable local data store
 		Parse.enableLocalDatastore(this);
@@ -27,7 +36,6 @@ public class CharityChallengerApplication extends Application {
 		ParseObject.registerSubclass(Picture.class);
 
 		// initialize parse SDK
-		//Parse.initialize(this, "G07OI4edB8GirWlb6pmHvEobWBWm8V8osS3w90tu", "WWtJuI8q7UYKAaZ4Pvy3bZcMJii4LejmWPTGsO0b");
 		Parse.initialize(this, "9e0wpyP9qg9UvX1g2cz65Qs2h2EkUkno88bzctFL", "PchSOljUdwS9F1bHsmotb6Aqv4epxH154UFbVggx");
 
 		
