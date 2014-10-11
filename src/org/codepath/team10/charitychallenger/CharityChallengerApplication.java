@@ -14,11 +14,23 @@ public class CharityChallengerApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		
+		initializeDb();
+	}
+	
+	public void initializeDb(){
 
+		// enable local data store
+		Parse.enableLocalDatastore(this);
+		
+		// register all the modles
 		ParseObject.registerSubclass(Picture.class);
 
-		Parse.initialize(this, "G07OI4edB8GirWlb6pmHvEobWBWm8V8osS3w90tu", "WWtJuI8q7UYKAaZ4Pvy3bZcMJii4LejmWPTGsO0b");
+		// initialize parse SDK
+		//Parse.initialize(this, "G07OI4edB8GirWlb6pmHvEobWBWm8V8osS3w90tu", "WWtJuI8q7UYKAaZ4Pvy3bZcMJii4LejmWPTGsO0b");
+		Parse.initialize(this, "9e0wpyP9qg9UvX1g2cz65Qs2h2EkUkno88bzctFL", "PchSOljUdwS9F1bHsmotb6Aqv4epxH154UFbVggx");
 
+		
 		ParseUser.enableAutomaticUser();
 
 		ParseACL defaultACL = new ParseACL();
@@ -26,6 +38,7 @@ public class CharityChallengerApplication extends Application {
 		defaultACL.setPublicReadAccess(true);
 
 		ParseACL.setDefaultACL(defaultACL, true);
+		
 	}
 
 }
