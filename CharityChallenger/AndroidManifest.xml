@@ -9,11 +9,12 @@
         android:targetSdkVersion="19" />
     
     <uses-permission android:name="android.permission.CAMERA" />
-
-    <uses-feature android:name="android.hardware.camera" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    
+    <uses-feature android:name="android.hardware.camera" />
+
+
 
     <application
         android:allowBackup="true"
@@ -37,6 +38,8 @@
             android:name=".PictureListActivity"
             android:label="@string/title_activity_picture_list" >
         </activity>
+        
+        <meta-data android:value="true" android:name="com.facebook.sdk.ApplicationId" android:resource="@string/facebook_app_id"/>
     </application>
 
 </manifest>

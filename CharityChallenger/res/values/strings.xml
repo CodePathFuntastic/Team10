@@ -22,5 +22,7 @@
         <item>1</item>
         <item></item>
     </string-array>
+    
+    <string name="facebook_app_id">396935243786864</string>
 
 </resources>
