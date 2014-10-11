@@ -2,6 +2,25 @@
 <resources>
 
     <string name="app_name">CharityChallenger</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">Welcome to Charity Challenger</string>
+    <string name="title_activity_new_picture">NewPictureActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_picture_list">PictureListActivity</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_favorite">Favorites</string>
+    <string name="action_new">Add an Picture</string>
+    <string name="picture_title">Pictures</string>
+    <string name="picture_label">Add a Picture</string>
+    <string name="save_button_text">Save</string>
+    <string name="cancel_button_text">Cancel</string>
+    
+    <string-array name="ratings_array">
+        <item>5</item>
+        <item>4</item>
+        <item>3</item>
+        <item>2</item>
+        <item>1</item>
+        <item></item>
+    </string-array>
 
 </resources>
