@@ -25,5 +25,7 @@
 
     <string name="facebook_app_id">396935243786864</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="facebook_login_label">Login to facebook</string>
+        <string name="welcome_user">Welcome: </string>
 
 </resources>
