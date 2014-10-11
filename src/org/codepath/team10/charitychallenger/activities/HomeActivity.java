@@ -1,6 +1,7 @@
-package org.codepath.team10.charitychallenger;
+package org.codepath.team10.charitychallenger.activities;
 
-import org.codepath.team10.charitychallenger.activities.NewPictureActivity;
+import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.R.layout;
 
 import android.app.Activity;
 import android.content.Intent;
