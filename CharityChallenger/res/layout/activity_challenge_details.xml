@@ -66,6 +66,7 @@
         android:layout_alignBottom="@+id/btnDonate"
         android:layout_marginRight="19dp"
         android:layout_toLeftOf="@+id/btnDonate"
+        android:onClick="onClickAccept"
         android:text="@string/accept_challenege" />
 
     <TextView

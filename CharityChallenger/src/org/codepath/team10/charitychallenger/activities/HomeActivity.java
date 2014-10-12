@@ -15,11 +15,6 @@ public class HomeActivity extends Activity {
         setContentView(R.layout.activity_home);
     }
     
-    public void onTakePictureClick(View v) {
-//    	Intent intent = new Intent(this, NewPictureActivity.class);
-//    	startActivity(intent);
-    }
-    
     public void onChallengeDetails(View view){
     	Intent intent = new Intent(this, ChallengeDetailsActivity.class);
     	startActivity(intent);	
