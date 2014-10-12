@@ -35,6 +35,7 @@ public class CharityChallengerApplication extends Application {
 		// register all the modles
 		ParseObject.registerSubclass(Picture.class);
 
+
 		// initialize parse SDK
 		Parse.initialize(this, "9e0wpyP9qg9UvX1g2cz65Qs2h2EkUkno88bzctFL", "PchSOljUdwS9F1bHsmotb6Aqv4epxH154UFbVggx");
 

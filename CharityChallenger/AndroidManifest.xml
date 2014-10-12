@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.codepath.team10.charitychallenger"
+<manifest package="org.codepath.team10.charitychallenger"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -16,17 +15,24 @@
 
     <application
         android:allowBackup="true"
+        android:name="org.codepath.team10.charitychallenger.CharityChallengerApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
+        <activity
+            android:name=".activities.LoginActivity"
+            android:label="@string/title_activity_login" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            
+        </activity>
+        
         <activity
             android:name=".activities.HomeActivity"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".NewPictureActivity"
@@ -42,10 +48,6 @@
             android:resource="@string/facebook_app_id"
             android:value="true" />
 
-        <activity
-            android:name="org.codepath.team10.charitychallenger.activities.LoginActivity"
-            android:label="@string/title_activity_login" >
-        </activity>
     </application>
 
 </manifest>
