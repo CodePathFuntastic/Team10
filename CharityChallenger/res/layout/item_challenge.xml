@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <ImageView
-        android:id="@+id/ivCharityOne"
+        android:id="@+id/ivCharityChallenge"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_alignParentLeft="true"
@@ -19,11 +19,11 @@
         android:id="@+id/relativeLayoutMoney"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ivCharityOne"
+        android:layout_alignBottom="@+id/ivCharityChallenge"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_toRightOf="@+id/ivCharityOne"
+        android:layout_toRightOf="@+id/ivCharityChallenge"
         android:background="@color/facebook_blue" >
 
         <TextView
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/relativeLayoutMoney"
         android:layout_alignRight="@+id/relativeLayoutMoney"
-        android:layout_alignTop="@+id/ivCharityOne"
+        android:layout_alignTop="@+id/ivCharityChallenge"
         android:text="Laurel Wood" 
         android:gravity="center"/>
 
