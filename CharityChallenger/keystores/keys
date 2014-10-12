@@ -1,13 +1,13 @@
 How to generate the keys
 --------------------------
 cd CharityChallenger/keys
-keytool -exportcert -alias androiddebugkey -keystore ./facebook.keystore | openssl sha1 -binary | openssl base64
+keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64
 Enter keystore password:  charity123
-xSLzBBuLJunOQPB89rtzM54FXx4=
+ga0RGNYHvNM5d0SLGQfpQWAPGJ8=
 
 Development
 --------------
-Nambi Sankaran : xSLzBBuLJunOQPB89rtzM54FXx4=
+Nambi Sankaran : ga0RGNYHvNM5d0SLGQfpQWAPGJ8=
 
 
 

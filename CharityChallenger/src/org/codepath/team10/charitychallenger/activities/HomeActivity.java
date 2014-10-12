@@ -1,7 +1,6 @@
 package org.codepath.team10.charitychallenger.activities;
 
 import org.codepath.team10.charitychallenger.R;
-import org.codepath.team10.charitychallenger.R.layout;
 
 import android.app.Activity;
 import android.content.Intent;
