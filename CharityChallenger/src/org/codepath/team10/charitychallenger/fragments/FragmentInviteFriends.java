@@ -9,8 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ChallengesHomeFragment extends Fragment {
-
+public class FragmentInviteFriends extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -20,7 +19,7 @@ public class ChallengesHomeFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_home_challenges, container);
+		View view = inflater.inflate(R.layout.fragment_invite_friends, container);
 		return view;
 	}
 }
