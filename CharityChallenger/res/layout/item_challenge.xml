@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/ivCharityOne"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/charity_1" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivCharityOne"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toRightOf="@+id/ivCharityOne"
+        android:background="@color/facebook_blue" >
+
+        <TextView
+            android:id="@+id/tvTargetAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvTargetAmoutLabel"
+            android:layout_alignBottom="@+id/tvTargetAmoutLabel"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="10dp"
+            
+            android:layout_toRightOf="@+id/tvTargetAmoutLabel"
+            android:text="$2000.00" />
+
+        <TextView
+            android:id="@+id/tvRaised"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvRaisedLabel"
+            android:layout_alignBottom="@+id/tvRaisedLabel"
+            android:layout_alignLeft="@+id/tvTargetAmount"
+            android:layout_alignParentRight="true"
+            android:text="$580.00" />
+
+        <TextView
+            android:id="@+id/tvTargetAmoutLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            
+            android:text="@string/target_amout" />
+
+        <TextView
+            android:id="@+id/tvRaisedLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tvTargetAmoutLabel"
+            android:layout_below="@+id/tvTargetAmoutLabel"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/raised" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvCharityName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/relativeLayoutMoney"
+        android:layout_alignRight="@+id/relativeLayoutMoney"
+        android:layout_alignTop="@+id/ivCharityOne"
+        android:text="Laurel Wood" 
+        android:gravity="center"/>
+
+</RelativeLayout>
