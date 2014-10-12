@@ -20,4 +20,14 @@
         android:onClick="onTakePictureClick"
         android:text="TakePicture" />
 
+    <Button
+        android:id="@+id/btnChallengeDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btCreatePicture"
+        android:layout_alignBottom="@+id/btCreatePicture"
+        android:layout_alignParentRight="true"
+        android:text="@string/challenge_details_label" 
+        android:onClick="onChallengeDetails"/>
+
 </RelativeLayout>

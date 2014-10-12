@@ -20,4 +20,9 @@ public class HomeActivity extends Activity {
 //    	Intent intent = new Intent(this, NewPictureActivity.class);
 //    	startActivity(intent);
     }
+    
+    public void onChallengeDetails(View view){
+    	Intent intent = new Intent(this, ChallengeDetailsActivity.class);
+    	startActivity(intent);	
+    }
 }

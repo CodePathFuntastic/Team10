@@ -46,6 +46,11 @@
             android:name="org.codepath.team10.charitychallenger.activities.LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
+        <activity
+            android:name=".activities.ChallengeDetailsActivity"
+            android:label="@string/challenge_details_label" >
+        </activity>
+        
     </application>
 
 </manifest>

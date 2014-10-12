@@ -11,5 +11,6 @@ public class ChallengeDetailsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_challenge_details);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 }

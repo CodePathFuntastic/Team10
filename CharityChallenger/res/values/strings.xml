@@ -36,5 +36,6 @@
         <string name="accept_challenege">Accept!</string>
         <string name="description_label">More Details:</string>
         <string name="challenege_description">Here are more challenge details... Please do this and take your picture and send back to sender .. have fun...</string>
+        <string name="challenge_details_label">Challenge Details</string>
 
 </resources>
