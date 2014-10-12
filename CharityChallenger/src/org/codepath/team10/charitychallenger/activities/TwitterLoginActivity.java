@@ -17,7 +17,7 @@ import com.activeandroid.util.Log;
 import com.codepath.oauth.OAuthLoginActivity;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
-public class LoginActivity extends OAuthLoginActivity<TwitterRestClient> {
+public class TwitterLoginActivity extends OAuthLoginActivity<TwitterRestClient> {
 	
 	TwitterRestClient twitterClient;
 

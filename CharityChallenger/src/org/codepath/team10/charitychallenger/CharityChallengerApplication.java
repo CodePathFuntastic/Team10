@@ -6,10 +6,12 @@ import org.codepath.team10.charitychallenger.models.Picture;
 import android.app.Application;
 import android.content.Context;
 
+import com.activeandroid.ActiveAndroid;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
+import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
 
 public class CharityChallengerApplication extends Application {
@@ -24,6 +26,10 @@ public class CharityChallengerApplication extends Application {
 		initializeParseAndLocalDB();
 		
 		//initializeFb();
+		
+		ActiveAndroid.initialize(this);
+		
+		ParseTwitterUtils.initialize( Constants.TWITTER_CONSUMER_KEY, Constants.TWITTER_CONSUMER_SECRET);
 	}
 	
 	private void initializeFb() {
@@ -42,7 +48,8 @@ public class CharityChallengerApplication extends Application {
 
 
 		// initialize parse SDK
-		Parse.initialize(this, "9e0wpyP9qg9UvX1g2cz65Qs2h2EkUkno88bzctFL", "PchSOljUdwS9F1bHsmotb6Aqv4epxH154UFbVggx");
+		//Parse.initialize(this, "9e0wpyP9qg9UvX1g2cz65Qs2h2EkUkno88bzctFL", "PchSOljUdwS9F1bHsmotb6Aqv4epxH154UFbVggx");
+		Parse.initialize(this, Constants.PARSE_APPLICATION_ID, Constants.PARSE_CLIENT_KEY );
 
 		
 		ParseUser.enableAutomaticUser();
