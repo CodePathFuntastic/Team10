@@ -37,5 +37,7 @@
         <string name="description_label">More Details:</string>
         <string name="challenege_description">Here are more challenge details... Please do this and take your picture and send back to sender .. have fun...</string>
         <string name="challenge_details_label">Challenge Details</string>
+        <string name="target_amout">Target:</string>
+        <string name="raised">Raised:</string>
 
 </resources>

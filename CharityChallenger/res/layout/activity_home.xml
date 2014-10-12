@@ -5,7 +5,7 @@
     tools:context="${relativePackage}.${activityClass}" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tvTargetAmoutLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/tvTargetAmoutLabel"
         android:layout_marginTop="18dp"
         android:onClick="onTakePictureClick"
         android:text="TakePicture" />
@@ -29,5 +29,15 @@
         android:layout_alignParentRight="true"
         android:text="@string/challenge_details_label" 
         android:onClick="onChallengeDetails"/>
+
+    <Button
+        android:id="@+id/btnLoginToFacebook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnChallengeDetails"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/btnChallengeDetails"
+        android:text="@string/facebook_login_label" 
+        android:onClick="onFacebookLogin"/>
 
 </RelativeLayout>
