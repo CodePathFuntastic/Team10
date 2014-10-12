@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="org.codepath.team10.charitychallenger.ActionDetailActivity" >
+
+    <TextView
+        android:id="@+id/tvChallegeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_description" />
+
+    <TextView
+        android:id="@+id/tvChallengeDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvChallegeTitle"
+        android:text="Make funny faces in front of public" />
+
+    <ImageView
+        android:id="@+id/ivTakenPicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvChallengeDescription"
+        android:layout_alignRight="@+id/tvChallegeTitle"
+        android:layout_below="@+id/tvChallengeDescription"
+        android:src="@drawable/ic_launcher" />
+
+    <GridView
+        android:id="@+id/gvSample"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivTakenPicture"
+        android:layout_alignTop="@+id/ivTakenPicture"
+        android:layout_toRightOf="@+id/ivTakenPicture"
+        android:numColumns="1"
+        android:src="@drawable/ic_launcher" />
+
+    <Button
+        android:id="@+id/btTakePicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ivTakenPicture"
+        android:onClick="onTakePicture"
+        android:text="TakePicture" />
+
+    <Button
+        android:id="@+id/btAcceptSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btTakePicture"
+        android:layout_alignBottom="@+id/btTakePicture"
+        android:layout_toRightOf="@+id/btTakePicture"
+        android:text="Submit" />
+
+    <Button
+        android:id="@+id/btAcceptDonate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btAcceptSubmit"
+        android:layout_alignBottom="@+id/btAcceptSubmit"
+        android:layout_toRightOf="@+id/btAcceptSubmit"
+        android:text="Donate" />
+
+</RelativeLayout>

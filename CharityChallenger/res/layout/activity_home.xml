@@ -11,23 +11,13 @@
         android:text="@string/hello_world" />
 
     <Button
-        android:id="@+id/btCreatePicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="18dp"
-        android:onClick="onTakePictureClick"
-        android:text="TakePicture" />
-
-    <Button
         android:id="@+id/btnChallengeDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btCreatePicture"
-        android:layout_alignBottom="@+id/btCreatePicture"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:text="@string/challenge_details_label" 
-        android:onClick="onChallengeDetails"/>
+        android:layout_below="@+id/textView1"
+        android:onClick="onChallengeDetails"
+        android:text="@string/challenge_details_label" />
 
 </RelativeLayout>

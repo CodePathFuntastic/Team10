@@ -26,16 +26,18 @@
     <string name="facebook_app_id">396935243786864</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="facebook_login_label">Login to facebook</string>
-        <string name="welcome_user">Welcome: </string>
-        <string name="charity_challenge_name">Global Giving Challenge</string>
-        <string name="target_amount_label">Target Amount:</string>
-        <string name="target_amount_raised">$ 2000</string>
-        <string name="amount_raised_label">Amount Raised:</string>
-        <string name="amount_raised">$ 500</string>
-        <string name="donoate">Donate Now</string>
-        <string name="accept_challenege">Accept!</string>
-        <string name="description_label">More Details:</string>
-        <string name="challenege_description">Here are more challenge details... Please do this and take your picture and send back to sender .. have fun...</string>
-        <string name="challenge_details_label">Challenge Details</string>
+    <string name="welcome_user">Welcome: </string>
+    <string name="charity_challenge_name">Global Giving Challenge</string>
+    <string name="target_amount_label">Target Amount:</string>
+    <string name="target_amount_raised">$ 2000</string>
+    <string name="amount_raised_label">Amount Raised:</string>
+    <string name="amount_raised">$ 500</string>
+    <string name="donoate">Donate Now</string>
+    <string name="accept_challenege">Accept!</string>
+    <string name="description_label">More Details:</string>
+    <string name="challenege_description">Here are more challenge details... Please do this and take your picture and send back to sender .. have fun...</string>
+    <string name="challenge_details_label">Challenge Details</string>
+    <string name="title_activity_action_detail">Action Details</string>
+    <string name="action_description">Challenge Description</string>
 
 </resources>
