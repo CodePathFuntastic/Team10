@@ -1,0 +1,38 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <Button
+        android:id="@+id/btnFacebookLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="15dp"
+        android:layout_marginTop="17dp"
+        android:background="@color/facebook_blue"
+        android:onClick="onLoginToFacebook"
+        android:text="@string/facebook_login_label"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnFacebookLogin"
+        android:layout_centerHorizontal="true"
+        android:text="@string/welcome_user" />
+    
+<!--    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnFacebookLogin"
+        android:layout_alignRight="@+id/btnFacebookLogin"
+        android:layout_below="@+id/btnFacebookLogin"
+        android:background="#FFAADD" >
+    </FrameLayout> -->
+    
+</RelativeLayout>

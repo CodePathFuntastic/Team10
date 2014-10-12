@@ -48,6 +48,11 @@
             android:resource="@string/facebook_app_id"
             android:value="true" />
 
+        <activity
+            android:name=".activities.ChallengeDetailsActivity"
+            android:label="@string/challenge_details_label" >
+        </activity>
+        
     </application>
 
 </manifest>
