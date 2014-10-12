@@ -40,5 +40,8 @@
     <string name="raised">Raised:</string>
     <string name="title_activity_action_detail">Action Details</string>
     <string name="action_description">Challenge Description</string>
+    <string name="friend_name">Friend Name</string>
+    <string name="friend_location">Friend\'s Location</string>
+    <string name="invite_friend_label">Challenge</string>
 
 </resources>

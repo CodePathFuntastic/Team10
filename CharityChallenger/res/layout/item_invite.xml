@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/ivCharityChallenge"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/charity_3" />
+
+    <TextView
+        android:id="@+id/tvFriendName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivCharityChallenge"
+        android:layout_marginLeft="20dp"
+        android:layout_toLeftOf="@+id/btnInviteFriend"
+        android:layout_toRightOf="@+id/ivCharityChallenge"
+        android:text="@string/friend_name" 
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/tvFriendLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivCharityChallenge"
+        android:layout_alignLeft="@+id/tvFriendName"
+        android:layout_alignRight="@+id/tvFriendName"
+        android:text="@string/friend_location" 
+        android:layout_marginBottom="5dp"/>
+
+    <Button
+        android:id="@+id/btnInviteFriend"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvFriendLocation"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/tvFriendName"
+        android:layout_marginRight="10dp"
+        android:text="@string/invite_friend_label" />
+    
+</RelativeLayout>

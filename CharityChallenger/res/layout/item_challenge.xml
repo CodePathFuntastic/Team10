@@ -30,12 +30,12 @@
             android:id="@+id/tvTargetAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/tvTargetAmoutLabel"
-            android:layout_alignBottom="@+id/tvTargetAmoutLabel"
+            android:layout_alignBaseline="@+id/tvTargetAmountLabel"
+            android:layout_alignBottom="@+id/tvTargetAmountLabel"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="10dp"
             
-            android:layout_toRightOf="@+id/tvTargetAmoutLabel"
+            android:layout_toRightOf="@+id/tvTargetAmountLabel"
             android:text="$2000.00" />
 
         <TextView
@@ -49,7 +49,7 @@
             android:text="$580.00" />
 
         <TextView
-            android:id="@+id/tvTargetAmoutLabel"
+            android:id="@+id/tvTargetAmountLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -61,8 +61,8 @@
             android:id="@+id/tvRaisedLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tvTargetAmoutLabel"
-            android:layout_below="@+id/tvTargetAmoutLabel"
+            android:layout_alignLeft="@+id/tvTargetAmountLabel"
+            android:layout_below="@+id/tvTargetAmountLabel"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="@string/raised" />
