@@ -11,6 +11,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="Login to FaceBook" />
+        android:onClick="loginToRest"
+        android:text="Login to Twitter" />
 
 </RelativeLayout>

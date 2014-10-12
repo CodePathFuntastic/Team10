@@ -1,8 +1,10 @@
 package org.codepath.team10.charitychallenger;
 
+import org.codepath.team10.charitychallenger.clients.TwitterRestClient;
 import org.codepath.team10.charitychallenger.models.Picture;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.parse.Parse;
 import com.parse.ParseACL;
@@ -11,14 +13,17 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 public class CharityChallengerApplication extends Application {
+	
+	private static Context context;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		this.context = this;
 		
 		initializeParseAndLocalDB();
 		
-		initializeFb();
+		//initializeFb();
 	}
 	
 	private void initializeFb() {
@@ -49,5 +54,10 @@ public class CharityChallengerApplication extends Application {
 		ParseACL.setDefaultACL(defaultACL, true);
 		
 	}
+	
+	public static TwitterRestClient getRestClient() {
+		return (TwitterRestClient) TwitterRestClient.getInstance(TwitterRestClient.class, CharityChallengerApplication.context);
+	}
+
 
 }

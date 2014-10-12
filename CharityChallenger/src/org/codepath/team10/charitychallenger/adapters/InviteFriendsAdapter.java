@@ -54,7 +54,7 @@ public class InviteFriendsAdapter extends ArrayAdapter<User> {
 		}
 		
 		if(viewHolder.tvFriendName != null){
-			viewHolder.tvFriendName.setText(user.getUsername());
+			viewHolder.tvFriendName.setText(user.getName());
 		}
 		
 		if(viewHolder.tvFriendLocation != null){
