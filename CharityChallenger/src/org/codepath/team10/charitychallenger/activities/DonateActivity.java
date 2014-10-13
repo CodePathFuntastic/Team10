@@ -3,21 +3,21 @@ package org.codepath.team10.charitychallenger.activities;
 import org.codepath.team10.charitychallenger.R;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
-public class ChallengeDetailsActivity extends Activity {
+public class DonateActivity extends Activity {
+	private static final String TAG = "DonateActivity ";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		setContentView(R.layout.activity_challenge_details);
+		setContentView(R.layout.activity_donate_money);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 		
-	public void onClickAccept(View v) {
-		 Intent intent = new Intent(this, ActionDetailActivity.class);
-		 startActivity(intent);
+	public void onDonateNow(View v) {
+		 Log.d(TAG, "onDonateNow called");
 	}
 }

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:layout_margin="15dp">
+
+    <TextView
+        android:id="@+id/tvCharityNameValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvCharityNameLabel"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="25dp"
+        android:layout_toRightOf="@+id/tvCharityNameLabel"
+        android:gravity="center"
+        android:text="@string/charity_name_value" />
+
+    <TextView
+        android:id="@+id/tvCharityNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="14dp"
+        android:text="@string/charity_name_label" />
+
+    <TextView
+        android:id="@+id/tvCharityAddressLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvCharityNameLabel"
+        android:layout_marginTop="24dp"
+        android:text="@string/charity_address_label" />
+
+    <TextView
+        android:id="@+id/tvAddressValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvCharityAddressLabel"
+        android:layout_alignBottom="@+id/tvCharityAddressLabel"
+        android:layout_alignLeft="@+id/tvCharityNameValue"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:text="@string/charity_address_value" />
+
+    <TextView
+        android:id="@+id/tvCauseLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvCharityAddressLabel"
+        android:layout_marginTop="30dp"
+        android:text="@string/charity_cause" />
+
+    <TextView
+        android:id="@+id/tvCauseValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvCauseLabel"
+        android:layout_alignBottom="@+id/tvCauseLabel"
+        android:layout_alignLeft="@+id/tvAddressValue"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:text="@string/cahrity_cause_value" />
+
+    <TextView
+        android:id="@+id/tvDonateAmountLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvCauseLabel"
+        android:layout_marginTop="30dp"
+        android:text="@string/donate_amount_label" />
+
+    <TextView
+        android:id="@+id/tvDonateAmountValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvDonateAmountLabel"
+        android:layout_alignBottom="@+id/tvDonateAmountLabel"
+        android:layout_alignLeft="@+id/tvCauseValue"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:text="@string/donate_amount_value" />
+
+    <TextView
+        android:id="@+id/tvPaymentTypeLable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvDonateAmountLabel"
+        android:layout_marginTop="30dp"
+        android:text="@string/payment_type_label" />
+
+    <TextView
+        android:id="@+id/tvPaymentTypeValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvPaymentTypeLable"
+        android:layout_alignBottom="@+id/tvPaymentTypeLable"
+        android:layout_alignLeft="@+id/tvDonateAmountValue"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:text="@string/payment_type_value" />
+
+    <TextView
+        android:id="@+id/tvCreditCardNumberLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvPaymentTypeLable"
+        android:layout_marginTop="30dp"
+        android:text="@string/credit_card_number_label" />
+
+    <TextView
+        android:id="@+id/tvCreditCardNumberValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvCreditCardNumberLabel"
+        android:layout_alignLeft="@+id/tvPaymentTypeValue"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:text="@string/credit_card_number_value" />
+
+    <TextView
+        android:id="@+id/tvExpiryDateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvCreditCardNumberLabel"
+        android:layout_marginTop="30dp"
+        android:text="@string/expiry_date_label" />
+
+    <TextView
+        android:id="@+id/tvExpiryDateValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvExpiryDateLabel"
+        android:layout_alignBottom="@+id/tvExpiryDateLabel"
+        android:layout_alignLeft="@+id/tvCreditCardNumberValue"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:text="@string/expiry_date_value" />
+
+    <Button
+        android:id="@+id/btnDonateNowLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvExpiryDateValue"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="@string/donate_now_value" 
+        android:onClick="onDonateNow"/>
+
+</RelativeLayout>

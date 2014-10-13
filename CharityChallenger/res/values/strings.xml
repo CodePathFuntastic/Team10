@@ -43,5 +43,20 @@
     <string name="friend_name">Friend Name</string>
     <string name="friend_location">Friend\'s Location</string>
     <string name="invite_friend_label">Challenge</string>
+    <string name="charity_name_label">Charity :</string>
+    <string name="charity_name_value">Global Giving</string>
+    <string name="charity_address_label">Address:</string>
+    <string name="charity_address_value">San Jose, CA.</string>
+    <string name="charity_cause">Cause :</string>
+    <string name="cahrity_cause_value">Hemophilia in Children</string>
+    <string name="donate_amount_label">Donate :</string>
+    <string name="donate_amount_value">$ 50.00</string>
+    <string name="payment_type_label">Payment Type :</string>
+    <string name="payment_type_value">PayPal</string>
+    <string name="credit_card_number_label">Credit Card #</string>
+    <string name="credit_card_number_value">1234-4567-5432-5678</string>
+    <string name="expiry_date_label">Expiry Date :</string>
+    <string name="expiry_date_value">Nov 20th, 2014</string>
+    <string name="donate_now_value">Donate Now!</string>
 
 </resources>
