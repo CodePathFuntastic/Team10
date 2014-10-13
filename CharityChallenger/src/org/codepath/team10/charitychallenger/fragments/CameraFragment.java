@@ -130,7 +130,7 @@ public class CameraFragment extends Fragment {
 		byte[] scaledData = bos.toByteArray();
 
 		// Save the scaled image to Parse
-		photoFile = new ParseFile("meal_photo.jpg", scaledData);
+		photoFile = new ParseFile("picture_photo.jpg", scaledData);
 		photoFile.saveInBackground(new SaveCallback() {
 
 			public void done(ParseException e) {
@@ -139,13 +139,13 @@ public class CameraFragment extends Fragment {
 							"Error saving: " + e.getMessage(),
 							Toast.LENGTH_LONG).show();
 				} else {
-					addPhotoToMealAndReturn(photoFile);
+					addPhotoToPictureAndReturn(photoFile);
 				}
 			}
 		});
 	}
 
-	private void addPhotoToMealAndReturn(ParseFile photoFile) {
+	private void addPhotoToPictureAndReturn(ParseFile photoFile) {
 		((NewPictureActivity) getActivity()).getCurrentPicture().setPhotoFile(
 				photoFile);
 		FragmentManager fm = getActivity().getFragmentManager();

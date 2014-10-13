@@ -53,7 +53,7 @@ public class CharityChallengerApplication extends Application {
 
 		
 		ParseUser.enableAutomaticUser();
-
+		ParseUser.getCurrentUser().saveInBackground();
 		ParseACL defaultACL = new ParseACL();
 
 		defaultACL.setPublicReadAccess(true);

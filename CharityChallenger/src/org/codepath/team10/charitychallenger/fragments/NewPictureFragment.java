@@ -120,7 +120,7 @@ public class NewPictureFragment extends Fragment {
 		FragmentTransaction transaction = getActivity().getFragmentManager()
 				.beginTransaction();
 		transaction.replace(R.id.fragmentContainer, cameraFragment);
-		transaction.addToBackStack("NewMealFragment");
+		transaction.addToBackStack("NewPictureFragment");
 		transaction.commit();
 	}
 
