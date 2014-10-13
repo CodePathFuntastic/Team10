@@ -1,0 +1,36 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="org.codepath.team10.charitychallenger.AchievementActivity" >
+
+    <Button
+        android:id="@+id/btTrending"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Trending" />
+
+    <Button
+        android:id="@+id/btHot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btTrending"
+        android:layout_alignBottom="@+id/btTrending"
+        android:layout_toRightOf="@+id/btTrending"
+        android:text="Hot" />
+
+    <Button
+        android:id="@+id/btBestPictures"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btHot"
+        android:layout_toRightOf="@+id/btHot"
+        android:text="BestPicture" />
+
+</RelativeLayout>
