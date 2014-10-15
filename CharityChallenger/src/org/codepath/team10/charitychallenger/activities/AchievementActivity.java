@@ -1,4 +1,9 @@
-package org.codepath.team10.charitychallenger;
+package org.codepath.team10.charitychallenger.activities;
+
+import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.R.id;
+import org.codepath.team10.charitychallenger.R.layout;
+import org.codepath.team10.charitychallenger.R.menu;
 
 import android.app.Activity;
 import android.os.Bundle;

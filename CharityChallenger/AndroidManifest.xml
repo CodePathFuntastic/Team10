@@ -97,7 +97,7 @@
             android:label="@string/title_activity_action_detail" >
         </activity>
         <activity
-            android:name=".AchievementActivity"
+            android:name="org.codepath.team10.charitychallenger.activities.AchievementActivity"
             android:label="@string/title_activity_achievement" >
         </activity>
 		<activity
