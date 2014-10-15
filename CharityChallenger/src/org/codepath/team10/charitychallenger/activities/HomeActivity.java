@@ -19,4 +19,9 @@ public class HomeActivity extends Activity {
     	Intent intent = new Intent(this, ChallengeDetailsActivity.class);
     	startActivity(intent);	
     }
+    
+    public void onFacebookLogin(View view){
+    	Intent intent = new Intent(this, FacebookLoginActivity.class);
+    	startActivity(intent);
+    }
 }

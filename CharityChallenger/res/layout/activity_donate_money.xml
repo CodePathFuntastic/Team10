@@ -31,7 +31,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/tvCharityNameLabel"
         android:layout_marginTop="24dp"
-        android:text="@string/charity_address_label" />
+        android:text="@string/charity_address_label"/>
 
     <TextView
         android:id="@+id/tvAddressValue"
