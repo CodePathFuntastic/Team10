@@ -12,6 +12,7 @@ public class Invitation extends ParseObject {
 	 * 		<li>challengeId:int</li>
 	 * 		<li>senderId:id</li>
 	 * 		<li>receiver:id</li>
+	 * 		<li>status:int</li>
 	 * </ol>
 	 */
 	public Invitation(){
@@ -34,5 +35,11 @@ public class Invitation extends ParseObject {
 	}
 	public int getReceiver(){
 		return getInt("receiver");
+	}
+	public void setStatus(int status){
+		put("status", status);
+	}
+	public int getStatus(){
+		return getInt("status");
 	}
 }

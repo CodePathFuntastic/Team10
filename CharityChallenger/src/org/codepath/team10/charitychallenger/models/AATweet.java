@@ -14,7 +14,7 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
 @Table(name = "tweets")
-public class Tweet extends Model implements Parcelable {
+public class AATweet extends Model implements Parcelable {
 
 	@Column(name="body")
 	private String body;
@@ -26,27 +26,27 @@ public class Tweet extends Model implements Parcelable {
 	private long uid;
 	
 	@Column(name="user", index=true)
-	private User user;
+	private AAUser user;
 	
-	public Tweet(){
+	public AATweet(){
 		super();
 	}
 	
-	public Tweet(String body, String created, long id, User usr){
+	public AATweet(String body, String created, long id, AAUser usr){
 		this.body = body;
 		this.createdAt = created;
 		this.uid = id;
 		this.user = user;
 	}
 	
-	public static Tweet fromJSON( JSONObject jsonObject ){
-		Tweet tweet = new Tweet();
+	public static AATweet fromJSON( JSONObject jsonObject ){
+		AATweet tweet = new AATweet();
 		
 		try {
 			tweet.body = jsonObject.getString("text");
 			tweet.createdAt = jsonObject.getString("created_at");
 			tweet.uid = jsonObject.getLong("id");
-			tweet.user = User.fromJson( jsonObject.getJSONObject("user"));
+			tweet.user = AAUser.fromJson( jsonObject.getJSONObject("user"));
 			
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -80,11 +80,11 @@ public class Tweet extends Model implements Parcelable {
 		this.uid = uid;
 	}
 
-	public User getUser() {
+	public AAUser getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(AAUser user) {
 		this.user = user;
 	}
 	
@@ -92,16 +92,16 @@ public class Tweet extends Model implements Parcelable {
 		return getBody() + " -- " + getUser().getScreenName();
 	}
 
-	public static ArrayList<Tweet> fromJSONArray(JSONArray jsonArray) {
+	public static ArrayList<AATweet> fromJSONArray(JSONArray jsonArray) {
 		
-		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
+		ArrayList<AATweet> tweets = new ArrayList<AATweet>();
 		
 		for( int i=0; i<jsonArray.length(); i++ ){
-			Tweet t=null;
+			AATweet t=null;
 			try {
 				
 				JSONObject json = (JSONObject) jsonArray.get(i);
-				t = Tweet.fromJSON(json);
+				t = AATweet.fromJSON(json);
 				
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -130,24 +130,24 @@ public class Tweet extends Model implements Parcelable {
 		user.writeToParcel(dest, flags);
 	}
 	
-	public static final Parcelable.Creator<Tweet> CREATOR = new Parcelable.Creator<Tweet>() {
+	public static final Parcelable.Creator<AATweet> CREATOR = new Parcelable.Creator<AATweet>() {
 
 		@Override
-		public Tweet createFromParcel(Parcel source) {
-			return new Tweet(source);
+		public AATweet createFromParcel(Parcel source) {
+			return new AATweet(source);
 		}
 
 		@Override
-		public Tweet[] newArray(int size) {
-			return new Tweet[size];
+		public AATweet[] newArray(int size) {
+			return new AATweet[size];
 		}
 	};
 	
-	private Tweet( Parcel in ){
+	private AATweet( Parcel in ){
 		super();
 		setBody(in.readString());
 		setCreatedAt(in.readString());
 		setUid(in.readLong());
-		setUser(  User.CREATOR.createFromParcel(in) );
+		setUser(  AAUser.CREATOR.createFromParcel(in) );
 	}
 }

@@ -3,7 +3,7 @@ package org.codepath.team10.charitychallenger.activities;
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.clients.TwitterRestClient;
-import org.codepath.team10.charitychallenger.models.User;
+import org.codepath.team10.charitychallenger.models.AAUser;
 import org.json.JSONObject;
 
 import android.content.Context;
@@ -62,7 +62,7 @@ public class TwitterLoginActivity extends OAuthLoginActivity<TwitterRestClient> 
 			public void onSuccess(JSONObject jsonObject) {
 				Log.d("debug", "User information " + jsonObject.toString());
 				
-				User user = User.fromJson(jsonObject);
+				AAUser user = AAUser.fromJson(jsonObject);
 				
 				// save these info in private shared info
 				SharedPreferences prefs = getSharedPreferences("com.github.snambi.twitterclient", Context.MODE_PRIVATE);

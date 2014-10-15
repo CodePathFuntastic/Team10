@@ -3,7 +3,7 @@ package org.codepath.team10.charitychallenger.adapters;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
-import org.codepath.team10.charitychallenger.models.User;
+import org.codepath.team10.charitychallenger.models.AAUser;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,8 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 ;
 
-public class InviteFriendsAdapter extends ArrayAdapter<User> {
-	public InviteFriendsAdapter(Context context, List<User> objects) {
+public class InviteFriendsAdapter extends ArrayAdapter<AAUser> {
+	public InviteFriendsAdapter(Context context, List<AAUser> objects) {
 		super(context, R.layout.item_invite, objects);
 	}
 	
@@ -28,7 +28,7 @@ public class InviteFriendsAdapter extends ArrayAdapter<User> {
 	@Override
 	public View getView(final int position, View convertView, final ViewGroup parent) {
 		// Get the data from position.
-		User user = getItem(position);
+		AAUser user = getItem(position);
 		
 		ViewHolder viewHolder =  null;
 		if(convertView == null){
@@ -48,7 +48,7 @@ public class InviteFriendsAdapter extends ArrayAdapter<User> {
 		return convertView;
 	}
 
-	private void updateTweetVew(ViewHolder viewHolder, User user) {
+	private void updateTweetVew(ViewHolder viewHolder, AAUser user) {
 		if(viewHolder.ivFriend != null){
 			//viewHolder.ivFriend = "set Image here...";
 		}

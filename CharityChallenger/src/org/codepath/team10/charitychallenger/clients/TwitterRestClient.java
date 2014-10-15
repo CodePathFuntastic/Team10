@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codepath.team10.charitychallenger.models.Tweet;
+import org.codepath.team10.charitychallenger.models.AATweet;
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
 
@@ -145,7 +145,7 @@ public class TwitterRestClient extends OAuthBaseClient implements Serializable {
 		public void setMaxId(long maxId) {
 			this.maxId = maxId;
 		}
-		public void setSinceIdMaxIdFrom( List<Tweet> tweets){
+		public void setSinceIdMaxIdFrom( List<AATweet> tweets){
 			if( tweets == null || tweets.size() == 0){
 				return ;
 			}
@@ -154,7 +154,7 @@ public class TwitterRestClient extends OAuthBaseClient implements Serializable {
 			long high=0;
 			long low=0;
 			
-			for( Tweet t : tweets ){
+			for( AATweet t : tweets ){
 				// special case, if "low" is 0 , then start from the first value
 				if( low == 0){
 					low = t.getUid();

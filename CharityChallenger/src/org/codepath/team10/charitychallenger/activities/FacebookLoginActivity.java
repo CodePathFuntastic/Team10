@@ -48,12 +48,18 @@ public class FacebookLoginActivity extends Activity{
 	      		    	  if (user != null) {
 	      		    		  TextView welcome = (TextView) findViewById(R.id.tvUsername);
 	      		    		  welcome.setText("Hello " + user.getName() + "!");
+	      		    		  startActivity1();
 	      		    		}
 	      		      }
 	      		    }).executeAsync();
 	      	  	}
 	        }
 		});
+	}
+	
+	public void startActivity1(){
+		  Intent intent = new Intent(this, HomeActivity.class);
+		  startActivity(intent);		
 	}
   
 	@Override

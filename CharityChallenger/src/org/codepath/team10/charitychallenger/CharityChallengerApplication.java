@@ -1,7 +1,11 @@
 package org.codepath.team10.charitychallenger;
 
 import org.codepath.team10.charitychallenger.clients.TwitterRestClient;
+import org.codepath.team10.charitychallenger.models.Challenge;
+import org.codepath.team10.charitychallenger.models.Invitation;
+import org.codepath.team10.charitychallenger.models.Organization;
 import org.codepath.team10.charitychallenger.models.Picture;
+import org.codepath.team10.charitychallenger.models.User;
 
 import android.app.Application;
 import android.content.Context;
@@ -44,8 +48,12 @@ public class CharityChallengerApplication extends Application {
 		Parse.enableLocalDatastore(this);
 		
 		// register all the modles
+		
+		ParseObject.registerSubclass(Challenge.class);
+		ParseObject.registerSubclass(Invitation.class);
+		ParseObject.registerSubclass(Organization.class);
 		ParseObject.registerSubclass(Picture.class);
-
+		ParseObject.registerSubclass(User.class);
 
 		// initialize parse SDK
 		//Parse.initialize(this, "9e0wpyP9qg9UvX1g2cz65Qs2h2EkUkno88bzctFL", "PchSOljUdwS9F1bHsmotb6Aqv4epxH154UFbVggx");
