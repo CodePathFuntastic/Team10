@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/tvCharityNameOnConfirmation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="28dp"
+        android:gravity="center"
+        android:text="@string/charity_name_value" />
+
+    <TextView
+        android:id="@+id/tvDonationAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvCharityAddressOnConfirmation"
+        android:layout_marginTop="31dp"
+        android:text="@string/donate_amount_value" 
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tvCharityAddressOnConfirmation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvCharityNameOnConfirmation"
+        android:layout_marginTop="27dp"
+        android:text="@string/charity_address_value" 
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tvDonationMethodLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvDonationAmount"
+        android:layout_marginTop="30dp"
+        android:text="@string/payment_type_value" 
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/btnDonateOnConfirmation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/donate_now_value" />
+
+</RelativeLayout>

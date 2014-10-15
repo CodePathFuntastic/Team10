@@ -5,26 +5,19 @@ import org.codepath.team10.charitychallenger.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class DonateActivity extends Activity {
-	private static final String TAG = "DonateActivity ";
+public class PaymentConfirmationActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
-		setContentView(R.layout.activity_donate_money);
+		setContentView(R.layout.activity_payment_confirmation);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 		
-	public void onDonateNow(View v) {
-		 Intent intent = new Intent(this, PaymentConfirmationActivity.class);
-		 startActivity(intent);
-	}
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.new_picture, menu);

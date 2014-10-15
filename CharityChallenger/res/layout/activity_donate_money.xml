@@ -73,8 +73,8 @@
         android:layout_marginTop="30dp"
         android:text="@string/donate_amount_label" />
 
-    <TextView
-        android:id="@+id/tvDonateAmountValue"
+    <EditText
+        android:id="@+id/etDonateAmountValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/tvDonateAmountLabel"
@@ -99,7 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/tvPaymentTypeLable"
         android:layout_alignBottom="@+id/tvPaymentTypeLable"
-        android:layout_alignLeft="@+id/tvDonateAmountValue"
+        android:layout_alignLeft="@+id/etDonateAmountValue"
         android:layout_alignParentRight="true"
         android:gravity="center"
         android:text="@string/payment_type_value" />

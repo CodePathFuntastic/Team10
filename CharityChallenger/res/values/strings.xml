@@ -27,6 +27,7 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="facebook_login_label">Login to facebook</string>
     <string name="donate_activity_title">Donate to Charity</string>
+    <string name="payment_confirmation">Donation Confirmation</string>
     <string name="welcome_user">Welcome: </string>
     <string name="charity_challenge_name">Global Giving Challenge</string>
     <string name="target_amount_label">Target Amount:</string>
