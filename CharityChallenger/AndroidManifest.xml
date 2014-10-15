@@ -76,8 +76,12 @@
         </activity>
         <activity
             android:name=".activities.FacebookLoginActivity"
-            android:label="@string/title_activity_login" >
+            android:label="@string/facebook_login_label" >
         </activity>
+		<activity
+            android:name=".activities.DonateActivity"
+            android:label="@string/donate_activity_title" >
+        </activity>        
     </application>
 
 </manifest>

@@ -56,7 +56,8 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/tvAmountRaised"
         android:layout_marginTop="17dp"
-        android:text="@string/donoate" />
+        android:text="@string/donoate" 
+        android:onClick="onDonate"/>
 
     <Button
         android:id="@+id/btnAcceptChallenge"
