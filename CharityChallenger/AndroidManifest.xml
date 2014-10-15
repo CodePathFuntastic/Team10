@@ -27,23 +27,21 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value ="@string/facebook_app_id"/>
-        
+        <!-- 
         <activity
             android:name="com.facebook.LoginActivity"
             android:label="@string/app_name" />
         
         <activity
             android:name=".activities.FacebookLoginActivity"
-            android:label="@string/title_activity_login" />
-        
-        <activity
-            android:name=".activities.HomeActivity"
-            android:label="@string/title_activity_login" >
+            android:label="@string/title_activity_login">
+            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -55,9 +53,31 @@
                     android:scheme="oauth" />
             </intent-filter>
         </activity>
+         -->
+        
+        <activity android:name=".activities.TwitterLoginActivity"
+            android:label="@string/title_activity_login" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+             <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="charitychallenger"
+                    android:scheme="oauth" />
+            </intent-filter>
+            
+        </activity>
+        
         <activity
-            android:name=".activities.TwitterLoginActivity"
-            android:label="@string/app_name" >
+            android:name=".activities.HomeActivity"
+            android:label="@string/title_activity_login" >
         </activity>
         <activity
             android:name=".activities.NewPictureActivity"

@@ -1,22 +1,14 @@
 package org.codepath.team10.charitychallenger.activities;
 
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import org.codepath.team10.charitychallenger.R;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.Signature;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.Request;
 import com.facebook.Response;
@@ -26,6 +18,8 @@ import com.facebook.model.GraphUser;
 
 public class FacebookLoginActivity extends Activity{
 	
+	private Session session=null;
+	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,30 +28,17 @@ public class FacebookLoginActivity extends Activity{
 	
 	public void onLoginToFacebook(View v){
 		// start Facebook Login
-		Session.openActiveSession(this, true, new Session.StatusCallback() {
-	        // callback when session changes state
-	        @Override
-	        public void call(Session session, SessionState state, Exception exception) {
-	      	  	if (session.isOpened()) {
-	      		// make request to the /me API
-	      		    Request.newMeRequest(session, new Request.GraphUserCallback() {
-	
-	      		      // callback after Graph API response with user object
-	      		      @Override
-	      		      public void onCompleted(GraphUser user, Response response) {
-	      		    	  if (user != null) {
-	      		    		  TextView welcome = (TextView) findViewById(R.id.tvUsername);
-	      		    		  welcome.setText("Hello " + user.getName() + "!");
-	      		    		  startActivity1();
-	      		    		}
-	      		      }
-	      		    }).executeAsync();
-	      	  	}
-	        }
+		session = Session.openActiveSession(this, true, new Session.StatusCallback(){
+
+			@Override
+			public void call(Session session, SessionState state, Exception exception) {
+				Log.d("debug", "Session" + session.toString() + ", state: " + state.toString() , exception);
+			}
+			
 		});
 	}
 	
-	public void startActivity1(){
+	public void startHomeActivity(){
 		  Intent intent = new Intent(this, HomeActivity.class);
 		  startActivity(intent);		
 	}
@@ -65,24 +46,72 @@ public class FacebookLoginActivity extends Activity{
 	@Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
+		if( Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data) == true ){
+			
+			
+			// session open successfully
+			if( Session.getActiveSession().isOpened() == true ){
+				// make a request to get the GraphApi response with User Object
+				Request.newMeRequest( Session.getActiveSession(), new Request.GraphUserCallback() {
+					
+					@Override
+					public void onCompleted(GraphUser user, Response response) {
+						// Save the user details on Sharedpreferences
+						user.getId();
+					}
+				});
+				
+				Intent intent = new Intent( this, HomeActivity.class);
+				startActivity(intent);
+
+			}else{
+				Toast.makeText(this, "login failed", Toast.LENGTH_SHORT).show();
+			}
+			
+		}
     }
   
-	// helper function to generate the keyHash. If your app is not authenticating from facebook.
-	private void generateKehHash(){
-	    try {
-	        PackageInfo info = getPackageManager().getPackageInfo(
-	                "org.codepath.team10.charitychallenger", 
-	                PackageManager.GET_SIGNATURES);
-	        for (Signature signature : info.signatures) {
-	            MessageDigest md = MessageDigest.getInstance("SHA");
-	            md.update(signature.toByteArray());
-	            Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-	            }
-	    } catch (NameNotFoundException e) {
-	
-	    } catch (NoSuchAlgorithmException e) {
-	
-	    }
+	public static class FacebookStatusCallback implements Session.StatusCallback{
+
+		@Override
+		public void call(Session session, SessionState state,
+				Exception exception) {		
+			
+        	if (session.isOpened()) {
+      		// make request to the /me API
+      		    Request.newMeRequest(session, new Request.GraphUserCallback() {
+
+      		      // callback after Graph API response with user object
+      		      @Override
+      		      public void onCompleted(GraphUser user, Response response) {
+      		    	  if (user != null) {
+      		    		  //TextView welcome = (TextView) findViewById(R.id.tvUsername);
+      		    		  //welcome.setText("Hello " + user.getName() + "!");
+      		    		  //startHomeActivity();
+      		    		}
+      		      }
+      		    }).executeAsync();
+      	  	}
+
+		}
+		
 	}
+	
+	// helper function to generate the keyHash. If your app is not authenticating from facebook.
+//	private void generateKehHash(){
+//	    try {
+//	        PackageInfo info = getPackageManager().getPackageInfo(
+//	                "org.codepath.team10.charitychallenger", 
+//	                PackageManager.GET_SIGNATURES);
+//	        for (Signature signature : info.signatures) {
+//	            MessageDigest md = MessageDigest.getInstance("SHA");
+//	            md.update(signature.toByteArray());
+//	            Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+//	            }
+//	    } catch (NameNotFoundException e) {
+//	
+//	    } catch (NoSuchAlgorithmException e) {
+//	
+//	    }
+//	}
 }

@@ -4,34 +4,21 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
+
+    </ListView>
+    
     <TextView
-        android:id="@+id/tvWelcome"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-
-    <Button
-        android:id="@+id/btnChallengeDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvFriendName"
-        android:onClick="onChallengeDetails"
-        android:text="@string/challenge_details_label" />
-
-    <Button
-        android:id="@+id/btnLoginToFacebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/btnChallengeDetails"
-        android:layout_margin="15dp"
-        android:layout_marginTop="22dp"
-        android:background="@color/facebook_blue"
-        android:onClick="onFacebookLogin"
-        android:text="@string/facebook_login_label"
-        android:textColor="@android:color/white" />
+        android:layout_alignParentLeft="true" 
+        android:layout_below="@id/listView1"
+        android:text="Hello World"/>
 
 </RelativeLayout>

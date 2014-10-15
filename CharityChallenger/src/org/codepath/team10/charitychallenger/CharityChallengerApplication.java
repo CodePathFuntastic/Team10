@@ -33,7 +33,7 @@ public class CharityChallengerApplication extends Application {
 		
 		ActiveAndroid.initialize(this);
 		
-		ParseTwitterUtils.initialize( Constants.TWITTER_CONSUMER_KEY, Constants.TWITTER_CONSUMER_SECRET);
+		//ParseTwitterUtils.initialize( Constants.TWITTER_CONSUMER_KEY, Constants.TWITTER_CONSUMER_SECRET);
 	}
 	
 	private void initializeFb() {
@@ -59,15 +59,14 @@ public class CharityChallengerApplication extends Application {
 		//Parse.initialize(this, "9e0wpyP9qg9UvX1g2cz65Qs2h2EkUkno88bzctFL", "PchSOljUdwS9F1bHsmotb6Aqv4epxH154UFbVggx");
 		Parse.initialize(this, Constants.PARSE_APPLICATION_ID, Constants.PARSE_CLIENT_KEY );
 
-		
-		ParseUser.enableAutomaticUser();
-		ParseUser.getCurrentUser().saveInBackground();
-		ParseACL defaultACL = new ParseACL();
-
-		defaultACL.setPublicReadAccess(true);
-
-		ParseACL.setDefaultACL(defaultACL, true);
-		
+//		
+//		ParseUser.enableAutomaticUser();
+//		ParseUser.getCurrentUser().saveInBackground();
+//		ParseACL defaultACL = new ParseACL();
+//
+//		defaultACL.setPublicReadAccess(true);
+//
+//		ParseACL.setDefaultACL(defaultACL, true);
 	}
 	
 	public static TwitterRestClient getRestClient() {
