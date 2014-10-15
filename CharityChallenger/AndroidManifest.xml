@@ -80,6 +80,10 @@
             android:name=".AchievementActivity"
             android:label="@string/title_activity_achievement" >
         </activity>
+		<activity
+            android:name=".activities.DonateActivity"
+            android:label="@string/donate_activity_title" >
+        </activity>        
     </application>
 
 </manifest>
