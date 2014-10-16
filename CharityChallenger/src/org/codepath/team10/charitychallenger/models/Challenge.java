@@ -13,6 +13,14 @@ public class Challenge extends ParseObject {
 	 * 	<li>id:number</li>
 	 *  <li>name:String</li>
 	 *  <li>description:String</li>
+
+	 *  <li>TargetAmount:int</li>
+	 *  <li>AmountRaised:int</li>
+	 *  
+	 *  <li>openChallenges:int</li>
+	 *  <li>completedChallenges:int</li>
+	 *  <li>paidChallenges:int</li>
+	 *  
 	 *  <li>organization_id:number</li>
 	 *  <li>charity_pictures:List</li>
 	 * </ol>
@@ -44,4 +52,35 @@ public class Challenge extends ParseObject {
 	public int getOrganization(){
 		return getInt("orgId");
 	}
+	public void setTargetAmount(double target){
+		put("target", target);
+	}
+	public double getTargetAmount(){
+		return getDouble("target");
+	}
+	public void setAmountRaised(double raised){
+		put("raised", raised);
+	}
+	public double getAmountRaised(){
+		return getDouble("raised");
+	}
+	public void setOpenInvitation( int invitations){
+		put("open_invitations", invitations);
+	}
+	public int getOpenInvitations(){
+		return getInt("open_invitations");
+	}
+	public void setClosedInvitations(int invitations){
+		put("closed_invitations", invitations);
+	}
+	public int getClosedInvitations(){
+		return getInt("closed_invitations");
+	}
+	public void setPaidInvitations( int invitations){
+		put("paid_invitations", invitations);
+	}
+	public int getPaidInvitations(){
+		return getInt("paid_invitations");
+	}
+	
 }
