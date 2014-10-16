@@ -17,7 +17,7 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<ParseObject> {
 
 	public static class ViewHolder{
 		ParseImageView ivCharityChallenge;
-		TextView tvChallengeTitle;
+		TextView tvCharityName;
 		TextView tvTargetAmount;
 		TextView tvRaised;
 		
@@ -28,6 +28,8 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<ParseObject> {
 			public ParseQuery<ParseObject> create() {
 				Log.d("Constructor: ", tableName);
 				ParseQuery query = new ParseQuery(tableName);
+				query.whereExists("raised");
+				query.whereExists("target");
 				return query;
 			}
 		});
@@ -42,7 +44,7 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<ParseObject> {
 			viewHolder = new ViewHolder();
 			v = View.inflate(getContext(), R.layout.item_challenge, null);
 			viewHolder.ivCharityChallenge = (ParseImageView) v.findViewById(R.id.ivCharityChallenge);
-			viewHolder.tvChallengeTitle = (TextView) v.findViewById(R.id.tvCharityChallengeName);
+			viewHolder.tvCharityName = (TextView) v.findViewById(R.id.tvCharityName);
 			viewHolder.tvTargetAmount = (TextView) v.findViewById(R.id.tvTargetAmount);
 			viewHolder.tvRaised = (TextView) v.findViewById(R.id.tvRaised);
 			v.setTag(viewHolder);
@@ -65,9 +67,9 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<ParseObject> {
 ////			});
 //		}
 		
-		viewHolder.tvTargetAmount.setText(challenge.getString("name"));
-		Log.d("col value:", challenge.getString("name"));
-		viewHolder.tvRaised.setText(challenge.getString("description"));
+		viewHolder.tvCharityName.setText(challenge.getString("name"));
+		viewHolder.tvTargetAmount.setText("$ " + challenge.getInt("target"));
+		viewHolder.tvRaised.setText("$ " + challenge.getInt("raised"));
 		return v;
 	}
 
