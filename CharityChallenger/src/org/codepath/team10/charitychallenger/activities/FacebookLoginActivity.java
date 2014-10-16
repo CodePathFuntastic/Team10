@@ -33,8 +33,25 @@ public class FacebookLoginActivity extends Activity{
 			@Override
 			public void call(Session session, SessionState state, Exception exception) {
 				Log.d("debug", "Session" + session.toString() + ", state: " + state.toString() , exception);
+				// session open successfully
+				if( Session.getActiveSession().isOpened() == true ){
+					// make a request to get the GraphApi response with User Object
+					Request.newMeRequest( Session.getActiveSession(), new Request.GraphUserCallback() {
+						
+						@Override
+						public void onCompleted(GraphUser user, Response response) {
+							// Save the user details on Sharedpreferences
+							user.getId();
+						}
+					});
+					
+					Intent intent = new Intent( FacebookLoginActivity.this, HomeActivity.class);
+					startActivity(intent);
+
+				}else{
+					Toast.makeText(FacebookLoginActivity.this, "login failed", Toast.LENGTH_SHORT).show();
+				}
 			}
-			
 		});
 	}
 	
@@ -67,7 +84,6 @@ public class FacebookLoginActivity extends Activity{
 			}else{
 				Toast.makeText(this, "login failed", Toast.LENGTH_SHORT).show();
 			}
-			
 		}
     }
   
