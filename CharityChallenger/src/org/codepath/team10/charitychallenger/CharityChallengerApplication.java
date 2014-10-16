@@ -6,6 +6,8 @@ import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.Organization;
 import org.codepath.team10.charitychallenger.models.Picture;
 import org.codepath.team10.charitychallenger.models.User;
+import org.codepath.team10.charitychallenger.parseuploads.ChallengeUploader;
+import org.codepath.team10.charitychallenger.parseuploads.OrganizationUploader;
 
 import android.app.Application;
 import android.content.Context;
@@ -70,14 +72,8 @@ public class CharityChallengerApplication extends Application {
 		c.setOrganization(2763723);
 		c.saveInBackground();
 		
-//		
-//		ParseUser.enableAutomaticUser();
-//		ParseUser.getCurrentUser().saveInBackground();
-//		ParseACL defaultACL = new ParseACL();
-//
-//		defaultACL.setPublicReadAccess(true);
-//
-//		ParseACL.setDefaultACL(defaultACL, true);
+		//OrganizationUploader.upload( this);
+		//ChallengeUploader.upload(this);
 	}
 	
 	public static TwitterRestClient getRestClient() {

@@ -1,19 +1,20 @@
 package org.codepath.team10.charitychallenger.activities;
 
-import java.util.ArrayList;
-
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.adapters.ChallengesViewAdapter;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class HomeActivity extends Activity {
 	
 	private ListView lvChallenges;
+	private ChallengesViewAdapter mChallengesAdapter; 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,19 +22,19 @@ public class HomeActivity extends Activity {
         setContentView(R.layout.activity_home);
         
         ListView lvChallenges = (ListView) findViewById(R.id.lvListOfChallenges);
+        mChallengesAdapter = new ChallengesViewAdapter(this, "Challenge");
+        lvChallenges.setAdapter(mChallengesAdapter);
         
-        ArrayList<String> items = new ArrayList<String>();
-        items.add("Item 1");
-        items.add("Item 2");
-        items.add("Item 3");
-        items.add("Item 4");
-        items.add("Item 5");
-        
-        ArrayAdapter<String> itemsAdapter = 
-        	    new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-        
-        lvChallenges.setAdapter(itemsAdapter);
-        
+      //OnItemClickListener
+        lvChallenges.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                    int position, long id) {
+                Intent intent = new Intent(HomeActivity.this, ChallengeDetailsActivity.class);
+                
+                //intent.putExtra("Challenge_id", imageData);
+                startActivity(intent);
+            }
+        });
     }
     
     public void onChallengeDetails(View view){
