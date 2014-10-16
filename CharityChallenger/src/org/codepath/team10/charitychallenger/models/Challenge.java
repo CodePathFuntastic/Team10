@@ -13,7 +13,7 @@ public class Challenge extends ParseObject {
 	 * 	<li>id:number</li>
 	 *  <li>name:String</li>
 	 *  <li>description:String</li>
-
+	 *  <li>organization_id:number</li>
 	 *  <li>TargetAmount:int</li>
 	 *  <li>AmountRaised:int</li>
 	 *  
@@ -21,8 +21,7 @@ public class Challenge extends ParseObject {
 	 *  <li>completedChallenges:int</li>
 	 *  <li>paidChallenges:int</li>
 	 *  
-	 *  <li>organization_id:number</li>
-	 *  <li>charity_pictures:List</li>
+	 *  <li>challenge_pictures:List</li>
 	 * </ol>
 	 */
 	public Challenge(){
