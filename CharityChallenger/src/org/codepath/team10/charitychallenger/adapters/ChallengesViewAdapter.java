@@ -1,50 +1,50 @@
 package org.codepath.team10.charitychallenger.adapters;
 
 import org.codepath.team10.charitychallenger.R;
-import org.codepath.team10.charitychallenger.models.Challenge;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
 import com.parse.ParseImageView;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 
-public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
+public class ChallengesViewAdapter extends ParseQueryAdapter<ParseObject> {
 
 	public static class ViewHolder{
-		ImageView ivCharityChallenge;
+		ParseImageView ivCharityChallenge;
 		TextView tvChallengeTitle;
 		TextView tvTargetAmount;
-		TextView tvAmountRaised;
+		TextView tvRaised;
 		
 	}
-	public ChallengesViewAdapter(Context context) {
-		super(context, new ParseQueryAdapter.QueryFactory<Challenge>() {
-			public ParseQuery<Challenge> create() {
-				ParseQuery query = new ParseQuery("Challenge");
+	public ChallengesViewAdapter(Context context, final String tableName) {
+		super(context, new ParseQueryAdapter.QueryFactory<ParseObject>() {
+			
+			public ParseQuery<ParseObject> create() {
+				Log.d("Constructor: ", tableName);
+				ParseQuery query = new ParseQuery(tableName);
 				return query;
 			}
 		});
 	}
 
+	// Customize the layout by overriding getItemView
 	@Override
-	public View getItemView(Challenge challenge, View v, ViewGroup parent) {
+	public View getItemView(ParseObject challenge, View v, ViewGroup parent) {
 		
 		ViewHolder viewHolder = null;
 		if (v == null) {
 			viewHolder = new ViewHolder();
 			v = View.inflate(getContext(), R.layout.item_challenge, null);
-			viewHolder.ivCharityChallenge = (ImageView) v.findViewById(R.id.ivCharityChallenge);
+			viewHolder.ivCharityChallenge = (ParseImageView) v.findViewById(R.id.ivCharityChallenge);
 			viewHolder.tvChallengeTitle = (TextView) v.findViewById(R.id.tvCharityChallengeName);
 			viewHolder.tvTargetAmount = (TextView) v.findViewById(R.id.tvTargetAmount);
-			viewHolder.tvAmountRaised = (TextView) v.findViewById(R.id.tvAmountRaised);
+			viewHolder.tvRaised = (TextView) v.findViewById(R.id.tvRaised);
 			v.setTag(viewHolder);
 			
 		} else {
@@ -53,22 +53,21 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 
 		super.getItemView(challenge, v, parent);
 
-		ParseImageView pictureImage = (ParseImageView) v.findViewById(R.id.icon);
-		ParseFile photoFile = challenge.getParseFile("photo");
-		if (photoFile != null) {
-			pictureImage.setParseFile(photoFile);
-			pictureImage.loadInBackground(new GetDataCallback() {
-				@Override
-				public void done(byte[] data, ParseException e) {
-					// nothing to do
-				}
-			});
-		}
+		//ParseImageView challangeImage = (ParseImageView) viewHolder.ivCharityChallenge;
+//		ParseFile photoFile = challenge.getParseFile("");
+//		if (photoFile != null) {
+//			viewHolder.ivCharityChallenge.setParseFile(photoFile);
+//			viewHolder.ivCharityChallenge.loadInBackground();//new GetDataCallback() {
+////				@Override
+////				public void done(byte[] data, ParseException e) {
+////					// nothing to do
+////				}
+////			});
+//		}
 		
-		viewHolder.ivCharityChallenge.setImageResource(0);
-		viewHolder.tvChallengeTitle.setText(challenge.getName());
-		viewHolder.tvTargetAmount.setText("$2000.00");
-		viewHolder.tvAmountRaised.setText("$$625.00");
+		viewHolder.tvTargetAmount.setText(challenge.getString("name"));
+		Log.d("col value:", challenge.getString("name"));
+		viewHolder.tvRaised.setText(challenge.getString("description"));
 		return v;
 	}
 
