@@ -1,5 +1,7 @@
 package org.codepath.team10.charitychallenger.models;
 
+import java.util.List;
+
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
@@ -80,6 +82,12 @@ public class Challenge extends ParseObject {
 	}
 	public int getPaidInvitations(){
 		return getInt("paid_invitations");
+	}
+	public void addChallengePictureUrls( List<String> urls){
+		addAllUnique("challenge_pic_urls", urls);
+	}
+	public List<String> getChallengesPictureUrls(){
+		return getList("challenge_pic_urls");
 	}
 	
 }

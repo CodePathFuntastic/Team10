@@ -55,28 +55,12 @@ public class User extends ParseObject {
 		return getString("email");
 	}
 	public List<User> getFriends(){
-		List<User> friends=null;
-		
-		ParseRelation<User> relation = getRelation("friends");
-		try {
-			friends = relation.getQuery().find();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return friends;
+		return getList("friends");
 	}
-	
-	public void addFriend(User user){
-		ParseRelation<User> relation = getRelation("friends");
-		relation.add(user);
-		this.saveInBackground();
+	public void addFriend(String friend){
+		addUnique("friends", friend);
 	}
-	
-	public void addFriends( List<User> friends){
-		ParseRelation<User> relation = getRelation("friends");
-		for( User f : friends ){
-			relation.add(f);
-		}
-		this.saveInBackground();
+	public void addFriends( List<String> friends){
+		addAllUnique("friends", friends);
 	}
 }

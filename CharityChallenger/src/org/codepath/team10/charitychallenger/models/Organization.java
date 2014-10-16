@@ -1,7 +1,14 @@
 package org.codepath.team10.charitychallenger.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.parse.FindCallback;
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseRelation;
 
 @ParseClassName(value="Organization")
 public class Organization extends ParseObject{
@@ -57,5 +64,66 @@ public class Organization extends ParseObject{
 	}
 	public String getUrl(){
 		return getString("url");
+	}
+	
+	public void addPicture( PictureUrl pic){
+		ParseRelation<PictureUrl> relation =  getRelation("PictureObjects");
+		relation.add(pic);
+	}
+	public void addPictures( List<PictureUrl> urls){
+		ParseRelation<PictureUrl> relation =  getRelation("PictureObjects");
+		for( PictureUrl url : urls){
+			relation.add(url);
+		}
+	}
+	public List<PictureUrl> getPictures(){
+		
+		List<PictureUrl> urls = null;
+		ParseRelation<PictureUrl> relation =  getRelation("PictureObjects");
+		try {
+			urls = relation.getQuery().find();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return urls;
+	}
+	
+	public List<String> getPictureUrls(){
+		List<PictureUrl> pics = getPictures();
+		List<String> urls = new ArrayList<String>();
+		for( PictureUrl u : pics ){
+			urls.add(u.getUrl());
+		}
+		return urls;
+	}
+	
+	public void saveRemoteProperly(){
+				
+		// first query whether this row exists
+		ParseQuery<Organization> query = ParseQuery.getQuery(Organization.class);
+		query.whereEqualTo("org_id", getOrgId() );
+		
+		query.findInBackground( new FindCallback<Organization>(){
+			
+			@Override
+			public void done(List<Organization> paramList,
+					ParseException paramParseException) {
+				for( Organization o : paramList ){
+					if( o.getOrgId() == getOrgId() ){
+						
+						// save the new values
+						o.setAddress(getAddress());
+						o.setChallengeId(getChallengeId());
+						o.setDescription(getDescription());
+						o.setName(getName());
+						o.setUrl(getUrl());
+						o.saveInBackground();
+					}
+				}
+				
+			}
+		});
+		
 	}
 }

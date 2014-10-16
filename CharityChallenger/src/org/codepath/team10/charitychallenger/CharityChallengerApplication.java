@@ -5,18 +5,22 @@ import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.Organization;
 import org.codepath.team10.charitychallenger.models.Picture;
+import org.codepath.team10.charitychallenger.models.PictureUrl;
 import org.codepath.team10.charitychallenger.models.User;
 import org.codepath.team10.charitychallenger.parseuploads.ChallengeUploader;
 import org.codepath.team10.charitychallenger.parseuploads.OrganizationUploader;
+import org.codepath.team10.charitychallenger.parseuploads.UserUploader;
 
 import android.app.Application;
 import android.content.Context;
 
 import com.activeandroid.ActiveAndroid;
 import com.parse.Parse;
+import com.parse.ParseACL;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParseRole;
 import com.parse.ParseUser;
 
 public class CharityChallengerApplication extends Application {
@@ -54,26 +58,21 @@ public class CharityChallengerApplication extends Application {
 		ParseObject.registerSubclass(Invitation.class);
 		ParseObject.registerSubclass(Organization.class);
 		ParseObject.registerSubclass(Picture.class);
+		ParseObject.registerSubclass(PictureUrl.class);
 		ParseObject.registerSubclass(User.class);
 
 		// initialize parse SDK
 		//Parse.initialize(this, "9e0wpyP9qg9UvX1g2cz65Qs2h2EkUkno88bzctFL", "PchSOljUdwS9F1bHsmotb6Aqv4epxH154UFbVggx");
 		Parse.initialize(this, Constants.PARSE_APPLICATION_ID, Constants.PARSE_CLIENT_KEY );
 		ParseInstallation.getCurrentInstallation().saveInBackground();
-
-		ParseUser user = new ParseUser();
-		user.setUsername("snambi");
-		user.setEmail("sjhdjsahd");
-		user.saveInBackground();
 		
-		Challenge c = new Challenge();
-		c.setName("great challenge");
-		c.setDescription("jhkjdhsjkdhkjashda");
-		c.setOrganization(2763723);
-		c.saveInBackground();
-		
-		//OrganizationUploader.upload( this);
-		//ChallengeUploader.upload(this);
+		final ParseACL roleACL = new ParseACL();
+		roleACL.setPublicReadAccess(true);
+		final ParseRole role = new ParseRole("Engineer", roleACL);
+				
+		OrganizationUploader.upload( this);
+		ChallengeUploader.upload(this);
+		UserUploader.upload(this);
 	}
 	
 	public static TwitterRestClient getRestClient() {
