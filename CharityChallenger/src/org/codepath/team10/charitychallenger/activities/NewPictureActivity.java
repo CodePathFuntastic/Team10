@@ -20,8 +20,8 @@ public class NewPictureActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		picture = new Picture();
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//		requestWindowFeature(Window.FEATURE_NO_TITLE);
+//		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_picture);
 		

@@ -19,7 +19,7 @@ public class ChallengeDetailsActivity extends Activity {
 	}
 		
 	public void onClickAccept(View v) {
-		 Intent intent = new Intent(this, ActionDetailActivity.class);
+		 Intent intent = new Intent(this, NewPictureActivity.class);
 		 startActivity(intent);
 	}
 	

@@ -4,6 +4,18 @@
     android:layout_height="match_parent" 
     android:orientation="vertical">
 
+        <TextView
+        android:id="@+id/tvChallegeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_description" />
+
+    <TextView
+        android:id="@+id/tvChallengeDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Make funny faces in front of public" />
+     
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,11 +33,13 @@
         android:id="@+id/rating_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+     
 
     <ImageButton
         android:id="@+id/photo_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+		android:src="@drawable/ic_action_photo" 
         android:text="@string/action_new" />
 
     <Button
@@ -39,10 +53,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/cancel_button_text" />
+    
+        <Button
+        android:id="@+id/donate_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/donoate" />
 
-    <com.parse.ParseImageView
-        android:id="@+id/picture_preview_image"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <com.parse.ParseImageView
+                android:id="@+id/picture_preview_image"
+                android:layout_width="155dp"
+                android:layout_height="113dp" />
+
+
+            <GridView
+                android:id="@+id/gvSample"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:numColumns="1"/>
+
+        </LinearLayout>
+    
+    
 
 </LinearLayout>
