@@ -15,6 +15,8 @@ public class Invitation extends ParseObject {
 	 * 		<li>senderId:id</li>
 	 * 		<li>receiver:id</li>
 	 * 		<li>status:int</li>
+	 * 		<li>message:String</li>
+	 * 		<li>amount:float</li>
 	 * 		<li>photos</li>
 	 * </ol>
 	 */
@@ -38,6 +40,18 @@ public class Invitation extends ParseObject {
 	}
 	public String getReceiver(){
 		return getString("receiver");
+	}
+	public void setMessage(String msg){
+		put("message", msg);
+	}
+	public String getMessage(){
+		return getString("message");
+	}
+	public void setAmount(double amt){
+		put("amount", amt);
+	}
+	public double getAmount(){
+		return getDouble("amount");
 	}
 	public void setStatus(int status){
 		put("status", status);
