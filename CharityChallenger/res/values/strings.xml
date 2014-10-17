@@ -66,5 +66,7 @@
     <string name="title_activity_challenge_details">ChallengeDetailsActivity</string>
     <string name="title_activity_invite_friends">InviteFriendsActivity</string>
     <string name="title_activity_fun">FunActivity</string>
+    <string name="title_action_received_challenges">Received Challenges</string>
+    
 
 </resources>

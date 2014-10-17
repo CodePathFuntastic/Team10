@@ -146,11 +146,6 @@
                 <category android:name="org.codepath.team10.charitychallenger" />
             </intent-filter>
         </receiver>
-
-        <activity
-            android:name=".activities.ChallengeDetailsActivity"
-            android:label="@string/title_activity_challenge_details" >
-        </activity>
         <activity
             android:name=".activities.InviteFriendsActivity"
             android:label="@string/title_activity_invite_friends" >

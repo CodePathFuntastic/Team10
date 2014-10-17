@@ -6,10 +6,17 @@ import org.codepath.team10.charitychallenger.adapters.ChallengesViewAdapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class HomeActivity extends Activity {
 	
@@ -21,11 +28,11 @@ public class HomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         
-        ListView lvChallenges = (ListView) findViewById(R.id.lvListOfChallenges);
+        lvChallenges = (ListView) findViewById(R.id.lvListOfChallenges);
         mChallengesAdapter = new ChallengesViewAdapter(this, "Challenge");
         lvChallenges.setAdapter(mChallengesAdapter);
         
-      //OnItemClickListener
+        //OnItemClickListener
         lvChallenges.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                     int position, long id) {
@@ -41,11 +48,31 @@ public class HomeActivity extends Activity {
     	Intent intent = new Intent(this, ChallengeDetailsActivity.class);
     	startActivity(intent);	
     }
-    
-    /*
-    public void onFacebookLogin(View view){
-    	Intent intent = new Intent(this, FacebookLoginActivity.class);
-    	startActivity(intent);
+	
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	getMenuInflater().inflate(R.menu.home_activity_menu, menu);
+
+        RelativeLayout badgeLayout = (RelativeLayout) menu.findItem(R.id.badge).getActionView();
+        TextView tv = (TextView) badgeLayout.findViewById(R.id.actionbar_notifcation_textview);
+        tv.setText("12");
+        
+        
+        MenuItemCompat.getActionView(menu.findItem(R.id.badge)).findViewById(R.id.ivReceivedChallenges).setOnClickListener(new OnClickListener() {	
+        	@Override 
+        	public void onClick(View v) {
+        		Intent intent = new Intent(HomeActivity.this, InviteFriendsActivity.class);
+    			startActivity(intent);
+        		} 
+        	});
+		return true;
     }
-    */
+    
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		int id = item.getItemId();
+//		if (id == R.id.badge) {
+//			return true;
+//		}
+//		return super.onOptionsItemSelected(item);
+//	}
 }
