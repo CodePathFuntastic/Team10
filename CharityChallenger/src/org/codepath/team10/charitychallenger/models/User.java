@@ -17,6 +17,7 @@ public class User extends ParseObject {
 	 * 	<li>twitterId</li>
 	 * 	<li>location</li>
 	 * 	<li>email</li>
+	 * 	<li>image_url</li>
 	 * 	<li>friends</li>
 	 * </ol>
 	 */
@@ -53,6 +54,12 @@ public class User extends ParseObject {
 	}
 	public String getEmail(){
 		return getString("email");
+	}
+	public void setImageUrl( String imageUrl){
+		put("image_url", imageUrl);
+	}
+	public String getImageUrl(){
+		return getString("image_url");
 	}
 	public List<User> getFriends(){
 		return getList("friends");

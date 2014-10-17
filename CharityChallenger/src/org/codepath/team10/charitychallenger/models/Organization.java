@@ -17,8 +17,6 @@ public class Organization extends ParseObject{
 	 * <ol>
 	 * 	<li>Name:String</li>
 	 *  <li>Description:String</li>
-	 *
-	 *  <li>challengeId:int</li>
 	 *  
 	 *  Should the list of photos be stored in this object?
 	 *  <li>orgPhotos:List<String></li>
@@ -46,12 +44,6 @@ public class Organization extends ParseObject{
 	}
 	public int getOrgId(){
 		return getInt("org_id");
-	}
-	public void setChallengeId( int id){
-		put("challenge_id", id);
-	}
-	public int getChallengeId(){
-		return getInt("challenge_id");
 	}
 	public void setAddress(String address){
 		put("address", address);
@@ -98,32 +90,32 @@ public class Organization extends ParseObject{
 		return urls;
 	}
 	
-	public void saveRemoteProperly(){
-				
-		// first query whether this row exists
-		ParseQuery<Organization> query = ParseQuery.getQuery(Organization.class);
-		query.whereEqualTo("org_id", getOrgId() );
-		
-		query.findInBackground( new FindCallback<Organization>(){
-			
-			@Override
-			public void done(List<Organization> paramList,
-					ParseException paramParseException) {
-				for( Organization o : paramList ){
-					if( o.getOrgId() == getOrgId() ){
-						
-						// save the new values
-						o.setAddress(getAddress());
-						o.setChallengeId(getChallengeId());
-						o.setDescription(getDescription());
-						o.setName(getName());
-						o.setUrl(getUrl());
-						o.saveInBackground();
-					}
-				}
-				
-			}
-		});
-		
-	}
+//	public void saveRemoteProperly(){
+//				
+//		// first query whether this row exists
+//		ParseQuery<Organization> query = ParseQuery.getQuery(Organization.class);
+//		query.whereEqualTo("org_id", getOrgId() );
+//		
+//		query.findInBackground( new FindCallback<Organization>(){
+//			
+//			@Override
+//			public void done(List<Organization> paramList,
+//					ParseException paramParseException) {
+//				for( Organization o : paramList ){
+//					if( o.getOrgId() == getOrgId() ){
+//						
+//						// save the new values
+//						o.setAddress(getAddress());
+//						o.setChallengeId(getChallengeId());
+//						o.setDescription(getDescription());
+//						o.setName(getName());
+//						o.setUrl(getUrl());
+//						o.saveInBackground();
+//					}
+//				}
+//				
+//			}
+//		});
+//		
+//	}
 }

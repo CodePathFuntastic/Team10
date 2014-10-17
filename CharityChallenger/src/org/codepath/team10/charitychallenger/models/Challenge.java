@@ -13,6 +13,7 @@ public class Challenge extends ParseObject {
 	 * 
 	 * <ol>
 	 * 	<li>id:number</li>
+	 * 
 	 *  <li>name:String</li>
 	 *  <li>description:String</li>
 	 *  <li>organization_id:number</li>
@@ -89,5 +90,4 @@ public class Challenge extends ParseObject {
 	public List<String> getChallengesPictureUrls(){
 		return getList("challenge_pic_urls");
 	}
-	
 }

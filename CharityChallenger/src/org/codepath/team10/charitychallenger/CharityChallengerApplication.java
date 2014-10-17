@@ -8,6 +8,7 @@ import org.codepath.team10.charitychallenger.models.Picture;
 import org.codepath.team10.charitychallenger.models.PictureUrl;
 import org.codepath.team10.charitychallenger.models.User;
 import org.codepath.team10.charitychallenger.parseuploads.ChallengeUploader;
+import org.codepath.team10.charitychallenger.parseuploads.InvitationUploader;
 import org.codepath.team10.charitychallenger.parseuploads.OrganizationUploader;
 import org.codepath.team10.charitychallenger.parseuploads.UserUploader;
 
@@ -73,6 +74,7 @@ public class CharityChallengerApplication extends Application {
 		OrganizationUploader.upload( this);
 		ChallengeUploader.upload(this);
 		UserUploader.upload(this);
+		InvitationUploader.upload(this);	
 	}
 	
 	public static TwitterRestClient getRestClient() {
