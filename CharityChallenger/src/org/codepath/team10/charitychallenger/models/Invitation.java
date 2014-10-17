@@ -23,6 +23,12 @@ public class Invitation extends ParseObject {
 	public Invitation(){
 	}
 	
+	public void setId(int id){
+		put("inviteId", id);
+	}
+	public int getId(){
+		return getInt("inviteId");
+	}
 	public void setChallengeId( int id){
 		put("challengeId", id);
 	}
