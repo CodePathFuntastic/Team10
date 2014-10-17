@@ -20,6 +20,8 @@ public class User extends ParseObject {
 	 * 	<li>image_url</li>
 	 * 	<li>friends</li>
 	 * </ol>
+	 * 
+	 * dd
 	 */
 
 	public User(){

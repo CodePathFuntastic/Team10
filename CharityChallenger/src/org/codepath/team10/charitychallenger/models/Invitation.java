@@ -18,7 +18,10 @@ public class Invitation extends ParseObject {
 	 * 		<li>message:String</li>
 	 * 		<li>amount:float</li>
 	 * 		<li>photos</li>
+	 * 		
 	 * </ol>
+	 * 
+	 * dd
 	 */
 	public Invitation(){
 	}
@@ -29,6 +32,7 @@ public class Invitation extends ParseObject {
 	public int getId(){
 		return getInt("inviteId");
 	}
+	
 	public void setChallengeId( int id){
 		put("challengeId", id);
 	}
