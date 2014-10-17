@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import org.codepath.team10.charitychallenger.R;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -33,6 +37,16 @@ public class FunActivity extends Activity {
 		
 		ListView list = (ListView)findViewById(R.id.lvFunChallenges);
 		list.setAdapter(friendsAdapter);
+		
+		list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Intent intent = new Intent(FunActivity.this, ChallengeDetailsActivity.class);
+				startActivity( intent);
+			}
+		});
 
 	}
 }
