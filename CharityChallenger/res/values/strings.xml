@@ -63,5 +63,7 @@
     <string name="expiry_date_value">Nov 20th, 2014</string>
     <string name="donate_now_value">Donate Now!</string>
     <string name="title_activity_achievement">AchievementActivity</string>
+    <string name="title_activity_challenge_details">ChallengeDetailsActivity</string>
+    <string name="title_activity_invite_friends">InviteFriendsActivity</string>
 
 </resources>

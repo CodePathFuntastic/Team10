@@ -14,19 +14,21 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<uses-permission android:name="android.permission.WAKE_LOCK" />
-	<uses-permission android:name="android.permission.VIBRATE" />
-	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
-	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
- 
-<!--
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <!--
   IMPORTANT: Change "com.parse.starter.permission.C2D_MESSAGE" in the lines below
   to match your app's package name + ".permission.C2D_MESSAGE".
--->
-	<permission android:protectionLevel="signature"
-    	android:name="org.codepath.team10.charitychallenger.permission.C2D_MESSAGE" />
-	<uses-permission android:name="org.codepath.team10.charitychallenger.permission.C2D_MESSAGE" />    
+    -->
+    <permission
+        android:name="org.codepath.team10.charitychallenger.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="org.codepath.team10.charitychallenger.permission.C2D_MESSAGE" />
 
     <uses-feature android:name="android.hardware.camera" />
 
@@ -43,17 +45,14 @@
         <activity
             android:name="com.facebook.LoginActivity"
             android:label="@string/app_name" />
-        
         <activity
             android:name=".activities.FacebookLoginActivity"
-            android:label="@string/title_activity_login">
-            
+            android:label="@string/title_activity_login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -65,7 +64,7 @@
                     android:scheme="oauth" />
             </intent-filter>
         </activity>
-<!--  
+        <!--
         <activity
             android:name=".activities.TwitterLoginActivity"
             android:label="@string/title_activity_login" >
@@ -107,7 +106,7 @@
             android:label="@string/title_activity_action_detail" >
         </activity>
         <activity
-            android:name="org.codepath.team10.charitychallenger.activities.AchievementActivity"
+            android:name=".activities.AchievementActivity"
             android:label="@string/title_activity_achievement" >
         </activity>
         <activity
@@ -143,10 +142,19 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-<!--       IMPORTANT: Change "com.parse.starter" to match your app's package name. -->
+                <!-- IMPORTANT: Change "com.parse.starter" to match your app's package name. -->
                 <category android:name="org.codepath.team10.charitychallenger" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".activities.ChallengeDetailsActivity"
+            android:label="@string/title_activity_challenge_details" >
+        </activity>
+        <activity
+            android:name="org.codepath.team10.charitychallenger.activities.InviteFriendsActivity"
+            android:label="@string/title_activity_invite_friends" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,101 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-     android:layout_margin="10dp">
-    <ImageView
-        android:id="@+id/ivCharity"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <TextView
+        android:id="@+id/tvChallengeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/ic_launcher" />
+        android:text="Large Text"
+        android:gravity="center_vertical"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/tvTargetAmountRaised"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvCharityChallengeName"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/ivCharity"
-        android:layout_marginTop="24dp"
-        android:text="@string/target_amount_raised" />
-
-    <TextView
-        android:id="@+id/tvAmountRaised"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvTargetAmountRaised"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvTargetAmountRaised"
-        android:layout_marginTop="19dp"
-        android:text="@string/amount_raised" />
-
-    <TextView
-        android:id="@+id/tvTargetAmountLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tvTargetAmountRaised"
-        android:layout_alignBottom="@+id/tvTargetAmountRaised"
-        android:layout_alignLeft="@+id/ivCharity"
-        android:text="@string/target_amount_label" />
-
-    <TextView
-        android:id="@+id/tvAmountRaisedLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tvAmountRaised"
-        android:layout_alignBottom="@+id/tvAmountRaised"
-        android:layout_alignLeft="@+id/tvTargetAmountLabel"
-        android:text="@string/amount_raised_label" />
-
-    <Button
-        android:id="@+id/btnDonate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvAmountRaised"
-        android:layout_marginTop="17dp"
-        android:text="@string/donoate" 
-        android:onClick="onDonate"/>
-
-    <Button
-        android:id="@+id/btnAcceptChallenge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btnDonate"
-        android:layout_alignBottom="@+id/btnDonate"
-        android:layout_marginRight="19dp"
-        android:layout_toLeftOf="@+id/btnDonate"
-        android:onClick="onClickAccept"
-        android:text="@string/accept_challenege" />
-
-    <TextView
-        android:id="@+id/tvCharityChallengeName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/ivCharity"
-        android:layout_marginTop="41dp"
-        android:text="@string/charity_challenge_name" />
-
-    <TextView
-        android:id="@+id/tvDescriptionLabel"
+    <ImageView
+        android:id="@+id/ivChallengeImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/btnAcceptChallenge"
-        android:layout_marginTop="14dp"
-        android:text="@string/description_label" />
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvChallengeTitle"
+        android:src="@drawable/icons_partnership_170" />
 
-    <TextView
-        android:id="@+id/tvDescription"
+    <Button
+        android:id="@+id/btnInvite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ivChallengeImage"
+        android:onClick="onClickInvite"
+        android:text="Invite" />
+
+    <Button
+        android:id="@+id/btnDonateNow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvDescriptionLabel"
-        android:text="@string/challenege_description" />
+        android:layout_below="@+id/ivChallengeImage"
+        android:onClick="onClickDonate"
+        android:text="Donate" />
 
 </RelativeLayout>
