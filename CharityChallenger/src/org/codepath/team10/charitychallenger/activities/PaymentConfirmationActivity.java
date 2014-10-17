@@ -33,4 +33,9 @@ public class PaymentConfirmationActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	public void onClickConfirm( View view){
+		Intent intent = new Intent(this, InviteFriendsActivity.class);
+		startActivity(intent);
+	}
 }
