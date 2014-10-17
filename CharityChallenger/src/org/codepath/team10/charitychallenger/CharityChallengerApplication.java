@@ -71,10 +71,10 @@ public class CharityChallengerApplication extends Application {
 		roleACL.setPublicReadAccess(true);
 		final ParseRole role = new ParseRole("Engineer", roleACL);
 				
-		OrganizationUploader.upload( this);
-		ChallengeUploader.upload(this);
-		UserUploader.upload(this);
-		InvitationUploader.upload(this);	
+//		OrganizationUploader.upload( this);
+//		ChallengeUploader.upload(this);
+//		UserUploader.upload(this);
+//		InvitationUploader.upload(this);	
 	}
 	
 	public static TwitterRestClient getRestClient() {
