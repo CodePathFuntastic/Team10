@@ -31,6 +31,7 @@ public class DonateActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		setContentView(R.layout.activity_donate_money);
 		getActionBar().setDisplayHomeAsUpEnabled(true);

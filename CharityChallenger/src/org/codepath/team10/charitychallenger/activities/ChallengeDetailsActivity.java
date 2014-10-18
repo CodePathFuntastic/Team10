@@ -38,6 +38,7 @@ public class ChallengeDetailsActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_challenge_details);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 	    ivChallengeImage = (ImageView)findViewById(R.id.ivChallengeImage);
 	    tvChallengeTitle = (TextView) findViewById(R.id.tvChallengeTitle);

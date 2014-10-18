@@ -15,6 +15,7 @@ public class ActionDetailActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_action_detail);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override

@@ -8,6 +8,8 @@ import org.codepath.team10.charitychallenger.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -20,6 +22,8 @@ public class AllInvitationsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_all_invitations);
+		
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		List<String> invitations = new ArrayList<String>();
 		invitations.add("Invitation from bob");
@@ -45,4 +49,20 @@ public class AllInvitationsActivity extends Activity {
 			
 		});
 	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.new_picture, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		if (id == android.R.id.home) {
+			this.finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
 }

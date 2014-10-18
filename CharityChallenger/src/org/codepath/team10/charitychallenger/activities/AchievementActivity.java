@@ -16,6 +16,7 @@ public class AchievementActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_achievement);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override

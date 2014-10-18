@@ -5,6 +5,7 @@ import org.codepath.team10.charitychallenger.R;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,13 +36,19 @@ public class FacebookLoginActivity extends Activity{
 				Log.d("debug", "Session" + session.toString() + ", state: " + state.toString() , exception);
 				// session open successfully
 				if( Session.getActiveSession().isOpened() == true ){
+					
 					// make a request to get the GraphApi response with User Object
 					Request.newMeRequest( Session.getActiveSession(), new Request.GraphUserCallback() {
 						
 						@Override
 						public void onCompleted(GraphUser user, Response response) {
 							// Save the user details on Sharedpreferences
-							user.getId();
+							String userId = user.getId();
+							
+							SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+							preferences.edit().putString("fb_userId", userId);
+							preferences.edit().commit();
+							
 						}
 					});
 					
