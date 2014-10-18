@@ -54,7 +54,7 @@
     <string name="charity_name_value">Global Giving</string>
     <string name="charity_address_label">Address:</string>
     <string name="charity_address_value">San Jose, CA.</string>
-    <string name="charity_cause">Cause :</string>
+    <string name="charity_cause">Description :</string>
     <string name="cahrity_cause_value">Hemophilia in Children</string>
     <string name="donate_amount_label">Donate :</string>
     <string name="donate_amount_value">$ 50.00</string>
@@ -74,7 +74,9 @@
     <string name="ok_button">OK</string>
     <string name="need_perms_alert_text">In order to pick your friends you need to accept all the permissions on the following page.</string>
     <string name="need_perms_alert_button_ok">OK</string>
-    <string name="need_perms_alert_button_quit">Quit</string>
+    <string name="need_perms_alert_button_quit">Quit</string> 
+    <string name="charity_url_label">Charity URL</string>
+    <string name="charity_url_value">http://www.globalgiving.com</string>
     <string name="title_activity_all_invitations">AllInvitationsActivity</string>
     <string name="title_activity_invitation_details">Invitations Details</string>
 
