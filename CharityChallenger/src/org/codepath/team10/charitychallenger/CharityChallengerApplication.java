@@ -94,20 +94,20 @@ public class CharityChallengerApplication extends Application {
 			});
 		
 		// send a test push notification
-		ParsePush push = new ParsePush();
-		push.setMessage("test message");
-		push.setChannel("");
-		push.sendInBackground( new SendCallback(){
-
-			@Override
-			public void done(ParseException paramParseException) {
-				if(paramParseException != null){
-					Log.e("org.codepath.team10.charitychallenger", "Push Exception", paramParseException);
-				}else{
-					Log.d("org.codepath.team10.charitychallenger", "Push Done");
-				}
-				
-			}});
+//		ParsePush push = new ParsePush();
+//		push.setMessage("test message");
+//		push.setChannel("");
+//		push.sendInBackground( new SendCallback(){
+//
+//			@Override
+//			public void done(ParseException paramParseException) {
+//				if(paramParseException != null){
+//					Log.e("org.codepath.team10.charitychallenger", "Push Exception", paramParseException);
+//				}else{
+//					Log.d("org.codepath.team10.charitychallenger", "Push Done");
+//				}
+//				
+//			}});
 		
 		
 		final ParseACL roleACL = new ParseACL();
