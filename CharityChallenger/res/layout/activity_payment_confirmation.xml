@@ -13,33 +13,24 @@
         android:gravity="center"
         android:text="@string/charity_confirmation_value" />
 
-    <TextView
-        android:id="@+id/tvCharityNameOnConfirmation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvConfirmationHeader"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:gravity="center"
-        android:text="@string/charity_name_value" />
+        <TextView
+            android:id="@+id/tvCharityNameOnConfirmation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvConfirmationHeader"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/charity_name_value" />
 
         <TextView
             android:id="@+id/tvCharityConfirmationUrl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tvCharityAddressOnConfirmation"
             android:layout_below="@+id/tvCharityNameOnConfirmation"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
             android:gravity="center"
             android:text="@string/charity_url_label" />
-
-        <TextView
-            android:id="@+id/tvDonationAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvCharityAddressOnConfirmation"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:text="@string/donate_amount_value" />
 
         <TextView
             android:id="@+id/tvCharityAddressOnConfirmation"
@@ -51,11 +42,21 @@
             android:text="@string/charity_address_value" />
 
         <TextView
+            android:id="@+id/tvDonationAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvCharityAddressOnConfirmation"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="17dp"
+            android:gravity="center"
+            android:text="@string/donate_amount_value" />
+
+        <TextView
             android:id="@+id/tvDonationMethodLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tvDonationAmount"
             android:layout_below="@+id/tvDonationAmount"
+            android:layout_centerHorizontal="true"
             android:gravity="center"
             android:text="@string/payment_type_value" />
 
@@ -65,6 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvDonationMethodLabel"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
             android:onClick="onClickConfirm"
             android:text="@string/invite_more_friends" />
 

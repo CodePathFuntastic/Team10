@@ -24,7 +24,7 @@ public class PaymentConfirmationActivity extends Activity {
     private TextView tvCharityNameOnConfirmation;
     private TextView tvDonationAmount;
     private TextView tvCharityAddressOnConfirmation;
-    private TextView tvCharityUrlValue;
+    private TextView tvCharityConfirmationUrl;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class PaymentConfirmationActivity extends Activity {
 		
 		tvCharityNameOnConfirmation = (TextView) findViewById(R.id.tvCharityNameOnConfirmation);
 		tvCharityAddressOnConfirmation = (TextView) findViewById(R.id.tvCharityAddressOnConfirmation);
-		tvCharityUrlValue = (TextView) findViewById(R.id.tvCharityConfirmationUrl);
+		tvCharityConfirmationUrl = (TextView) findViewById(R.id.tvCharityConfirmationUrl);
 		tvDonationAmount = (TextView) findViewById(R.id.tvDonationAmount);
 		tvDonationAmount.setText(donateAmount);
 
@@ -62,8 +62,8 @@ public class PaymentConfirmationActivity extends Activity {
 	
 	public void updateView(ParseObject parseObject) {
 		tvCharityNameOnConfirmation.setText(parseObject.getString("name"));
+		tvCharityConfirmationUrl.setText(parseObject.getString("url"));
 		tvCharityAddressOnConfirmation.setText(parseObject.getString("address"));
-		tvCharityUrlValue.setText(parseObject.getString("url"));
 	}
 		
 	@Override
