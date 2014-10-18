@@ -30,11 +30,11 @@ public class Challenge extends ParseObject {
 	public Challenge(){
 	}
 	
-	public void setId( int id){
-		put("id", id);
+	public void setChallengeId( int id){
+		put("challenge_id", id);
 	}
-	public int getId(){
-		return getInt("id");
+	public int getChallengeId(){
+		return getInt("challenge_id");
 	}
 	public void setName(String name){
 		put("name", name);

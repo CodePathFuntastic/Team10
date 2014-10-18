@@ -10,9 +10,10 @@ public class ChallengeUploader {
 
 	public static void upload( Context context){
 		
+		
 		Challenge c1 = new Challenge();
 		
-		c1.setId(100);
+		c1.setChallengeId(100);
 		c1.setOrganization(100);
 		c1.setName("Eat a Cat");
 		c1.setDescription("Catch and Eat a cat");
@@ -27,7 +28,7 @@ public class ChallengeUploader {
 		
 		
 		Challenge c2 = new Challenge();
-		c2.setId(101);
+		c2.setChallengeId(101);
 		c2.setOrganization(101);
 		c2.setName("Put your face in icecream");
 		c2.setDescription("Eat the icecream");
@@ -42,7 +43,7 @@ public class ChallengeUploader {
 
 		
 		Challenge c3 = new Challenge();
-		c3.setId(102);
+		c3.setChallengeId(102);
 		c3.setOrganization(102);
 		c3.setName("Put your face in icecream");
 		c3.setDescription("Eat the icecream");
@@ -57,7 +58,7 @@ public class ChallengeUploader {
 
 
 		Challenge c4 = new Challenge();
-		c4.setId(103);
+		c4.setChallengeId(103);
 		c4.setOrganization(103);
 		c4.setName("Dress up like a bear");
 		c4.setDescription("Use a bug bear constume");
@@ -72,7 +73,7 @@ public class ChallengeUploader {
 
 		
 		Challenge c5 = new Challenge();
-		c5.setId(104);
+		c5.setChallengeId(104);
 		c5.setOrganization(104);
 		c5.setName("Put your face on ICE for 2 minutes");
 		c5.setDescription("Get a big bar of ice from fridge");
@@ -88,7 +89,7 @@ public class ChallengeUploader {
 		
 		
 		Challenge c6 = new Challenge();
-		c6.setId(105);
+		c6.setChallengeId(105);
 		c6.setOrganization(105);
 		c6.setName("Put your face on ICE for 2 minutes");
 		c6.setDescription("Get a big bar of ice from fridge");
