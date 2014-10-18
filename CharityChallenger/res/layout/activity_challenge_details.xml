@@ -42,4 +42,13 @@
         android:onClick="onClickDonate"
         android:text="Donate" />
 
+    <TextView
+        android:id="@+id/tvSelectedFriends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/btnInvite"/>
+
 </RelativeLayout>

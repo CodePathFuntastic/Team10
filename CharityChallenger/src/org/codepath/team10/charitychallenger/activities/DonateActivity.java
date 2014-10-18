@@ -1,6 +1,7 @@
 package org.codepath.team10.charitychallenger.activities;
 
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,13 +12,18 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class DonateActivity extends Activity {
+	
 	private static final String TAG = "DonateActivity ";
+    ParseProxyObject ppo;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_donate_money);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		Intent intent = getIntent();
+		ppo = (ParseProxyObject) intent.getSerializableExtra("parseObject");
 	}
 		
 	public void onDonateNow(View v) {

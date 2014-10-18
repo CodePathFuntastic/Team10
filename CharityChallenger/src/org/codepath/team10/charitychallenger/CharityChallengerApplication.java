@@ -1,5 +1,7 @@
 package org.codepath.team10.charitychallenger;
 
+import java.util.Collection;
+
 import org.codepath.team10.charitychallenger.clients.TwitterRestClient;
 import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
@@ -13,6 +15,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.activeandroid.ActiveAndroid;
+import com.facebook.model.GraphUser;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseException;
@@ -41,6 +44,16 @@ public class CharityChallengerApplication extends Application {
 		
 		//ParseTwitterUtils.initialize( Constants.TWITTER_CONSUMER_KEY, Constants.TWITTER_CONSUMER_SECRET);
 	}
+	
+    private Collection<GraphUser> selectedUsers;
+
+    public Collection<GraphUser> getSelectedUsers() {
+        return selectedUsers;
+    }
+
+    public void setSelectedUsers(Collection<GraphUser> selectedUsers) {
+        this.selectedUsers = selectedUsers;
+    }
 	
 	private void initializeFb() {
 		// Set your Facebook App Id in strings.xml

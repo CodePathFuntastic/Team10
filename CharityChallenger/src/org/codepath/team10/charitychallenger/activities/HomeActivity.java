@@ -2,14 +2,13 @@ package org.codepath.team10.charitychallenger.activities;
 
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.adapters.ChallengesViewAdapter;
+import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -17,6 +16,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.parse.ParseObject;
 
 public class HomeActivity extends Activity {
 	
@@ -37,8 +38,9 @@ public class HomeActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View v,
                     int position, long id) {
                 Intent intent = new Intent(HomeActivity.this, ChallengeDetailsActivity.class);
-                
-                //intent.putExtra("Challenge_id", imageData);
+                ParseObject parseObject = mChallengesAdapter.getItem(position);
+                ParseProxyObject ppo = new ParseProxyObject(parseObject);
+                intent.putExtra("parseObject", ppo);
                 startActivity(intent);
             }
         });
