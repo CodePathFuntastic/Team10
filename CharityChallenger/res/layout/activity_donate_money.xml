@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
     android:layout_margin="15dp">
@@ -104,7 +103,7 @@
         android:layout_alignParentRight="true"
         android:gravity="center"
         android:text="@string/donate_amount_value" />
-
+<!--  
     <TextView
         android:id="@+id/tvPaymentTypeLable"
         android:layout_width="wrap_content"
@@ -163,15 +162,18 @@
         android:layout_alignParentRight="true"
         android:gravity="center"
         android:text="@string/expiry_date_value" />
+        -->
 
-    <Button
+    <ImageButton
         android:id="@+id/btnDonateNowLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvExpiryDateValue"
+        android:layout_below="@+id/etDonateAmountValue"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:text="@string/donate_now_value" 
-        android:onClick="onDonateNow"/>
+        android:onClick="onDonateNow"
+        android:src="@drawable/paypal"/>
+    
+
 
 </RelativeLayout>

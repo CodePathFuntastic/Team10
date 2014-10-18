@@ -43,7 +43,7 @@ public class DonateActivity extends Activity {
 		tvAddressValue = (TextView) findViewById(R.id.tvAddressValue);
 		tvCauseValue = (TextView) findViewById(R.id.tvCauseValue);
 		tvCharityUrlValue = (TextView) findViewById(R.id.tvCharityUrlValue);
-		//etDonateAmountValue = (TextView) findViewById(R.id.etDonateAmountValue);
+		etDonateAmountValue = (TextView) findViewById(R.id.etDonateAmountValue);
 
 		int orgId = ppo.getInt("orgId");
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Organization");
@@ -70,6 +70,8 @@ public class DonateActivity extends Activity {
 		
 	public void onDonateNow(View v) {
 		 Intent intent = new Intent(this, PaymentConfirmationActivity.class);
+		 intent.putExtra("parseObject", ppo);
+		 intent.putExtra("amount", etDonateAmountValue.getText());
 		 startActivity(intent);
 	}
 	

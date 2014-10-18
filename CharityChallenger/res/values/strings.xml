@@ -77,7 +77,9 @@
     <string name="need_perms_alert_button_quit">Quit</string> 
     <string name="charity_url_label">Charity URL</string>
     <string name="charity_url_value">http://www.globalgiving.com</string>
+    <string name="charity_confirmation_value">Thanks for your donation!!!</string>
     <string name="title_activity_all_invitations">AllInvitationsActivity</string>
     <string name="title_activity_invitation_details">Invitations Details</string>
-
+    <string name="invite_more_friends">Invite More Friends</string>
+    
 </resources>
