@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -52,21 +53,36 @@ public class HomeActivity extends Activity {
     }
 	
     public boolean onCreateOptionsMenu(Menu menu) {
+    	
     	getMenuInflater().inflate(R.menu.home_activity_menu, menu);
 
+    	int numberOfinvites = 12;
+    	
         RelativeLayout badgeLayout = (RelativeLayout) menu.findItem(R.id.badge).getActionView();
         TextView tv = (TextView) badgeLayout.findViewById(R.id.actionbar_notifcation_textview);
-        tv.setText("12");
+        tv.setText( ""+numberOfinvites);
         
+        ImageView ivBadge = (ImageView ) MenuItemCompat.getActionView(menu.findItem(R.id.badge)).findViewById(R.id.ivReceivedChallenges);
         
-        MenuItemCompat.getActionView(menu.findItem(R.id.badge)).findViewById(R.id.ivReceivedChallenges).setOnClickListener(new OnClickListener() {	
+        ivBadge.setTag( numberOfinvites );
+        
+        ivBadge.setOnClickListener(new OnClickListener() {	
         	@Override 
-        	public void onClick(View v) {
-        		//Intent intent = new Intent(HomeActivity.this, InviteFriendsActivity.class);
-        		Intent intent = new Intent(HomeActivity.this, AllInvitationsActivity.class);
-    			startActivity(intent);
-        		} 
-        	});
+        	public void onClick(View view ) {
+        		
+        		int numInvitations = (Integer) view.getTag();
+        		
+        		// if only one invitation is available, directly open that invitation
+        		if( numInvitations == 1){
+        			Intent intent = new Intent(HomeActivity.this, InvitationDetails.class);
+        			startActivity(intent);
+        		}else if( numInvitations > 1 ){
+            		// if more that invitations are available, show all invitations, so that user can pick one
+            		Intent intent = new Intent(HomeActivity.this, AllInvitationsActivity.class);
+        			startActivity(intent);
+        		}
+        	}
+        });
 		return true;
     }
     
