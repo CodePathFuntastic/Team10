@@ -5,13 +5,16 @@ import java.util.Collection;
 
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.Session;
@@ -24,14 +27,25 @@ public class ChallengeDetailsActivity extends FragmentActivity {
     private static final int PICK_FRIENDS_ACTIVITY = 1;
     private Button pickFriendsButton;
     private TextView resultsTextView;
+    private TextView tvChallengeTitle;
     private UiLifecycleHelper lifecycleHelper;
     boolean pickFriendsWhenSessionOpened;
+    private ImageView ivChallengeImage;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_challenge_details);
 		
+	    ivChallengeImage = (ImageView)findViewById(R.id.ivChallengeImage);
+	    tvChallengeTitle = (TextView) findViewById(R.id.tvChallengeTitle);
+		
+		
+		Intent intent = getIntent();
+		ParseProxyObject ppo = (ParseProxyObject) intent.getSerializableExtra("parseObject");
+		Log.v("Test", String.format("Proxy object description: %s", ppo.getString("name")));
+		String name = ppo.getString("name");
+		tvChallengeTitle.setText(name);		
         resultsTextView = (TextView) findViewById(R.id.tvSelectedFriends);
         pickFriendsButton = (Button) findViewById(R.id.btnInvite);
         pickFriendsButton.setOnClickListener(new View.OnClickListener() {
