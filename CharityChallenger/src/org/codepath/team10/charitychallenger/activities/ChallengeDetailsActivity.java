@@ -21,6 +21,7 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
+import com.parse.ParseObject;
 
 public class ChallengeDetailsActivity extends FragmentActivity {
 
@@ -31,6 +32,7 @@ public class ChallengeDetailsActivity extends FragmentActivity {
     private UiLifecycleHelper lifecycleHelper;
     boolean pickFriendsWhenSessionOpened;
     private ImageView ivChallengeImage;
+    ParseProxyObject ppo;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +44,10 @@ public class ChallengeDetailsActivity extends FragmentActivity {
 		
 		
 		Intent intent = getIntent();
-		ParseProxyObject ppo = (ParseProxyObject) intent.getSerializableExtra("parseObject");
+		ppo = (ParseProxyObject) intent.getSerializableExtra("parseObject");
 		Log.v("Test", String.format("Proxy object description: %s", ppo.getString("name")));
 		String name = ppo.getString("name");
-		tvChallengeTitle.setText(name);		
+		tvChallengeTitle.setText(name);	
         resultsTextView = (TextView) findViewById(R.id.tvSelectedFriends);
         pickFriendsButton = (Button) findViewById(R.id.btnInvite);
         pickFriendsButton.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +143,7 @@ public class ChallengeDetailsActivity extends FragmentActivity {
 	
 	public void onClickDonate(View view){
 		Intent intent = new Intent(this, DonateActivity.class);
+        intent.putExtra("parseObject", ppo);
 		startActivity(intent);
 	}
 }
