@@ -62,7 +62,8 @@ public class HomeActivity extends Activity {
         MenuItemCompat.getActionView(menu.findItem(R.id.badge)).findViewById(R.id.ivReceivedChallenges).setOnClickListener(new OnClickListener() {	
         	@Override 
         	public void onClick(View v) {
-        		Intent intent = new Intent(HomeActivity.this, InviteFriendsActivity.class);
+        		//Intent intent = new Intent(HomeActivity.this, InviteFriendsActivity.class);
+        		Intent intent = new Intent(HomeActivity.this, AllInvitationsActivity.class);
     			startActivity(intent);
         		} 
         	});
