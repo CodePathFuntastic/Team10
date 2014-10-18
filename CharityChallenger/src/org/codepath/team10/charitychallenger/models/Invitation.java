@@ -15,21 +15,22 @@ public class Invitation extends ParseObject {
 	 * 		<li>senderId:id</li>
 	 * 		<li>receiver:id</li>
 	 * 		<li>status:int</li>
+	 * 		<li>isOpened:boolean</li>
 	 * 		<li>message:String</li>
 	 * 		<li>amount:float</li>
 	 * 		<li>photos</li>
 	 * 		
 	 * </ol>
 	 * 
-	 * dd
 	 */
 	public Invitation(){
+		setOpened(false);
+		setStatus(InvitationStatusEnum.OPEN.ordinal());
+		increment("inviteId");
 	}
 	
-	public void setId(int id){
-		put("inviteId", id);
-	}
-	public int getId(){
+	
+	public int getInviteId(){
 		return getInt("inviteId");
 	}
 	
@@ -62,6 +63,12 @@ public class Invitation extends ParseObject {
 	}
 	public double getAmount(){
 		return getDouble("amount");
+	}
+	public void setOpened(boolean status){
+		put("opened_status", status);
+	}
+	public boolean isOpened(){
+		return getBoolean("opened_status");
 	}
 	public void setStatus(int status){
 		put("status", status);

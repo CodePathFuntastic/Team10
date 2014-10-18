@@ -11,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
@@ -31,7 +33,8 @@ public class FacebookLoginFragment extends Fragment {
           @Override
           public void call(Session session, SessionState state, Exception exception) {
         	  if (session.isOpened()) {
-        		// make request to the /me API
+        		  	
+        		  	// make request to the /me API
         		    Request.newMeRequest(session, new Request.GraphUserCallback() {
 
         		      // callback after Graph API response with user object
@@ -43,6 +46,7 @@ public class FacebookLoginFragment extends Fragment {
         		    		}
         		      }
         		    }).executeAsync();
+        		    
         	  }
           }
         });

@@ -1,7 +1,10 @@
 package org.codepath.team10.charitychallenger.activities;
 
 
+import java.util.Set;
+
 import org.codepath.team10.charitychallenger.R;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,10 +14,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
+import com.facebook.model.GraphObject;
 import com.facebook.model.GraphUser;
 
 public class FacebookLoginActivity extends Activity{
@@ -51,6 +56,45 @@ public class FacebookLoginActivity extends Activity{
 							
 						}
 					});
+					
+					new Request(
+						    session,
+						    "/me",
+						    null,
+						    HttpMethod.GET,
+						    new Request.Callback() {
+						        public void onCompleted(Response response) {
+						        	if( response !=null ){
+	        		    	        	   GraphObject go = response.getGraphObject();
+	        		    	        	   Set<String> keys = go.asMap().keySet();
+	        		    	        	   StringBuilder sb = new StringBuilder();
+	        		    	        	   for(String k : keys){
+	        		    	        		   sb.append(k);
+	        		    	        		   sb.append(",");
+	        		    	        	   }
+	        		    	        	   Toast.makeText( getApplication(), ""+ sb.toString() , Toast.LENGTH_SHORT).show();
+	        		    	         }
+						        }
+						    }
+						).executeAsync();
+					
+        		    new Request(
+        		    	    session,
+        		    	    "/me/friends",
+        		    	    null,
+        		    	    HttpMethod.GET,
+        		    	    new Request.Callback() {
+        		    	        public void onCompleted(Response response) {
+        		    	           if( response !=null ){
+        		    	        	   GraphObject go = response.getGraphObject();
+        		    	        	   Set<String> keys = go.asMap().keySet();
+        		    	        	   JSONObject data = go.getInnerJSONObject();
+        		    	        	   Toast.makeText( getApplication(), ""+ data.toString() , Toast.LENGTH_SHORT).show();
+        		    	           }
+        		    	        }
+        		    	    }
+        		    	).executeAsync();
+
 					
 					Intent intent = new Intent( FacebookLoginActivity.this, HomeActivity.class);
 					startActivity(intent);

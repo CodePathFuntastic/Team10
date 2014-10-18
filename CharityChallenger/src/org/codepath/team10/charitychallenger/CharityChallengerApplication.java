@@ -9,6 +9,10 @@ import org.codepath.team10.charitychallenger.models.Organization;
 import org.codepath.team10.charitychallenger.models.Picture;
 import org.codepath.team10.charitychallenger.models.PictureUrl;
 import org.codepath.team10.charitychallenger.models.User;
+import org.codepath.team10.charitychallenger.parseuploads.ChallengeUploader;
+import org.codepath.team10.charitychallenger.parseuploads.InvitationUploader;
+import org.codepath.team10.charitychallenger.parseuploads.OrganizationUploader;
+import org.codepath.team10.charitychallenger.parseuploads.UserUploader;
 
 import android.app.Application;
 import android.content.Context;
@@ -25,7 +29,6 @@ import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseRole;
 import com.parse.SaveCallback;
-import com.parse.SendCallback;
 
 public class CharityChallengerApplication extends Application {
 	
