@@ -106,6 +106,14 @@
             android:label="@string/title_activity_action_detail" >
         </activity>
         <activity
+            android:name=".activities.AllInvitationsActivity"
+            android:label="@string/title_activity_all_invitations" >
+        </activity>
+        <activity
+            android:name=".activities.InvitationDetails"
+            android:label="@string/title_activity_invitation_details" >
+        </activity>
+        <activity
             android:name=".activities.AchievementActivity"
             android:label="@string/title_activity_achievement" >
         </activity>
@@ -122,10 +130,9 @@
             android:label="@string/title_activity_invite_friends" >
         </activity>
         <activity
-            android:name="org.codepath.team10.charitychallenger.activities.FunActivity"
+            android:name=".activities.FunActivity"
             android:label="@string/title_activity_fun" >
         </activity>
-        
 
         <service android:name="com.parse.PushService" />
 
@@ -136,6 +143,17 @@
             </intent-filter>
         </receiver>
         <receiver
+            android:name=".receivers.ParsePushReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
+                <action android:name="SEND_PUSH" />
+            </intent-filter>
+        </receiver>
+        <!--
+        <receiver
             android:name="com.parse.ParsePushBroadcastReceiver"
             android:exported="false" >
             <intent-filter>
@@ -144,6 +162,7 @@
                 <action android:name="com.parse.push.intent.OPEN" />
             </intent-filter>
         </receiver>
+        -->
         <receiver
             android:name="com.parse.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
@@ -155,6 +174,7 @@
                 <category android:name="org.codepath.team10.charitychallenger" />
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>

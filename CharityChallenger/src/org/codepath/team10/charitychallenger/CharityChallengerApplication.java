@@ -12,15 +12,20 @@ import org.codepath.team10.charitychallenger.models.User;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import com.activeandroid.ActiveAndroid;
 import com.facebook.model.GraphUser;
 import com.parse.Parse;
 import com.parse.ParseACL;
+import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseRole;
+import com.parse.SaveCallback;
+import com.parse.SendCallback;
 
 public class CharityChallengerApplication extends Application {
 	
@@ -74,6 +79,36 @@ public class CharityChallengerApplication extends Application {
 		//Parse.initialize(this, "9e0wpyP9qg9UvX1g2cz65Qs2h2EkUkno88bzctFL", "PchSOljUdwS9F1bHsmotb6Aqv4epxH154UFbVggx");
 		Parse.initialize(this, Constants.PARSE_APPLICATION_ID, Constants.PARSE_CLIENT_KEY );
 		ParseInstallation.getCurrentInstallation().saveInBackground();
+		Parse.setLogLevel(Parse.LOG_LEVEL_VERBOSE);
+		
+		// Enable push notifications
+		ParsePush.subscribeInBackground("", new SaveCallback() {
+			  @Override
+			  public void done(ParseException e) {
+			    if (e == null) {
+			      Log.d("org.codepath.team10.charitychallenger", "successfully subscribed to the broadcast channel.");
+			    } else {
+			      Log.e("org.codepath.team10.charitychallenger", "failed to subscribe for push", e);
+			    }
+			  }
+			});
+		
+		// send a test push notification
+//		ParsePush push = new ParsePush();
+//		push.setMessage("test message");
+//		push.setChannel("");
+//		push.sendInBackground( new SendCallback(){
+//
+//			@Override
+//			public void done(ParseException paramParseException) {
+//				if(paramParseException != null){
+//					Log.e("org.codepath.team10.charitychallenger", "Push Exception", paramParseException);
+//				}else{
+//					Log.d("org.codepath.team10.charitychallenger", "Push Done");
+//				}
+//				
+//			}});
+		
 		
 		final ParseACL roleACL = new ParseACL();
 		roleACL.setPublicReadAccess(true);
@@ -88,6 +123,4 @@ public class CharityChallengerApplication extends Application {
 	public static TwitterRestClient getRestClient() {
 		return (TwitterRestClient) TwitterRestClient.getInstance(TwitterRestClient.class, CharityChallengerApplication.context);
 	}
-
-
 }
