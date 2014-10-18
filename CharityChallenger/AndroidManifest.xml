@@ -125,7 +125,6 @@
             android:name="org.codepath.team10.charitychallenger.activities.FunActivity"
             android:label="@string/title_activity_fun" >
         </activity>
-        
 
         <service android:name="com.parse.PushService" />
 
