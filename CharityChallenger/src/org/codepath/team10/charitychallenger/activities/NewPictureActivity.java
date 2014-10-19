@@ -10,6 +10,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -18,8 +19,8 @@ public class NewPictureActivity extends Activity {
 	
 	private Picture picture;
     private ParseProxyObject ppo;
-    private TextView tvChallengeDescription;
-    private TextView tvChallegeTitle;
+//    private TextView tvChallengeDescription;
+//    private TextView tvChallegeTitle;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,8 @@ public class NewPictureActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_picture);
 		
-		tvChallengeDescription = (TextView) findViewById(R.id.tvChallengeDescription);
-		tvChallegeTitle = (TextView) findViewById(R.id.tvChallegeTitle);
+//		tvChallengeDescription = (TextView) findViewById(R.id.tvChallengeDescription);
+//		tvChallegeTitle = (TextView) findViewById(R.id.tvChallegeTitle);
 
 		Intent intent = getIntent();
 
@@ -45,6 +46,9 @@ public class NewPictureActivity extends Activity {
 
 		if (fragment == null) {
 			fragment = new NewPictureFragment();
+//		    Bundle bundle = new Bundle();
+//		    bundle.putSerializable("invitation", ppo);
+//		    fragment.setArguments(bundle);
 			manager.beginTransaction().add(R.id.fragmentContainer, fragment)
 					.commit();
 		}

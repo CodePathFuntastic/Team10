@@ -8,6 +8,7 @@ import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -74,12 +75,20 @@ public class InvitationDetails extends Activity {
 	public void onClickAccept(View v) {
 		 Intent intent = new Intent(this, NewPictureActivity.class);
          intent.putExtra("parseObject", ppo);
-		 startActivity(intent);
+ 		 startActivityForResult(intent, 110);
 	}
 	
 	public void onDonate(View view){
 		Intent intent = new Intent(this, DonateActivity.class);
-		startActivity(intent);
+		startActivityForResult(intent, 120);
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == Activity.RESULT_OK && requestCode == 110) {
+			Log.i("InviationDetail", "Get back from the activity");
+			// set the ppo and store in the database.
+		}
 	}
 	
 	@Override

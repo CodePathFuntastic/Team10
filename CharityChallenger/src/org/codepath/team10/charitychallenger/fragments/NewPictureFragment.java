@@ -2,6 +2,7 @@ package org.codepath.team10.charitychallenger.fragments;
 
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.activities.NewPictureActivity;
+import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 import org.codepath.team10.charitychallenger.models.Picture;
 
 import android.app.Activity;
@@ -36,6 +37,7 @@ public class NewPictureFragment extends Fragment {
 	private TextView pictureName;
 	private Spinner pictureRating;
 	private ParseImageView picturePreview;
+    private ParseProxyObject ppo;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,11 @@ public class NewPictureFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
 			Bundle SavedInstanceState) {
+		
+//		Bundle arguments = getArguments();
+//		
+//		ppo = (ParseProxyObject)arguments.getSerializable("invitation");
+		
 		View v = inflater.inflate(R.layout.fragment_new_picture, parent, false);
 
 		pictureName = ((EditText) v.findViewById(R.id.picture_name));
@@ -77,8 +84,8 @@ public class NewPictureFragment extends Fragment {
 				Picture picture = ((NewPictureActivity) getActivity()).getCurrentPicture();
 
 				picture.setTitle(pictureName.getText().toString());
-				picture.setAuthor(ParseUser.getCurrentUser());
-				picture.setRating(pictureRating.getSelectedItem().toString());
+				//picture.setAuthor(ParseUser.getCurrentUser());
+				//picture.setRating(pictureRating.getSelectedItem().toString());
 				picture.saveInBackground(new SaveCallback() {
 
 					@Override
