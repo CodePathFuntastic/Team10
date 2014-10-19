@@ -38,13 +38,10 @@ public class InvitationDetails extends Activity {
 		
 		int challengeId = 0;
 		Intent intent = getIntent();
-//		if(intent.hasExtra("challengeId")){
-//			challengeId = intent.getIntExtra("challengeId", 0); 
-//		}
-		
+
 		if(intent.hasExtra("parseObject")){
 			ppo = (ParseProxyObject) intent.getSerializableExtra("parseObject");
-			challengeId = ppo.getInt("challenge_id");
+			challengeId = ppo.getInt("challengeId");
 		}
 		
 		mTvChallengeName = (TextView) findViewById(R.id.tvCharityChallengeName);
