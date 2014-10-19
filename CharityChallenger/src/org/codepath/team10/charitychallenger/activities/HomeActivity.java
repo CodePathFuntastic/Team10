@@ -3,7 +3,6 @@ package org.codepath.team10.charitychallenger.activities;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.adapters.ChallengesViewAdapter;
 import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
-import org.codepath.team10.charitychallenger.models.Challenge;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,8 +19,6 @@ public class HomeActivity extends BaseActivity {
 	
 	private ListView mlvChallenges;
 	private ChallengesViewAdapter mChallengesAdapter; 
-//	private TextView mTvNotificationsBadge;
-//	private ArrayList<ParseObject> mInvitationsList; 
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +33,16 @@ public class HomeActivity extends BaseActivity {
         
         //OnItemClickListener
         mlvChallenges.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                    int position, long id) {
-                Intent intent = new Intent(HomeActivity.this, ChallengeDetailsActivity.class);
-                ParseProxyObject ppo = new ParseProxyObject(mChallengesAdapter.getItem(position));
-                intent.putExtra("challenge", ppo);
+        	
+            public void onItemClick(AdapterView<?> parent, 
+            						View v,
+            						int position, 
+            						long id) {
+                
+            	Intent intent = new Intent(HomeActivity.this, ChallengeDetailsActivity.class);
+               
+                intent.putExtra("challenge", mChallengesAdapter.getItem(position));
+                
                 startActivity(intent);
             }
         });

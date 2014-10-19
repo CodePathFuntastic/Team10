@@ -2,10 +2,12 @@ package org.codepath.team10.charitychallenger.activities;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
+import org.codepath.team10.charitychallenger.models.Challenge;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,15 +48,21 @@ public class ChallengeDetailsActivity extends FragmentActivity {
 		
 		
 		Intent intent = getIntent();
-		ppo = (ParseProxyObject) intent.getSerializableExtra("challenge");
-		String name = ppo.getString("name");
-		ArrayList<String> arrayList = ppo.getArray("challenge_pic_urls");
-		Log.d("Testing", "Testing");
+		
+		Challenge challenge = (Challenge) intent.getParcelableExtra("challenge");
+		String name = challenge.getName();
+		List<String> arrayList = challenge.getChallengesPictureUrls();
+		
+		Log.d(BaseActivity.LOG_TAG, "Challenge = " + challenge.toString() );
+		
+		Log.d(BaseActivity.LOG_TAG, "Testing");
+		
 		tvChallengeTitle.setText(name);
 		if (arrayList != null && arrayList.size() > 0) {
 	        Picasso.with(this).load(arrayList.get(0)).into(ivChallengeImage);
 		}
-		Log.v("Test", String.format("Proxy object description: %s", name ));
+		
+		Log.v( BaseActivity.LOG_TAG, String.format("Proxy object description: %s", name ));
 		
 		resultsTextView = (TextView) findViewById(R.id.tvSelectedFriends);
         pickFriendsButton = (Button) findViewById(R.id.btnInvite);
