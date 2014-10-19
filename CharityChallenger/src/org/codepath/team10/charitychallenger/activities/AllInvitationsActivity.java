@@ -14,7 +14,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class AllInvitationsActivity extends BaseActivity {
-
+	private ListView mLvAllInvitations;
+	private ReceivedInvitationAdapter mItemsAdapter;
 	//private List<Invitation> mInvitations;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +24,13 @@ public class AllInvitationsActivity extends BaseActivity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		
-		ReceivedInvitationAdapter itemsAdapter = 
-			    new ReceivedInvitationAdapter(this, getInvitations());
+		mItemsAdapter = new ReceivedInvitationAdapter(this, getInvitations());
 		
-		ListView lvAllInvitations = (ListView) findViewById(R.id.lvAllInvitations);
-		lvAllInvitations.setAdapter(itemsAdapter);
+		mLvAllInvitations = (ListView) findViewById(R.id.lvAllInvitations);
+		mLvAllInvitations.setAdapter(mItemsAdapter);
 		
 		//setOnItemClickListener
-		lvAllInvitations.setOnItemClickListener( new OnItemClickListener(){
+		mLvAllInvitations.setOnItemClickListener( new OnItemClickListener(){
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,

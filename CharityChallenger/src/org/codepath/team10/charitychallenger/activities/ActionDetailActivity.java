@@ -2,7 +2,6 @@ package org.codepath.team10.charitychallenger.activities;
 
 import org.codepath.team10.charitychallenger.R;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -32,6 +31,10 @@ public class ActionDetailActivity extends BaseActivity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
+			return true;
+		}
+		if (id == android.R.id.home) {
+			this.finish();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

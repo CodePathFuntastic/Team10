@@ -49,7 +49,7 @@
     <string name="action_description">Challenge Description</string>
     <string name="friend_name">Friend Name</string>
     <string name="friend_location">Friend\'s Location</string>
-    <string name="invite_friend_label">Invite</string>
+    <string name="invite_friend_label">Accept</string>
     <string name="charity_name_label">Charity :</string>
     <string name="charity_name_value">Global Giving</string>
     <string name="charity_address_label">Address:</string>
