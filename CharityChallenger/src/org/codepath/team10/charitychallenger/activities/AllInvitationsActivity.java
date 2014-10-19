@@ -2,7 +2,6 @@ package org.codepath.team10.charitychallenger.activities;
 
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.adapters.ReceivedInvitationAdapter;
-import org.codepath.team10.charitychallenger.models.User;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +22,9 @@ public class AllInvitationsActivity extends BaseActivity {
 		setContentView(R.layout.activity_all_invitations);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
+		if( getInvitations().size() == 0 ){
+			// fire an event to get all invitations
+		}
 		
 		mItemsAdapter = new ReceivedInvitationAdapter(this, getInvitations());
 		

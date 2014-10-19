@@ -19,7 +19,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;

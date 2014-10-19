@@ -20,7 +20,8 @@ public class BaseActivity extends FragmentActivity {
 	
 	public static final String LOG_TAG = "org.codepath.team10.charitychallenger";
 	private CharityChallengerApplication application;
-	private ParsePushReceiver pushReceiver ;
+	private ParsePushReceiver pushReceiver;
+	private MenuFragment menufragment;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class BaseActivity extends FragmentActivity {
 		FragmentManager fragmentManager = getFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		
-		MenuFragment menufragment = new MenuFragment();
+		menufragment = new MenuFragment();
 		fragmentTransaction.add(menufragment, "menu");
 		fragmentTransaction.commit();
 		application.registerUserSyncedListener(menufragment);
@@ -58,6 +59,7 @@ public class BaseActivity extends FragmentActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		pushReceiver.unregisterInvitationReceivedListener(menufragment);
 		unregisterReceiver(pushReceiver);
 	}
 	
