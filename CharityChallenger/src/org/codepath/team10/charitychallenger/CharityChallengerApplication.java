@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.clients.TwitterRestClient;
-import org.codepath.team10.charitychallenger.listeners.InvitationCompletedListener;
-import org.codepath.team10.charitychallenger.listeners.InvitationReceivedListener;
 import org.codepath.team10.charitychallenger.listeners.UserSynchedListener;
 import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
@@ -131,6 +129,7 @@ public class CharityChallengerApplication extends Application {
 		
 		ImageLoader.getInstance().init(config);	
 	}
+	
 	public void initializeParseAndLocalDB(){
 
 		// enable local data store

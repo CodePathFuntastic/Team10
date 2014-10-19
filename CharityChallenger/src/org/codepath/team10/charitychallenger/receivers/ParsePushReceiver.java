@@ -92,6 +92,15 @@ public class ParsePushReceiver extends BroadcastReceiver implements UserSynchedL
 			invitationReceivedListeners.add(listener);
 		}
 	}
+	public void unregisterInvitationReceivedListener( InvitationReceivedListener listener ){
+		if( listener != null ){
+			for( InvitationReceivedListener l: invitationReceivedListeners){
+				if( l == listener){
+					invitationReceivedListeners.remove(listener);
+				}
+			}
+		}
+	}
 	
 	public void receiverInvitationFromPush( JSONObject input){
 		Invitation invitation = new Invitation();
