@@ -27,10 +27,6 @@ public class InvitationDetails extends Activity {
 	private TextView mTvDesc;
 	private ImageView mIvCharity;
 	
-	//ParseImageView challangeImage = (ParseImageView) viewHolder.ivCharityChallenge;
-
-	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
