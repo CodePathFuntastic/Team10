@@ -1,5 +1,7 @@
 package org.codepath.team10.charitychallenger.activities;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
@@ -34,7 +36,7 @@ public class HomeActivity extends Activity {
 	private ListView mlvChallenges;
 	private ChallengesViewAdapter mChallengesAdapter; 
 	private TextView mTvNotificationsBadge;
-	private List<ParseObject> invitationsList; 
+	private ArrayList<ParseObject> mInvitationsList; 
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +80,7 @@ public class HomeActivity extends Activity {
             if (numberOfInvites > 0) {
             	mTvNotificationsBadge.setVisibility(View.VISIBLE);
             	mTvNotificationsBadge.setText("" + numberOfInvites);
-            	invitationsList = receivedNotifications;
+            	mInvitationsList = (ArrayList<ParseObject>) receivedNotifications;
             } else {
                 Log.d("Error: ", e.getMessage());
             }
@@ -115,13 +117,17 @@ public class HomeActivity extends Activity {
 	        		// if only one invitation is available, directly open that invitation
 	        		if( numInvitations == 1){
 	        			intent = new Intent(HomeActivity.this, InvitationDetails.class);
-	        			ParseObject parseObject = invitationsList.get(0);
+	        			ParseObject parseObject = mInvitationsList.get(0);
 	                    ParseProxyObject ppo = new ParseProxyObject(parseObject);
 	                    intent.putExtra("parseObject", ppo);
 	        		}else if( numInvitations > 1 ){
-	            		// if more that invitations are available, show all invitations, so that user can pick one
-	        			//intent.putExtra("challengeId", invitationsList.get(0).getInt("challenge_id"));
+	            		// Pass the list of invitations.
 	        			intent = new Intent(HomeActivity.this, AllInvitationsActivity.class);
+	        			// Create a Bundle and Put Bundle in to it
+//	        			Bundle bundleObject = new Bundle();
+//	        			bundleObject.putSerializable("list_of_objects", mInvitationsList);
+//	        			// Put Bundle in to Intent and call start Activity
+//	        			intent.putExtras(bundleObject);
 	        		}
 	                startActivity(intent);
         		}
