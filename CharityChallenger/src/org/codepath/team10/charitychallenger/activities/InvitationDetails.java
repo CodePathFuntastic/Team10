@@ -26,6 +26,7 @@ public class InvitationDetails extends Activity {
 	private TextView mTvTarget;
 	private TextView mTvRaised;
 	private TextView mTvDesc;
+    private ParseProxyObject ppo;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +37,15 @@ public class InvitationDetails extends Activity {
 		
 		int challengeId = 0;
 		Intent intent = getIntent();
-		if(intent.hasExtra("challengeId")){
-			challengeId = intent.getIntExtra("challengeId", 0); 
+//		if(intent.hasExtra("challengeId")){
+//			challengeId = intent.getIntExtra("challengeId", 0); 
+//		}
+		
+		if(intent.hasExtra("parseObject")){
+			ppo = (ParseProxyObject) intent.getSerializableExtra("parseObject");
+			challengeId = ppo.getInt("challenge_id");
 		}
+		
 		mTvChallengeName = (TextView) findViewById(R.id.tvCharityChallengeName);
 		mTvTarget = (TextView) findViewById(R.id.tvTargetAmountRaised);
 		mTvRaised = (TextView) findViewById(R.id.tvAmountRaised);
@@ -65,6 +72,7 @@ public class InvitationDetails extends Activity {
 		
 	public void onClickAccept(View v) {
 		 Intent intent = new Intent(this, NewPictureActivity.class);
+         intent.putExtra("parseObject", ppo);
 		 startActivity(intent);
 	}
 	

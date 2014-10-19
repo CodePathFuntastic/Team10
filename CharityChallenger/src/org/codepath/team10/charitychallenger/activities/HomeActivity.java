@@ -102,8 +102,9 @@ public class HomeActivity extends Activity {
 	        		// if only one invitation is available, directly open that invitation
 	        		if( numInvitations == 1){
 	        			intent = new Intent(HomeActivity.this, InvitationDetails.class);
-	        			int id = invitationsList.get(0).getInt("challengeId");
-	        			intent.putExtra("challengeId", id);
+	        			ParseObject parseObject = invitationsList.get(0);
+	                    ParseProxyObject ppo = new ParseProxyObject(parseObject);
+	                    intent.putExtra("parseObject", ppo);
 	        		}else if( numInvitations > 1 ){
 	            		// if more that invitations are available, show all invitations, so that user can pick one
 	        			//intent.putExtra("challengeId", invitationsList.get(0).getInt("challenge_id"));
