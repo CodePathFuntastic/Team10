@@ -3,11 +3,9 @@ package org.codepath.team10.charitychallenger.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.parse.FindCallback;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 
 @ParseClassName(value="Organization")
@@ -90,32 +88,4 @@ public class Organization extends ParseObject{
 		return urls;
 	}
 	
-//	public void saveRemoteProperly(){
-//				
-//		// first query whether this row exists
-//		ParseQuery<Organization> query = ParseQuery.getQuery(Organization.class);
-//		query.whereEqualTo("org_id", getOrgId() );
-//		
-//		query.findInBackground( new FindCallback<Organization>(){
-//			
-//			@Override
-//			public void done(List<Organization> paramList,
-//					ParseException paramParseException) {
-//				for( Organization o : paramList ){
-//					if( o.getOrgId() == getOrgId() ){
-//						
-//						// save the new values
-//						o.setAddress(getAddress());
-//						o.setChallengeId(getChallengeId());
-//						o.setDescription(getDescription());
-//						o.setName(getName());
-//						o.setUrl(getUrl());
-//						o.saveInBackground();
-//					}
-//				}
-//				
-//			}
-//		});
-//		
-//	}
 }

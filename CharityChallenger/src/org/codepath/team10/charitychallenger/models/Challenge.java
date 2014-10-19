@@ -114,18 +114,6 @@ public class Challenge extends ParseObject implements Parcelable{
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString( getObjectId());
 		pinInBackground();
-//		dest.writeLong(getUpdatedAt().getTime() );
-//		dest.writeLong(getCreatedAt().getTime() );
-//		dest.writeInt( getChallengeId());
-//		dest.writeString( getName());
-//		dest.writeString( getDescription());
-//		dest.writeInt( getOrganization());
-//		dest.writeDouble(getTargetAmount());
-//		dest.writeDouble( getAmountRaised());
-//		dest.writeInt( getOpenInvitations());
-//		dest.writeInt( getClosedInvitations());
-//		dest.writeInt( getPaidInvitations());
-//		dest.writeList(getChallengesPictureUrls());
 	}
 	
 	public static final Parcelable.Creator<Challenge> CREATOR = new Parcelable.Creator<Challenge>() {

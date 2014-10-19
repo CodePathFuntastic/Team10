@@ -1,15 +1,20 @@
 package org.codepath.team10.charitychallenger.models;
 
-import java.io.Serializable;
 import java.util.List;
 
+import org.codepath.team10.charitychallenger.activities.BaseActivity;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.util.Log;
+
+import com.parse.GetCallback;
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 
 @ParseClassName(value="Invitation")
-public class Invitation extends ParseObject implements Serializable {
-
-	private static final long serialVersionUID = -8340247455491413163L;
+public class Invitation extends ParseObject implements Parcelable {
 
 	/**
 	 * <ol>
@@ -93,4 +98,46 @@ public class Invitation extends ParseObject implements Serializable {
 	public List<String> getPhotos(){
 		return getList("photos");
 	}
+
+	// methods needed for json to and from
+	
+	// methods and classes needed for Parcelable
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(getObjectId());
+		pinInBackground();
+	}
+	public static final Parcelable.Creator<Invitation> CREATOR = new Parcelable.Creator<Invitation>() {
+
+		@Override
+		public Invitation createFromParcel(Parcel source) {
+			Invitation invitation = ParseObject.createWithoutData(Invitation.class, source.readString());
+			invitation.fetchFromLocalDatastoreInBackground( new GetCallback<Invitation>(){
+
+				@Override
+				public void done(Invitation invitation,
+									ParseException e) {
+					if( e == null ){
+						
+					}else{
+						Log.e(BaseActivity.LOG_TAG, "Unable to retrieve invitation from localDB", e);
+					}
+				}
+			});
+			return invitation;
+		}
+
+		@Override
+		public Invitation[] newArray(int size) {
+			return new Invitation[size];
+		}
+		
+	};	
 }

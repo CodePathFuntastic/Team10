@@ -3,9 +3,7 @@ package org.codepath.team10.charitychallenger.models;
 import java.util.List;
 
 import com.parse.ParseClassName;
-import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.ParseRelation;
 
 @ParseClassName(value="User")
 public class User extends ParseObject {
@@ -22,7 +20,6 @@ public class User extends ParseObject {
 	 * 	<li>friends</li>
 	 * </ol>
 	 * 
-	 * dd
 	 */
 
 	public User(){
