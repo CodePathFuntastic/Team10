@@ -17,10 +17,12 @@
 
     <ImageView
         android:id="@+id/ivChallengeImage"
-        android:layout_width="wrap_content"
+		android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
         android:layout_below="@+id/tvChallengeTitle"
         android:src="@drawable/icons_partnership_170" />
 
