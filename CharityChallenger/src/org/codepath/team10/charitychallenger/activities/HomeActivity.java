@@ -21,6 +21,9 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -38,6 +41,16 @@ public class HomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         
+        // --- this is the global initialization of the ImageLoader... 
+        // 	Create global configuration and initialize ImageLoader with this configuration
+		DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().
+				cacheInMemory().cacheOnDisc().build();
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
+		.defaultDisplayImageOptions(defaultOptions)
+		.build();
+		ImageLoader.getInstance().init(config);	
+     	// --------------------- end initialization of the ImageLoader...
+		
         mlvChallenges = (ListView) findViewById(R.id.lvListOfChallenges);
         mChallengesAdapter = new ChallengesViewAdapter(this, "Challenge");
         mlvChallenges.setAdapter(mChallengesAdapter);
