@@ -80,7 +80,7 @@ public class FacebookLoginActivity extends Activity{
 	        		    	        	   if( a instanceof CharityChallengerApplication) {
 	        		    	        		   CharityChallengerApplication app = (CharityChallengerApplication) a;
 	        		    	        		   User user = new User();
-	        		    	        		   user.setFacebookId((String) go.asMap().get("username"));
+	        		    	        		   user.setFacebookId((String) go.asMap().get("id"));
 	        		    	        		   app.retrieveOrSignupUser( user);
 	        		    	        	   }
 	        		    	        	   

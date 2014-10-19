@@ -3,6 +3,7 @@ package org.codepath.team10.charitychallenger.adapters;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.models.Challenge;
 
 import android.content.Context;
 import android.util.Log;
@@ -12,12 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.parse.ParseImageView;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 
-public class ChallengesViewAdapter extends ParseQueryAdapter<ParseObject> {
+public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 
 	public static class ViewHolder{
 		ImageView ivCharityChallenge;
@@ -27,11 +26,12 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<ParseObject> {
 		
 	}
 	public ChallengesViewAdapter(Context context, final String tableName) {
-		super(context, new ParseQueryAdapter.QueryFactory<ParseObject>() {
+		super(context, new ParseQueryAdapter.QueryFactory<Challenge>() {
 			
-			public ParseQuery<ParseObject> create() {
+			public ParseQuery<Challenge> create() {
 				Log.d("Constructor: ", tableName);
-				ParseQuery query = new ParseQuery(tableName);
+				//ParseQuery query = new ParseQuery(tableName);
+				ParseQuery<Challenge> query = ParseQuery.getQuery(Challenge.class);
 				query.whereExists("raised");
 				query.whereExists("target");
 				return query;
@@ -41,7 +41,7 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<ParseObject> {
 
 	// Customize the layout by overriding getItemView
 	@Override
-	public View getItemView(ParseObject challenge, View v, ViewGroup parent) {
+	public View getItemView(Challenge challenge, View v, ViewGroup parent) {
 		
 		ViewHolder viewHolder = null;
 		if (v == null) {

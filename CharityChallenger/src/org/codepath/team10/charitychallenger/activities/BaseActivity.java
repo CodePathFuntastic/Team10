@@ -7,14 +7,14 @@ import org.codepath.team10.charitychallenger.fragments.MenuFragment;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.User;
 
-import android.app.Activity;
 import android.app.Application;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends FragmentActivity {
 	
 	public static final String LOG_TAG = "org.codepath.team10.charitychallenger";
 	private CharityChallengerApplication application;

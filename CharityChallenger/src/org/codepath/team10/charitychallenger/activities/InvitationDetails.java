@@ -5,6 +5,7 @@ import java.util.List;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;

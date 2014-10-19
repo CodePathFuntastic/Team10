@@ -11,6 +11,8 @@ import org.codepath.team10.charitychallenger.models.Organization;
 import org.codepath.team10.charitychallenger.models.Picture;
 import org.codepath.team10.charitychallenger.models.PictureUrl;
 import org.codepath.team10.charitychallenger.models.User;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Application;
 import android.content.Context;
@@ -32,11 +34,14 @@ import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseRole;
 import com.parse.SaveCallback;
+import com.parse.SendCallback;
 
 public class CharityChallengerApplication extends Application {
 	
 	public static final String LOG_TAG = "org.codepath.team10.charitychallenger";
 	public static final String MAIN_CHANNEL = "MAIN_CHANNEL";
+	public static final String INVITATION_RECEIVE = "INVITATION_RECEIVE";
+	public static final String INVITATION_COMPLETE = "INVITATION_COMPLETE";
 	
 	private static Context context;
 
@@ -51,6 +56,8 @@ public class CharityChallengerApplication extends Application {
 		
 		initializeParseAndLocalDB();
 		
+		initParseNotificationChannels();
+		
 		//initializeFb();
 		
 		ActiveAndroid.initialize(this);
@@ -62,7 +69,10 @@ public class CharityChallengerApplication extends Application {
 	
     
 
-    public Collection<GraphUser> getSelectedUsers() {
+
+
+
+	public Collection<GraphUser> getSelectedUsers() {
         return selectedUsers;
     }
 
@@ -123,6 +133,19 @@ public class CharityChallengerApplication extends Application {
 		ParseInstallation.getCurrentInstallation().saveInBackground();
 		Parse.setLogLevel(Parse.LOG_LEVEL_VERBOSE);
 		
+
+		
+		final ParseACL roleACL = new ParseACL();
+		roleACL.setPublicReadAccess(true);
+		final ParseRole role = new ParseRole("Engineer", roleACL);
+				
+//		OrganizationUploader.upload( this);
+//		ChallengeUploader.upload(this);
+//		UserUploader.upload(this);
+//		InvitationUploader.upload(this);	
+	}
+	
+    private void initParseNotificationChannels() {
 		// Enable push notifications
 		ParsePush.subscribeInBackground("", new SaveCallback() {
 			  @Override
@@ -146,33 +169,32 @@ public class CharityChallengerApplication extends Application {
 				}
 			}
 		});
-		
-		// send a test push notification
-//		ParsePush push = new ParsePush();
-//		push.setMessage("test message");
-//		push.setChannel("");
-//		push.sendInBackground( new SendCallback(){
-//
-//			@Override
-//			public void done(ParseException paramParseException) {
-//				if(paramParseException != null){
-//					Log.e("org.codepath.team10.charitychallenger", "Push Exception", paramParseException);
-//				}else{
-//					Log.d("org.codepath.team10.charitychallenger", "Push Done");
-//				}
-//				
-//			}});
-		
-		
-		final ParseACL roleACL = new ParseACL();
-		roleACL.setPublicReadAccess(true);
-		final ParseRole role = new ParseRole("Engineer", roleACL);
-				
-//		OrganizationUploader.upload( this);
-//		ChallengeUploader.upload(this);
-//		UserUploader.upload(this);
-//		InvitationUploader.upload(this);	
+
+		ParsePush.subscribeInBackground(INVITATION_RECEIVE,  new SaveCallback() {
+			
+			@Override
+			public void done(ParseException e) {
+				if( e == null ){
+					Log.d(LOG_TAG, "successfully subcribed to "+ INVITATION_RECEIVE);
+				}else{
+					Log.e(LOG_TAG, "failed to subscribe to " +  INVITATION_RECEIVE , e);
+				}
+			}
+		});
+
+		ParsePush.subscribeInBackground(INVITATION_COMPLETE,  new SaveCallback() {
+			
+			@Override
+			public void done(ParseException e) {
+				if( e == null ){
+					Log.d(LOG_TAG, "successfully subcribed to "+ INVITATION_COMPLETE);
+				}else{
+					Log.e(LOG_TAG, "failed to subscribe to " +  INVITATION_COMPLETE , e);
+				}
+			}
+		});
 	}
+	
 	
 	public static TwitterRestClient getRestClient() {
 		return (TwitterRestClient) TwitterRestClient.getInstance(TwitterRestClient.class, CharityChallengerApplication.context);
@@ -226,5 +248,64 @@ public class CharityChallengerApplication extends Application {
 			}
 			
 		});	
+	}
+
+	public void sendInvitations( List<Invitation> invitations) {
+		if( invitations != null ){
+			
+			for( Invitation i : invitations ){
+			
+				i.pinInBackground();
+				i.saveInBackground( new SaveCallback(){
+					@Override
+					public void done(ParseException e) {
+						if( e == null ){
+							// success.
+							
+						}else{
+							// error
+						}
+					}
+				});
+				
+				sendInvitationPush(i);
+			}
+		}
+	}
+	
+	public void sendInvitationPush( Invitation i ){
+		ParsePush push = new ParsePush();
+		String senderName = getUser().getName();
+
+		try {
+			JSONObject json = new JSONObject();
+			json.put("subject", senderName + " sent a challenge for you!");
+			json.put("message", "You have received a challenge");
+			json.put("challengeId", i.getChallengeId());
+			json.put("amount", i.getAmount());
+			json.put("inviteId",  i.getInviteId());
+			json.put("sender", i.getSender());
+			json.put("receiver", i.getReceiver());
+			json.put("objectId", i.getObjectId());
+			json.put("status", i.getStatus());
+
+			push.setMessage( json.toString() );
+			push.setChannel("INVITATION_RECEIVE");
+			
+			push.sendInBackground( new SendCallback(){
+
+				@Override
+				public void done(ParseException e) {
+					if( e == null ){
+						
+					}else{
+						// error
+					}
+				}
+			});
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 }

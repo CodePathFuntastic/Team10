@@ -5,7 +5,7 @@ import java.util.Collection;
 
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
-import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
+import org.codepath.team10.charitychallenger.models.Challenge;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +21,6 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
-import com.parse.ParseObject;
 
 public class ChallengeDetailsActivity extends FragmentActivity {
 
@@ -32,7 +31,7 @@ public class ChallengeDetailsActivity extends FragmentActivity {
     private UiLifecycleHelper lifecycleHelper;
     boolean pickFriendsWhenSessionOpened;
     private ImageView ivChallengeImage;
-    ParseProxyObject ppo;
+    Challenge challenge;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +44,13 @@ public class ChallengeDetailsActivity extends FragmentActivity {
 		
 		
 		Intent intent = getIntent();
-		ppo = (ParseProxyObject) intent.getSerializableExtra("parseObject");
-		Log.v("Test", String.format("Proxy object description: %s", ppo.getString("name")));
-		String name = ppo.getString("name");
+		challenge = (Challenge) intent.getSerializableExtra("challenge");
+		Log.v("Test", String.format("Proxy object description: %s", challenge.getName() ));
+		
+		String name = challenge.getName();
 		tvChallengeTitle.setText(name);	
-        resultsTextView = (TextView) findViewById(R.id.tvSelectedFriends);
+        
+		resultsTextView = (TextView) findViewById(R.id.tvSelectedFriends);
         pickFriendsButton = (Button) findViewById(R.id.btnInvite);
         pickFriendsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -129,6 +130,7 @@ public class ChallengeDetailsActivity extends FragmentActivity {
 	            application.setSelectedUsers(null);
 
 	            Intent intent = new Intent(this, InviteFriendsActivity.class);
+	            intent.putExtra("challenge", challenge);
 
 	            InviteFriendsActivity.populateParameters(intent, null, true, true);
 	            startActivityForResult(intent, PICK_FRIENDS_ACTIVITY);
@@ -144,7 +146,7 @@ public class ChallengeDetailsActivity extends FragmentActivity {
 	
 	public void onClickDonate(View view){
 		Intent intent = new Intent(this, DonateActivity.class);
-        intent.putExtra("parseObject", ppo);
+        intent.putExtra("parseObject", challenge);
 		startActivity(intent);
 	}
 }

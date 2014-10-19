@@ -1,21 +1,30 @@
 package org.codepath.team10.charitychallenger.activities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.fragments.CustomFbFriendsPickerFragment;
+import org.codepath.team10.charitychallenger.models.Challenge;
+import org.codepath.team10.charitychallenger.models.Invitation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.widget.Toast;
 
 import com.facebook.FacebookException;
+import com.facebook.model.GraphUser;
 import com.facebook.widget.FriendPickerFragment;
 import com.facebook.widget.PickerFragment;
 
-public class InviteFriendsActivity extends FragmentActivity {
+public class InviteFriendsActivity extends BaseActivity {
 	
-	FriendPickerFragment friendPickerFragment;
+	//FriendPickerFragment friendPickerFragment;
+	CustomFbFriendsPickerFragment friendPickerFragment;
+	
+	Challenge challenge;
 
 
 	public static void populateParameters(Intent intent, String userId, boolean multiSelect, boolean showTitleBar) {
@@ -28,17 +37,20 @@ public class InviteFriendsActivity extends FragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_invite_friends);
+		
+		challenge = (Challenge) getIntent().getSerializableExtra("challenge");
 
 		FragmentManager fm = getSupportFragmentManager();
 
 		if (savedInstanceState == null) {
 			final Bundle args = getIntent().getExtras();
-			friendPickerFragment = new FriendPickerFragment(args);
+			//friendPickerFragment = new FriendPickerFragment(args);
+			friendPickerFragment = new CustomFbFriendsPickerFragment(args);
 			fm.beginTransaction()
 				.add(R.id.friend_picker_fragment, friendPickerFragment)
 				.commit();
 		} else {
-			friendPickerFragment = (FriendPickerFragment) fm.findFragmentById(R.id.friend_picker_fragment);
+			friendPickerFragment = (CustomFbFriendsPickerFragment) fm.findFragmentById(R.id.friend_picker_fragment);
 		}
 
 		friendPickerFragment.setOnErrorListener(new PickerFragment.OnErrorListener() {
@@ -48,12 +60,30 @@ public class InviteFriendsActivity extends FragmentActivity {
 			}
 		});
 
+		final String senderId = getUser().getFacebookId();
 		friendPickerFragment.setOnDoneButtonClickedListener(new PickerFragment.OnDoneButtonClickedListener() {
+
 			@Override
 			public void onDoneButtonClicked(PickerFragment<?> fragment) {
 				// We just store our selection in the Application for other activities to look at.
 				CharityChallengerApplication application = (CharityChallengerApplication) getApplication();
 				application.setSelectedUsers(friendPickerFragment.getSelection());
+				
+				List<GraphUser> fbUsers = friendPickerFragment.getSelection();
+				List<Invitation> invitations = new ArrayList<Invitation>();
+				for( GraphUser u : fbUsers ){
+					Invitation i = new Invitation();
+					i.setReceiver(u.getId());
+					i.setSender(senderId);
+					
+					// TODO: challenge should have an amount
+					i.setAmount( 10.00);
+					i.setChallengeId( challenge.getChallengeId());
+					
+					invitations.add(i);
+				}
+				
+				application.sendInvitations( invitations);
 
 				setResult(RESULT_OK, null);
 				finish();
