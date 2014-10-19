@@ -3,7 +3,7 @@ package org.codepath.team10.charitychallenger.adapters;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
-import org.codepath.team10.charitychallenger.activities.ActionDetailActivity;
+import org.codepath.team10.charitychallenger.activities.NewPictureActivity;
 import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 import org.codepath.team10.charitychallenger.models.Invitation;
 
@@ -58,7 +58,7 @@ public class ReceivedInvitationAdapter extends ArrayAdapter<Invitation> {
 		viewHolder.btnInvite.setOnClickListener(new OnClickListener() {
 		    @Override
 		    public void onClick(View v) {
-		    	final Intent intent = new Intent(getContext(), ActionDetailActivity.class);
+		    	final Intent intent = new Intent(getContext(), NewPictureActivity.class);
 		    		ParseQuery<ParseObject> query = ParseQuery.getQuery("Challenge");
 					query.whereEqualTo("challenge_id", getItem(position).getInt("challengeId"));
 					query.findInBackground(new FindCallback<ParseObject>() {

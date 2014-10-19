@@ -108,10 +108,6 @@
             android:label="@string/challenge_details_label" >
         </activity>
         <activity
-            android:name=".activities.ActionDetailActivity"
-            android:label="@string/title_activity_action_detail" >
-        </activity>
-        <activity
             android:name=".activities.AllInvitationsActivity"
             android:label="@string/title_activity_all_invitations" >
         </activity>
