@@ -8,6 +8,7 @@ import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.fragments.CustomFbFriendsPickerFragment;
 import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
+import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -79,6 +80,8 @@ public class InviteFriendsActivity extends BaseActivity {
 					// TODO: challenge should have an amount
 					i.setAmount( 10.00);
 					i.setChallengeId( challenge.getChallengeId());
+					i.setStatus(InvitationStatusEnum.OPEN.ordinal());
+					i.setOpened(false);
 					
 					invitations.add(i);
 				}

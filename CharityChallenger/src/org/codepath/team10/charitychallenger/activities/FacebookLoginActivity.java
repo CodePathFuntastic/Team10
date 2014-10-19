@@ -1,6 +1,5 @@
 package org.codepath.team10.charitychallenger.activities;
 
-
 import java.util.Set;
 
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
@@ -45,19 +44,19 @@ public class FacebookLoginActivity extends Activity{
 				if( Session.getActiveSession().isOpened() == true ){
 					
 					// make a request to get the GraphApi response with User Object
-					Request.newMeRequest( Session.getActiveSession(), new Request.GraphUserCallback() {
-						
-						@Override
-						public void onCompleted(GraphUser user, Response response) {
-							// Save the user details on Sharedpreferences
-							String userId = user.getId();
-							
-							SharedPreferences preferences = getPreferences(MODE_PRIVATE);
-							preferences.edit().putString("fb_userId", userId);
-							preferences.edit().commit();
-							
-						}
-					});
+//					Request.newMeRequest( Session.getActiveSession(), new Request.GraphUserCallback() {
+//						
+//						@Override
+//						public void onCompleted(GraphUser user, Response response) {
+//							// Save the user details on Sharedpreferences
+//							String userId = user.getId();
+//							
+//							SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+//							preferences.edit().putString("fb_userId", userId);
+//							preferences.edit().commit();
+//							
+//						}
+//					});
 					
 					
 					new Request(
@@ -81,6 +80,7 @@ public class FacebookLoginActivity extends Activity{
 	        		    	        		   CharityChallengerApplication app = (CharityChallengerApplication) a;
 	        		    	        		   User user = new User();
 	        		    	        		   user.setFacebookId((String) go.asMap().get("id"));
+	        		    	        		   user.setName( (String) go.asMap().get("name"));
 	        		    	        		   app.retrieveOrSignupUser( user);
 	        		    	        	   }
 	        		    	        	   

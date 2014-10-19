@@ -5,6 +5,9 @@ import java.util.Collection;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.clients.TwitterRestClient;
+import org.codepath.team10.charitychallenger.listeners.InvitationCompletedListener;
+import org.codepath.team10.charitychallenger.listeners.InvitationReceivedListener;
+import org.codepath.team10.charitychallenger.listeners.UserSynchedListener;
 import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.Organization;
@@ -44,6 +47,12 @@ public class CharityChallengerApplication extends Application {
 	public static final String INVITATION_COMPLETE = "INVITATION_COMPLETE";
 	
 	private static Context context;
+	
+	// maintain a list of listeners to send events system wide.
+	// these listeners registered by various activities during onCreate
+	private List<InvitationCompletedListener> invitationCompletedListeners = new ArrayList<InvitationCompletedListener>();
+	private List<InvitationReceivedListener> invitationReceivedListeners = new ArrayList<InvitationReceivedListener>();
+	private List<UserSynchedListener> userSyncedListeners = new ArrayList<UserSynchedListener>();
 
 	private List<Invitation> invitations = new ArrayList<Invitation>();
 	private User user;
@@ -68,8 +77,38 @@ public class CharityChallengerApplication extends Application {
 	}
 	
     
+	public void registerListener(InvitationCompletedListener listener){
+		if( listener != null){
+			invitationCompletedListeners.add(listener);
+		}
+	}
+	public void unregisterListener( InvitationCompletedListener listener ){
+		if( listener != null ){
+			for( InvitationCompletedListener l : invitationCompletedListeners ){
+				if( listener == l ){
+					invitationCompletedListeners.remove(listener);
+					break;
+				}
+			}
+		}
+	}
+	public void registerListener(InvitationReceivedListener listener){
+		if( listener != null){
+			invitationReceivedListeners.add(listener);
+		}
+	}
+	public void registerListener(UserSynchedListener listener){
+		if( listener != null){
+			userSyncedListeners.add(listener);
+		}
+	}
 
 
+	private void processUserSyncEvent(){
+		for( UserSynchedListener l : userSyncedListeners ){
+			l.onSync(user);
+		}
+	}
 
 
 	public Collection<GraphUser> getSelectedUsers() {
@@ -89,6 +128,7 @@ public class CharityChallengerApplication extends Application {
     
     public void setUser( User user){
     	this.user = user;
+    	processUserSyncEvent();
     }
     public User getUser(){
     	return user;
@@ -217,8 +257,8 @@ public class CharityChallengerApplication extends Application {
 	public void retrieveOrSignupUser(final User user) {
 		
 		ParseQuery<User> query = ParseQuery.getQuery(User.class);
-		query.whereEqualTo("facebookId", user.getFacebookId());
 		
+		query.whereEqualTo("facebookId", user.getFacebookId());
 		query.findInBackground( new FindCallback<User>(){
 
 			@Override
@@ -236,6 +276,9 @@ public class CharityChallengerApplication extends Application {
 							// if the user exists, then save the user
 							User u = users.get(0);
 							if( u.getFacebookId().equals(user.getFacebookId())){
+								if(user.getName() != null ){
+									u.setName(user.getName());
+								}
 								setUser(u);
 							}
 						}else if( users.size() > 1 ){

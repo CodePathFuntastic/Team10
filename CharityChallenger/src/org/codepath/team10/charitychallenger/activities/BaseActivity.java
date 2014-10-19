@@ -35,6 +35,8 @@ public class BaseActivity extends FragmentActivity {
 		MenuFragment menufragment = new MenuFragment();
 		fragmentTransaction.add(menufragment, "menu");
 		fragmentTransaction.commit();
+		
+		application.registerListener(menufragment);
 	}
 
 	public List<Invitation> getInvitations(){

@@ -6,7 +6,10 @@ import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.activities.AllInvitationsActivity;
 import org.codepath.team10.charitychallenger.activities.BaseActivity;
 import org.codepath.team10.charitychallenger.activities.InvitationDetails;
+import org.codepath.team10.charitychallenger.listeners.UserSynchedListener;
 import org.codepath.team10.charitychallenger.models.Invitation;
+import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
+import org.codepath.team10.charitychallenger.models.User;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -26,10 +29,11 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
-public class MenuFragment extends Fragment {
+public class MenuFragment extends Fragment implements UserSynchedListener {
 	
 	BaseActivity activity;
 	TextView mTvNotificationsBadge;
+	String username;
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,17 +90,22 @@ public class MenuFragment extends Fragment {
         
         // fire the background task to get the list of invitations for the user.
         // this should happen only once, when the activity loads for first time.
-        if( ( activity.getInvitations() == null || 
-        		activity.getInvitations().size() == 0)
-        		&& activity.getUser() != null ){
+        if( activity.getInvitations().size() == 0 &&
+        	username != null ){
         	
-          ParseQuery<Invitation> query = ParseQuery.getQuery(Invitation.class);
-          
-          String userId = activity.getUser().getFacebookId();
-          query.whereEqualTo("receiver", userId);
-          query.whereEqualTo("status", 1);
-    
-          query.findInBackground( new FindCallback<Invitation>(){
+        	updateInvitationBadge();
+        }
+
+    }
+
+    public void updateInvitationBadge(){
+        ParseQuery<Invitation> query = ParseQuery.getQuery(Invitation.class);
+        
+        String userId = activity.getUser().getFacebookId();
+        query.whereEqualTo("receiver", userId);
+        query.whereEqualTo("status", InvitationStatusEnum.OPEN.ordinal() );
+  
+        query.findInBackground( new FindCallback<Invitation>(){
 
 			@Override
 			public void done(List<Invitation> invites,
@@ -114,11 +123,20 @@ public class MenuFragment extends Fragment {
 					Log.d( activity.LOG_TAG , e.getMessage());
 				}
 			}
-        	  
-          });
- 
-        }
+      	  
+        });
 
     }
+    
+	@Override
+	public void onSync(User user) {
+		if( username == null ){
+			username = user.getName();
+		}
+		
+		if( activity.getInvitations().size() == 0 ){
+			updateInvitationBadge();
+		}
+	}
 
 }

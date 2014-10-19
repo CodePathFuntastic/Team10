@@ -1,12 +1,15 @@
 package org.codepath.team10.charitychallenger.models;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
 @ParseClassName(value="Invitation")
-public class Invitation extends ParseObject {
+public class Invitation extends ParseObject implements Serializable {
+
+	private static final long serialVersionUID = -8340247455491413163L;
 
 	/**
 	 * <ol>
