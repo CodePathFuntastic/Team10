@@ -39,9 +39,8 @@ public class HomeActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View v,
                     int position, long id) {
                 Intent intent = new Intent(HomeActivity.this, ChallengeDetailsActivity.class);
-                Challenge challenge = mChallengesAdapter.getItem(position);
-                //ParseProxyObject ppo = new ParseProxyObject(parseObject);
-                intent.putExtra("challenge", challenge);
+                ParseProxyObject ppo = new ParseProxyObject(mChallengesAdapter.getItem(position));
+                intent.putExtra("challenge", ppo);
                 startActivity(intent);
             }
         });

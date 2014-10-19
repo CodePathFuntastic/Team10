@@ -6,6 +6,7 @@ import java.util.List;
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.fragments.CustomFbFriendsPickerFragment;
+import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 
@@ -24,7 +25,7 @@ public class InviteFriendsActivity extends BaseActivity {
 	//FriendPickerFragment friendPickerFragment;
 	CustomFbFriendsPickerFragment friendPickerFragment;
 	
-	Challenge challenge;
+	ParseProxyObject ppo;
 
 
 	public static void populateParameters(Intent intent, String userId, boolean multiSelect, boolean showTitleBar) {
@@ -37,8 +38,7 @@ public class InviteFriendsActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_invite_friends);
-		
-		challenge = (Challenge) getIntent().getSerializableExtra("challenge");
+		ppo = (ParseProxyObject) getIntent().getSerializableExtra("challenge");
 
 		FragmentManager fm = getSupportFragmentManager();
 
@@ -78,7 +78,7 @@ public class InviteFriendsActivity extends BaseActivity {
 					
 					// TODO: challenge should have an amount
 					i.setAmount( 10.00);
-					i.setChallengeId( challenge.getChallengeId());
+					i.setChallengeId( ppo.getInt("challenge_id"));
 					
 					invitations.add(i);
 				}

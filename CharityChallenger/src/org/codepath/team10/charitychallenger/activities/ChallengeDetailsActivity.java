@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 import org.codepath.team10.charitychallenger.models.Challenge;
 
 import android.content.Intent;
@@ -31,7 +32,7 @@ public class ChallengeDetailsActivity extends FragmentActivity {
     private UiLifecycleHelper lifecycleHelper;
     boolean pickFriendsWhenSessionOpened;
     private ImageView ivChallengeImage;
-    Challenge challenge;
+    private ParseProxyObject ppo;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +45,12 @@ public class ChallengeDetailsActivity extends FragmentActivity {
 		
 		
 		Intent intent = getIntent();
-		challenge = (Challenge) intent.getSerializableExtra("challenge");
-		Log.v("Test", String.format("Proxy object description: %s", challenge.getName() ));
-		
-		String name = challenge.getName();
+		ppo = (ParseProxyObject) intent.getSerializableExtra("challenge");
+		String name = ppo.getString("name");
 		tvChallengeTitle.setText(name);	
         
+		Log.v("Test", String.format("Proxy object description: %s", name ));
+		
 		resultsTextView = (TextView) findViewById(R.id.tvSelectedFriends);
         pickFriendsButton = (Button) findViewById(R.id.btnInvite);
         pickFriendsButton.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +131,7 @@ public class ChallengeDetailsActivity extends FragmentActivity {
 	            application.setSelectedUsers(null);
 
 	            Intent intent = new Intent(this, InviteFriendsActivity.class);
-	            intent.putExtra("challenge", challenge);
+	            intent.putExtra("challenge", ppo);
 
 	            InviteFriendsActivity.populateParameters(intent, null, true, true);
 	            startActivityForResult(intent, PICK_FRIENDS_ACTIVITY);
@@ -146,7 +147,7 @@ public class ChallengeDetailsActivity extends FragmentActivity {
 	
 	public void onClickDonate(View view){
 		Intent intent = new Intent(this, DonateActivity.class);
-        intent.putExtra("parseObject", challenge);
+        intent.putExtra("parseObject", ppo);
 		startActivity(intent);
 	}
 }

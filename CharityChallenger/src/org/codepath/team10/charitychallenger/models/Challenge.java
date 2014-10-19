@@ -1,15 +1,16 @@
 package org.codepath.team10.charitychallenger.models;
 
-import java.io.Serializable;
 import java.util.List;
+
+import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
 @ParseClassName(value="Challenge")
-public class Challenge extends ParseObject implements Serializable{
+public class Challenge extends ParseObject{
 
-	private static final long serialVersionUID = -8485164036593158312L;
+	//private static final long serialVersionUID = -8485164036593158312L;
 
 	/**
 	 * Data needed for a challenge

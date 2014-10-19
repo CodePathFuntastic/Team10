@@ -80,3 +80,4 @@ public class User extends ParseObject {
 		addAllUnique("friends", friends);
 	}
 }
+
