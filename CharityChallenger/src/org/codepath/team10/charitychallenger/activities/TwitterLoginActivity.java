@@ -65,12 +65,15 @@ public class TwitterLoginActivity extends OAuthLoginActivity<TwitterRestClient> 
 				AAUser user = AAUser.fromJson(jsonObject);
 				
 				// save these info in private shared info
-				SharedPreferences prefs = getSharedPreferences("com.github.snambi.twitterclient", Context.MODE_PRIVATE);
+				SharedPreferences prefs = getSharedPreferences("org.codepath.team10.charitychallenger", Context.MODE_PRIVATE);
 				
 				prefs.edit().putString("user_name", user.getName()).apply();
 				prefs.edit().putString("screen_name", user.getScreenName()).apply();
 				prefs.edit().putString("image_profile_url", user.getProfileImageUrl()).apply();
 				prefs.edit().putLong("id", user.getUid()).apply();
+				prefs.edit().putString("social_network", "twitter").apply();
+				
+				// Query the userid from parse and save the info in parse
 			}
 		});
 	}

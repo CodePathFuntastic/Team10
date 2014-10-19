@@ -17,6 +17,7 @@ public class User extends ParseObject {
 	 * 	<li>twitterId</li>
 	 * 	<li>location</li>
 	 * 	<li>email</li>
+	 * 	<li>phone_number</li>
 	 * 	<li>image_url</li>
 	 * 	<li>friends</li>
 	 * </ol>
@@ -35,6 +36,12 @@ public class User extends ParseObject {
 	}
 	public void setFacebookId(String id){
 		put("facebookId", id);
+	}
+	public void setPhoneNumber(String phone){
+		put("phone", phone);
+	}
+	public String getPhoneNumber(){
+		return getString("phone");
 	}
 	public String getFacebookId(){
 		return getString("facebookId");

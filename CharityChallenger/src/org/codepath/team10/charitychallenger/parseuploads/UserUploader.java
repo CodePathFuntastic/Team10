@@ -14,6 +14,7 @@ public class UserUploader {
 		u1.setFacebookId("snambi@gmail.com");
 		u1.setTwitterId("snambi");
 		u1.setName("Nambi Sankaran");
+		u1.setPhoneNumber("408-480-0039");
 		u1.setImageUrl("https://en.gravatar.com/userimage/27098625/0ef522318e4e61098a43e767a92ff08c.png");
 		u1.setLocation("Sunnyvale, CA");
 		String[] f1 = {"joe1", "kevin", "syed"};
@@ -24,6 +25,7 @@ public class UserUploader {
 		u2.setFacebookId("syed");
 		u2.setName("Syed Naqvi");
 		u2.setTwitterId("syed");
+		u2.setPhoneNumber("626-512-2696");
 		u2.setImageUrl("http://www.gravatar.com/avatar/12c1217a2578591700612d472a2d8d42.png");
 		u2.setLocation("San jose, CA");
 		String[] f2 = {"snambi", "kevin"};
@@ -34,6 +36,7 @@ public class UserUploader {
 		u3.setFacebookId("kevin");
 		u3.setName("Kevin Mo");
 		u3.setTwitterId("kevin");
+		u3.setPhoneNumber("408-465-8883");
 		u3.setImageUrl("https://en.gravatar.com/userimage/27098625/0ef522318e4e61098a43e767a92ff08c.png");
 		u3.setLocation("Fremont, CA");
 		String[] f3 = {"snambi", "syed"};
