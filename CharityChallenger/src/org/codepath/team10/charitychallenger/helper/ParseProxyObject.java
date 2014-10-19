@@ -1,6 +1,7 @@
 package org.codepath.team10.charitychallenger.helper;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.parse.ParseObject;
@@ -34,10 +35,21 @@ public class ParseProxyObject implements Serializable {
 			} else if(classType == ParseUser.class) {
 				ParseProxyObject parseUserObject = new ParseProxyObject((ParseObject)object.get(key));
 				values.put(key, parseUserObject);
+			} else if (classType == ArrayList.class) {
+				ArrayList<String> arrayList = (ArrayList<String>)object.get(key);
+				values.put(key, arrayList);
 			} else {
 				// You might want to add more conditions here, for embedded ParseObject, ParseFile, etc.
 			}
 		}
+	}
+	
+	public ArrayList<String> getArray(String key) {
+		if(has(key)) {
+			return (ArrayList) values.get(key);
+		} else {
+			return null;
+		}		
 	}
 	
 	public String getString(String key) {

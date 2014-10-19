@@ -6,7 +6,6 @@ import java.util.Collection;
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
-import org.codepath.team10.charitychallenger.models.Challenge;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +22,7 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
+import com.squareup.picasso.Picasso;
 
 public class ChallengeDetailsActivity extends FragmentActivity {
 
@@ -41,15 +41,19 @@ public class ChallengeDetailsActivity extends FragmentActivity {
 		setContentView(R.layout.activity_challenge_details);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
-	    ivChallengeImage = (ImageView)findViewById(R.id.ivChallengeImage);
+		ivChallengeImage = (ImageView)findViewById(R.id.ivChallengeImage);
 	    tvChallengeTitle = (TextView) findViewById(R.id.tvChallengeTitle);
 		
 		
 		Intent intent = getIntent();
 		ppo = (ParseProxyObject) intent.getSerializableExtra("challenge");
 		String name = ppo.getString("name");
-		tvChallengeTitle.setText(name);	
-        
+		ArrayList<String> arrayList = ppo.getArray("challenge_pic_urls");
+		Log.d("Testing", "Testing");
+		tvChallengeTitle.setText(name);
+		if (arrayList != null && arrayList.size() > 0) {
+	        Picasso.with(this).load(arrayList.get(0)).into(ivChallengeImage);
+		}
 		Log.v("Test", String.format("Proxy object description: %s", name ));
 		
 		resultsTextView = (TextView) findViewById(R.id.tvSelectedFriends);
