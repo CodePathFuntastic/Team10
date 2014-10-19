@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,7 +18,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-public class InvitationDetails extends Activity {
+public class InvitationDetails extends BaseActivity {
 	private ParseObject mChallenge;
 	private TextView mTvChallengeName;
 	private TextView mTvTarget;

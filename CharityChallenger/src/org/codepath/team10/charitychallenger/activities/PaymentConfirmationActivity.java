@@ -18,7 +18,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
-public class PaymentConfirmationActivity extends Activity {
+public class PaymentConfirmationActivity extends BaseActivity {
 	
     ParseProxyObject ppo;
     

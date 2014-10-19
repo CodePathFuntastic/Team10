@@ -18,7 +18,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-public class DonateActivity extends Activity {
+public class DonateActivity extends BaseActivity {
 	
 	private static final String TAG = "DonateActivity ";
     ParseProxyObject ppo;

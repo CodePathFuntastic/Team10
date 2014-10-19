@@ -35,8 +35,8 @@ public class InviteFriendsActivity extends FragmentActivity {
 			final Bundle args = getIntent().getExtras();
 			friendPickerFragment = new FriendPickerFragment(args);
 			fm.beginTransaction()
-			.add(R.id.friend_picker_fragment, friendPickerFragment)
-			.commit();
+				.add(R.id.friend_picker_fragment, friendPickerFragment)
+				.commit();
 		} else {
 			friendPickerFragment = (FriendPickerFragment) fm.findFragmentById(R.id.friend_picker_fragment);
 		}

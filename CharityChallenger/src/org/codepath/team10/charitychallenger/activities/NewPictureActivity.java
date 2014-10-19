@@ -10,10 +10,8 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
 
-public class NewPictureActivity extends Activity {
+public class NewPictureActivity extends BaseActivity {
 	
 	private Picture picture;
 	
@@ -30,7 +28,8 @@ public class NewPictureActivity extends Activity {
 
 		if (fragment == null) {
 			fragment = new NewPictureFragment();
-			manager.beginTransaction().add(R.id.fragmentContainer, fragment)
+			manager.beginTransaction()
+					.add(R.id.fragmentContainer, fragment)
 					.commit();
 		}
 	}

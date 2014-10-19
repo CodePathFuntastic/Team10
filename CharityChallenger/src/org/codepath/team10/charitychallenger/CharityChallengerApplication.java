@@ -1,6 +1,8 @@
 package org.codepath.team10.charitychallenger;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.codepath.team10.charitychallenger.clients.TwitterRestClient;
 import org.codepath.team10.charitychallenger.models.Challenge;
@@ -16,6 +18,9 @@ import android.util.Log;
 
 import com.activeandroid.ActiveAndroid;
 import com.facebook.model.GraphUser;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseException;
@@ -33,6 +38,9 @@ public class CharityChallengerApplication extends Application {
 	
 	private static Context context;
 
+	private List<Invitation> invitations = new ArrayList<Invitation>();
+	private Collection<GraphUser> selectedUsers=null;
+	
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -44,10 +52,12 @@ public class CharityChallengerApplication extends Application {
 		
 		ActiveAndroid.initialize(this);
 		
+		initImageLoader();
+		
 		//ParseTwitterUtils.initialize( Constants.TWITTER_CONSUMER_KEY, Constants.TWITTER_CONSUMER_SECRET);
 	}
 	
-    private Collection<GraphUser> selectedUsers;
+    
 
     public Collection<GraphUser> getSelectedUsers() {
         return selectedUsers;
@@ -56,6 +66,13 @@ public class CharityChallengerApplication extends Application {
     public void setSelectedUsers(Collection<GraphUser> selectedUsers) {
         this.selectedUsers = selectedUsers;
     }
+    
+    public List<Invitation> getAllInvitations(){
+    	return invitations;
+    }
+    public void addInvitation( Invitation i){
+    	invitations.add(i);
+    }
 	
 	private void initializeFb() {
 		// Set your Facebook App Id in strings.xml
@@ -63,6 +80,19 @@ public class CharityChallengerApplication extends Application {
 
 	}
 
+	private void initImageLoader(){ 
+        // 	Create global configuration and initialize ImageLoader with this configuration
+		DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+																	.cacheInMemory()
+																	.cacheOnDisc()
+																	.build();
+		
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
+																		.defaultDisplayImageOptions(defaultOptions)
+																		.build();
+		
+		ImageLoader.getInstance().init(config);	
+	}
 	public void initializeParseAndLocalDB(){
 
 		// enable local data store

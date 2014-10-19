@@ -6,7 +6,6 @@ import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.adapters.ChallengesViewAdapter;
 import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -21,15 +20,12 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-public class HomeActivity extends Activity {
+public class HomeActivity extends BaseActivity {
 	
 	private ListView mlvChallenges;
 	private ChallengesViewAdapter mChallengesAdapter; 
@@ -39,17 +35,9 @@ public class HomeActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
         setContentView(R.layout.activity_home);
         
-        // --- this is the global initialization of the ImageLoader... 
-        // 	Create global configuration and initialize ImageLoader with this configuration
-		DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().
-				cacheInMemory().cacheOnDisc().build();
-		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-		.defaultDisplayImageOptions(defaultOptions)
-		.build();
-		ImageLoader.getInstance().init(config);	
-     	// --------------------- end initialization of the ImageLoader...
 		
         mlvChallenges = (ListView) findViewById(R.id.lvListOfChallenges);
         mChallengesAdapter = new ChallengesViewAdapter(this, "Challenge");
@@ -67,23 +55,23 @@ public class HomeActivity extends Activity {
             }
         });
         
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Invitation");
-		query.whereEqualTo("receiver", "syed");
-		query.whereEqualTo("status", 1);
-
-		query.findInBackground(new FindCallback<ParseObject>() {
-        public void done(List<ParseObject> receivedNotifications, ParseException e) {
-        	int numberOfInvites = receivedNotifications.size();
-        	mTvNotificationsBadge.setTag(numberOfInvites);
-            if (numberOfInvites > 0) {
-            	mTvNotificationsBadge.setVisibility(View.VISIBLE);
-            	mTvNotificationsBadge.setText("" + numberOfInvites);
-            	invitationsList = receivedNotifications;
-            } else {
-                Log.d("Error: ", e.getMessage());
-            }
-        }
-        });
+//        ParseQuery<ParseObject> query = ParseQuery.getQuery("Invitation");
+//		query.whereEqualTo("receiver", "syed");
+//		query.whereEqualTo("status", 1);
+//
+//		query.findInBackground(new FindCallback<ParseObject>() {
+//        public void done(List<ParseObject> receivedNotifications, ParseException e) {
+//        	int numberOfInvites = receivedNotifications.size();
+//        	mTvNotificationsBadge.setTag(numberOfInvites);
+//            if (numberOfInvites > 0) {
+//            	mTvNotificationsBadge.setVisibility(View.VISIBLE);
+//            	mTvNotificationsBadge.setText("" + numberOfInvites);
+//            	invitationsList = receivedNotifications;
+//            } else {
+//                Log.d("Error: ", e.getMessage());
+//            }
+//        }
+//        });
         
     }
     
@@ -92,6 +80,7 @@ public class HomeActivity extends Activity {
     	startActivity(intent);	
     }
 	
+    /*
     public boolean onCreateOptionsMenu(Menu menu) {
     	
     	getMenuInflater().inflate(R.menu.home_activity_menu, menu);
@@ -128,6 +117,7 @@ public class HomeActivity extends Activity {
         });
 		return true;
     }
+    */
     
     private ParseQuery<ParseObject> create() {
 		Log.d("HomeActivity: ", "Invitation query");
