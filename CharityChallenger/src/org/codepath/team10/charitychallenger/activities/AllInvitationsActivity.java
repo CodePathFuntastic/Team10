@@ -1,11 +1,9 @@
 package org.codepath.team10.charitychallenger.activities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.adapters.ReceivedInvitationAdapter;
+import org.codepath.team10.charitychallenger.models.User;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,47 +11,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-
-import com.parse.ParseObject;
 
 public class AllInvitationsActivity extends BaseActivity {
 
+	//private List<Invitation> mInvitations;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_all_invitations);
-		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
-		try{
-		    // Get the Bundle Object        
-		    Bundle bundleObject = getIntent().getExtras();
-		             
-		        // Get ArrayList Bundle
-		    ArrayList<ParseObject> classObject = (ArrayList<ParseObject>) bundleObject.getSerializable("list_of_objects");
-		             
-		    //Retrieve Objects from Bundle
-		    for(int index = 0; index < classObject.size(); index++){
-		                 
-		    	ParseObject Object = classObject.get(index);
-		        Toast.makeText(getApplicationContext(), "Id is :"+Object.getString("name"), Toast.LENGTH_SHORT).show();
-		    }
-		} catch(Exception e){
-		    e.printStackTrace();
-		}
 		
-		
-		List<String> invitations = new ArrayList<String>();
-		invitations.add("Invitation from bob");
-		invitations.add("Invitation from dad");
-		invitations.add("Invitation from joe");
-		invitations.add("Invitation from mary");
-		
-		ArrayAdapter<String> itemsAdapter = 
-			    new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, invitations);
+		ReceivedInvitationAdapter itemsAdapter = 
+			    new ReceivedInvitationAdapter(this, getInvitations());
 		
 		ListView lvAllInvitations = (ListView) findViewById(R.id.lvAllInvitations);
 		lvAllInvitations.setAdapter(itemsAdapter);
@@ -67,7 +38,6 @@ public class AllInvitationsActivity extends BaseActivity {
 				Intent intent = new Intent(AllInvitationsActivity.this, InvitationDetails.class);
 				startActivity(intent);
 			}
-			
 		});
 	}
 	@Override
