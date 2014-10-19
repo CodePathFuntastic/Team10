@@ -41,7 +41,7 @@ public class BaseActivity extends Activity {
 		return application.getAllInvitations();
 	}
 	public User getUser(){
-		return null;
+		return application.getUser();
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu) {

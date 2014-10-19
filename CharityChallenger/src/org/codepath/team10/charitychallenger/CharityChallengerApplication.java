@@ -21,6 +21,7 @@ import com.facebook.model.GraphUser;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseException;
@@ -28,6 +29,7 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
+import com.parse.ParseQuery;
 import com.parse.ParseRole;
 import com.parse.SaveCallback;
 
@@ -39,6 +41,7 @@ public class CharityChallengerApplication extends Application {
 	private static Context context;
 
 	private List<Invitation> invitations = new ArrayList<Invitation>();
+	private User user;
 	private Collection<GraphUser> selectedUsers=null;
 	
 	@Override
@@ -72,6 +75,13 @@ public class CharityChallengerApplication extends Application {
     }
     public void addInvitation( Invitation i){
     	invitations.add(i);
+    }
+    
+    public void setUser( User user){
+    	this.user = user;
+    }
+    public User getUser(){
+    	return user;
     }
 	
 	private void initializeFb() {
@@ -166,5 +176,55 @@ public class CharityChallengerApplication extends Application {
 	
 	public static TwitterRestClient getRestClient() {
 		return (TwitterRestClient) TwitterRestClient.getInstance(TwitterRestClient.class, CharityChallengerApplication.context);
+	}
+
+	public void signUpUser( final User user){
+		
+		user.saveInBackground( new SaveCallback(){
+			@Override
+			public void done(ParseException paramParseException) {
+				if(paramParseException != null ){
+					Log.e(LOG_TAG, "Unable to save user", paramParseException);
+				}else{
+					setUser(user);
+				}
+			}
+		});
+	}
+	
+	public void retrieveOrSignupUser(final User user) {
+		
+		ParseQuery<User> query = ParseQuery.getQuery(User.class);
+		query.whereEqualTo("facebookId", user.getFacebookId());
+		
+		query.findInBackground( new FindCallback<User>(){
+
+			@Override
+			public void done(List<User> users, ParseException e) {
+				
+				if( e == null ){
+					
+					if( users != null ){
+					
+						// if users is empty, that means the user doesn't exist
+						// so signup for the user
+						if( users.size() == 0){
+							signUpUser(user);
+						}else if( users.size() == 1 ){
+							// if the user exists, then save the user
+							User u = users.get(0);
+							if( u.getFacebookId().equals(user.getFacebookId())){
+								setUser(u);
+							}
+						}else if( users.size() > 1 ){
+							// TODO: complex case, deal with it later
+						}
+					}
+				}else{
+					Log.d(LOG_TAG, "exception "+ e);
+				}
+			}
+			
+		});	
 	}
 }

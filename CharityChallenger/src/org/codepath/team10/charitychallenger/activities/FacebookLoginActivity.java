@@ -3,9 +3,12 @@ package org.codepath.team10.charitychallenger.activities;
 
 import java.util.Set;
 
+import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.models.User;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -72,31 +75,21 @@ public class FacebookLoginActivity extends Activity{
 	        		    	        		   sb.append(k);
 	        		    	        		   sb.append(",");
 	        		    	        	   }
+	        		    	        	   
+	        		    	        	   Application  a = getApplication();
+	        		    	        	   if( a instanceof CharityChallengerApplication) {
+	        		    	        		   CharityChallengerApplication app = (CharityChallengerApplication) a;
+	        		    	        		   User user = new User();
+	        		    	        		   user.setFacebookId((String) go.asMap().get("username"));
+	        		    	        		   app.retrieveOrSignupUser( user);
+	        		    	        	   }
+	        		    	        	   
 	        		    	        	   Toast.makeText( getApplication(), ""+ sb.toString() , Toast.LENGTH_SHORT).show();
 	        		    	         }
 						        }
 						    }
 						).executeAsync();
-					
-					/*
-        		    new Request(
-        		    	    session,
-        		    	    "/me/friends",
-        		    	    null,
-        		    	    HttpMethod.GET,
-        		    	    new Request.Callback() {
-        		    	        public void onCompleted(Response response) {
-        		    	           if( response !=null ){
-        		    	        	   GraphObject go = response.getGraphObject();
-        		    	        	   Set<String> keys = go.asMap().keySet();
-        		    	        	   JSONObject data = go.getInnerJSONObject();
-        		    	        	   Toast.makeText( getApplication(), ""+ data.toString() , Toast.LENGTH_SHORT).show();
-        		    	           }
-        		    	        }
-        		    	    }
-        		    	).executeAsync();
-					*/
-					
+										
 					Intent intent = new Intent( FacebookLoginActivity.this, HomeActivity.class);
 					startActivity(intent);
 

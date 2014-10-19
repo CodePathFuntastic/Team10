@@ -86,13 +86,14 @@ public class MenuFragment extends Fragment {
         
         // fire the background task to get the list of invitations for the user.
         // this should happen only once, when the activity loads for first time.
-        if( activity.getInvitations() == null || 
-        		activity.getInvitations().size() == 0 ){
+        if( ( activity.getInvitations() == null || 
+        		activity.getInvitations().size() == 0)
+        		&& activity.getUser() != null ){
         	
           ParseQuery<Invitation> query = ParseQuery.getQuery(Invitation.class);
           
-          // TODO : get the current from base activity
-          query.whereEqualTo("receiver", "syed");
+          String userId = activity.getUser().getFacebookId();
+          query.whereEqualTo("receiver", userId);
           query.whereEqualTo("status", 1);
     
           query.findInBackground( new FindCallback<Invitation>(){
