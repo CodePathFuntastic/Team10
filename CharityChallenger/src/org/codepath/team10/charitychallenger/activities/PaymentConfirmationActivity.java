@@ -53,27 +53,40 @@ public class PaymentConfirmationActivity extends Activity {
 		            Log.d("Log","inside done :"+parseObject.getString("description"));
 		            if(ParseError == null){
 		            	updateView(parseObject);
-		            	int currentRaised = parseObject.getInt("raised");
-		            	int totalRaised = currentRaised + Integer.valueOf(donateAmount);
-		            	parseObject.put("raised", totalRaised);
-		            	parseObject.saveInBackground(new SaveCallback() {
-		                    public void done(ParseException e) {
-		                           if (e == null) {
-		                               Log.d("Log","EXCELENT");   
-
-		                           } else {
-
-		                               Log.d("Log","Failed boss: "+e);
-		                               System.out.println(e.getCause());
-		                               System.out.println("VERY BAD");     
-		                           }
-		                         }
-		                       });
 		            }else{
 		                 Log.d("Log", "Bombed error is :"+ParseError);
 		            }
 		        }
-		    });		
+		    });	
+		   
+		   final int challenge_id = ppo.getInt("challenge_id");
+		   ParseQuery<ParseObject> queryChallenge = ParseQuery.getQuery("Challenge");
+		   queryChallenge.whereEqualTo("challenge_id", challenge_id);
+		   queryChallenge.getFirstInBackground(new GetCallback<ParseObject>() {
+			   public void done(ParseObject parseObject, ParseException ParseError) {
+				   Log.d("Log","inside done :"+parseObject.getInt("challenge_id"));
+				   if(ParseError == null){
+					   int currentRaised = parseObject.getInt("raised");
+					   int totalRaised = currentRaised + Integer.valueOf(donateAmount);
+					   parseObject.put("raised", totalRaised);
+					   parseObject.saveInBackground(new SaveCallback() {
+						   public void done(ParseException e) {
+							   if (e == null) {
+								   Log.d("Log","EXCELENT");   
+
+							   } else {
+
+								   Log.d("Log","Failed boss: "+e);
+								   System.out.println(e.getCause());
+								   System.out.println("VERY BAD");     
+							   }
+						   }
+					   });
+				   }else{
+					   Log.d("Log", "Bombed error is :"+ParseError);
+				   }
+			   }
+		   });	
 		
 	}
 	

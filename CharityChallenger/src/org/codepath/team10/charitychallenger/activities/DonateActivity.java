@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.parse.GetCallback;
@@ -25,7 +26,7 @@ public class DonateActivity extends Activity {
     private TextView tvAddressValue;
     private TextView tvCauseValue;
     private TextView tvCharityUrlValue;
-    private TextView etDonateAmountValue;
+    private EditText etDonateAmountValue;
 
 	
 	@Override
@@ -43,7 +44,7 @@ public class DonateActivity extends Activity {
 		tvAddressValue = (TextView) findViewById(R.id.tvAddressValue);
 		tvCauseValue = (TextView) findViewById(R.id.tvCauseValue);
 		tvCharityUrlValue = (TextView) findViewById(R.id.tvCharityUrlValue);
-		etDonateAmountValue = (TextView) findViewById(R.id.etDonateAmountValue);
+		etDonateAmountValue = (EditText) findViewById(R.id.etDonateAmountValue);
 
 		int orgId = ppo.getInt("orgId");
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Organization");
@@ -71,7 +72,8 @@ public class DonateActivity extends Activity {
 	public void onDonateNow(View v) {
 		 Intent intent = new Intent(this, PaymentConfirmationActivity.class);
 		 intent.putExtra("parseObject", ppo);
-		 intent.putExtra("amount", etDonateAmountValue.getText());
+		 String amount = etDonateAmountValue.getText().toString();
+		 intent.putExtra("amount", amount);
 		 startActivity(intent);
 	}
 	
