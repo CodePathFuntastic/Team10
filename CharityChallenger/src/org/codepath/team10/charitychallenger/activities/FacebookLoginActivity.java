@@ -57,6 +57,7 @@ public class FacebookLoginActivity extends Activity{
 						}
 					});
 					
+					/*
 					new Request(
 						    session,
 						    "/me",
@@ -94,7 +95,7 @@ public class FacebookLoginActivity extends Activity{
         		    	        }
         		    	    }
         		    	).executeAsync();
-
+					*/
 					
 					Intent intent = new Intent( FacebookLoginActivity.this, HomeActivity.class);
 					startActivity(intent);
