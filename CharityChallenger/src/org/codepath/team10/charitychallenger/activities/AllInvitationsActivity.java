@@ -15,6 +15,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.parse.ParseObject;
 
 public class AllInvitationsActivity extends BaseActivity {
 
@@ -24,6 +27,24 @@ public class AllInvitationsActivity extends BaseActivity {
 		setContentView(R.layout.activity_all_invitations);
 		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		try{
+		    // Get the Bundle Object        
+		    Bundle bundleObject = getIntent().getExtras();
+		             
+		        // Get ArrayList Bundle
+		    ArrayList<ParseObject> classObject = (ArrayList<ParseObject>) bundleObject.getSerializable("list_of_objects");
+		             
+		    //Retrieve Objects from Bundle
+		    for(int index = 0; index < classObject.size(); index++){
+		                 
+		    	ParseObject Object = classObject.get(index);
+		        Toast.makeText(getApplicationContext(), "Id is :"+Object.getString("name"), Toast.LENGTH_SHORT).show();
+		    }
+		} catch(Exception e){
+		    e.printStackTrace();
+		}
+		
 		
 		List<String> invitations = new ArrayList<String>();
 		invitations.add("Invitation from bob");

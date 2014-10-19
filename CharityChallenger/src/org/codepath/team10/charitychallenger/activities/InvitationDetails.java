@@ -3,9 +3,11 @@ package org.codepath.team10.charitychallenger.activities;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,11 +26,8 @@ public class InvitationDetails extends BaseActivity {
 	private TextView mTvTarget;
 	private TextView mTvRaised;
 	private TextView mTvDesc;
+    private ParseProxyObject ppo;
 	private ImageView mIvCharity;
-	
-	//ParseImageView challangeImage = (ParseImageView) viewHolder.ivCharityChallenge;
-
-	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +38,12 @@ public class InvitationDetails extends BaseActivity {
 		
 		int challengeId = 0;
 		Intent intent = getIntent();
-		if(intent.hasExtra("challengeId")){
-			challengeId = intent.getIntExtra("challengeId", 0); 
+
+		if(intent.hasExtra("parseObject")){
+			ppo = (ParseProxyObject) intent.getSerializableExtra("parseObject");
+			challengeId = ppo.getInt("challengeId");
 		}
+		
 		mTvChallengeName = (TextView) findViewById(R.id.tvCharityChallengeName);
 		mTvTarget = (TextView) findViewById(R.id.tvTargetAmountRaised);
 		mTvRaised = (TextView) findViewById(R.id.tvAmountRaised);
@@ -71,12 +73,21 @@ public class InvitationDetails extends BaseActivity {
 		
 	public void onClickAccept(View v) {
 		 Intent intent = new Intent(this, NewPictureActivity.class);
-		 startActivity(intent);
+         intent.putExtra("parseObject", ppo);
+ 		 startActivityForResult(intent, 110);
 	}
 	
 	public void onDonate(View view){
 		Intent intent = new Intent(this, DonateActivity.class);
-		startActivity(intent);
+		startActivityForResult(intent, 120);
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == Activity.RESULT_OK && requestCode == 110) {
+			Log.i("InviationDetail", "Get back from the activity");
+			// set the ppo and store in the database.
+		}
 	}
 	
 	@Override
