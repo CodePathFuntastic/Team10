@@ -6,6 +6,7 @@ import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.activities.AllInvitationsActivity;
 import org.codepath.team10.charitychallenger.activities.BaseActivity;
 import org.codepath.team10.charitychallenger.activities.InvitationDetails;
+import org.codepath.team10.charitychallenger.listeners.InvitationReceivedListener;
 import org.codepath.team10.charitychallenger.listeners.UserSynchedListener;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
@@ -29,11 +30,12 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
-public class MenuFragment extends Fragment implements UserSynchedListener {
+public class MenuFragment extends Fragment implements UserSynchedListener, InvitationReceivedListener {
 	
 	BaseActivity activity;
 	TextView mTvNotificationsBadge;
 	String username;
+	boolean hasNewInvitationArrived = false;
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -125,8 +127,24 @@ public class MenuFragment extends Fragment implements UserSynchedListener {
 			}
       	  
         });
-
     }
+    
+	private void updateInvitationBadge( Invitation invite) {
+		List<Invitation> invites = activity.getInvitations();
+		if( !invites.contains(invite) ){
+			invites.add(invite);
+		}
+		
+		int newinvites =0;
+		for( Invitation i : invites ){
+			if( i.isOpened() == false ){
+				newinvites++;
+			}
+		}
+		mTvNotificationsBadge.setVisibility(View.VISIBLE);
+    	mTvNotificationsBadge.setText("" + newinvites);
+	}
+
     
 	@Override
 	public void onSync(User user) {
@@ -138,5 +156,11 @@ public class MenuFragment extends Fragment implements UserSynchedListener {
 			updateInvitationBadge();
 		}
 	}
+
+	@Override
+	public void onReceive(Invitation invitation) {
+		updateInvitationBadge(invitation);
+	}
+
 
 }

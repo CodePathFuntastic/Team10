@@ -50,8 +50,6 @@ public class CharityChallengerApplication extends Application {
 	
 	// maintain a list of listeners to send events system wide.
 	// these listeners registered by various activities during onCreate
-	private List<InvitationCompletedListener> invitationCompletedListeners = new ArrayList<InvitationCompletedListener>();
-	private List<InvitationReceivedListener> invitationReceivedListeners = new ArrayList<InvitationReceivedListener>();
 	private List<UserSynchedListener> userSyncedListeners = new ArrayList<UserSynchedListener>();
 
 	private List<Invitation> invitations = new ArrayList<Invitation>();
@@ -77,27 +75,7 @@ public class CharityChallengerApplication extends Application {
 	}
 	
     
-	public void registerListener(InvitationCompletedListener listener){
-		if( listener != null){
-			invitationCompletedListeners.add(listener);
-		}
-	}
-	public void unregisterListener( InvitationCompletedListener listener ){
-		if( listener != null ){
-			for( InvitationCompletedListener l : invitationCompletedListeners ){
-				if( listener == l ){
-					invitationCompletedListeners.remove(listener);
-					break;
-				}
-			}
-		}
-	}
-	public void registerListener(InvitationReceivedListener listener){
-		if( listener != null){
-			invitationReceivedListeners.add(listener);
-		}
-	}
-	public void registerListener(UserSynchedListener listener){
+	public void registerUserSyncedListener(UserSynchedListener listener){
 		if( listener != null){
 			userSyncedListeners.add(listener);
 		}
@@ -351,4 +329,5 @@ public class CharityChallengerApplication extends Application {
 			e.printStackTrace();
 		}
 	}
+	
 }

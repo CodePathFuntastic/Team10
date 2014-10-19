@@ -36,7 +36,9 @@ public class Invitation extends ParseObject implements Serializable {
 	public int getInviteId(){
 		return getInt("inviteId");
 	}
-	
+	public void setInviteId( int id){
+		put("inviteId", id);
+	}
 	public void setChallengeId( int id){
 		put("challengeId", id);
 	}
@@ -54,6 +56,12 @@ public class Invitation extends ParseObject implements Serializable {
 	}
 	public String getReceiver(){
 		return getString("receiver");
+	}
+	public void setSubject(String subject){
+		put("subject", subject);
+	}
+	public String getSubject(){
+		return getString("subject");
 	}
 	public void setMessage(String msg){
 		put("message", msg);
