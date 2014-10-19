@@ -24,9 +24,9 @@ public class Invitation extends ParseObject {
 	 * 
 	 */
 	public Invitation(){
-		setOpened(false);
-		setStatus(InvitationStatusEnum.OPEN.ordinal());
-		increment("inviteId");
+//		setOpened(false);
+//		setStatus(InvitationStatusEnum.OPEN.ordinal());
+//		increment("inviteId");
 	}
 	
 	
