@@ -140,6 +140,11 @@
             android:label="@string/title_activity_fun" >
         </activity>
 
+        
+        <meta-data
+            android:name="com.parse.push.notification_icon"
+            android:resource="@drawable/ic_launcher" />
+        
         <service android:name="com.parse.PushService" />
 
         <receiver android:name="com.parse.ParseBroadcastReceiver" >

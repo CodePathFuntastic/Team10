@@ -9,10 +9,6 @@ import org.codepath.team10.charitychallenger.models.Organization;
 import org.codepath.team10.charitychallenger.models.Picture;
 import org.codepath.team10.charitychallenger.models.PictureUrl;
 import org.codepath.team10.charitychallenger.models.User;
-import org.codepath.team10.charitychallenger.parseuploads.ChallengeUploader;
-import org.codepath.team10.charitychallenger.parseuploads.InvitationUploader;
-import org.codepath.team10.charitychallenger.parseuploads.OrganizationUploader;
-import org.codepath.team10.charitychallenger.parseuploads.UserUploader;
 
 import android.app.Application;
 import android.content.Context;
@@ -31,6 +27,9 @@ import com.parse.ParseRole;
 import com.parse.SaveCallback;
 
 public class CharityChallengerApplication extends Application {
+	
+	public static final String LOG_TAG = "org.codepath.team10.charitychallenger";
+	public static final String MAIN_CHANNEL = "MAIN_CHANNEL";
 	
 	private static Context context;
 
@@ -95,6 +94,18 @@ public class CharityChallengerApplication extends Application {
 			    }
 			  }
 			});
+		
+		ParsePush.subscribeInBackground(MAIN_CHANNEL,  new SaveCallback() {
+			
+			@Override
+			public void done(ParseException e) {
+				if( e == null ){
+					Log.d(LOG_TAG, "successfully subcribed to "+ MAIN_CHANNEL);
+				}else{
+					Log.e(LOG_TAG, "failed to subscribe to " +  MAIN_CHANNEL , e);
+				}
+			}
+		});
 		
 		// send a test push notification
 //		ParsePush push = new ParsePush();
