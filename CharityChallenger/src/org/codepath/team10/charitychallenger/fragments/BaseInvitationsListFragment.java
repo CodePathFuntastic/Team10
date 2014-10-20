@@ -3,6 +3,8 @@ package org.codepath.team10.charitychallenger.fragments;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.codepath.team10.charitychallenger.EventManager;
+import org.codepath.team10.charitychallenger.ParseData;
 import org.codepath.team10.charitychallenger.adapters.InvitationsAdapter;
 import org.codepath.team10.charitychallenger.models.Invitation;
 
@@ -14,6 +16,8 @@ public class BaseInvitationsListFragment extends Fragment{
 	
 	protected InvitationsAdapter invitationsAdapter;
 	protected List<Invitation> invitations = new ArrayList<Invitation>();
+	protected ParseData parseData = ParseData.getInstance();
+	protected EventManager eventManager = EventManager.getInstance();
 	
 	public BaseInvitationsListFragment(){
 	}
@@ -28,5 +32,34 @@ public class BaseInvitationsListFragment extends Fragment{
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+	}
+	
+	public void addInvitation(Invitation invitation){
+		if( invitation != null ){
+			invitations.add(invitation);
+			invitationsAdapter.notifyDataSetChanged();
+		}
+	}
+	public void addInvitationAt(int position, Invitation invitation){
+		if( invitation != null && position >= 0 ){
+			invitations.add(position, invitation);
+			invitationsAdapter.notifyDataSetChanged();
+		}
+	}
+	// make sure duplicates are not added
+	public void addAllInvitations( List<Invitation> invites ){
+		
+		if( invites != null){
+			
+			
+			for( Invitation invite : invites ){
+				if( !invitations.contains(invite) ){
+					invitations.add( invite);
+				}
+			}
+			
+			invitationsAdapter.notifyDataSetChanged();
+		
+		}
 	}
 }

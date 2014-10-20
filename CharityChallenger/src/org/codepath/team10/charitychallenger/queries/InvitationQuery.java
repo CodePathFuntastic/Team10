@@ -4,26 +4,39 @@ import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
 
 import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.RefreshCallback;
 
 public class InvitationQuery {
 
 	
-	public static void getInvitations(String receiverId, 
+	public static void getInvitations(String receiver, 
 								InvitationStatusEnum status, 
 								boolean isOpened,
 								FindCallback<Invitation> callback){
 		
 		ParseQuery<Invitation> query = ParseQuery.getQuery(Invitation.class);
 		
-		query.whereEqualTo("receiverId", receiverId);
+		query.whereEqualTo("receiver", receiver);
 		query.whereEqualTo("state", status.ordinal() );
 		query.whereEqualTo("opened_status", isOpened);
 		
 		query.findInBackground(callback);
 	}
+	
+	public static void getSentInvitations( String sentUser, FindCallback<Invitation> callback ){
 		
+		ParseQuery<Invitation> query = ParseQuery.getQuery(Invitation.class);
+		query.whereEqualTo("sender", sentUser);
+		
+		query.findInBackground(callback);
+	}
+
+	public static void getReceivedInvitations( String receiver, FindCallback<Invitation> callback ){
+		
+		ParseQuery<Invitation> query = ParseQuery.getQuery(Invitation.class);
+		query.whereEqualTo("receiver", receiver);
+		
+		query.findInBackground(callback);
+	}
+
 }

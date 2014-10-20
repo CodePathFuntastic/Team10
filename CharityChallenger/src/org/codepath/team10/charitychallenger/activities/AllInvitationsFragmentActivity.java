@@ -49,9 +49,6 @@ public class AllInvitationsFragmentActivity extends BaseActivity {
 				    new FragmentTabListener<SentInvitationsFragment>(R.id.flContainer, this, "second",
 				    		SentInvitationsFragment.class, bundle ));
 			
-			
-
 			actionBar.addTab(tab2);
-
 	}
 }
