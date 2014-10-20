@@ -30,7 +30,7 @@ import com.parse.SaveCallback;
 import com.parse.SendCallback;
 
 public class InvitationDetails extends BaseActivity {
-	private ParseObject mChallenge;
+	//private ParseObject mChallenge;
 	private TextView mTvChallengeName;
 	private TextView mTvTarget;
 	private TextView mTvRaised;

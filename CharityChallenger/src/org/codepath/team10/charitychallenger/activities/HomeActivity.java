@@ -2,7 +2,6 @@ package org.codepath.team10.charitychallenger.activities;
 
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.adapters.ChallengesViewAdapter;
-import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 
 import android.content.Intent;
 import android.os.Bundle;

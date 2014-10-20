@@ -1,7 +1,6 @@
 package org.codepath.team10.charitychallenger.activities;
 
 import java.io.IOException;
-import java.util.Set;
 
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
@@ -9,7 +8,6 @@ import org.codepath.team10.charitychallenger.models.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;

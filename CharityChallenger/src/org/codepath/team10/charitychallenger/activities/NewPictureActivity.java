@@ -5,15 +5,12 @@ import org.codepath.team10.charitychallenger.fragments.NewPictureFragment;
 import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 import org.codepath.team10.charitychallenger.models.Picture;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class NewPictureActivity extends BaseActivity {
 	
@@ -25,14 +22,9 @@ public class NewPictureActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		picture = new Picture();
-//		requestWindowFeature(Window.FEATURE_NO_TITLE);
-//		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_picture);
 		
-//		tvChallengeDescription = (TextView) findViewById(R.id.tvChallengeDescription);
-//		tvChallegeTitle = (TextView) findViewById(R.id.tvChallegeTitle);
-
 		Intent intent = getIntent();
 
 		if(intent.hasExtra("parseObject")){

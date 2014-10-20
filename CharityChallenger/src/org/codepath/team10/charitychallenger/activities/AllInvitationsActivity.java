@@ -32,9 +32,6 @@ public class AllInvitationsActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_all_invitations);
 		
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		
-		
 		
 		mItemsAdapter = new ReceivedInvitationAdapter(this, getInvitations());
 		

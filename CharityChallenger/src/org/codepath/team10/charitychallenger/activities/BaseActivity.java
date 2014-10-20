@@ -33,6 +33,8 @@ public class BaseActivity extends FragmentActivity {
 			}
 		}
 		
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
 		FragmentManager fragmentManager = getFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		

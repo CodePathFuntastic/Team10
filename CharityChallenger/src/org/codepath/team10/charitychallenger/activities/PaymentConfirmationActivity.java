@@ -1,9 +1,8 @@
 package org.codepath.team10.charitychallenger.activities;
 
 import org.codepath.team10.charitychallenger.R;
-import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
+import org.codepath.team10.charitychallenger.models.Challenge;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,24 +19,29 @@ import com.parse.SaveCallback;
 
 public class PaymentConfirmationActivity extends BaseActivity {
 	
-    ParseProxyObject ppo;
+    //ParseProxyObject ppo;
     
     private TextView tvCharityNameOnConfirmation;
     private TextView tvDonationAmount;
     private TextView tvCharityAddressOnConfirmation;
     private TextView tvCharityConfirmationUrl;
+    
+    private Challenge challenge;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+	
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_payment_confirmation);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		Intent intent = getIntent();
 		final String donateAmount = intent.getStringExtra("amount");
-		ppo = (ParseProxyObject) intent.getSerializableExtra("parseObject");
-		Log.v("Test", String.format("Proxy object description: %s", ppo.getInt("orgId")));
+		challenge = (Challenge) intent.getParcelableExtra("challenge");
+		
+		//ppo = (ParseProxyObject) intent.getSerializableExtra("parseObject");
+		//Log.v(LOG_TAG, String.format("Proxy object description: %s", ppo.getInt("orgId")));
+		Log.v(LOG_TAG, String.format("challenge description: %s", challenge.getName() ));
 		
 		tvCharityNameOnConfirmation = (TextView) findViewById(R.id.tvCharityNameOnConfirmation);
 		tvCharityAddressOnConfirmation = (TextView) findViewById(R.id.tvCharityAddressOnConfirmation);
@@ -45,26 +49,31 @@ public class PaymentConfirmationActivity extends BaseActivity {
 		tvDonationAmount = (TextView) findViewById(R.id.tvDonationAmount);
 		tvDonationAmount.setText(donateAmount);
 
-		final int orgId = ppo.getInt("orgId");
+		//final int orgId = ppo.getInt("orgId");
+		
+		final int orgId = challenge.getOrganization();
+		
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Organization");
+		
 		query.whereEqualTo("org_id", orgId);
 		   query.getFirstInBackground(new GetCallback<ParseObject>() {
 		        public void done(ParseObject parseObject, ParseException ParseError) {
-		            Log.d("Log","inside done :"+parseObject.getString("description"));
+		            Log.d(LOG_TAG,"inside done :"+parseObject.getString("description"));
 		            if(ParseError == null){
 		            	updateView(parseObject);
 		            }else{
-		                 Log.d("Log", "Bombed error is :"+ParseError);
+		                 Log.d(LOG_TAG, "Bombed error is :"+ParseError);
 		            }
 		        }
 		    });	
 		   
-		   final int challenge_id = ppo.getInt("challenge_id");
+		   //final int challenge_id = ppo.getInt("challenge_id");
+		   final int challenge_id = challenge.getChallengeId();
 		   ParseQuery<ParseObject> queryChallenge = ParseQuery.getQuery("Challenge");
 		   queryChallenge.whereEqualTo("challenge_id", challenge_id);
 		   queryChallenge.getFirstInBackground(new GetCallback<ParseObject>() {
 			   public void done(ParseObject parseObject, ParseException ParseError) {
-				   Log.d("Log","inside done :"+parseObject.getInt("challenge_id"));
+				   Log.d(LOG_TAG,"inside done :"+parseObject.getInt("challenge_id"));
 				   if(ParseError == null){
 					   int currentRaised = parseObject.getInt("raised");
 					   int totalRaised = currentRaised + Integer.valueOf(donateAmount);
@@ -76,14 +85,14 @@ public class PaymentConfirmationActivity extends BaseActivity {
 
 							   } else {
 
-								   Log.d("Log","Failed boss: "+e);
+								   Log.d(LOG_TAG,"Failed boss: "+e);
 								   System.out.println(e.getCause());
 								   System.out.println("VERY BAD");     
 							   }
 						   }
 					   });
 				   }else{
-					   Log.d("Log", "Bombed error is :"+ParseError);
+					   Log.d(LOG_TAG, "Bombed error is :"+ParseError);
 				   }
 			   }
 		   });	
@@ -113,7 +122,11 @@ public class PaymentConfirmationActivity extends BaseActivity {
 	}
 	
 	public void onClickConfirm( View view){
+		
 		Intent intent = new Intent(this, InviteFriendsActivity.class);
+		
+		intent.putExtra("challenge", challenge);
+		
 		startActivity(intent);
 	}
 }

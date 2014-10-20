@@ -60,7 +60,7 @@ public class TwitterLoginActivity extends OAuthLoginActivity<TwitterRestClient> 
 			
 			@Override
 			public void onSuccess(JSONObject jsonObject) {
-				Log.d("debug", "User information " + jsonObject.toString());
+				Log.d( CharityChallengerApplication.LOG_TAG, "User information " + jsonObject.toString());
 				
 				AAUser user = AAUser.fromJson(jsonObject);
 				
