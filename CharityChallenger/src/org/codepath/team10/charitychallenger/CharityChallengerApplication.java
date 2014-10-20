@@ -256,6 +256,10 @@ public class CharityChallengerApplication extends Application {
 								if(user.getName() != null ){
 									u.setName(user.getName());
 								}
+								if( user.getImageUrl() != null ){
+									u.setImageUrl(user.getImageUrl());
+								}
+								u.saveInBackground();
 								setUser(u);
 							}
 						}else if( users.size() > 1 ){
