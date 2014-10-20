@@ -37,7 +37,7 @@ public class NewPictureFragment extends Fragment {
 	private TextView pictureName;
 	private Spinner pictureRating;
 	private ParseImageView picturePreview;
-    private ParseProxyObject ppo;
+    //private ParseProxyObject ppo;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

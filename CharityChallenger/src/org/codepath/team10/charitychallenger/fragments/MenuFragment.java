@@ -126,11 +126,6 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
 					if( invites != null && invites.size() > 0){
 						activity.getInvitations().addAll(invites);
 						displayInvitaionBadge();
-//						int numberofInvites = activity.getInvitations().size();
-//						if( numberofInvites > 0 ){
-//							mTvNotificationsBadge.setVisibility(View.VISIBLE);
-//		                	mTvNotificationsBadge.setText("" + numberofInvites);
-//						}
 					}
 				}else{
 					Log.d( activity.LOG_TAG , e.getMessage());
