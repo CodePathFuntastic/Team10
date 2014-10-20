@@ -139,10 +139,16 @@ public class InvitationDetails extends BaseActivity {
 			Invitation invitation = (Invitation)data.getParcelableExtra("invitation");
 			final String newPhotoUrl = (String) data.getStringExtra("newPhotoUrl");
 
-			ParseQuery<ParseObject> queryChallenge = ParseQuery.getQuery("Invitation");
-			
-			//queryChallenge.whereEqualTo("challengeId", challengeId);
-			queryChallenge.getFirstInBackground(new GetCallback<ParseObject>() {
+//			ParseProxyObject incomingPPo = (ParseProxyObject)data.getSerializableExtra("parseObject");
+//			final int challengeId = incomingPPo.getInt("challenge_Id");
+			// get the ParseFile URL
+			//ParseFile newPhoto = (ParseFile)data.getSerializableExtra("photo");
+			//final String newPhotoUrl = newPhoto.getUrl();
+			ParseQuery<ParseObject> queryInvitation = ParseQuery.getQuery("Invitation");
+			queryInvitation.whereEqualTo("challengeId", invitation.getChallengeId());
+			queryInvitation.whereEqualTo("sender", invitation.getSender());
+			queryInvitation.whereEqualTo("receiver", invitation.getReceiver());
+			queryInvitation.getFirstInBackground(new GetCallback<ParseObject>() {
 				public void done(ParseObject parseObject, ParseException ParseError) {
 					Log.d("Log","inside done :"+parseObject.getInt("challengeId"));
 					if(ParseError == null){
@@ -152,6 +158,7 @@ public class InvitationDetails extends BaseActivity {
 							photos = new JSONArray();
 						} 
 						photos.put(newPhotoUrl);
+						parseObject.put("photos", photos);
 						final String sender = parseObject.getString("sender");
 						parseObject.saveInBackground(new SaveCallback() {
 							public void done(ParseException e) {
