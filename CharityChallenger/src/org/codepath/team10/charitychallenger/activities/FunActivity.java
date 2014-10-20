@@ -3,14 +3,13 @@ package org.codepath.team10.charitychallenger.activities;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.adapters.FunScreenAdapter;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-public class FunActivity extends Activity {
+public class FunActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
