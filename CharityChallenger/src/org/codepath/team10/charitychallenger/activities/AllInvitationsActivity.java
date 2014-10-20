@@ -46,9 +46,6 @@ public class AllInvitationsActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_all_invitations);
 		
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		
-		
 		
 		mItemsAdapter = new ReceivedInvitationAdapter(this, getInvitations());
 		
@@ -66,6 +63,8 @@ public class AllInvitationsActivity extends BaseActivity {
 			}
 		});
 		
+		// if the invitations are 0, fire a parse query to load invitations.
+		// then add a callback which notifies the adapter.
 		if( getInvitations().size() == 0 ){
 			InvitationQuery.getInvitations( getUser().getFacebookId(), 
 											InvitationStatusEnum.OPEN, 

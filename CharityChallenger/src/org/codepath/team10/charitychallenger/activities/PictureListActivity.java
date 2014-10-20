@@ -2,7 +2,6 @@ package org.codepath.team10.charitychallenger.activities;
 
 import org.codepath.team10.charitychallenger.R;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;

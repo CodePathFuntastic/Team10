@@ -2,7 +2,6 @@ package org.codepath.team10.charitychallenger.activities;
 
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.adapters.ChallengesViewAdapter;
-import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -53,11 +52,11 @@ public class HomeActivity extends BaseActivity {
     	startActivity(intent);	
     }
 	   
-    private ParseQuery<ParseObject> create() {
-		Log.d("HomeActivity: ", "Invitation query");
-		ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Invitation");
-		query.whereEqualTo("receiver", "syed");
-		query.whereEqualTo("status", 1);
-		return query;
-	}
+//    private ParseQuery<ParseObject> create() {
+//		Log.d("HomeActivity: ", "Invitation query");
+//		ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Invitation");
+//		query.whereEqualTo("receiver", "syed");
+//		query.whereEqualTo("status", 1);
+//		return query;
+//	}
 }

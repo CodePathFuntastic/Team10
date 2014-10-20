@@ -37,7 +37,7 @@ public class NewPictureFragment extends Fragment {
 	private TextView pictureName;
 	private Spinner pictureRating;
 	private ParseImageView picturePreview;
-    private ParseProxyObject ppo;
+	private ParseProxyObject ppo;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,7 @@ public class NewPictureFragment extends Fragment {
 		Bundle arguments = getArguments();
 		
 		ppo = (ParseProxyObject)arguments.getSerializable("challenge");
+
 		
 		View v = inflater.inflate(R.layout.fragment_new_picture, parent, false);
 
@@ -70,7 +71,7 @@ public class NewPictureFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				InputMethodManager imm = (InputMethodManager) getActivity()
-						.getSystemService(Context.INPUT_METHOD_SERVICE);
+												.getSystemService(Context.INPUT_METHOD_SERVICE);
 				imm.hideSoftInputFromWindow(pictureName.getWindowToken(), 0);
 				startCamera();
 			}
@@ -81,6 +82,8 @@ public class NewPictureFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
+				
+				// TODO: create a listener
 				Picture picture = ((NewPictureActivity) getActivity()).getCurrentPicture();
 
 				picture.setTitle(pictureName.getText().toString());

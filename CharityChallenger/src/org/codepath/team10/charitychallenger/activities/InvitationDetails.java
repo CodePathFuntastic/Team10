@@ -23,7 +23,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 public class InvitationDetails extends BaseActivity {
-	private ParseObject mChallenge;
+	//private ParseObject mChallenge;
 	private TextView mTvChallengeName;
 	private TextView mTvTarget;
 	private TextView mTvRaised;

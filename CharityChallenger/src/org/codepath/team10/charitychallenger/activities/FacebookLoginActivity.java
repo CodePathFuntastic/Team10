@@ -1,15 +1,15 @@
 package org.codepath.team10.charitychallenger.activities;
 
-import java.util.Set;
+import java.io.IOException;
 
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.models.User;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +23,7 @@ import com.facebook.SessionState;
 import com.facebook.model.GraphObject;
 import com.facebook.model.GraphUser;
 
-public class FacebookLoginActivity extends Activity{
+public class FacebookLoginActivity extends BaseActivity{
 	
 	private Session session=null;
 	
@@ -34,30 +34,19 @@ public class FacebookLoginActivity extends Activity{
     }
 	
 	public void onLoginToFacebook(View v){
+		
 		// start Facebook Login
 		session = Session.openActiveSession(this, true, new Session.StatusCallback(){
 
 			@Override
 			public void call(Session session, SessionState state, Exception exception) {
-				Log.d("debug", "Session" + session.toString() + ", state: " + state.toString() , exception);
+				
+				Log.d(LOG_TAG, "Session" + session.toString() + ", state: " + state.toString() , exception);
+				
 				// session open successfully
 				if( Session.getActiveSession().isOpened() == true ){
 					
 					// make a request to get the GraphApi response with User Object
-//					Request.newMeRequest( Session.getActiveSession(), new Request.GraphUserCallback() {
-//						
-//						@Override
-//						public void onCompleted(GraphUser user, Response response) {
-//							// Save the user details on Sharedpreferences
-//							String userId = user.getId();
-//							
-//							SharedPreferences preferences = getPreferences(MODE_PRIVATE);
-//							preferences.edit().putString("fb_userId", userId);
-//							preferences.edit().commit();
-//							
-//						}
-//					});
-					
 					
 					new Request(
 						    session,
@@ -66,29 +55,19 @@ public class FacebookLoginActivity extends Activity{
 						    HttpMethod.GET,
 						    new Request.Callback() {
 						        public void onCompleted(Response response) {
-						        	if( response !=null ){
+						        	if( response !=null){
 	        		    	        	   GraphObject go = response.getGraphObject();
-	        		    	        	   Set<String> keys = go.asMap().keySet();
-	        		    	        	   StringBuilder sb = new StringBuilder();
-	        		    	        	   for(String k : keys){
-	        		    	        		   sb.append(k);
-	        		    	        		   sb.append(",");
-	        		    	        	   }
 	        		    	        	   
-	        		    	        	   Application  a = getApplication();
-	        		    	        	   if( a instanceof CharityChallengerApplication) {
-	        		    	        		   CharityChallengerApplication app = (CharityChallengerApplication) a;
-	        		    	        		   User user = new User();
-	        		    	        		   user.setFacebookId((String) go.asMap().get("id"));
-	        		    	        		   user.setName( (String) go.asMap().get("name"));
-	        		    	        		   app.retrieveOrSignupUser( user);
-	        		    	        	   }
-	        		    	        	   
-	        		    	        	   Toast.makeText( getApplication(), ""+ sb.toString() , Toast.LENGTH_SHORT).show();
+	        		    	        	   User user = new User();
+        		    	        		   user.setFacebookId((String) go.asMap().get("id"));
+        		    	        		   user.setName( (String) go.asMap().get("name"));
+        		    	        		   
+        		    	        		   callFacebookUserProfile(user);
 	        		    	         }
 						        }
 						    }
 						).executeAsync();
+					
 										
 					Intent intent = new Intent( FacebookLoginActivity.this, HomeActivity.class);
 					startActivity(intent);
@@ -98,6 +77,65 @@ public class FacebookLoginActivity extends Activity{
 				}
 			}
 		});
+	}
+	
+	
+	public void callFacebookUserProfile( final User user){
+		
+		if( Session.getActiveSession().isOpened() == true ){
+
+			/*
+			 * me/picture?width=200&type=&height=200&redirect=false
+			 */
+			
+			Bundle params = new Bundle();
+			params.putBoolean("redirect", false);
+			params.putString("height", "200");
+			params.putString("type", "normal");
+			params.putString("width", "200");
+			
+			new Request(session,
+						"/me/picture",
+						params,
+						HttpMethod.GET,
+						new Request.Callback() {
+							
+							@Override
+							public void onCompleted(Response response) {
+								
+								try {
+									if( response != null ){
+										int responsecode = response.getConnection().getResponseCode();
+										if( responsecode == 200 ){
+											
+											GraphObject go = response.getGraphObject();
+											
+											JSONObject json = go.getInnerJSONObject();
+											try {
+												JSONObject data = json.getJSONObject("data");
+												if( data.has("url") ){
+													String imageUrl = (String) data.get("url");
+													user.setImageUrl(imageUrl);
+												}
+											} catch (JSONException e) {
+												e.printStackTrace();
+											}
+										}
+									}
+									
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+								
+								Application  a = getApplication();
+						 	   	if( a instanceof CharityChallengerApplication) {
+						 	   		CharityChallengerApplication app = (CharityChallengerApplication) a;
+						 	   		app.retrieveOrSignupUser( user);
+						 	   	}
+							}
+						}
+			).executeAsync();
+		}
 	}
 	
 	public void startHomeActivity(){

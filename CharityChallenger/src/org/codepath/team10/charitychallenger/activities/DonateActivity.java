@@ -2,8 +2,8 @@ package org.codepath.team10.charitychallenger.activities;
 
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
+import org.codepath.team10.charitychallenger.models.Challenge;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,8 +20,8 @@ import com.parse.ParseQuery;
 
 public class DonateActivity extends BaseActivity {
 	
-	private static final String TAG = "DonateActivity ";
-    ParseProxyObject ppo;
+    //ParseProxyObject ppo;
+    private Challenge challenge;
     private TextView tvCharityNameValue;
     private TextView tvAddressValue;
     private TextView tvCauseValue;
@@ -35,10 +35,12 @@ public class DonateActivity extends BaseActivity {
 		//getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		setContentView(R.layout.activity_donate_money);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		//getActionBar().setDisplayHomeAsUpEnabled(true);
+		
 		Intent intent = getIntent();
-		ppo = (ParseProxyObject) intent.getSerializableExtra("parseObject");
-		Log.v("Test", String.format("Proxy object description: %s", ppo.getInt("orgId")));
+		//ppo = (ParseProxyObject) intent.getSerializableExtra("parseObject");
+		challenge = (Challenge) intent.getParcelableExtra("challenge");
+		Log.v(LOG_TAG, String.format("challenge description: %s", challenge.getName() ));
 		
 		tvCharityNameValue = (TextView) findViewById(R.id.tvCharityNameValue);
 		tvAddressValue = (TextView) findViewById(R.id.tvAddressValue);
@@ -46,16 +48,17 @@ public class DonateActivity extends BaseActivity {
 		tvCharityUrlValue = (TextView) findViewById(R.id.tvCharityUrlValue);
 		etDonateAmountValue = (EditText) findViewById(R.id.etDonateAmountValue);
 
-		int orgId = ppo.getInt("orgId");
+		int orgId = challenge.getOrganization();
+		
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Organization");
 		query.whereEqualTo("org_id", orgId);
 		   query.getFirstInBackground(new GetCallback<ParseObject>() {
 		        public void done(ParseObject parseObject, ParseException ParseError) {
-		            Log.d("Log","inside done :"+parseObject.getString("description"));
+		            Log.d( LOG_TAG,"inside done :"+parseObject.getString("description"));
 		            if(ParseError == null){
 		            	updateView(parseObject);
 		            }else{
-		                 Log.d("Log", "Bombed error is :"+ParseError);
+		                 Log.d( LOG_TAG, "Bombed error is :"+ParseError);
 		            }
 		        }
 		    });
@@ -70,10 +73,13 @@ public class DonateActivity extends BaseActivity {
 	}
 		
 	public void onDonateNow(View v) {
-		 Intent intent = new Intent(this, PaymentConfirmationActivity.class);
-		 intent.putExtra("parseObject", ppo);
+		 
+		Intent intent = new Intent(this, PaymentConfirmationActivity.class);
+		 intent.putExtra("challenge", challenge);
+		 
 		 String amount = etDonateAmountValue.getText().toString();
 		 intent.putExtra("amount", amount);
+		
 		 startActivity(intent);
 	}
 	

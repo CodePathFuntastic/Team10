@@ -26,7 +26,8 @@ public class InviteFriendsActivity extends BaseActivity {
 	//FriendPickerFragment friendPickerFragment;
 	CustomFbFriendsPickerFragment friendPickerFragment;
 	
-	ParseProxyObject ppo;
+	//ParseProxyObject ppo;
+	Challenge challenge;
 
 
 	public static void populateParameters(Intent intent, String userId, boolean multiSelect, boolean showTitleBar) {
@@ -39,7 +40,9 @@ public class InviteFriendsActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_invite_friends);
-		ppo = (ParseProxyObject) getIntent().getSerializableExtra("challenge");
+		
+		//ppo = (ParseProxyObject) getIntent().getSerializableExtra("challenge");
+		challenge = getIntent().getParcelableExtra("challenge");				
 
 		FragmentManager fm = getSupportFragmentManager();
 
@@ -81,7 +84,8 @@ public class InviteFriendsActivity extends BaseActivity {
 					i.setAmount( 10.00);
 					i.setStatus(InvitationStatusEnum.OPEN.ordinal());
 					i.setOpened(false);
-					i.setChallengeId( ppo.getInt("challenge_id"));
+					//i.setChallengeId( ppo.getInt("challenge_id"));
+					i.setChallengeId(challenge.getChallengeId());
 					
 					invitations.add(i);
 				}
