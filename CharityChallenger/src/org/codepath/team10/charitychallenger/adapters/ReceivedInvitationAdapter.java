@@ -60,7 +60,7 @@ public class ReceivedInvitationAdapter extends ArrayAdapter<Invitation> {
 		    public void onClick(View v) {
 		    	final Intent intent = new Intent(getContext(), NewPictureActivity.class);
 		    	
-		    	ChallengeQueries.getChallengeById(getItem(position).getInt("challengeId"), 
+		    	ChallengeQueries.getChallengeById(getItem(position).getChallengeId(), 
 		    						new FindCallback<Challenge>(){
 										@Override
 										public void done(
