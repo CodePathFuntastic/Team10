@@ -87,7 +87,7 @@ public class NewPictureFragment extends Fragment {
 			public void onClick(View v) {
 				
 				// TODO: create a listener
-				Picture picture = ((NewPictureActivity) getActivity()).getCurrentPicture();
+				final Picture picture = ((NewPictureActivity) getActivity()).getCurrentPicture();
 
 				picture.setTitle(pictureName.getText().toString());
 				//picture.setAuthor(ParseUser.getCurrentUser());
@@ -100,6 +100,7 @@ public class NewPictureFragment extends Fragment {
 							Intent data = new Intent();
 							data.putExtra("invitation", invitation);
 							data.putExtra("challenge", challenge);
+							data.putExtra("newPhotoUrl", picture.getPhotoFile().getUrl());
 							getActivity().setResult(Activity.RESULT_OK, data);
 							getActivity().finish();
 						} else {

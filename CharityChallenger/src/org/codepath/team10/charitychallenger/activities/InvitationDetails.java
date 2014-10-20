@@ -115,11 +115,14 @@ public class InvitationDetails extends BaseActivity {
 			Log.i(LOG_TAG, "Get back from the activity");
 			// set the ppo and store in the database.
 			// update the invitation table
+			Challenge challenge = (Challenge)data.getParcelableExtra("challenge");
+			Invitation invitation = (Invitation)data.getParcelableExtra("invitation");
+			final String newPhotoUrl = (String) data.getStringExtra("newPhotoUrl");
 //			ParseProxyObject incomingPPo = (ParseProxyObject)data.getSerializableExtra("parseObject");
 //			final int challengeId = incomingPPo.getInt("challenge_Id");
 			// get the ParseFile URL
-			ParseFile newPhoto = (ParseFile)data.getSerializableExtra("photo");
-			final String newPhotoUrl = newPhoto.getUrl();
+			//ParseFile newPhoto = (ParseFile)data.getSerializableExtra("photo");
+			//final String newPhotoUrl = newPhoto.getUrl();
 			ParseQuery<ParseObject> queryChallenge = ParseQuery.getQuery("Invitation");
 			//queryChallenge.whereEqualTo("challengeId", challengeId);
 			queryChallenge.getFirstInBackground(new GetCallback<ParseObject>() {
