@@ -1,16 +1,18 @@
 package org.codepath.team10.charitychallenger;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codepath.team10.charitychallenger.clients.ParseData;
 import org.codepath.team10.charitychallenger.listeners.InvitationCompletedListener;
 import org.codepath.team10.charitychallenger.listeners.InvitationReceivedListener;
 import org.codepath.team10.charitychallenger.listeners.UserSynchedListener;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.User;
 
-public class EventManager {
+public class EventManager implements Serializable {
+	
+	private static final long serialVersionUID = -1330586372238451214L;
 	
 	// maintain a list of listeners to send events system wide.
 	// these listeners registered by various activities during onCreate

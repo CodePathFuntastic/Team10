@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.codepath.team10.charitychallenger.clients.ParseData;
 import org.codepath.team10.charitychallenger.clients.TwitterRestClient;
 import org.codepath.team10.charitychallenger.listeners.UserSynchedListener;
 import org.codepath.team10.charitychallenger.models.Challenge;

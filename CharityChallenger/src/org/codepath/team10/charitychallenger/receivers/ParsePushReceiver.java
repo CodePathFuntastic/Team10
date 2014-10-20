@@ -2,8 +2,8 @@ package org.codepath.team10.charitychallenger.receivers;
 
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.EventManager;
+import org.codepath.team10.charitychallenger.ParseData;
 import org.codepath.team10.charitychallenger.activities.BaseActivity;
-import org.codepath.team10.charitychallenger.clients.ParseData;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,12 +1,15 @@
-package org.codepath.team10.charitychallenger.clients;
+package org.codepath.team10.charitychallenger;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.User;
 
-public class ParseData {
+public class ParseData implements Serializable{
+	
+	private static final long serialVersionUID = -5916211427380606124L;
 	
 	private List<Invitation> receivedInvitations = new ArrayList<Invitation>();
 	private List<Invitation> sentInvitations = new ArrayList<Invitation>();

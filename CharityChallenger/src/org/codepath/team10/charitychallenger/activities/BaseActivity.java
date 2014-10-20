@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.EventManager;
-import org.codepath.team10.charitychallenger.clients.ParseData;
+import org.codepath.team10.charitychallenger.ParseData;
 import org.codepath.team10.charitychallenger.fragments.MenuFragment;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.User;
@@ -57,25 +57,16 @@ public class BaseActivity extends FragmentActivity {
 		eventManager.registerInvitationReceivedListener(menufragment);
 		
 		pushReceiver = new ParsePushReceiver();
-		
-//		pushReceiver.registerInvitationReceivedListener(menufragment);
-//		pushReceiver.registerInvitationCompleteListener(menufragment);
-//		pushReceiver.setUser( parseData.getUser());
-//		
+				
 		registerReceiver(pushReceiver, new IntentFilter("com.parse.push.intent.RECEIVE"));
 		registerReceiver(pushReceiver, new IntentFilter("com.parse.push.intent.DELETE"));
 		registerReceiver(pushReceiver, new IntentFilter("com.parse.push.intent.OPEN"));
-		registerReceiver(pushReceiver, new IntentFilter("SENDPUSH"));
-		
-		//application.registerUserSyncedListener(pushReceiver);
-		//eventManager.registerUserSyncedListener(pushReceiver);
+		registerReceiver(pushReceiver, new IntentFilter("SENDPUSH"));	
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		//pushReceiver.unregisterInvitationReceivedListener(menufragment);
-		//pushReceiver.unregisterInvitationCompleteListener(menufragment);
 		eventManager.unregisterInvitationCompletedListener(menufragment);
 		eventManager.unregisterInvitationReceivedListener(menufragment);
 		unregisterReceiver(pushReceiver);
