@@ -3,7 +3,7 @@ package org.codepath.team10.charitychallenger.fragments;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
-import org.codepath.team10.charitychallenger.activities.AllInvitationsActivity;
+import org.codepath.team10.charitychallenger.activities.AllInvitationsFragmentActivity;
 import org.codepath.team10.charitychallenger.activities.BaseActivity;
 import org.codepath.team10.charitychallenger.activities.InvitationDetails;
 import org.codepath.team10.charitychallenger.listeners.InvitationCompletedListener;
@@ -79,15 +79,12 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
 	        			intent = new Intent(getActivity(), InvitationDetails.class);
 	        			Invitation invitation = (Invitation)activity.getInvitations().get(0);
 	        			intent.putExtra("invitation", invitation);
-//	        			int id = activity.getInvitations().get(0).getInt("challengeId");
-//	        			intent.putExtra("challengeId", id);
 	        		
 	        		}else if( numInvitations > 1 ){
 	        			
 	            		// if more that invitations are available, show all invitations, 
 	        			// so that user can pick one
-	        			intent = new Intent( getActivity(), AllInvitationsActivity.class);
-	        			
+	        			intent = new Intent( getActivity(), AllInvitationsFragmentActivity.class);	        			
 	        		}
 	                startActivity(intent);
         		}
@@ -135,7 +132,6 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
 					Log.d( activity.LOG_TAG , e.getMessage());
 				}
 			}
-      	  
         });
     }
     

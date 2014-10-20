@@ -38,8 +38,6 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        
-        
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -47,8 +45,6 @@
         <activity
             android:name="com.facebook.LoginActivity"
             android:label="@string/app_name" />
-        
-        
         <activity
             android:name=".activities.FacebookLoginActivity"
             android:label="@string/title_activity_login" >
@@ -68,8 +64,8 @@
                     android:scheme="oauth" />
             </intent-filter>
         </activity>
-       
-       	<!--  
+
+        <!--
         <activity
             android:name=".activities.TwitterLoginActivity"
             android:label="@string/title_activity_login" >
@@ -89,8 +85,8 @@
                     android:scheme="oauth" />
             </intent-filter>
         </activity>
-         -->
-         
+        -->
+
         <activity
             android:name=".activities.HomeActivity"
             android:label="@string/title_activity_home" >
@@ -136,11 +132,10 @@
             android:label="@string/title_activity_fun" >
         </activity>
 
-        
         <meta-data
             android:name="com.parse.push.notification_icon"
             android:resource="@drawable/ic_launcher" />
-        
+
         <service android:name="com.parse.PushService" />
 
         <receiver android:name="com.parse.ParseBroadcastReceiver" >
@@ -182,6 +177,10 @@
             </intent-filter>
         </receiver>
 
+        <activity
+            android:name="org.codepath.team10.charitychallenger.activities.AllInvitationsFragmentActivity"
+            android:label="@string/title_activity_all_invitations_fragment" >
+        </activity>
     </application>
 
 </manifest>

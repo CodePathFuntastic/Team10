@@ -74,7 +74,7 @@
     <string name="ok_button">OK</string>
     <string name="need_perms_alert_text">In order to pick your friends you need to accept all the permissions on the following page.</string>
     <string name="need_perms_alert_button_ok">OK</string>
-    <string name="need_perms_alert_button_quit">Quit</string> 
+    <string name="need_perms_alert_button_quit">Quit</string>
     <string name="charity_url_label">Charity URL</string>
     <string name="charity_url_value">http://www.globalgiving.com</string>
     <string name="charity_confirmation_value">Thanks for your donation!!!</string>
@@ -82,7 +82,6 @@
     <string name="title_activity_invitation_details">Invitations Details</string>
     <string name="invite_more_friends">Browse More!!</string>
     <string name="action_home">Home</string>
-    
-    
-    
+    <string name="title_activity_all_invitations_fragment">AllInvitationsFragmentActivity</string>
+
 </resources>

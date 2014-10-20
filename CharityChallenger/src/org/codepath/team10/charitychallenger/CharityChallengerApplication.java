@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.codepath.team10.charitychallenger.clients.ParseData;
 import org.codepath.team10.charitychallenger.clients.TwitterRestClient;
 import org.codepath.team10.charitychallenger.listeners.UserSynchedListener;
 import org.codepath.team10.charitychallenger.models.Challenge;
@@ -48,17 +49,26 @@ public class CharityChallengerApplication extends Application {
 	
 	// maintain a list of listeners to send events system wide.
 	// these listeners registered by various activities during onCreate
+	/* BEGIN : ALL this DATA should be saved in ParseData Singleton Object */
 	private List<UserSynchedListener> userSyncedListeners = new ArrayList<UserSynchedListener>();
-
 	private List<Invitation> invitations = new ArrayList<Invitation>();
-	private User user;
+	//private User user;
 	private Collection<GraphUser> selectedUsers=null;
+	/* END : ALL this DATA should be saved in ParseData Singleton Object */
+	
+	// all data needed for all fragments/activies to be stored here
+	private ParseData parseData;
+	// all event listeners to be managed by event manager
+	private EventManager eventManager;
 	
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		this.context = this;
-		
+
+		parseData = ParseData.getInstance();
+		eventManager = EventManager.getInstance();
+
 		initializeParseAndLocalDB();
 		
 		initParseNotificationChannels();
@@ -69,22 +79,23 @@ public class CharityChallengerApplication extends Application {
 		
 		initImageLoader();
 		
+		
 		//ParseTwitterUtils.initialize( Constants.TWITTER_CONSUMER_KEY, Constants.TWITTER_CONSUMER_SECRET);
 	}
 	
     
-	public void registerUserSyncedListener(UserSynchedListener listener){
-		if( listener != null){
-			userSyncedListeners.add(listener);
-		}
-	}
-
-
-	private void processUserSyncEvent(){
-		for( UserSynchedListener l : userSyncedListeners ){
-			l.onSync(user);
-		}
-	}
+//	public void registerUserSyncedListener(UserSynchedListener listener){
+//		if( listener != null){
+//			userSyncedListeners.add(listener);
+//		}
+//	}
+//
+//
+//	private void processUserSyncEvent(){
+//		for( UserSynchedListener l : userSyncedListeners ){
+//			l.onSync(user);
+//		}
+//	}
 
 
 	public Collection<GraphUser> getSelectedUsers() {
@@ -103,12 +114,12 @@ public class CharityChallengerApplication extends Application {
     }
     
     public void setUser( User user){
-    	this.user = user;
-    	processUserSyncEvent();
+    	//this.user = user;
+    	eventManager.processUserSyncEvent(user);
     }
-    public User getUser(){
-    	return user;
-    }
+//    public User getUser(){
+//    	return user;
+//    }
 	
 	private void initializeFb() {
 		// Set your Facebook App Id in strings.xml
@@ -260,6 +271,9 @@ public class CharityChallengerApplication extends Application {
 									u.setImageUrl(user.getImageUrl());
 								}
 								u.saveInBackground();
+								
+								// Save the user with ParseData.
+								
 								setUser(u);
 							}
 						}else if( users.size() > 1 ){
@@ -299,7 +313,7 @@ public class CharityChallengerApplication extends Application {
 	
 	public void sendInvitationPush( Invitation i ){
 		ParsePush push = new ParsePush();
-		String senderName = getUser().getName();
+		String senderName = parseData.getUser().getName();
 
 		try {
 			JSONObject json = new JSONObject();

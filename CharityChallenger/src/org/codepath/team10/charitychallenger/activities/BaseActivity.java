@@ -3,6 +3,8 @@ package org.codepath.team10.charitychallenger.activities;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
+import org.codepath.team10.charitychallenger.EventManager;
+import org.codepath.team10.charitychallenger.clients.ParseData;
 import org.codepath.team10.charitychallenger.fragments.MenuFragment;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.User;
@@ -23,6 +25,9 @@ public class BaseActivity extends FragmentActivity {
 	private ParsePushReceiver pushReceiver;
 	private MenuFragment menufragment;
 	
+	EventManager eventManager;
+	ParseData parseData;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,35 +40,44 @@ public class BaseActivity extends FragmentActivity {
 		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
+		eventManager = EventManager.getInstance();
+		parseData = ParseData.getInstance();
+		
 		FragmentManager fragmentManager = getFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		
 		menufragment = new MenuFragment();
 		fragmentTransaction.add(menufragment, "menu");
 		fragmentTransaction.commit();
-		application.registerUserSyncedListener(menufragment);
 		
 		
+		//application.registerUserSyncedListener(menufragment);
+		eventManager.registerUserSyncedListener(menufragment);
+		eventManager.registerInvitationCompletedListener(menufragment);
+		eventManager.registerInvitationReceivedListener(menufragment);
 		
 		pushReceiver = new ParsePushReceiver();
 		
-		pushReceiver.registerInvitationReceivedListener(menufragment);
-		pushReceiver.registerInvitationCompleteListener(menufragment);
-		pushReceiver.setUser( application.getUser());
-		
+//		pushReceiver.registerInvitationReceivedListener(menufragment);
+//		pushReceiver.registerInvitationCompleteListener(menufragment);
+//		pushReceiver.setUser( parseData.getUser());
+//		
 		registerReceiver(pushReceiver, new IntentFilter("com.parse.push.intent.RECEIVE"));
 		registerReceiver(pushReceiver, new IntentFilter("com.parse.push.intent.DELETE"));
 		registerReceiver(pushReceiver, new IntentFilter("com.parse.push.intent.OPEN"));
 		registerReceiver(pushReceiver, new IntentFilter("SENDPUSH"));
 		
-		application.registerUserSyncedListener(pushReceiver);
+		//application.registerUserSyncedListener(pushReceiver);
+		//eventManager.registerUserSyncedListener(pushReceiver);
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		pushReceiver.unregisterInvitationReceivedListener(menufragment);
-		pushReceiver.unregisterInvitationCompleteListener(menufragment);
+		//pushReceiver.unregisterInvitationReceivedListener(menufragment);
+		//pushReceiver.unregisterInvitationCompleteListener(menufragment);
+		eventManager.unregisterInvitationCompletedListener(menufragment);
+		eventManager.unregisterInvitationReceivedListener(menufragment);
 		unregisterReceiver(pushReceiver);
 	}
 	
@@ -71,7 +85,7 @@ public class BaseActivity extends FragmentActivity {
 		return application.getAllInvitations();
 	}
 	public User getUser(){
-		return application.getUser();
+		return parseData.getUser();
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
