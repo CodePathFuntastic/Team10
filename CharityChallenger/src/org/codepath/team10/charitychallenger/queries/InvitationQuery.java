@@ -33,10 +33,10 @@ public class InvitationQuery {
 
 	public static void getReceivedInvitations( String receiver, FindCallback<Invitation> callback ){
 		
-		ParseQuery<Invitation> query = ParseQuery.getQuery(Invitation.class);
-		query.whereEqualTo("receiver", receiver);
+		ParseQuery<Invitation> query1 = ParseQuery.getQuery(Invitation.class);
+		query1.whereEqualTo("receiver", receiver);
 		
-		query.findInBackground(callback);
+		query1.findInBackground(callback);
 	}
 
 }

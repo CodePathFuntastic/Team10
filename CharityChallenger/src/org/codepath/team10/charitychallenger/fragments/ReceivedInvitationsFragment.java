@@ -23,7 +23,7 @@ public class ReceivedInvitationsFragment extends BaseInvitationsListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		populateSentInvitations();
+		populateReceivedInvitations();
 	}
 	
 	@Override
@@ -32,7 +32,7 @@ public class ReceivedInvitationsFragment extends BaseInvitationsListFragment {
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 
-	private void populateSentInvitations() {
+	private void populateReceivedInvitations() {
 		if( parseData.getReceivedInvitations().size() == 0 ){
 			// fire a network call to load the sent invitations for the "user"
 			String userId = parseData.getUser().getFacebookId();
@@ -47,13 +47,13 @@ public class ReceivedInvitationsFragment extends BaseInvitationsListFragment {
 							parseData.getReceivedInvitations().addAll(invites);
 							addAllInvitations( parseData.getReceivedInvitations());
 						}else{
-							Log.e(BaseActivity.LOG_TAG, "Unable to get sent invitations", e);
+							Log.e(BaseActivity.LOG_TAG, "Unable to get received invitations", e);
 						}
 					}
 				});
 			}
 		}else{
-			
+			addAllInvitations(parseData.getReceivedInvitations());
 		}
 	}
 }

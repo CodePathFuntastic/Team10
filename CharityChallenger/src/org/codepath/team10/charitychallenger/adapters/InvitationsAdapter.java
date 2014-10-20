@@ -84,22 +84,6 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 										}
 		    			});
 		    		
-		    	
-		    	
-		    	
-//		    		ParseQuery<ParseObject> query = ParseQuery.getQuery("Challenge");
-//					query.whereEqualTo("challenge_id", getItem(position).getInt("challengeId"));
-//					query.findInBackground(new FindCallback<ParseObject>() {
-//			        public void done(List<ParseObject> records, ParseException e) {
-//			        	if(records.size()>0){
-//			        		ParseProxyObject ppo = new ParseProxyObject(records.get(0));
-//			        		intent.putExtra("challenge", ppo);
-//			        		getContext().startActivity(intent);
-//			        	} else {
-//			        		Log.d("Error:", "no challenge found for challangeId - " + getItem(position).getInt("challengeId"));
-//			        	}
-//			        }
-//				});
 		    }
 		});
 		

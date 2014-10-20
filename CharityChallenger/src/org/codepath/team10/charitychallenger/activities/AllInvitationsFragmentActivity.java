@@ -37,9 +37,7 @@ public class AllInvitationsFragmentActivity extends BaseActivity {
 					new FragmentTabListener<ReceivedInvitationsFragment>(R.id.flContainer, this, "first",
 							ReceivedInvitationsFragment.class, bundle));
 
-			actionBar.addTab(tab1);
-			actionBar.selectTab(tab1);
-
+			
 			Tab tab2 = actionBar
 				.newTab()
 				.setText("Sent")
@@ -50,5 +48,7 @@ public class AllInvitationsFragmentActivity extends BaseActivity {
 				    		SentInvitationsFragment.class, bundle ));
 			
 			actionBar.addTab(tab2);
+			actionBar.selectTab(tab2);
+			actionBar.addTab(tab1);
 	}
 }
