@@ -26,9 +26,9 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 
-public class ReceivedInvitationAdapter extends ArrayAdapter<Invitation> {	
+public class InvitationsAdapter extends ArrayAdapter<Invitation> {	
 	
-	public ReceivedInvitationAdapter(Context context, List<Invitation> objects) {
+	public InvitationsAdapter(Context context, List<Invitation> objects) {
 		super(context, R.layout.item_invite, objects);
 	}
 	

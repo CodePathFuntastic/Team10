@@ -3,7 +3,7 @@ package org.codepath.team10.charitychallenger.activities;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
-import org.codepath.team10.charitychallenger.adapters.ReceivedInvitationAdapter;
+import org.codepath.team10.charitychallenger.adapters.InvitationsAdapter;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
 import org.codepath.team10.charitychallenger.queries.InvitationQuery;
@@ -24,7 +24,7 @@ import com.parse.ParseException;
 public class AllInvitationsActivity extends BaseActivity {
 	
 	private ListView mLvAllInvitations;
-	private ReceivedInvitationAdapter mItemsAdapter;
+	private InvitationsAdapter mItemsAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class AllInvitationsActivity extends BaseActivity {
 		setContentView(R.layout.activity_all_invitations);
 		
 		
-		mItemsAdapter = new ReceivedInvitationAdapter(this, getInvitations());
+		mItemsAdapter = new InvitationsAdapter(this, getInvitations());
 		
 		mLvAllInvitations = (ListView) findViewById(R.id.lvAllInvitations);
 		mLvAllInvitations.setAdapter(mItemsAdapter);
