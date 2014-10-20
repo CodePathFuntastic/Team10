@@ -94,12 +94,22 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
         // this should happen only once, when the activity loads for first time.
         if( activity.getInvitations().size() == 0 &&
         	username != null ){
-        	
         	updateInvitationBadge();
         }
-
+        
+        if( activity.getInvitations().size() > 0){
+        	displayInvitaionBadge();
+        }
     }
 
+    public void displayInvitaionBadge(){
+    	int numberofInvites = activity.getInvitations().size();
+		if( numberofInvites > 0 ){
+			mTvNotificationsBadge.setVisibility(View.VISIBLE);
+        	mTvNotificationsBadge.setText("" + numberofInvites);
+		}
+    }
+    
     public void updateInvitationBadge(){
         ParseQuery<Invitation> query = ParseQuery.getQuery(Invitation.class);
         
@@ -115,11 +125,12 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
 				if( e == null){
 					if( invites != null && invites.size() > 0){
 						activity.getInvitations().addAll(invites);
-						int numberofInvites = activity.getInvitations().size();
-						if( numberofInvites > 0 ){
-							mTvNotificationsBadge.setVisibility(View.VISIBLE);
-		                	mTvNotificationsBadge.setText("" + numberofInvites);
-						}
+						displayInvitaionBadge();
+//						int numberofInvites = activity.getInvitations().size();
+//						if( numberofInvites > 0 ){
+//							mTvNotificationsBadge.setVisibility(View.VISIBLE);
+//		                	mTvNotificationsBadge.setText("" + numberofInvites);
+//						}
 					}
 				}else{
 					Log.d( activity.LOG_TAG , e.getMessage());
@@ -129,6 +140,7 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
         });
     }
     
+    // TODO: display RED for new invites, BLUE for old invites
 	private void updateInvitationBadge( Invitation invite) {
 		List<Invitation> invites = activity.getInvitations();
 		if( !invites.contains(invite) ){

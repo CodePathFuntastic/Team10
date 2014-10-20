@@ -52,11 +52,11 @@ public class HomeActivity extends BaseActivity {
     	startActivity(intent);	
     }
 	   
-    private ParseQuery<ParseObject> create() {
-		Log.d("HomeActivity: ", "Invitation query");
-		ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Invitation");
-		query.whereEqualTo("receiver", "syed");
-		query.whereEqualTo("status", 1);
-		return query;
-	}
+//    private ParseQuery<ParseObject> create() {
+//		Log.d("HomeActivity: ", "Invitation query");
+//		ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Invitation");
+//		query.whereEqualTo("receiver", "syed");
+//		query.whereEqualTo("status", 1);
+//		return query;
+//	}
 }
