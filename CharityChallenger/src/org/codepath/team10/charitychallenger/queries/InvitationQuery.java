@@ -25,16 +25,5 @@ public class InvitationQuery {
 		
 		query.findInBackground(callback);
 	}
-	
-	public static void syncInvitation( Invitation invitation ){
 		
-		invitation.refreshInBackground( new RefreshCallback(){
-
-			@Override
-			public void done(ParseObject paramParseObject,
-					ParseException paramParseException) {
-				
-			}});
-	}
-	
 }

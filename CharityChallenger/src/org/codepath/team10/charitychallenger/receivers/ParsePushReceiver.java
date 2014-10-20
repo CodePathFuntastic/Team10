@@ -48,7 +48,8 @@ public class ParsePushReceiver extends BroadcastReceiver implements UserSynchedL
 						
 					}
 					if( channel.equals(CharityChallengerApplication.INVITATION_COMPLETE) ){
-						
+						String data = intent.getExtras().getString("com.parse.Data");
+						Toast.makeText(context, "InvitComplete : "+ data, Toast.LENGTH_SHORT).show();
 					}
 					if( channel.equals(CharityChallengerApplication.INVITATION_RECEIVE) ){
 						if(user == null ){
@@ -56,7 +57,7 @@ public class ParsePushReceiver extends BroadcastReceiver implements UserSynchedL
 						}
 						JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
 						receiverInvitationFromPush(json);
-						Toast.makeText(context, "Push Received. channel :" + channel + ", data: "+json, Toast.LENGTH_SHORT).show();
+						Toast.makeText(context, "InviteReceived. channel :" + channel + ", data: "+json, Toast.LENGTH_SHORT).show();
 					}
 					if( channel.equals("")){
 						

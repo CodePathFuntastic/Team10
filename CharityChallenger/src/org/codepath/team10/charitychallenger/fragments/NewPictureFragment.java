@@ -1,9 +1,12 @@
 package org.codepath.team10.charitychallenger.fragments;
 
+import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.activities.FunActivity;
 import org.codepath.team10.charitychallenger.activities.NewPictureActivity;
 import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
+import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
 import org.codepath.team10.charitychallenger.models.Picture;
 
 import android.app.Activity;
@@ -24,11 +27,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.GetCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseImageView;
+import com.parse.ParsePush;
 import com.parse.SaveCallback;
+import com.parse.SendCallback;
 
 public class NewPictureFragment extends Fragment {
 
@@ -94,7 +100,7 @@ public class NewPictureFragment extends Fragment {
 					@Override
 					public void done(ParseException e) {
 						if (e == null) {
-							completeAction();
+							refreshFromParse();
 						} else {
 							Toast.makeText(
 									getActivity().getApplicationContext(),
@@ -122,33 +128,111 @@ public class NewPictureFragment extends Fragment {
 		return v;
 	}
 	
-	public void completeAction(){
+	public void refreshFromParse(){
+		
+		// refresh the invitation and challenge
+		invitation.fetchInBackground( new GetCallback<Invitation>(){
+
+			@Override
+			public void done(Invitation invitation,
+					ParseException e) {
+				
+				if( e == null ){
+					
+					// refresh the challenge
+					challenge.fetchInBackground( new GetCallback<Challenge>() {
+						@Override
+						public void done(Challenge c,
+								ParseException e) {
+							if( e == null ){
+								saveInParse();
+							}else{
+								// handle exception
+							}
+						}
+					});
+					
+				}else{
+					// handle the error
+				}
+			}
+		} );
+	}
+	
+	public void saveInParse(){
 		
 		// at this point the picture should have the URL.
 		ParseFile photo = picture.getPhotoFile();
 		String photourl = photo.getUrl();
 		
 		invitation.addPhoto(photourl);
+		invitation.setStatus(InvitationStatusEnum.PIC_SENT.ordinal());
 		
-		// refresh the invitation
-		
-		// refresh the challenge
-		
-		// update the invitation
-		
-		// update the challenge
-		
+		// update the invitation and challenge
+		invitation.saveInBackground( new SaveCallback() {
+			@Override
+			public void done(ParseException e) {
+				if( e == null ){
+					
+					int oi = challenge.getOpenInvitations();
+					oi--;
+					int ci = challenge.getClosedInvitations();
+					ci++;
+					
+					challenge.setOpenInvitation(oi);
+					challenge.setClosedInvitations(ci);
+					
+					challenge.saveInBackground( new SaveCallback() {
+						
+						@Override
+						public void done(ParseException e) {
+							if( e == null ){
+								sendPushNotification();
+							}else{
+								// TODO : handle exception
+							}
+						}
+					});
+				}else{
+					// TODO: handle exception
+				}
+			}
+		});
+	}
+	
+	private void sendPushNotification() {
 		// send push notification
+		ParsePush push = new ParsePush();
+		
+		push.setMessage("");
+		push.setChannel(CharityChallengerApplication.INVITATION_COMPLETE);
+		push.sendInBackground( new SendCallback(){
+
+			@Override
+			public void done(ParseException e) {
+				if( e == null ){
+					
+				}else{
+					// handle error
+				}
+			}
+		});
 		
 		// start to fun activity
-		Intent data = new Intent();
-		data.putExtra("invitation", invitation);
-		data.putExtra("challenge", challenge);
-		data.putExtra("newPhotoUrl", picture.getPhotoFile().getUrl());
-
+//		Intent data = new Intent();
+//		data.putExtra("invitation", invitation);
+//		data.putExtra("challenge", challenge);
+//		data.putExtra("newPhotoUrl", picture.getPhotoFile().getUrl());
+//
+//		
+//		getActivity().setResult(Activity.RESULT_OK, data);
+//		getActivity().finish();
 		
-		getActivity().setResult(Activity.RESULT_OK, data);
-		getActivity().finish();
+		Intent intent = new Intent( getActivity(), FunActivity.class);
+		intent.putExtra("invitation", invitation);
+		intent.putExtra("challenge", challenge);
+		
+		startActivity(intent);
 	}
 
 	public void startCamera() {
