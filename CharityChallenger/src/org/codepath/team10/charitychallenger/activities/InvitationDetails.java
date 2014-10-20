@@ -3,7 +3,6 @@ package org.codepath.team10.charitychallenger.activities;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
-import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,10 +55,6 @@ public class InvitationDetails extends BaseActivity {
 			mInvitation = (Invitation) intent.getParcelableExtra("invitation");
 			challengeId = mInvitation.getInt("challengeId");
 		}
-//		if(intent.hasExtra("parseObject")){
-//			ppo = (ParseProxyObject) intent.getSerializableExtra("parseObject");
-//			challengeId = ppo.getInt("challengeId");
-//		}
 		
 		mTvChallengeName = (TextView) findViewById(R.id.tvCharityChallengeName);
 		mTvTarget = (TextView) findViewById(R.id.tvTargetAmountRaised);
@@ -68,22 +63,24 @@ public class InvitationDetails extends BaseActivity {
 		mIvCharity = (ImageView) findViewById(R.id.ivCharity); 
 		
 		if(challengeId != 0){
+			
 			ParseQuery<ParseObject> query = ParseQuery.getQuery("Challenge");
 			query.whereEqualTo("challenge_id", challengeId);
+			
 			query.findInBackground(new FindCallback<ParseObject>() {
-	        public void done(List<ParseObject> records, ParseException e) {
-	        	if(e == null){
-	        		mTvChallengeName.setText(records.get(0).getString("name"));
-	        		int num = records.get(0).getInt("target");
-	        		mTvTarget.setText("$ "+num);
-	        		mTvRaised.setText("$ "+records.get(0).getInt("raised"));
-	        		mTvDesc.setText(""+records.get(0).getString("description"));	
-	        		List<String> url = records.get(0).getList("challenge_pic_urls");
-	        		ImageLoader.getInstance().displayImage(url.get(0), mIvCharity);
-	        	} else {
-	        		e.printStackTrace();
-	        	}
-	        }
+		        public void done(List<ParseObject> records, ParseException e) {
+		        	if(e == null){
+		        		mTvChallengeName.setText(records.get(0).getString("name"));
+		        		int num = records.get(0).getInt("target");
+		        		mTvTarget.setText("$ "+num);
+		        		mTvRaised.setText("$ "+records.get(0).getInt("raised"));
+		        		mTvDesc.setText(""+records.get(0).getString("description"));	
+		        		List<String> url = records.get(0).getList("challenge_pic_urls");
+		        		ImageLoader.getInstance().displayImage(url.get(0), mIvCharity);
+		        	} else {
+		        		e.printStackTrace();
+		        	}
+		        }
 	        });
 		}
 	}
