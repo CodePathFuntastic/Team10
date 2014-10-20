@@ -60,7 +60,9 @@ public class ReceivedInvitationAdapter extends ArrayAdapter<Invitation> {
 		    public void onClick(View v) {
 		    	final Intent intent = new Intent(getContext(), NewPictureActivity.class);
 		    	
-		    	ChallengeQueries.getChallengeById(getItem(position).getChallengeId(), 
+		    	final Invitation invitation = getItem(position);
+		    	
+		    	ChallengeQueries.getChallengeById( invitation.getChallengeId(), 
 		    						new FindCallback<Challenge>(){
 										@Override
 										public void done(
@@ -72,6 +74,7 @@ public class ReceivedInvitationAdapter extends ArrayAdapter<Invitation> {
 												if( challenges.size()>0 ){
 													Challenge c = challenges.get(0);
 													intent.putExtra("challenge", c);
+													intent.putExtra("invitation", invitation);
 													getContext().startActivity(intent);
 												}
 											}

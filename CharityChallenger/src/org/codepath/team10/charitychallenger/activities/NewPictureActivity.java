@@ -3,6 +3,7 @@ package org.codepath.team10.charitychallenger.activities;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.fragments.NewPictureFragment;
 import org.codepath.team10.charitychallenger.models.Challenge;
+import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.Picture;
 
 import android.app.Fragment;
@@ -15,8 +16,8 @@ import android.view.MenuItem;
 public class NewPictureActivity extends BaseActivity {
 	
 	private Picture picture;
-    //private ParseProxyObject ppo;
     private Challenge challenge;
+    private Invitation invitation;
 //    private TextView tvChallengeDescription;
 //    private TextView tvChallegeTitle;
 	
@@ -28,14 +29,12 @@ public class NewPictureActivity extends BaseActivity {
 		
 		Intent intent = getIntent();
 
-//		if(intent.hasExtra("parseObject")){
-//			ppo = (ParseProxyObject) intent.getSerializableExtra("parseObject");
-//			//tvChallengeDescription.setText(ppo.getString("name"));
-//			//tvChallegeTitle.setText(ppo.getString("name"));
-//		}
 		
 		if( intent.hasExtra("challenge") ){
 			challenge = intent.getParcelableExtra("challenge");
+		}
+		if( intent.hasExtra("invitation")){
+			invitation = intent.getParcelableExtra("invitation");
 		}
 		
 		FragmentManager manager = getFragmentManager();

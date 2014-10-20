@@ -2,7 +2,6 @@ package org.codepath.team10.charitychallenger.fragments;
 
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.activities.NewPictureActivity;
-import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 import org.codepath.team10.charitychallenger.models.Picture;
 
 import android.app.Activity;
@@ -26,7 +25,6 @@ import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseImageView;
-import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 public class NewPictureFragment extends Fragment {
@@ -37,7 +35,6 @@ public class NewPictureFragment extends Fragment {
 	private TextView pictureName;
 	private Spinner pictureRating;
 	private ParseImageView picturePreview;
-    //private ParseProxyObject ppo;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -48,9 +45,6 @@ public class NewPictureFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
 			Bundle SavedInstanceState) {
 		
-//		Bundle arguments = getArguments();
-//		
-//		ppo = (ParseProxyObject)arguments.getSerializable("invitation");
 		
 		View v = inflater.inflate(R.layout.fragment_new_picture, parent, false);
 
@@ -70,7 +64,7 @@ public class NewPictureFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				InputMethodManager imm = (InputMethodManager) getActivity()
-						.getSystemService(Context.INPUT_METHOD_SERVICE);
+												.getSystemService(Context.INPUT_METHOD_SERVICE);
 				imm.hideSoftInputFromWindow(pictureName.getWindowToken(), 0);
 				startCamera();
 			}
@@ -81,6 +75,8 @@ public class NewPictureFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
+				
+				// TODO: create a listener
 				Picture picture = ((NewPictureActivity) getActivity()).getCurrentPicture();
 
 				picture.setTitle(pictureName.getText().toString());
