@@ -28,12 +28,6 @@ public class NewPictureActivity extends BaseActivity {
 		setContentView(R.layout.activity_new_picture);
 		
 		Intent intent = getIntent();
-
-//		if(intent.hasExtra("challenge")){
-//			ppo = (ParseProxyObject) intent.getSerializableExtra("challenge");
-//			//tvChallengeDescription.setText(ppo.getString("name"));
-//			//tvChallegeTitle.setText(ppo.getString("name"));
-
 		
 		if( intent.hasExtra("challenge") ){
 			challenge = intent.getParcelableExtra("challenge");

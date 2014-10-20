@@ -3,9 +3,9 @@ package org.codepath.team10.charitychallenger.activities;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
-import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
+import org.codepath.team10.charitychallenger.queries.ChallengeQueries;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,7 +24,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
-import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
@@ -62,11 +61,7 @@ public class InvitationDetails extends BaseActivity {
 		if( intent.hasExtra("challenge") ){
 			mChallenge = (Challenge) intent.getParcelableExtra("challenge");
 		}
-		
-		if(intent.hasExtra("challenge")){
-			mChallenge = (Challenge) intent.getParcelableExtra("challenge");
-		}
-		
+				
 		mTvChallengeName = (TextView) findViewById(R.id.tvCharityChallengeName);
 		mTvTarget = (TextView) findViewById(R.id.tvTargetAmountRaised);
 		mTvRaised = (TextView) findViewById(R.id.tvAmountRaised);
@@ -75,6 +70,30 @@ public class InvitationDetails extends BaseActivity {
 		
 		if(challengeId != 0){
 			
+			ChallengeQueries.getChallengeById( challengeId, new FindCallback<Challenge>() {
+
+				@Override
+				public void done(List<Challenge> list,
+								ParseException e) {
+					
+					if( e == null ){
+						// should be only one challenge
+						Challenge c = list.get(0);
+						
+						mTvChallengeName.setText(c.getName());
+						mTvTarget.setText( "$" +c.getTargetAmount());
+						mTvTarget.setText("$" + c.getAmountRaised());
+						mTvDesc.setText(c.getDescription());
+						List<String> imageUrls = c.getChallengesPictureUrls();
+						if( imageUrls.size() > 0){
+							String image = imageUrls.get(0);
+							ImageLoader.getInstance().displayImage(image, mIvCharity);
+						}
+					}
+				}
+			});
+			
+			/*
 			ParseQuery<ParseObject> query = ParseQuery.getQuery("Challenge");
 			query.whereEqualTo("challenge_id", challengeId);
 			
@@ -93,6 +112,7 @@ public class InvitationDetails extends BaseActivity {
 		        	}
 		        }
 	        });
+	        */
 		}
 	}
 		
@@ -114,17 +134,13 @@ public class InvitationDetails extends BaseActivity {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK && requestCode == 110) {
 			Log.i(LOG_TAG, "Get back from the activity");
-			// set the ppo and store in the database.
-			// update the invitation table
+			
 			Challenge challenge = (Challenge)data.getParcelableExtra("challenge");
 			Invitation invitation = (Invitation)data.getParcelableExtra("invitation");
 			final String newPhotoUrl = (String) data.getStringExtra("newPhotoUrl");
-//			ParseProxyObject incomingPPo = (ParseProxyObject)data.getSerializableExtra("parseObject");
-//			final int challengeId = incomingPPo.getInt("challenge_Id");
-			// get the ParseFile URL
-			//ParseFile newPhoto = (ParseFile)data.getSerializableExtra("photo");
-			//final String newPhotoUrl = newPhoto.getUrl();
+
 			ParseQuery<ParseObject> queryChallenge = ParseQuery.getQuery("Invitation");
+			
 			//queryChallenge.whereEqualTo("challengeId", challengeId);
 			queryChallenge.getFirstInBackground(new GetCallback<ParseObject>() {
 				public void done(ParseObject parseObject, ParseException ParseError) {

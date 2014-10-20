@@ -2,6 +2,7 @@ package org.codepath.team10.charitychallenger.activities;
 
 import java.util.List;
 
+import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.adapters.ReceivedInvitationAdapter;
 import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
@@ -39,7 +40,7 @@ public class AllInvitationsActivity extends BaseActivity {
 	private ReceivedInvitationAdapter mItemsAdapter;
 	//private List<Invitation> mInvitations;
     private ParseProxyObject ppo;
-	public static final String MAIN_CHANNEL = "MAIN_CHANNEL";
+	//public static final String MAIN_CHANNEL = "MAIN_CHANNEL";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -146,7 +147,7 @@ public class AllInvitationsActivity extends BaseActivity {
 										e1.printStackTrace();
 									}
 									push.setData(data);
-									push.setChannel(MAIN_CHANNEL);
+									push.setChannel(CharityChallengerApplication.MAIN_CHANNEL);
 									push.sendInBackground( new SendCallback(){
 							
 										@Override

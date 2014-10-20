@@ -2,7 +2,6 @@ package org.codepath.team10.charitychallenger.fragments;
 
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.activities.NewPictureActivity;
-import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.Picture;
@@ -41,6 +40,8 @@ public class NewPictureFragment extends Fragment {
 	private ParseImageView picturePreview;
 	private Challenge challenge;
 	private Invitation invitation;
+	
+	private Picture picture;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,8 @@ public class NewPictureFragment extends Fragment {
 		pictureName = ((EditText) v.findViewById(R.id.picture_name));
 
 		pictureRating = ((Spinner) v.findViewById(R.id.rating_spinner));
+		
+		picture = ((NewPictureActivity) getActivity()).getCurrentPicture();
 		
 		ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter
 				.createFromResource(getActivity(), R.array.ratings_array,
@@ -85,24 +88,13 @@ public class NewPictureFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				
-				// TODO: create a listener
-				final Picture picture = ((NewPictureActivity) getActivity()).getCurrentPicture();
 
 				picture.setTitle(pictureName.getText().toString());
-				//picture.setAuthor(ParseUser.getCurrentUser());
-				//picture.setRating(pictureRating.getSelectedItem().toString());
 				picture.saveInBackground(new SaveCallback() {
-
 					@Override
 					public void done(ParseException e) {
 						if (e == null) {
-							Intent data = new Intent();
-							data.putExtra("invitation", invitation);
-							data.putExtra("challenge", challenge);
-							data.putExtra("newPhotoUrl", picture.getPhotoFile().getUrl());
-							getActivity().setResult(Activity.RESULT_OK, data);
-							getActivity().finish();
+							completeAction();
 						} else {
 							Toast.makeText(
 									getActivity().getApplicationContext(),
@@ -110,9 +102,7 @@ public class NewPictureFragment extends Fragment {
 									Toast.LENGTH_SHORT).show();
 						}
 					}
-
 				});
-
 			}
 		});
 
@@ -130,6 +120,35 @@ public class NewPictureFragment extends Fragment {
 		picturePreview.setVisibility(View.INVISIBLE);
 
 		return v;
+	}
+	
+	public void completeAction(){
+		
+		// at this point the picture should have the URL.
+		ParseFile photo = picture.getPhotoFile();
+		String photourl = photo.getUrl();
+		
+		invitation.addPhoto(photourl);
+		
+		// refresh the invitation
+		
+		// refresh the challenge
+		
+		// update the invitation
+		
+		// update the challenge
+		
+		// send push notification
+		
+		// start to fun activity
+		Intent data = new Intent();
+		data.putExtra("invitation", invitation);
+		data.putExtra("challenge", challenge);
+		data.putExtra("newPhotoUrl", picture.getPhotoFile().getUrl());
+
+		
+		getActivity().setResult(Activity.RESULT_OK, data);
+		getActivity().finish();
 	}
 
 	public void startCamera() {
