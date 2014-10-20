@@ -5,12 +5,12 @@ import java.util.List;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.activities.AllInvitationsActivity;
 import org.codepath.team10.charitychallenger.activities.InvitationDetails;
-import org.codepath.team10.charitychallenger.activities.NewPictureActivity;
 import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
+import org.codepath.team10.charitychallenger.models.User;
 import org.codepath.team10.charitychallenger.queries.ChallengeQueries;
+import org.codepath.team10.charitychallenger.queries.UserQuery;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -23,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
 
 public class ReceivedInvitationAdapter extends ArrayAdapter<Invitation> {	
@@ -61,24 +60,8 @@ public class ReceivedInvitationAdapter extends ArrayAdapter<Invitation> {
 		    
 			@Override
 		    public void onClick(View v) {
-		    	final Intent intent = new Intent(getContext(), NewPictureActivity.class);
-
-//		    		ParseQuery<ParseObject> query = ParseQuery.getQuery("Challenge");
-//					query.whereEqualTo("challenge_id", getItem(position).getInt("challengeId"));
-//					query.findInBackground(new FindCallback<ParseObject>() {
-//			        public void done(List<ParseObject> records, ParseException e) {
-//			        	if(records.size()>0){
-//			        		ParseProxyObject ppo = new ParseProxyObject(records.get(0));
-//			        		intent.putExtra("challenge", ppo);
-//			        		//getContext().startActivity(intent);
-//			        		((AllInvitationsActivity)getContext()).startPictureActivity(intent);
-//			        	} else {
-//			        		Log.d("Error:", "no challenge found for challangeId - " + getItem(position).getInt("challengeId"));
-//			        	}
-//			        }
-//				});
-//
-//		    	
+		    	final Intent intent = new Intent(getContext(), InvitationDetails.class);
+		    	
 		    	final Invitation invitation = getItem(position);
 		    	
 		    	ChallengeQueries.getChallengeById( invitation.getChallengeId(), 
@@ -101,6 +84,26 @@ public class ReceivedInvitationAdapter extends ArrayAdapter<Invitation> {
 										}
 		    			});
 		    		
+		    	UserQuery.getUserBySenderId( invitation.getSender(), 
+					new FindCallback<User>(){
+						@Override
+						public void done(
+								List<User> users,
+								ParseException e) {
+								
+							if( e == null ){
+								// it should be only one
+								if( users.size()>0 ){
+									User user = users.get(0);
+									if(user.getImageUrl() != null){
+										// set on ImageView.
+									}
+								}
+							}
+						}
+			});
+		    	
+		    	
 //		    		ParseQuery<ParseObject> query = ParseQuery.getQuery("Challenge");
 //					query.whereEqualTo("challenge_id", getItem(position).getInt("challengeId"));
 //					query.findInBackground(new FindCallback<ParseObject>() {
