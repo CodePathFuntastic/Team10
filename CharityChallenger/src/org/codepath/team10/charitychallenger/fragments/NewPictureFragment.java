@@ -222,6 +222,7 @@ public class NewPictureFragment extends Fragment {
 	}
 	
 	private void sendPushNotification() {
+		
 		// send push notification
 		ParsePush push = new ParsePush();
 		

@@ -53,6 +53,8 @@ public class DonateActivity extends BaseActivity {
 		tvCauseValue = (TextView) findViewById(R.id.tvCauseValue);
 		tvCharityUrlValue = (TextView) findViewById(R.id.tvCharityUrlValue);
 		etDonateAmountValue = (EditText) findViewById(R.id.etDonateAmountValue);
+		
+		etDonateAmountValue.setText( "" + invitation.getAmount());
 
 		int orgId = challenge.getOrganization();
 		
@@ -81,12 +83,13 @@ public class DonateActivity extends BaseActivity {
 	public void onDonateNow(View v) {
 		 
 		Intent intent = new Intent(this, PaymentConfirmationActivity.class);
-		 intent.putExtra("challenge", challenge);
+		intent.putExtra("challenge", challenge);
+		intent.putExtra("invitation", invitation);
 		 
-		 String amount = etDonateAmountValue.getText().toString();
-		 intent.putExtra("amount", amount);
+		String amount = etDonateAmountValue.getText().toString();
+		intent.putExtra("amount", amount);
 		
-		 startActivity(intent);
+		startActivity(intent);
 	}
 	
 	@Override
