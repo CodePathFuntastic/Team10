@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 
@@ -84,24 +85,7 @@ public class ReceivedInvitationAdapter extends ArrayAdapter<Invitation> {
 										}
 		    			});
 		    		
-		    	UserQuery.getUserBySenderId( invitation.getSender(), 
-					new FindCallback<User>(){
-						@Override
-						public void done(
-								List<User> users,
-								ParseException e) {
-								
-							if( e == null ){
-								// it should be only one
-								if( users.size()>0 ){
-									User user = users.get(0);
-									if(user.getImageUrl() != null){
-										// set on ImageView.
-									}
-								}
-							}
-						}
-			});
+		    	
 		    	
 		    	
 //		    		ParseQuery<ParseObject> query = ParseQuery.getQuery("Challenge");
@@ -125,17 +109,28 @@ public class ReceivedInvitationAdapter extends ArrayAdapter<Invitation> {
 		return convertView;
 	}
 
-	private void updateVew(ViewHolder viewHolder, Invitation invitation) {
-		if(viewHolder.ivFriend != null){
-			//viewHolder.ivFriend = "set Image here...";
-		}
-		
-		if(viewHolder.tvFriendName != null){
-			viewHolder.tvFriendName.setText(invitation.getSender());
-		}
-		
-		if(viewHolder.tvFriendLocation != null){
-			viewHolder.tvFriendLocation.setText("San Jose, CA");
-		}
+	private void updateVew(final ViewHolder viewHolder, Invitation invitation) {
+		UserQuery.getUserBySenderId( invitation.getSender(), 
+			new FindCallback<User>(){
+				@Override
+				public void done(
+						List<User> users,
+						ParseException e) {
+						
+					if( e == null ){
+						// it should be only one
+						if( users.size()>0 ){
+							User user = users.get(0);
+							if(user.getImageUrl() != null){
+								viewHolder.ivFriend.setImageResource(android.R.color.transparent);
+								ImageLoader.getInstance().displayImage(user.getImageUrl(), viewHolder.ivFriend);
+							}
+							viewHolder.tvFriendName.setText(user.getName());
+							viewHolder.tvFriendLocation.setText(user.getLocation());
+						}
+					}
+				}
+		});
+
 	}
 }
