@@ -1,8 +1,8 @@
 package org.codepath.team10.charitychallenger.activities;
 
 import org.codepath.team10.charitychallenger.R;
-import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 import org.codepath.team10.charitychallenger.models.Challenge;
+import org.codepath.team10.charitychallenger.models.Invitation;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,26 +20,32 @@ import com.parse.ParseQuery;
 
 public class DonateActivity extends BaseActivity {
 	
-    //ParseProxyObject ppo;
-    private Challenge challenge;
+    
+    
     private TextView tvCharityNameValue;
     private TextView tvAddressValue;
     private TextView tvCauseValue;
     private TextView tvCharityUrlValue;
     private EditText etDonateAmountValue;
 
-	
+    private Challenge challenge;
+    private Invitation invitation;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		setContentView(R.layout.activity_donate_money);
-		//getActionBar().setDisplayHomeAsUpEnabled(true);
+		
 		
 		Intent intent = getIntent();
-		//ppo = (ParseProxyObject) intent.getSerializableExtra("parseObject");
-		challenge = (Challenge) intent.getParcelableExtra("challenge");
+		if( intent.hasExtra("challenge" )){
+			challenge = (Challenge) intent.getParcelableExtra("challenge");
+		}
+		if( intent.hasExtra("invitation")){
+			invitation = (Invitation) intent.getParcelableExtra("invitation");
+		}
+
 		Log.v(LOG_TAG, String.format("challenge description: %s", challenge.getName() ));
 		
 		tvCharityNameValue = (TextView) findViewById(R.id.tvCharityNameValue);
