@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,6 @@ import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseImageView;
-import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 public class NewPictureFragment extends Fragment {
@@ -48,9 +48,9 @@ public class NewPictureFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
 			Bundle SavedInstanceState) {
 		
-//		Bundle arguments = getArguments();
-//		
-//		ppo = (ParseProxyObject)arguments.getSerializable("invitation");
+		Bundle arguments = getArguments();
+		
+		ppo = (ParseProxyObject)arguments.getSerializable("challenge");
 		
 		View v = inflater.inflate(R.layout.fragment_new_picture, parent, false);
 
@@ -91,7 +91,9 @@ public class NewPictureFragment extends Fragment {
 					@Override
 					public void done(ParseException e) {
 						if (e == null) {
-							getActivity().setResult(Activity.RESULT_OK);
+							Intent data = new Intent();
+							data.putExtra("parseObject", ppo);
+							getActivity().setResult(Activity.RESULT_OK, data);
 							getActivity().finish();
 						} else {
 							Toast.makeText(

@@ -75,15 +75,18 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
 	        		// if only one invitation is available, directly open that invitation
 	        		if( numInvitations == 1){
 	        			
-	        			intent = new Intent(  getActivity(), InvitationDetails.class);
-	        			int id = activity.getInvitations().get(0).getInt("challengeId");
-	        			intent.putExtra("challengeId", id);
+	        			intent = new Intent(getActivity(), InvitationDetails.class);
+	        			Invitation invitation = (Invitation)activity.getInvitations().get(0);
+	        			intent.putExtra("invitation", invitation);
+//	        			int id = activity.getInvitations().get(0).getInt("challengeId");
+//	        			intent.putExtra("challengeId", id);
 	        		
 	        		}else if( numInvitations > 1 ){
 	        			
 	            		// if more that invitations are available, show all invitations, 
 	        			// so that user can pick one
 	        			intent = new Intent( getActivity(), AllInvitationsActivity.class);
+	        			
 	        		}
 	                startActivity(intent);
         		}

@@ -3,10 +3,16 @@ package org.codepath.team10.charitychallenger.adapters;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.activities.AllInvitationsActivity;
+import org.codepath.team10.charitychallenger.activities.InvitationDetails;
 import org.codepath.team10.charitychallenger.activities.NewPictureActivity;
 import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 import org.codepath.team10.charitychallenger.models.Invitation;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -20,9 +26,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
+import com.parse.SendCallback;
 ;
 
 public class ReceivedInvitationAdapter extends ArrayAdapter<Invitation> {
@@ -66,7 +77,8 @@ public class ReceivedInvitationAdapter extends ArrayAdapter<Invitation> {
 			        	if(records.size()>0){
 			        		ParseProxyObject ppo = new ParseProxyObject(records.get(0));
 			        		intent.putExtra("challenge", ppo);
-			        		getContext().startActivity(intent);
+			        		//getContext().startActivity(intent);
+			        		((AllInvitationsActivity)getContext()).startPictureActivity(intent);
 			        	} else {
 			        		Log.d("Error:", "no challenge found for challangeId - " + getItem(position).getInt("challengeId"));
 			        	}

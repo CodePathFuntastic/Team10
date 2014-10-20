@@ -35,8 +35,8 @@ public class NewPictureActivity extends BaseActivity {
 
 		Intent intent = getIntent();
 
-		if(intent.hasExtra("parseObject")){
-			ppo = (ParseProxyObject) intent.getSerializableExtra("parseObject");
+		if(intent.hasExtra("challenge")){
+			ppo = (ParseProxyObject) intent.getSerializableExtra("challenge");
 			//tvChallengeDescription.setText(ppo.getString("name"));
 			//tvChallegeTitle.setText(ppo.getString("name"));
 		}
@@ -46,13 +46,14 @@ public class NewPictureActivity extends BaseActivity {
 
 		if (fragment == null) {
 			fragment = new NewPictureFragment();
+			
+		    Bundle bundle = new Bundle();
+		    bundle.putSerializable("challenge", ppo);
+		    fragment.setArguments(bundle);
+
 			manager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment)
-					.commit();
-//		    Bundle bundle = new Bundle();
-//		    bundle.putSerializable("invitation", ppo);
-//		    fragment.setArguments(bundle);
-		}
+					.commit();		}
 	}
 	
 	public Picture getCurrentPicture() {
