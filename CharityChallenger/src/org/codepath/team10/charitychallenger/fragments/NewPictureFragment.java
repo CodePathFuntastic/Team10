@@ -3,6 +3,8 @@ package org.codepath.team10.charitychallenger.fragments;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.activities.NewPictureActivity;
 import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
+import org.codepath.team10.charitychallenger.models.Challenge;
+import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.Picture;
 
 import android.app.Activity;
@@ -37,7 +39,8 @@ public class NewPictureFragment extends Fragment {
 	private TextView pictureName;
 	private Spinner pictureRating;
 	private ParseImageView picturePreview;
-	private ParseProxyObject ppo;
+	private Challenge challenge;
+	private Invitation invitation;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -50,9 +53,9 @@ public class NewPictureFragment extends Fragment {
 		
 		Bundle arguments = getArguments();
 		
-		ppo = (ParseProxyObject)arguments.getSerializable("challenge");
+		challenge = (Challenge)arguments.get("challenge");
+		invitation = (Invitation)arguments.get("invitation");
 
-		
 		View v = inflater.inflate(R.layout.fragment_new_picture, parent, false);
 
 		pictureName = ((EditText) v.findViewById(R.id.picture_name));
@@ -95,7 +98,8 @@ public class NewPictureFragment extends Fragment {
 					public void done(ParseException e) {
 						if (e == null) {
 							Intent data = new Intent();
-							data.putExtra("parseObject", ppo);
+							data.putExtra("invitation", invitation);
+							data.putExtra("challenge", challenge);
 							getActivity().setResult(Activity.RESULT_OK, data);
 							getActivity().finish();
 						} else {

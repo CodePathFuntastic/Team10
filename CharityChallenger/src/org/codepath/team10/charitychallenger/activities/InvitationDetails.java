@@ -3,6 +3,8 @@ package org.codepath.team10.charitychallenger.activities;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
+import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,6 +39,7 @@ public class InvitationDetails extends BaseActivity {
 	private TextView mTvDesc;
 //    private ParseProxyObject ppo;
 	private Invitation mInvitation;
+	private Challenge mChallenge;
 	private ImageView mIvCharity;
 	
 	public static final String MAIN_CHANNEL = "MAIN_CHANNEL";
@@ -54,6 +57,10 @@ public class InvitationDetails extends BaseActivity {
 		if(intent.hasExtra("invitation")){
 			mInvitation = (Invitation) intent.getParcelableExtra("invitation");
 			challengeId = mInvitation.getInt("challengeId");
+		}
+		
+		if(intent.hasExtra("challenge")){
+			mChallenge = (Challenge) intent.getParcelableExtra("challenge");
 		}
 		
 		mTvChallengeName = (TextView) findViewById(R.id.tvCharityChallengeName);
@@ -87,7 +94,8 @@ public class InvitationDetails extends BaseActivity {
 		
 	public void onClickAccept(View v) {
 		 Intent intent = new Intent(this, NewPictureActivity.class);
-         intent.putExtra("parseObject", mInvitation);
+         intent.putExtra("invitation", mInvitation);
+         intent.putExtra("challenge", mChallenge);
  		 startActivityForResult(intent, 110);
 	}
 	

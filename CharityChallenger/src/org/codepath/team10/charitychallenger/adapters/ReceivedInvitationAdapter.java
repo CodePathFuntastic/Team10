@@ -74,8 +74,8 @@ public class ReceivedInvitationAdapter extends ArrayAdapter<Invitation> {
 											if( e == null ){
 												// it should be only one
 												if( challenges.size()>0 ){
-													Challenge c = challenges.get(0);
-													intent.putExtra("challenge", c);
+													Challenge challenge = challenges.get(0);
+													intent.putExtra("challenge", challenge);
 													intent.putExtra("invitation", invitation);
 													((AllInvitationsActivity)getContext()).startPictureActivity(intent);
 													//getContext().startActivity(intent);
