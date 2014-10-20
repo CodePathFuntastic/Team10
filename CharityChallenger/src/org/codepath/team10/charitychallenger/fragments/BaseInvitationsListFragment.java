@@ -5,12 +5,17 @@ import java.util.List;
 
 import org.codepath.team10.charitychallenger.EventManager;
 import org.codepath.team10.charitychallenger.ParseData;
+import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.adapters.InvitationsAdapter;
 import org.codepath.team10.charitychallenger.models.Invitation;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
 
 public class BaseInvitationsListFragment extends Fragment{
 	
@@ -18,6 +23,8 @@ public class BaseInvitationsListFragment extends Fragment{
 	protected List<Invitation> invitations = new ArrayList<Invitation>();
 	protected ParseData parseData = ParseData.getInstance();
 	protected EventManager eventManager = EventManager.getInstance();
+	
+	protected ListView lvInvitations;
 	
 	public BaseInvitationsListFragment(){
 	}
@@ -30,9 +37,17 @@ public class BaseInvitationsListFragment extends Fragment{
 	}
 	
 	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
+	public View onCreateView(LayoutInflater inflater,
+			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		super.onCreateView(inflater, container, savedInstanceState);
+		
+		View view = inflater.inflate( R.layout.fragment_all_invitations, container, false);
+		lvInvitations = (ListView) view.findViewById(R.id.lvFragAllInvitations);
+		lvInvitations.setAdapter(invitationsAdapter);
+				
+		return view;
 	}
+	
 	
 	public void addInvitation(Invitation invitation){
 		if( invitation != null ){
