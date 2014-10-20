@@ -3,7 +3,6 @@ package org.codepath.team10.charitychallenger.adapters;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
-import org.codepath.team10.charitychallenger.activities.AllInvitationsActivity;
 import org.codepath.team10.charitychallenger.activities.InvitationDetails;
 import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
@@ -79,8 +78,7 @@ public class ReceivedInvitationAdapter extends ArrayAdapter<Invitation> {
 													Challenge challenge = challenges.get(0);
 													intent.putExtra("challenge", challenge);
 													intent.putExtra("invitation", invitation);
-													((AllInvitationsActivity)getContext()).startPictureActivity(intent);
-													//getContext().startActivity(intent);
+													getContext().startActivity(intent);
 												}
 											}
 										}

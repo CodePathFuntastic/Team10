@@ -39,7 +39,7 @@ public class AllInvitationsActivity extends BaseActivity {
 	private ListView mLvAllInvitations;
 	private ReceivedInvitationAdapter mItemsAdapter;
 	//private List<Invitation> mInvitations;
-    private ParseProxyObject ppo;
+   // private ParseProxyObject ppo;
 	//public static final String MAIN_CHANNEL = "MAIN_CHANNEL";
 	
 	@Override
@@ -93,6 +93,10 @@ public class AllInvitationsActivity extends BaseActivity {
 		getMenuInflater().inflate(R.menu.new_picture, menu);
 		return true;
 	}
+	
+	public void launchInvitationDetails(){
+		
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -104,6 +108,7 @@ public class AllInvitationsActivity extends BaseActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	/*
 	public void startPictureActivity(Intent intent) {
 		 startActivityForResult(intent, 110);	
 	}
@@ -174,5 +179,6 @@ public class AllInvitationsActivity extends BaseActivity {
 			});	
 		}
 	}
+	*/
 
 }
