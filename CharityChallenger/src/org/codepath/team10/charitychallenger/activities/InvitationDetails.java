@@ -40,7 +40,7 @@ public class InvitationDetails extends BaseActivity {
 //    private ParseProxyObject ppo;
 	
 	private Invitation mInvitation;
-	private Challenge challenge;
+	private Challenge mChallenge;
 	private ImageView mIvCharity;
 	
 	public static final String MAIN_CHANNEL = "MAIN_CHANNEL";
@@ -60,7 +60,11 @@ public class InvitationDetails extends BaseActivity {
 			challengeId = mInvitation.getInt("challengeId");
 		}
 		if( intent.hasExtra("challenge") ){
-			challenge = (Challenge) intent.getParcelableExtra("challenge");
+			mChallenge = (Challenge) intent.getParcelableExtra("challenge");
+		}
+		
+		if(intent.hasExtra("challenge")){
+			mChallenge = (Challenge) intent.getParcelableExtra("challenge");
 		}
 		
 		mTvChallengeName = (TextView) findViewById(R.id.tvCharityChallengeName);
@@ -95,14 +99,14 @@ public class InvitationDetails extends BaseActivity {
 	public void onClickAccept(View v) {
 		 Intent intent = new Intent(this, NewPictureActivity.class);
          intent.putExtra("invitation", mInvitation);
-         intent.putExtra("challenge", challenge);
+         intent.putExtra("challenge", mChallenge);
  		 startActivityForResult(intent, 110);
 	}
 	
 	public void onDonate(View view){
 		Intent intent = new Intent(this, DonateActivity.class);
 		intent.putExtra("invitation", mInvitation);
-		intent.putExtra("challenge", challenge);
+		intent.putExtra("challenge", mChallenge);
 		startActivityForResult(intent, 120);
 	}
 	
@@ -112,13 +116,16 @@ public class InvitationDetails extends BaseActivity {
 			Log.i(LOG_TAG, "Get back from the activity");
 			// set the ppo and store in the database.
 			// update the invitation table
-			ParseProxyObject incomingPPo = (ParseProxyObject)data.getSerializableExtra("parseObject");
-			final int challengeId = incomingPPo.getInt("challenge_Id");
+			Challenge challenge = (Challenge)data.getParcelableExtra("challenge");
+			Invitation invitation = (Invitation)data.getParcelableExtra("invitation");
+			final String newPhotoUrl = (String) data.getStringExtra("newPhotoUrl");
+//			ParseProxyObject incomingPPo = (ParseProxyObject)data.getSerializableExtra("parseObject");
+//			final int challengeId = incomingPPo.getInt("challenge_Id");
 			// get the ParseFile URL
-			ParseFile newPhoto = (ParseFile)data.getSerializableExtra("photo");
-			final String newPhotoUrl = newPhoto.getUrl();
+			//ParseFile newPhoto = (ParseFile)data.getSerializableExtra("photo");
+			//final String newPhotoUrl = newPhoto.getUrl();
 			ParseQuery<ParseObject> queryChallenge = ParseQuery.getQuery("Invitation");
-			queryChallenge.whereEqualTo("challengeId", challengeId);
+			//queryChallenge.whereEqualTo("challengeId", challengeId);
 			queryChallenge.getFirstInBackground(new GetCallback<ParseObject>() {
 				public void done(ParseObject parseObject, ParseException ParseError) {
 					Log.d("Log","inside done :"+parseObject.getInt("challengeId"));

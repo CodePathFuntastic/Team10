@@ -50,7 +50,8 @@ public class NewPictureActivity extends BaseActivity {
 			fragment = new NewPictureFragment();
 			
 		    Bundle bundle = new Bundle();
-		    //bundle.putSerializable("challenge", ppo);
+		    bundle.putParcelable("challenge", challenge);
+		    bundle.putParcelable("invitation", invitation);
 		    fragment.setArguments(bundle);
 
 			manager.beginTransaction()
