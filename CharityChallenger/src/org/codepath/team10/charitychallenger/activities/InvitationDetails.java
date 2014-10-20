@@ -5,6 +5,9 @@ import java.util.List;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.helper.ParseProxyObject;
 import org.codepath.team10.charitychallenger.models.Invitation;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,9 +21,14 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
+import com.parse.SendCallback;
 
 public class InvitationDetails extends BaseActivity {
 	//private ParseObject mChallenge;
@@ -31,6 +39,8 @@ public class InvitationDetails extends BaseActivity {
 //    private ParseProxyObject ppo;
 	private Invitation mInvitation;
 	private ImageView mIvCharity;
+	
+	public static final String MAIN_CHANNEL = "MAIN_CHANNEL";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +104,65 @@ public class InvitationDetails extends BaseActivity {
 		if (resultCode == Activity.RESULT_OK && requestCode == 110) {
 			Log.i("InviationDetail", "Get back from the activity");
 			// set the ppo and store in the database.
+			// update the invitation table
+			ParseProxyObject incomingPPo = (ParseProxyObject)data.getSerializableExtra("parseObject");
+			final int challengeId = incomingPPo.getInt("challenge_Id");
+			// get the ParseFile URL
+			ParseFile newPhoto = (ParseFile)data.getSerializableExtra("photo");
+			final String newPhotoUrl = newPhoto.getUrl();
+			ParseQuery<ParseObject> queryChallenge = ParseQuery.getQuery("Invitation");
+			queryChallenge.whereEqualTo("challengeId", challengeId);
+			queryChallenge.getFirstInBackground(new GetCallback<ParseObject>() {
+				public void done(ParseObject parseObject, ParseException ParseError) {
+					Log.d("Log","inside done :"+parseObject.getInt("challengeId"));
+					if(ParseError == null){
+						JSONArray photos = parseObject.getJSONArray("photos");
+						JSONArray newPhotos;
+						if (photos == null) {
+							photos = new JSONArray();
+						} 
+						photos.put(newPhotoUrl);
+						final String sender = parseObject.getString("sender");
+						parseObject.saveInBackground(new SaveCallback() {
+							public void done(ParseException e) {
+								if (e == null) {
+									Log.d("Log","EXCELENT");   
+									// fire the push message
+									ParsePush push = new ParsePush();
+									push.setMessage(sender + " has accepted your Challenge");
+									JSONObject data = new JSONObject();
+									try {
+										data.put("sender", sender);
+									} catch (JSONException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+									push.setData(data);
+									push.setChannel(MAIN_CHANNEL);
+									push.sendInBackground( new SendCallback(){
+							
+										@Override
+										public void done(ParseException paramParseException) {
+											if(paramParseException != null){
+												Log.e("org.codepath.team10.charitychallenger", "Push Exception", paramParseException);
+											}else{
+												Log.d("org.codepath.team10.charitychallenger", "Push Done");
+											}
+											
+										}});
+								} else {
+
+									Log.d("Log","Failed boss: "+e);
+									System.out.println(e.getCause());
+									System.out.println("VERY BAD");     
+								}
+							}
+						});
+					}else{
+						Log.d("Log", "Bombed error is :"+ParseError);
+					}
+				}
+			});	
 		}
 	}
 	
