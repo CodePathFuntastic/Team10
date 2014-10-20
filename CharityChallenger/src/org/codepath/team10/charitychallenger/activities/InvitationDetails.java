@@ -29,7 +29,7 @@ public class InvitationDetails extends BaseActivity {
 	private TextView mTvRaised;
 	private TextView mTvDesc;
 //    private ParseProxyObject ppo;
-	private Invitation ppo;
+	private Invitation mInvitation;
 	private ImageView mIvCharity;
 	
 	@Override
@@ -43,8 +43,8 @@ public class InvitationDetails extends BaseActivity {
 		Intent intent = getIntent();
 
 		if(intent.hasExtra("invitation")){
-			ppo = (Invitation) intent.getSerializableExtra("invitation");
-			challengeId = ppo.getInt("challengeId");
+			mInvitation = (Invitation) intent.getParcelableExtra("invitation");
+			challengeId = mInvitation.getInt("challengeId");
 		}
 //		if(intent.hasExtra("parseObject")){
 //			ppo = (ParseProxyObject) intent.getSerializableExtra("parseObject");
@@ -80,7 +80,7 @@ public class InvitationDetails extends BaseActivity {
 		
 	public void onClickAccept(View v) {
 		 Intent intent = new Intent(this, NewPictureActivity.class);
-         intent.putExtra("parseObject", ppo);
+         intent.putExtra("parseObject", mInvitation);
  		 startActivityForResult(intent, 110);
 	}
 	
