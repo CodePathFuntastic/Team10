@@ -13,4 +13,9 @@ public class ChallengeQueries {
 		query.whereEqualTo("challenge_id", challengeId);
 		query.findInBackground(callback);
 	}
+	
+	public static void getAllChallenges(FindCallback<Challenge> callback ){
+		ParseQuery<Challenge> query = ParseQuery.getQuery(Challenge.class);
+		query.findInBackground(callback);
+	}
 }
