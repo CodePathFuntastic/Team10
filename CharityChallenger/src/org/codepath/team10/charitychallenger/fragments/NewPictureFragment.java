@@ -2,6 +2,7 @@ package org.codepath.team10.charitychallenger.fragments;
 
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.activities.DonateActivity;
 import org.codepath.team10.charitychallenger.activities.FunActivity;
 import org.codepath.team10.charitychallenger.activities.NewPictureActivity;
 import org.codepath.team10.charitychallenger.models.Challenge;
@@ -15,6 +16,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +43,7 @@ public class NewPictureFragment extends Fragment {
 	private ImageButton photoButton;
 	private Button saveButton;
 	private Button cancelButton;
+	private Button donateButton;
 	private TextView pictureName;
 	private Spinner pictureRating;
 	private ParseImageView picturePreview;
@@ -52,12 +55,12 @@ public class NewPictureFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
 			Bundle SavedInstanceState) {
-		
 		Bundle arguments = getArguments();
 		
 		challenge = (Challenge)arguments.get("challenge");
@@ -89,12 +92,30 @@ public class NewPictureFragment extends Fragment {
 			}
 		});
 
+		donateButton = ((Button) v.findViewById(R.id.donate_button));
+		donateButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view){
+				Intent intent = new Intent(getActivity(), DonateActivity.class);
+				intent.putExtra("invitation", invitation);
+				intent.putExtra("challenge", challenge);
+				startActivityForResult(intent, 120);
+			}
+		});
+		
 		saveButton = ((Button) v.findViewById(R.id.save_button));
 		saveButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-
+				
+				// TODO: create a listener
+				final Picture picture = ((NewPictureActivity) getActivity()).getCurrentPicture();
+				if(picture==null || picture.getPhotoFile() == null){
+					Log.e("Error: ", "Please take the picture first");
+					return;
+				}
+				
 				picture.setTitle(pictureName.getText().toString());
 				picture.saveInBackground(new SaveCallback() {
 					@Override
@@ -259,5 +280,4 @@ public class NewPictureFragment extends Fragment {
 			});
 		}
 	}
-
 }
