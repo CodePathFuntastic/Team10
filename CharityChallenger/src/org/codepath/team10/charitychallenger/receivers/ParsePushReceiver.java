@@ -13,6 +13,9 @@ import org.codepath.team10.charitychallenger.models.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -49,6 +52,7 @@ public class ParsePushReceiver extends BroadcastReceiver implements UserSynchedL
 					}
 					if( channel.equals(CharityChallengerApplication.INVITATION_COMPLETE) ){
 						String data = intent.getExtras().getString("com.parse.Data");
+						completedInvitationsFromPush(data);
 						Toast.makeText(context, "InvitComplete : "+ data, Toast.LENGTH_SHORT).show();
 					}
 					if( channel.equals(CharityChallengerApplication.INVITATION_RECEIVE) ){
@@ -72,6 +76,7 @@ public class ParsePushReceiver extends BroadcastReceiver implements UserSynchedL
 			Toast.makeText(context, "Push Received without intent", Toast.LENGTH_SHORT).show();
 		}
 	}
+
 
 	public void registerInvitationCompleteListener(InvitationCompletedListener listener){
 		if( listener != null){
@@ -131,6 +136,31 @@ public class ParsePushReceiver extends BroadcastReceiver implements UserSynchedL
 		
 	}
 
+	public void completedInvitationsFromPush(String data) {
+		
+		try {
+			JSONObject jsondata = new JSONObject(data);
+			String str =jsondata.getString("alert");
+			JSONObject json = new JSONObject(str);
+			
+			String objectId = json.getString("invitation_obj_id");
+			Invitation invitation = Invitation.createWithoutData(Invitation.class, objectId);
+			
+			invitation.fetchInBackground(new GetCallback<Invitation>() {
+
+				@Override
+				public void done(Invitation invitation,
+						ParseException e) {
+					if(e == null ){
+						processCompletedInvitations(invitation);
+					}
+				}
+			});
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private void processReceivedInvitations( Invitation invitation){
 		for( InvitationReceivedListener l : invitationReceivedListeners ){
 			l.onReceive(invitation);

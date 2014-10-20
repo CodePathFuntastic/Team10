@@ -9,6 +9,7 @@ import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
 import org.codepath.team10.charitychallenger.models.Picture;
+import org.codepath.team10.charitychallenger.utils.InvitationMessageUtils;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -226,7 +227,9 @@ public class NewPictureFragment extends Fragment {
 		// send push notification
 		ParsePush push = new ParsePush();
 		
-		push.setMessage("");
+		String msg = InvitationMessageUtils.generateInvitationCompleteMsg(invitation, challenge);
+		push.setMessage(msg);
+		
 		push.setChannel(CharityChallengerApplication.INVITATION_COMPLETE);
 		push.sendInBackground( new SendCallback(){
 

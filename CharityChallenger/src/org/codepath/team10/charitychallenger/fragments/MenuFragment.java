@@ -6,6 +6,7 @@ import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.activities.AllInvitationsActivity;
 import org.codepath.team10.charitychallenger.activities.BaseActivity;
 import org.codepath.team10.charitychallenger.activities.InvitationDetails;
+import org.codepath.team10.charitychallenger.listeners.InvitationCompletedListener;
 import org.codepath.team10.charitychallenger.listeners.InvitationReceivedListener;
 import org.codepath.team10.charitychallenger.listeners.UserSynchedListener;
 import org.codepath.team10.charitychallenger.models.Invitation;
@@ -30,7 +31,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
-public class MenuFragment extends Fragment implements UserSynchedListener, InvitationReceivedListener {
+public class MenuFragment extends Fragment implements UserSynchedListener, InvitationReceivedListener, InvitationCompletedListener {
 	
 	BaseActivity activity;
 	TextView mTvNotificationsBadge;
@@ -169,6 +170,11 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
 
 	@Override
 	public void onReceive(Invitation invitation) {
+		updateInvitationBadge(invitation);
+	}
+
+	@Override
+	public void onComplete(Invitation invitation) {
 		updateInvitationBadge(invitation);
 	}
 

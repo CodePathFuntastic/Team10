@@ -48,6 +48,7 @@ public class BaseActivity extends FragmentActivity {
 		pushReceiver = new ParsePushReceiver();
 		
 		pushReceiver.registerInvitationReceivedListener(menufragment);
+		pushReceiver.registerInvitationCompleteListener(menufragment);
 		pushReceiver.setUser( application.getUser());
 		
 		registerReceiver(pushReceiver, new IntentFilter("com.parse.push.intent.RECEIVE"));
@@ -62,6 +63,7 @@ public class BaseActivity extends FragmentActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 		pushReceiver.unregisterInvitationReceivedListener(menufragment);
+		pushReceiver.unregisterInvitationCompleteListener(menufragment);
 		unregisterReceiver(pushReceiver);
 	}
 	

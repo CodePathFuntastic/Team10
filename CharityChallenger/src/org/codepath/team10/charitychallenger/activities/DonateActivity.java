@@ -37,6 +37,12 @@ public class DonateActivity extends BaseActivity {
 		
 		setContentView(R.layout.activity_donate_money);
 		
+		tvCharityNameValue = (TextView) findViewById(R.id.tvCharityNameValue);
+		tvAddressValue = (TextView) findViewById(R.id.tvAddressValue);
+		tvCauseValue = (TextView) findViewById(R.id.tvCauseValue);
+		tvCharityUrlValue = (TextView) findViewById(R.id.tvCharityUrlValue);
+		etDonateAmountValue = (EditText) findViewById(R.id.etDonateAmountValue);
+		
 		
 		Intent intent = getIntent();
 		if( intent.hasExtra("challenge" )){
@@ -44,17 +50,11 @@ public class DonateActivity extends BaseActivity {
 		}
 		if( intent.hasExtra("invitation")){
 			invitation = (Invitation) intent.getParcelableExtra("invitation");
+			etDonateAmountValue.setText( "" + invitation.getAmount());
 		}
 
 		Log.v(LOG_TAG, String.format("challenge description: %s", challenge.getName() ));
 		
-		tvCharityNameValue = (TextView) findViewById(R.id.tvCharityNameValue);
-		tvAddressValue = (TextView) findViewById(R.id.tvAddressValue);
-		tvCauseValue = (TextView) findViewById(R.id.tvCauseValue);
-		tvCharityUrlValue = (TextView) findViewById(R.id.tvCharityUrlValue);
-		etDonateAmountValue = (EditText) findViewById(R.id.etDonateAmountValue);
-		
-		etDonateAmountValue.setText( "" + invitation.getAmount());
 
 		int orgId = challenge.getOrganization();
 		
@@ -84,7 +84,9 @@ public class DonateActivity extends BaseActivity {
 		 
 		Intent intent = new Intent(this, PaymentConfirmationActivity.class);
 		intent.putExtra("challenge", challenge);
-		intent.putExtra("invitation", invitation);
+		if( invitation != null ){
+			intent.putExtra("invitation", invitation);
+		}
 		 
 		String amount = etDonateAmountValue.getText().toString();
 		intent.putExtra("amount", amount);
