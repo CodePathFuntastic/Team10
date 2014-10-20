@@ -3,6 +3,7 @@ package org.codepath.team10.charitychallenger.activities;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 
 import android.app.Activity;
@@ -22,13 +23,15 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 public class InvitationDetails extends BaseActivity {
-	//private ParseObject mChallenge;
+	
 	private TextView mTvChallengeName;
 	private TextView mTvTarget;
 	private TextView mTvRaised;
 	private TextView mTvDesc;
 //    private ParseProxyObject ppo;
+	
 	private Invitation mInvitation;
+	private Challenge challenge;
 	private ImageView mIvCharity;
 	
 	@Override
@@ -44,6 +47,9 @@ public class InvitationDetails extends BaseActivity {
 		if(intent.hasExtra("invitation")){
 			mInvitation = (Invitation) intent.getParcelableExtra("invitation");
 			challengeId = mInvitation.getInt("challengeId");
+		}
+		if( intent.hasExtra("challenge") ){
+			challenge = (Challenge) intent.getParcelableExtra("challenge");
 		}
 		
 		mTvChallengeName = (TextView) findViewById(R.id.tvCharityChallengeName);
@@ -77,19 +83,22 @@ public class InvitationDetails extends BaseActivity {
 		
 	public void onClickAccept(View v) {
 		 Intent intent = new Intent(this, NewPictureActivity.class);
-         intent.putExtra("parseObject", mInvitation);
+         intent.putExtra("invitation", mInvitation);
+         intent.putExtra("challenge", challenge);
  		 startActivityForResult(intent, 110);
 	}
 	
 	public void onDonate(View view){
 		Intent intent = new Intent(this, DonateActivity.class);
+		intent.putExtra("invitation", mInvitation);
+		intent.putExtra("challenge", challenge);
 		startActivityForResult(intent, 120);
 	}
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK && requestCode == 110) {
-			Log.i("InviationDetail", "Get back from the activity");
+			Log.i(LOG_TAG, "Get back from the activity");
 			// set the ppo and store in the database.
 		}
 	}
