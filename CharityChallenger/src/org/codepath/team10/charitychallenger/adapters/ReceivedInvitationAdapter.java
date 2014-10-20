@@ -10,6 +10,7 @@ import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.User;
 import org.codepath.team10.charitychallenger.queries.ChallengeQueries;
 import org.codepath.team10.charitychallenger.queries.UserQuery;
+import org.codepath.team10.charitychallenger.utils.FancyTimeUtil;
 
 import android.content.Context;
 import android.content.Intent;
@@ -104,6 +105,8 @@ public class ReceivedInvitationAdapter extends ArrayAdapter<Invitation> {
 		    }
 		});
 		
+		String relativeCreationTime = FancyTimeUtil.getRelativeTimeAgo(invitation.getCreatedAt().toString());
+		viewHolder.tvFriendLocation.setText(relativeCreationTime + " ago");
 		updateVew(viewHolder, invitation);
 		
 		return convertView;
@@ -126,7 +129,6 @@ public class ReceivedInvitationAdapter extends ArrayAdapter<Invitation> {
 								ImageLoader.getInstance().displayImage(user.getImageUrl(), viewHolder.ivFriend);
 							}
 							viewHolder.tvFriendName.setText(user.getName());
-							viewHolder.tvFriendLocation.setText(user.getLocation());
 						}
 					}
 				}
