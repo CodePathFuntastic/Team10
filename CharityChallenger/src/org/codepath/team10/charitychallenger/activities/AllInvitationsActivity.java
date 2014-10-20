@@ -52,6 +52,8 @@ public class AllInvitationsActivity extends BaseActivity {
 			}
 		});
 		
+		// if the invitations are 0, fire a parse query to load invitations.
+		// then add a callback which notifies the adapter.
 		if( getInvitations().size() == 0 ){
 			InvitationQuery.getInvitations( getUser().getFacebookId(), 
 											InvitationStatusEnum.OPEN, 
