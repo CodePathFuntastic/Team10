@@ -26,11 +26,11 @@ public class ReceivedInvitationsFragment extends BaseInvitationsListFragment {
 		populateReceivedInvitations();
 	}
 	
-	@Override
-	public View onCreateView(LayoutInflater inflater,
-			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		return super.onCreateView(inflater, container, savedInstanceState);
-	}
+//	@Override
+//	public View onCreateView(LayoutInflater inflater,
+//			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//		return super.onCreateView(inflater, container, savedInstanceState);
+//	}
 
 	private void populateReceivedInvitations() {
 		if( parseData.getReceivedInvitations().size() == 0 ){

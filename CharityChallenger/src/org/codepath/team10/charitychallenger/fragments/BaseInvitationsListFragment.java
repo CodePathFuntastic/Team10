@@ -65,8 +65,6 @@ public class BaseInvitationsListFragment extends Fragment{
 	public void addAllInvitations( List<Invitation> invites ){
 		
 		if( invites != null){
-			
-			
 			for( Invitation invite : invites ){
 				if( !invitations.contains(invite) ){
 					invitations.add( invite);
