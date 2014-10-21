@@ -105,7 +105,7 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
 	            		// if more that invitations are available, show all invitations, 
 	        			// so that user can pick one
 	        			//intent = new Intent( getActivity(), AllInvitationsFragmentActivity.class);
-	        			intent = new Intent( getActivity(), AllInvitationsActivity.class);
+	        			Intent intent = new Intent( getActivity(), AllInvitationsActivity.class);
 	        			//intent = new Intent( getActivity(), AllInvitationsFragmentActivity.class);	
 	        			startActivity(intent);
 	        		}
