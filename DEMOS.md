@@ -13,6 +13,7 @@ These include,
 5. Using parse for sending push notifications
 6. Implementing a event system that distribute events various activities, fragments etc
 
+![Alt Text](https://github.com/CodePathFuntastic/Team10/blob/master/wireframe/sprint2demo.gif "Demo for Sprint 2" )
 ![Alt Text](https://raw.githubusercontent.com/CodePathFuntastic/Team10/master/demos/charity1.gif "Demo for Milestone 2" )
 
 This that needs to be fixed,
