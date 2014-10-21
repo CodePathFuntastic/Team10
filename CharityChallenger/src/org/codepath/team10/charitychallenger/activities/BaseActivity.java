@@ -5,6 +5,7 @@ import java.util.List;
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.EventManager;
 import org.codepath.team10.charitychallenger.ParseData;
+import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.fragments.MenuFragment;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.User;
@@ -13,10 +14,12 @@ import org.codepath.team10.charitychallenger.receivers.ParsePushReceiver;
 import android.app.Application;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 
 public class BaseActivity extends FragmentActivity {
 	
@@ -75,6 +78,11 @@ public class BaseActivity extends FragmentActivity {
 	public List<Invitation> getInvitations(){
 		return application.getAllInvitations();
 	}
+	
+	public List<Invitation> getAcceptedInvitations(){
+		return application.getAllAcceptedInvitations();
+	}
+	
 	public User getUser(){
 		return parseData.getUser();
 	}
@@ -82,4 +90,24 @@ public class BaseActivity extends FragmentActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		return true;
 	}
+	
+	 @Override
+		public boolean onOptionsItemSelected(MenuItem item) {
+			switch (item.getItemId()) {
+		    case R.id.action_sent_challenges:
+		    	startAllAcceptedActivity();	
+		      break;
+		      
+		    default:
+		    	return super.onOptionsItemSelected(item);
+		    }
+
+		    return true;
+		}
+
+	private void startAllAcceptedActivity() {
+		Intent intent = new Intent(this, AllAcceptedActivity.class);
+		startActivity(intent);
+	}
+	 
 }

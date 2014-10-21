@@ -51,6 +51,8 @@ public class CharityChallengerApplication extends Application {
 	/* BEGIN : ALL this DATA should be saved in ParseData Singleton Object */
 	private List<UserSynchedListener> userSyncedListeners = new ArrayList<UserSynchedListener>();
 	private List<Invitation> invitations = new ArrayList<Invitation>();
+	
+	private List<Invitation> acceptedInvitations = new ArrayList<Invitation>();
 	//private User user;
 	private Collection<GraphUser> selectedUsers=null;
 	/* END : ALL this DATA should be saved in ParseData Singleton Object */
@@ -108,6 +110,11 @@ public class CharityChallengerApplication extends Application {
     public List<Invitation> getAllInvitations(){
     	return invitations;
     }
+    
+    public List<Invitation> getAllAcceptedInvitations(){
+    	return acceptedInvitations;
+    }   
+    
     public void addInvitation( Invitation i){
     	invitations.add(i);
     }

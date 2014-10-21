@@ -6,7 +6,14 @@
         android:actionLayout="@layout/actionbar_badge_layout"
         android:icon="@drawable/ic_action_received_challenges"
         android:showAsAction="always"
+        android:orderInCategory="90"
         android:title="@string/title_action_received_challenges"/>
+    <item
+        android:id="@+id/action_sent_challenges"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/title_action_accepted_challenges"
+        android:icon="@drawable/ic_action_accepted_challenges"/>
             
 	<item
         android:id="@+id/action_settings"
