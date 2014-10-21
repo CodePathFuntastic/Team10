@@ -14,6 +14,7 @@ import org.codepath.team10.charitychallenger.receivers.ParsePushReceiver;
 import android.app.Application;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -90,7 +91,7 @@ public class BaseActivity extends FragmentActivity {
 		public boolean onOptionsItemSelected(MenuItem item) {
 			switch (item.getItemId()) {
 		    case R.id.action_sent_challenges:
-		    	startYourActivity();	
+		    	startAllAcceptedActivity();	
 		      break;
 		      
 		    default:
@@ -100,7 +101,9 @@ public class BaseActivity extends FragmentActivity {
 		    return true;
 		}
 
-	private void startYourActivity() {
+	private void startAllAcceptedActivity() {
+		Intent intent = new Intent(this, AllAcceptedActivity.class);
+		startActivity(intent);
 	}
 	 
 }
