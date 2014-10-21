@@ -10,9 +10,11 @@ import org.codepath.team10.charitychallenger.activities.InvitationDetails;
 import org.codepath.team10.charitychallenger.listeners.InvitationCompletedListener;
 import org.codepath.team10.charitychallenger.listeners.InvitationReceivedListener;
 import org.codepath.team10.charitychallenger.listeners.UserSynchedListener;
+import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
 import org.codepath.team10.charitychallenger.models.User;
+import org.codepath.team10.charitychallenger.queries.ChallengeQueries;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -72,23 +74,41 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
         		int numInvitations = activity.getInvitations().size();
         		if(numInvitations > 0)
         		{
-	        		Intent intent = null;
-	        		
 	        		// if only one invitation is available, directly open that invitation
 	        		if( numInvitations == 1){
 	        			
-	        			intent = new Intent(getActivity(), InvitationDetails.class);
-	        			Invitation invitation = (Invitation)activity.getInvitations().get(0);
-	        			intent.putExtra("invitation", invitation);
-	        		
+//	        			intent = new Intent(getActivity(), InvitationDetails.class);
+//	        			Invitation invitation = (Invitation)activity.getInvitations().get(0);
+//	        			intent.putExtra("invitation", invitation);
+	        			final Intent intent = new Intent(getActivity(), InvitationDetails.class);
+	        	        Invitation invitation = (Invitation)activity.getInvitations().get(0);
+	        	        intent.putExtra("invitation", invitation);
+
+	        	        ChallengeQueries.getChallengeById( invitation.getChallengeId(), 
+	        	        		new FindCallback<Challenge>(){
+	        	        		@Override
+	        	        		public void done(
+	        	        				List<Challenge> challenges,
+	        	        				ParseException e) {
+	        	        				if( e == null ){
+	        	        					// it should be only one
+	        	        					if( challenges.size()>0 ){
+	        	        						Challenge challenge = challenges.get(0);
+	        	        						intent.putExtra("challenge", challenge);
+	        	        						getActivity().startActivity(intent);
+	        	        					}
+	        	        				}
+	        	        		}
+	        	        });
 	        		}else if( numInvitations > 1 ){
 	        			
 	            		// if more that invitations are available, show all invitations, 
 	        			// so that user can pick one
 	        			//intent = new Intent( getActivity(), AllInvitationsFragmentActivity.class);
 	        			intent = new Intent( getActivity(), AllInvitationsActivity.class);
+	        			//intent = new Intent( getActivity(), AllInvitationsFragmentActivity.class);	
+	        			startActivity(intent);
 	        		}
-	                startActivity(intent);
         		}
         	}
         });

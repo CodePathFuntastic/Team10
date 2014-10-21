@@ -13,6 +13,7 @@ import org.codepath.team10.charitychallenger.utils.FancyTimeUtil;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -56,8 +57,24 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 		}else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}	
+		
+		if(invitation.getStatus() == 1){
+			viewHolder.btnInvite.setVisibility(View.VISIBLE);
+			setListener(viewHolder.btnInvite, position);
+		} else {
+			viewHolder.btnInvite.setVisibility(View.GONE);
+			setListener(convertView, position);
+		}
+		
+		String relativeCreationTime = FancyTimeUtil.getRelativeTimeAgo(invitation.getCreatedAt().toString());
+		viewHolder.tvFriendLocation.setText(relativeCreationTime);
+		updateVew(viewHolder, invitation);
+		
+		return convertView;
+	}
 
-		viewHolder.btnInvite.setOnClickListener(new OnClickListener() {
+	private void setListener(View view, final int position){
+		view.setOnClickListener(new OnClickListener() {
 		    
 			@Override
 		    public void onClick(View v) {
@@ -86,14 +103,7 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 		    		
 		    }
 		});
-		
-		String relativeCreationTime = FancyTimeUtil.getRelativeTimeAgo(invitation.getCreatedAt().toString());
-		viewHolder.tvFriendLocation.setText(relativeCreationTime + " ago");
-		updateVew(viewHolder, invitation);
-		
-		return convertView;
 	}
-
 	private void updateVew(final ViewHolder viewHolder, Invitation invitation) {
 		UserQuery.getUserBySenderId( invitation.getSender(), 
 			new FindCallback<User>(){
@@ -110,6 +120,7 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 								viewHolder.ivFriend.setImageResource(android.R.color.transparent);
 								ImageLoader.getInstance().displayImage(user.getImageUrl(), viewHolder.ivFriend);
 							}
+							Log.d("InvitationsAdapter: name - ", user.getName());
 							viewHolder.tvFriendName.setText(user.getName());
 						}
 					}

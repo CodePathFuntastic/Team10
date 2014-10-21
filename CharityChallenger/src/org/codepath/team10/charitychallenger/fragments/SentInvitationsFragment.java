@@ -25,11 +25,11 @@ public class SentInvitationsFragment extends BaseInvitationsListFragment {
 		populateSentInvitations();
 	}
 	
-	@Override
-	public View onCreateView(LayoutInflater inflater,
-			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		return super.onCreateView(inflater, container, savedInstanceState);
-	}
+//	@Override
+//	public View onCreateView(LayoutInflater inflater,
+//			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//		return super.onCreateView(inflater, container, savedInstanceState);
+//	}
 	
 	private void populateSentInvitations() {
 		//if( parseData.getSentInvitations().size() == 0 ){

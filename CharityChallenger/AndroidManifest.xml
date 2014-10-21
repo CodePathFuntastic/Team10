@@ -178,7 +178,7 @@
         </receiver>
 
         <activity
-            android:name="org.codepath.team10.charitychallenger.activities.AllInvitationsFragmentActivity"
+            android:name=".activities.AllInvitationsFragmentActivity"
             android:label="@string/title_activity_all_invitations_fragment" >
         </activity>
     </application>
