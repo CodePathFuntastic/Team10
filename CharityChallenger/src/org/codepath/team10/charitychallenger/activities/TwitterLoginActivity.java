@@ -54,7 +54,6 @@ public class TwitterLoginActivity extends OAuthLoginActivity<TwitterRestClient> 
 			
 			@Override
 			public void onFailure(Throwable arg0, JSONObject arg1) {
-				// TODO Auto-generated method stub
 				super.onFailure(arg0, arg1);
 			}
 			
