@@ -42,7 +42,9 @@ public class AllAcceptedActivity extends BaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				
 				Intent intent = new Intent(AllAcceptedActivity.this, InvitationAcceptedActivity.class);
+				intent.putExtra("invitation", mItemsAdapter.getItem(position));
 				startActivity(intent);
 			}
 		});

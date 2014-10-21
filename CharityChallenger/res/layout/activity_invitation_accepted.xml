@@ -10,11 +10,15 @@
 
     <ImageView
         android:id="@+id/ivAcceptedPicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/icons_partnership_170" />
+        android:src="@drawable/icons_partnership_170" 
+        android:layout_height="200dp"
+        android:stretchMode="columnWidth" 
+        android:layout_margin="15dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"  />
 
     <Button
         android:id="@+id/btPictureSeen"
@@ -23,6 +27,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="69dp"
-        android:text="Done" />
+        android:text="Done" 
+        android:onClick="OnDone"/>
 
 </RelativeLayout>
