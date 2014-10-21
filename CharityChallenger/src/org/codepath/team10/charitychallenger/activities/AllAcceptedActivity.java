@@ -4,15 +4,10 @@ import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.adapters.InvitationsAcceptedAdapter;
-import org.codepath.team10.charitychallenger.adapters.InvitationsAdapter;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
 import org.codepath.team10.charitychallenger.queries.InvitationQuery;
 
-import com.parse.FindCallback;
-import com.parse.ParseException;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,8 +15,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+import com.parse.FindCallback;
+import com.parse.ParseException;
 
 public class AllAcceptedActivity extends BaseActivity {
 
@@ -33,7 +31,7 @@ public class AllAcceptedActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_all_accepted);
 		
-		mItemsAdapter = new InvitationsAcceptedAdapter(this, getInvitations());
+		mItemsAdapter = new InvitationsAcceptedAdapter(this, getAcceptedInvitations());
 		
 		mlvAllInvitationsAccepted = (ListView) findViewById(R.id.lvAllInvitationsAccepted);
 		mlvAllInvitationsAccepted.setAdapter(mItemsAdapter);
@@ -51,7 +49,7 @@ public class AllAcceptedActivity extends BaseActivity {
 		
 		// if the invitations are 0, fire a parse query to load invitations.
 		// then add a callback which notifies the adapter.
-		if( getInvitations().size() == 0 ){
+		if( getAcceptedInvitations().size() == 0 ){
 			InvitationQuery.getInvitations( getUser().getFacebookId(), 
 											InvitationStatusEnum.PIC_SENT, 
 											false, 

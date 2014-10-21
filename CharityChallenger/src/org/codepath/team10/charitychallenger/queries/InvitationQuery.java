@@ -23,6 +23,22 @@ public class InvitationQuery {
 		query.findInBackground(callback);
 	}
 	
+	public static void getAcceptedInvitations(String sender, 
+			InvitationStatusEnum status, 
+			boolean isOpened,
+			FindCallback<Invitation> callback){
+
+		ParseQuery<Invitation> query = ParseQuery.getQuery(Invitation.class);
+
+		query.whereEqualTo("sender", sender);
+		query.whereEqualTo("state", status.ordinal() );
+		query.whereEqualTo("opened_status", isOpened);
+
+		query.findInBackground(callback);
+	}
+	
+	
+	
 	public static void getSentInvitations( String sentUser, FindCallback<Invitation> callback ){
 		
 		ParseQuery<Invitation> query = ParseQuery.getQuery(Invitation.class);
