@@ -50,7 +50,7 @@ public class AllAcceptedActivity extends BaseActivity {
 		// if the invitations are 0, fire a parse query to load invitations.
 		// then add a callback which notifies the adapter.
 		if( getAcceptedInvitations().size() == 0 ){
-			InvitationQuery.getInvitations( getUser().getFacebookId(), 
+			InvitationQuery.getAcceptedInvitations(getUser().getFacebookId(), 
 											InvitationStatusEnum.PIC_SENT, 
 											false, 
 											new FindCallback<Invitation>(){
