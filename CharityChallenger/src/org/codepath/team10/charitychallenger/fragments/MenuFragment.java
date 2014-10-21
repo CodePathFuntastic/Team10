@@ -3,9 +3,11 @@ package org.codepath.team10.charitychallenger.fragments;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.activities.AllAcceptedActivity;
 import org.codepath.team10.charitychallenger.activities.AllInvitationsActivity;
 import org.codepath.team10.charitychallenger.activities.AllInvitationsFragmentActivity;
 import org.codepath.team10.charitychallenger.activities.BaseActivity;
+import org.codepath.team10.charitychallenger.activities.InvitationAcceptedActivity;
 import org.codepath.team10.charitychallenger.activities.InvitationDetails;
 import org.codepath.team10.charitychallenger.listeners.InvitationCompletedListener;
 import org.codepath.team10.charitychallenger.listeners.InvitationReceivedListener;
@@ -81,6 +83,7 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
 //	        			Invitation invitation = (Invitation)activity.getInvitations().get(0);
 //	        			intent.putExtra("invitation", invitation);
 	        			final Intent intent = new Intent(getActivity(), InvitationDetails.class);
+//	        			final Intent intent = new Intent(getActivity(), InvitationAcceptedActivity.class);
 	        	        Invitation invitation = (Invitation)activity.getInvitations().get(0);
 	        	        intent.putExtra("invitation", invitation);
 
@@ -104,8 +107,9 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
 	        			
 	            		// if more that invitations are available, show all invitations, 
 	        			// so that user can pick one
-	        			//intent = new Intent( getActivity(), AllInvitationsFragmentActivity.class);
+	        			//Intent intent = new Intent( getActivity(), AllInvitationsFragmentActivity.class);
 	        			Intent intent = new Intent( getActivity(), AllInvitationsActivity.class);
+	        			//Intent intent = new Intent( getActivity(), AllAcceptedActivity.class);
 	        			//intent = new Intent( getActivity(), AllInvitationsFragmentActivity.class);	
 	        			startActivity(intent);
 	        		}

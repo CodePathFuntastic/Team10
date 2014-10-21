@@ -75,6 +75,7 @@ public class BaseActivity extends FragmentActivity {
 	public List<Invitation> getInvitations(){
 		return application.getAllInvitations();
 	}
+	
 	public User getUser(){
 		return parseData.getUser();
 	}

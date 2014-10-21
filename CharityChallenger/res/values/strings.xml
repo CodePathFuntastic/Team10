@@ -83,5 +83,7 @@
     <string name="invite_more_friends">Browse More!!</string>
     <string name="action_home">Home</string>
     <string name="title_activity_all_invitations_fragment">AllInvitationsFragmentActivity</string>
+    <string name="title_activity_all_accepted">AllAcceptedActivity</string>
+    <string name="title_activity_invitation_accepted">InvitationAcceptedActivity</string>
 
 </resources>
