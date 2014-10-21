@@ -31,8 +31,8 @@ public class InvitationQuery {
 		ParseQuery<Invitation> query = ParseQuery.getQuery(Invitation.class);
 
 		query.whereEqualTo("sender", sender);
-		query.whereEqualTo("state", status.ordinal() );
-		query.whereEqualTo("opened_status", isOpened);
+		query.whereEqualTo("status", status.ordinal());
+		//query.whereEqualTo("opened_status", isOpened);
 
 		query.findInBackground(callback);
 	}
