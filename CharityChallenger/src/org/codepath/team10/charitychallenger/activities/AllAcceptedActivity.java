@@ -59,7 +59,7 @@ public class AllAcceptedActivity extends BaseActivity {
 													
 													if( e == null ){
 														if( invitations.size() > 0 ){
-															getInvitations().addAll(invitations);
+															getAcceptedInvitations().addAll(invitations);
 															
 															// trigger the adapter to reload
 															mItemsAdapter.notifyDataSetChanged();
