@@ -112,7 +112,6 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
         		}
         	}
         });
-        
         // fire the background task to get the list of invitations for the user.
         // this should happen only once, when the activity loads for first time.
         if( activity.getInvitations().size() == 0 &&
