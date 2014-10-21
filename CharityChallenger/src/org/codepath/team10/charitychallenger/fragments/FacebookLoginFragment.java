@@ -45,7 +45,6 @@ public class FacebookLoginFragment extends Fragment {
         		    		}
         		      }
         		    }).executeAsync();
-        		    
         	  }
           }
         });

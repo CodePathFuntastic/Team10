@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 
 public class ReceivedInvitationsFragment extends BaseInvitationsListFragment {
@@ -33,27 +34,38 @@ public class ReceivedInvitationsFragment extends BaseInvitationsListFragment {
 	}
 
 	private void populateReceivedInvitations() {
-		if( parseData.getReceivedInvitations().size() == 0 ){
+		//if( parseData.getReceivedInvitations().size() == 0 ){
 			// fire a network call to load the sent invitations for the "user"
 			String userId = parseData.getUser().getFacebookId();
 			if( userId != null){
 				
-				InvitationQuery.getReceivedInvitations(userId, new FindCallback<Invitation>(){
-
-					@Override
-					public void done(List<Invitation> invites, ParseException e) {
-						if( e == null ){
-							// save the data in the data cache
-							parseData.getReceivedInvitations().addAll(invites);
-							addAllInvitations( parseData.getReceivedInvitations());
-						}else{
-							Log.e(BaseActivity.LOG_TAG, "Unable to get received invitations", e);
-						}
+				ParseQuery<Invitation> query = ParseQuery.getQuery(Invitation.class);
+				query.whereEqualTo("receiver", userId);
+				
+				try {
+					List<Invitation> invites = query.find();
+					if( invites != null ){
+						addAllInvitations(invites);
 					}
-				});
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//query.clearCachedResult();
+//				query.findInBackground( new FindCallback<Invitation>(){
+//
+//					@Override
+//					public void done(List<Invitation> list,
+//										ParseException e) {
+//						if( e == null ){
+//							//parseData.getReceivedInvitations().addAll(list);
+//							addAllInvitations(list);
+//						}
+//					}
+//				});
 			}
-		}else{
-			addAllInvitations(parseData.getReceivedInvitations());
-		}
+//		}else{
+//			//addAllInvitations(parseData.getReceivedInvitations());
+//		}
 	}
 }

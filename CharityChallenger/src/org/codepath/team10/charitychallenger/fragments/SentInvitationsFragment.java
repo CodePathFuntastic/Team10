@@ -32,7 +32,7 @@ public class SentInvitationsFragment extends BaseInvitationsListFragment {
 	}
 	
 	private void populateSentInvitations() {
-		if( parseData.getSentInvitations().size() == 0 ){
+		//if( parseData.getSentInvitations().size() == 0 ){
 			// fire a network call to load the sent invitations for the "user"
 			String userId = parseData.getUser().getFacebookId();
 			if( userId != null ){
@@ -43,8 +43,8 @@ public class SentInvitationsFragment extends BaseInvitationsListFragment {
 					public void done(List<Invitation> list, ParseException e) {
 						if( e == null ){
 								// save the data in the data cache
-								parseData.getReceivedInvitations().addAll(list);
-								addAllInvitations( parseData.getReceivedInvitations());
+								//parseData.getReceivedInvitations().addAll(list);
+								addAllInvitations( list);
 						}else{
 							Log.e(BaseActivity.LOG_TAG, "Unable to retrive sent invites", e);
 						}
@@ -52,8 +52,8 @@ public class SentInvitationsFragment extends BaseInvitationsListFragment {
 				});
 			}
 
-		}else{
-			addAllInvitations( parseData.getSentInvitations());
-		}
+//		}else{
+//			addAllInvitations( parseData.getSentInvitations());
+//		}
 	}
 }

@@ -77,7 +77,7 @@ public class ParsePushReceiver extends BroadcastReceiver{
 			}
 
 		}else{
-			Toast.makeText(context, "Push Received without intent", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(context, "Push Received without intent", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -157,6 +157,7 @@ public class ParsePushReceiver extends BroadcastReceiver{
 						ParseException e) {
 					if(e == null ){
 						eventManager.processCompletedInvitations(invitation);
+						//Toast.makeText(context, "Push Received without intent", Toast.LENGTH_SHORT).show();
 					}
 				}
 			});

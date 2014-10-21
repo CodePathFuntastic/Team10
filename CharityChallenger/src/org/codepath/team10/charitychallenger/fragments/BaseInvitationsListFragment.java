@@ -66,7 +66,6 @@ public class BaseInvitationsListFragment extends Fragment{
 		
 		if( invites != null){
 			
-			
 			for( Invitation invite : invites ){
 				if( !invitations.contains(invite) ){
 					invitations.add( invite);
@@ -74,7 +73,6 @@ public class BaseInvitationsListFragment extends Fragment{
 			}
 			
 			invitationsAdapter.notifyDataSetChanged();
-		
 		}
 	}
 }

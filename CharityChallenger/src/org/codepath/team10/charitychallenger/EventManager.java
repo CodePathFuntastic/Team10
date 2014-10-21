@@ -10,6 +10,8 @@ import org.codepath.team10.charitychallenger.listeners.UserSynchedListener;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.User;
 
+import android.widget.Toast;
+
 public class EventManager implements Serializable {
 	
 	private static final long serialVersionUID = -1330586372238451214L;

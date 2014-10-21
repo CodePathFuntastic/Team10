@@ -26,7 +26,9 @@ public class InvitationQuery {
 	public static void getSentInvitations( String sentUser, FindCallback<Invitation> callback ){
 		
 		ParseQuery<Invitation> query = ParseQuery.getQuery(Invitation.class);
+		
 		query.whereEqualTo("sender", sentUser);
+		//query.clearCachedResult();
 		
 		query.findInBackground(callback);
 	}
@@ -35,6 +37,7 @@ public class InvitationQuery {
 		
 		ParseQuery<Invitation> query1 = ParseQuery.getQuery(Invitation.class);
 		query1.whereEqualTo("receiver", receiver);
+		//query1.clearCachedResult();
 		
 		query1.findInBackground(callback);
 	}

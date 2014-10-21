@@ -3,6 +3,7 @@ package org.codepath.team10.charitychallenger.fragments;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.activities.AllInvitationsActivity;
 import org.codepath.team10.charitychallenger.activities.AllInvitationsFragmentActivity;
 import org.codepath.team10.charitychallenger.activities.BaseActivity;
 import org.codepath.team10.charitychallenger.activities.InvitationDetails;
@@ -84,7 +85,8 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
 	        			
 	            		// if more that invitations are available, show all invitations, 
 	        			// so that user can pick one
-	        			intent = new Intent( getActivity(), AllInvitationsFragmentActivity.class);	        			
+	        			//intent = new Intent( getActivity(), AllInvitationsFragmentActivity.class);
+	        			intent = new Intent( getActivity(), AllInvitationsActivity.class);
 	        		}
 	                startActivity(intent);
         		}
