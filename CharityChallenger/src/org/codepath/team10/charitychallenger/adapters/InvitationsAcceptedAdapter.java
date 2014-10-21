@@ -3,7 +3,7 @@ package org.codepath.team10.charitychallenger.adapters;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
-import org.codepath.team10.charitychallenger.activities.InvitationDetails;
+import org.codepath.team10.charitychallenger.activities.InvitationAcceptedActivity;
 import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.User;
@@ -78,7 +78,7 @@ public class InvitationsAcceptedAdapter extends ArrayAdapter<Invitation> {
 		    
 			@Override
 		    public void onClick(View v) {
-		    	final Intent intent = new Intent(getContext(), InvitationDetails.class);
+		    	final Intent intent = new Intent(getContext(), InvitationAcceptedActivity.class);
 		    	
 		    	final Invitation invitation = getItem(position);
 		    	
