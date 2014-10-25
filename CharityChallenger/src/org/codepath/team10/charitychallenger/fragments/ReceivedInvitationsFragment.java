@@ -27,30 +27,30 @@ public class ReceivedInvitationsFragment extends BaseInvitationsListFragment {
 		populateReceivedInvitations();
 	}
 	
-//	@Override
-//	public View onCreateView(LayoutInflater inflater,
-//			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//		return super.onCreateView(inflater, container, savedInstanceState);
-//	}
+	@Override
+	public View onCreateView(LayoutInflater inflater,
+			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		return super.onCreateView(inflater, container, savedInstanceState);
+	}
 
 	private void populateReceivedInvitations() {
 		//if( parseData.getReceivedInvitations().size() == 0 ){
 			// fire a network call to load the sent invitations for the "user"
-			String userId = parseData.getUser().getFacebookId();
-			if( userId != null){
-				
-				ParseQuery<Invitation> query = ParseQuery.getQuery(Invitation.class);
-				query.whereEqualTo("receiver", userId);
-				
-				try {
-					List<Invitation> invites = query.find();
-					if( invites != null ){
-						addAllInvitations(invites);
-					}
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//			String userId = parseData.getUser().getFacebookId();
+//			if( userId != null){
+//				
+//				ParseQuery<Invitation> query = ParseQuery.getQuery(Invitation.class);
+//				query.whereEqualTo("receiver", userId);
+//				
+//				try {
+//					List<Invitation> invites = query.find();
+//					if( invites != null ){
+//						addAllInvitations(invites);
+//					}
+//				} catch (ParseException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 				//query.clearCachedResult();
 //				query.findInBackground( new FindCallback<Invitation>(){
 //
@@ -63,7 +63,7 @@ public class ReceivedInvitationsFragment extends BaseInvitationsListFragment {
 //						}
 //					}
 //				});
-			}
+//			}
 //		}else{
 //			//addAllInvitations(parseData.getReceivedInvitations());
 //		}
