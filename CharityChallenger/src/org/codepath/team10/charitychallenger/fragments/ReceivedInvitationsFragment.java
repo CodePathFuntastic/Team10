@@ -37,14 +37,16 @@ public class ReceivedInvitationsFragment extends BaseInvitationsListFragment imp
 
 	private void populateReceivedInvitations() {
 		if( parseData.getReceivedInvitations().size() == 0 ){
-			eventManager.getReceivedInvitations();
+			eventManager.getReceivedOpenInvitations();
 		}else{
+			// TODO: filter only open invitations
 			invitations.addAll(parseData.getReceivedInvitations());
 		}
 	}
 
 	@Override
 	public void onSuccess() {
+		// TODO: filter only open invitations
 		invitations.addAll(parseData.getReceivedInvitations());
 		invitationsAdapter.notifyDataSetChanged();
 	}

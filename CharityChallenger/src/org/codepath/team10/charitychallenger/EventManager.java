@@ -11,6 +11,7 @@ import org.codepath.team10.charitychallenger.listeners.InvitationReceivedListene
 import org.codepath.team10.charitychallenger.listeners.InvitationsLoadedListener;
 import org.codepath.team10.charitychallenger.listeners.UserSynchedListener;
 import org.codepath.team10.charitychallenger.models.Invitation;
+import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
 import org.codepath.team10.charitychallenger.models.User;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -105,6 +106,39 @@ public class EventManager implements Serializable {
 		});
 	}
 	
+	public void getReceivedOpenInvitations(){
+		
+		// trigger the call to get all received invitations
+		restclient.getReceivedInvitations(parseData.getUser().getFacebookId(), 
+									InvitationStatusEnum.OPEN.ordinal(),
+			new ParseJsonHttpResponseHandler(){
+			
+			@Override
+			public void onSuccess(int status, JSONObject json) {
+				if( status == 200 ){
+					if( json != null ){
+						if( !json.isNull("results")){
+							try {
+								JSONArray array = json.getJSONArray("results");
+								List<Invitation> invites = Invitation.fromJsonArray(array);
+								if( invites.size() >0 ){
+									parseData.getReceivedInvitations().clear();
+									parseData.getReceivedInvitations().addAll(invites);
+								}
+								
+								// notify the components that need the data
+								processLoadedInvitationsOnSuccess();
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+				}
+			}
+		});
+	}
+
+	
 	
 	////////////////////
 	// process events
@@ -118,6 +152,7 @@ public class EventManager implements Serializable {
 			}
 			
 			getSentInvitations();
+			getReceivedOpenInvitations();
 		}
 	}
 	

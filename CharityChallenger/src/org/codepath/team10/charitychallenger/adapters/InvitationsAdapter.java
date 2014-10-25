@@ -4,11 +4,16 @@ import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.activities.InvitationDetails;
+import org.codepath.team10.charitychallenger.clients.ParseJsonHttpResponseHandler;
+import org.codepath.team10.charitychallenger.clients.ParseRestClient;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
 import org.codepath.team10.charitychallenger.models.User;
 import org.codepath.team10.charitychallenger.queries.UserQuery;
 import org.codepath.team10.charitychallenger.utils.FancyTimeUtil;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.Intent;
@@ -116,6 +121,34 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 	}
 	private void updateVew(final ViewHolder viewHolder, String  userid) {
 		
+		ParseRestClient.getInstance().getUserDetails(userid, new ParseJsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int status, JSONObject json) {
+				if( status == 200 && json != null){
+					if( !json.isNull("results")){
+						try {
+							JSONArray array = json.getJSONArray("results");
+							
+							// we only care about the first result
+							for(int i=0 ; i < 1; i++ ){
+								JSONObject j = array.getJSONObject(i);
+								User user = User.fromJson(j);
+								if(user.getImageUrl() != null){
+									viewHolder.ivFriend.setImageResource(android.R.color.transparent);
+									ImageLoader.getInstance().displayImage(user.getImageUrl(), viewHolder.ivFriend);
+								}
+								Log.d("InvitationsAdapter: name - ", user.getName());
+								viewHolder.tvFriendName.setText(user.getName());
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		});
+		
+		/*
 		UserQuery.getUserBySenderId(userid, 
 			new FindCallback<User>(){
 				@Override
@@ -137,6 +170,6 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 					}
 				}
 		});
-
+		*/
 	}
 }

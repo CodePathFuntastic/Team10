@@ -1,19 +1,10 @@
 package org.codepath.team10.charitychallenger.clients;
 
-import java.net.URLEncoder;
-import java.util.List;
-
-import org.codepath.team10.charitychallenger.activities.BaseActivity;
 import org.codepath.team10.charitychallenger.models.Invitation;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.util.Log;
+import org.codepath.team10.charitychallenger.models.User;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 public class ParseRestClient {
@@ -26,6 +17,7 @@ public class ParseRestClient {
 	private static final String PARSE_BASE_URL = "https://api.parse.com/1/classes/";
 	private static final String PARSE_END_POINT_INVITATION = PARSE_BASE_URL + "Invitation";
 	private static final String PARSE_END_POINT_CHALLENGE = PARSE_BASE_URL + "Challenge";
+	private static final String PARSE_END_POINT_USER = PARSE_BASE_URL + "User";
 	
 	AsyncHttpClient httpClient = new AsyncHttpClient();
 	
@@ -73,6 +65,26 @@ public class ParseRestClient {
 		
 		httpClient.get(PARSE_END_POINT_INVITATION, params, responseHandler);
 	}
+
+	public void getReceivedInvitations( String receiver, int status, 
+										AsyncHttpResponseHandler responseHandler ){
+		
+		if( receiver == null ){
+			throw new NullPointerException("receiver cannot be null");
+		}
+		if( responseHandler == null ){
+			throw new NullPointerException("response handler cannot be null");
+		}
+		
+		String json = Invitation.createJsonQueryStatus( null, receiver, status);
+		
+		RequestParams params = new RequestParams();
+		params.put("where", json);
+		
+		
+		httpClient.get(PARSE_END_POINT_INVITATION, params, responseHandler);
+	}
+
 	
 	public void getSentInvitations( String sender, AsyncHttpResponseHandler responseHandler){
 		
@@ -91,6 +103,22 @@ public class ParseRestClient {
 		httpClient.get(PARSE_END_POINT_INVITATION, params, responseHandler);
 	}
 	
+	public void getUserDetails( String facebookId, AsyncHttpResponseHandler responseHandler ){
+		if( facebookId == null ){
+			throw new NullPointerException("facebookId cannot be null");
+		}
+		if( responseHandler == null ){
+			throw new NullPointerException("response handler cannot be null");
+		}
+		
+		String json = User.createJsonQuery(facebookId);
+		RequestParams params = new RequestParams();
+		params.put("where", json);
+		
+		httpClient.get(PARSE_END_POINT_USER, params, responseHandler);
+	}
+	
+	/*
 	public void getInvitations( ){
 		String endPoint = PARSE_BASE_URL + "Invitation";
 		
@@ -115,4 +143,5 @@ public class ParseRestClient {
 			}
 		});
 	}
+	*/
 }

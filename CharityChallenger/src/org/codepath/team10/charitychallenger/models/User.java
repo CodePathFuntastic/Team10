@@ -2,6 +2,10 @@ package org.codepath.team10.charitychallenger.models;
 
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
@@ -75,6 +79,56 @@ public class User extends ParseObject {
 	}
 	public void addFriends( List<String> friends){
 		addAllUnique("friends", friends);
+	}
+
+	public static String createJsonQuery(String facebookId) {
+		
+		String result=null;
+		JSONObject json = new JSONObject();
+		try {
+			json.put("facebookId", facebookId);
+			result = json.toString();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static User fromJson( JSONObject json ){
+		User user=null;
+		if( json != null ){
+			try {
+				if( !json.isNull("objectId")){
+					user = User.createWithoutData(User.class, json.getString("objectId"));
+				}
+				if( !json.isNull("facebookId")){
+					user.setFacebookId(json.getString("facebookId"));
+				}
+				if( !json.isNull("friends")){
+					JSONArray array = json.getJSONArray("friends");
+					for( int i=0; i<array.length(); i++){
+						String a = array.getString(i);
+						user.addFriend(a);
+					}
+				}
+				if( !json.isNull("image_url")){
+					user.setImageUrl( json.getString("image_url"));
+				}
+				if( !json.isNull("location")){
+					user.setLocation(json.getString("location"));
+				}
+				if( !json.isNull("name")){
+					user.setName( json.getString("name"));
+				}
+			
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return user;
 	}
 }
 
