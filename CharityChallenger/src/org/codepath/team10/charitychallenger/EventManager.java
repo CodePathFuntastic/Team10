@@ -52,77 +52,52 @@ public class EventManager implements Serializable {
 				listener.onSync(user);
 			}
 			
-			// trigger the call to get all received invitations
-			restclient.getReceivedInvitations(user.getFacebookId(), new JsonHttpResponseHandler(){
-				
-				@Override
-				public void onFailure(Throwable e) {
-					Log.e("Error retrieving sent invitations", e);
-				}
-				
-				@Override
-				public void onFailure(Throwable e,String paramString) {
-					Log.e("Error retrieving sent invitations :" + paramString, e);
-				}
-				
-				@Override
-				public void onFailure(Throwable e,JSONArray paramJSONArray) {
-					Log.e("Error retrieving sent invitations", e);
-				}
-				
-				@Override
-				public void onFailure(Throwable e,JSONObject paramJSONObject) {
-					Log.e("Error retrieving sent invitations", e);
-				}
-				@Override
-				public void onSuccess(int status, JSONObject json) {
-					if( status == 200 ){
-						if( json != null ){
-							if( !json.isNull("results")){
-								try {
-									JSONArray array = json.getJSONArray("results");
-									List<Invitation> invites = Invitation.fromJsonArray(array);
-									if( invites.size() >0 ){
-										parseData.getReceivedInvitations().addAll(invites);
-									}
-								} catch (JSONException e) {
-									e.printStackTrace();
-								}
-							}
-						}
-					}
-				}
-			});
-
-			
-			// trigger the call to get all sent invitations
-			restclient.getSentInvitations( user.getFacebookId(), new JsonHttpResponseHandler(){
-				@Override
-				public void onFailure(Throwable e) {
-					Log.e("Error retrieving sent invitations", e);
-				}
-				@Override
-				public void onSuccess(int status, JSONObject json) {
-					if( status == 200 ){
-						if( json != null ){
-							if( !json.isNull("results")){
-								try {
-									JSONArray array = json.getJSONArray("results");
-									List<Invitation> invites = Invitation.fromJsonArray(array);
-									if( invites.size() >0 ){
-										parseData.getSentInvitations().addAll(invites);
-									}
-								} catch (JSONException e) {
-									e.printStackTrace();
-								}
-							}
-						}
-					}
-				}
-			});
-			
-			
+			getSentInvitations();
 		}
+	}
+	
+	public void getSentInvitations(){
+		// trigger the call to get all received invitations
+		restclient.getReceivedInvitations(parseData.getUser().getFacebookId(), new JsonHttpResponseHandler(){
+			
+			@Override
+			public void onFailure(Throwable e) {
+				Log.e("Error retrieving sent invitations", e);
+			}
+			
+			@Override
+			public void onFailure(Throwable e,String paramString) {
+				Log.e("Error retrieving sent invitations :" + paramString, e);
+			}
+			
+			@Override
+			public void onFailure(Throwable e,JSONArray paramJSONArray) {
+				Log.e("Error retrieving sent invitations", e);
+			}
+			
+			@Override
+			public void onFailure(Throwable e,JSONObject paramJSONObject) {
+				Log.e("Error retrieving sent invitations", e);
+			}
+			@Override
+			public void onSuccess(int status, JSONObject json) {
+				if( status == 200 ){
+					if( json != null ){
+						if( !json.isNull("results")){
+							try {
+								JSONArray array = json.getJSONArray("results");
+								List<Invitation> invites = Invitation.fromJsonArray(array);
+								if( invites.size() >0 ){
+									parseData.getReceivedInvitations().addAll(invites);
+								}
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+				}
+			}
+		});
 	}
 	
 	public void processCompletedInvitations( Invitation invitation){

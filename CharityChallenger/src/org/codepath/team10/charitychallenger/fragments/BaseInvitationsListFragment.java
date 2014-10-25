@@ -5,16 +5,11 @@ import java.util.List;
 
 import org.codepath.team10.charitychallenger.EventManager;
 import org.codepath.team10.charitychallenger.ParseData;
-import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.adapters.InvitationsAdapter;
 import org.codepath.team10.charitychallenger.models.Invitation;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 
 public class BaseInvitationsListFragment extends Fragment{

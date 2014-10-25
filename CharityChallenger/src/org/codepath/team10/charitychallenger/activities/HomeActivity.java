@@ -5,14 +5,8 @@ import org.codepath.team10.charitychallenger.adapters.ChallengesViewAdapter;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 
 public class HomeActivity extends BaseActivity {
 	
