@@ -61,8 +61,7 @@ public class EventManager implements Serializable {
 				}
 				
 				@Override
-				public void onFailure(Throwable e,
-						String paramString) {
+				public void onFailure(Throwable e,String paramString) {
 					Log.e("Error retrieving sent invitations :" + paramString, e);
 				}
 				
