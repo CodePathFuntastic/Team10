@@ -59,6 +59,7 @@ public class EventManager implements Serializable {
 								JSONArray array = json.getJSONArray("results");
 								List<Invitation> invites = Invitation.fromJsonArray(array);
 								if( invites.size() >0 ){
+									parseData.getSentInvitations().clear();
 									parseData.getSentInvitations().addAll(invites);
 								}
 								
@@ -88,6 +89,7 @@ public class EventManager implements Serializable {
 								JSONArray array = json.getJSONArray("results");
 								List<Invitation> invites = Invitation.fromJsonArray(array);
 								if( invites.size() >0 ){
+									parseData.getReceivedInvitations().clear();
 									parseData.getReceivedInvitations().addAll(invites);
 								}
 								

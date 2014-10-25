@@ -1,6 +1,7 @@
 package org.codepath.team10.charitychallenger.fragments;
 
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.adapters.InvitationsAdapter;
 import org.codepath.team10.charitychallenger.listeners.InvitationsLoadedListener;
 
 import android.os.Bundle;
@@ -15,7 +16,7 @@ public class ReceivedInvitationsFragment extends BaseInvitationsListFragment imp
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		invitationsAdapter = new InvitationsAdapter( getActivity(),false, invitations);
 		populateReceivedInvitations();
 	}
 	

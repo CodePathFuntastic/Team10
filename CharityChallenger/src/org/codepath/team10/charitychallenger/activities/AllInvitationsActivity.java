@@ -32,7 +32,7 @@ public class AllInvitationsActivity extends BaseActivity {
 		setContentView(R.layout.activity_all_invitations);
 		
 		
-		mItemsAdapter = new InvitationsAdapter(this, getInvitations());
+		mItemsAdapter = new InvitationsAdapter(this, false,getInvitations());
 		
 		mLvAllInvitations = (ListView) findViewById(R.id.lvAllInvitations);
 		mLvAllInvitations.setAdapter(mItemsAdapter);

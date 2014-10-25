@@ -28,7 +28,7 @@ public class BaseInvitationsListFragment extends Fragment{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		invitationsAdapter = new InvitationsAdapter( getActivity(), invitations);
+		//invitationsAdapter = new InvitationsAdapter( getActivity(), invitations);
 	}
 		
 	public void addInvitation(Invitation invitation){

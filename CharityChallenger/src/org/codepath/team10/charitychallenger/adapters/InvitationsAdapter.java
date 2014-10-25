@@ -4,11 +4,9 @@ import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.activities.InvitationDetails;
-import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
 import org.codepath.team10.charitychallenger.models.User;
-import org.codepath.team10.charitychallenger.queries.ChallengeQueries;
 import org.codepath.team10.charitychallenger.queries.UserQuery;
 import org.codepath.team10.charitychallenger.utils.FancyTimeUtil;
 
@@ -30,8 +28,11 @@ import com.parse.ParseException;
 
 public class InvitationsAdapter extends ArrayAdapter<Invitation> {	
 	
-	public InvitationsAdapter(Context context, List<Invitation> objects) {
+	private boolean isSentView = false;
+	
+	public InvitationsAdapter(Context context, boolean isSentView, List<Invitation> objects) {
 		super(context, R.layout.item_invite, objects);
+		this.isSentView = isSentView;
 	}
 	
 	public static class ViewHolder{
@@ -59,20 +60,25 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}	
 		
-		if(invitation.getStatus() == InvitationStatusEnum.OPEN.ordinal() ){
-			viewHolder.btnInvite.setVisibility(View.VISIBLE);
-			setListener(viewHolder.btnInvite, position);
-		} else {
-			viewHolder.btnInvite.setVisibility(View.GONE);
-			setListener(convertView, position);
-		}
+//		if(invitation.getStatus() == InvitationStatusEnum.OPEN.ordinal() ){
+//			viewHolder.btnInvite.setVisibility(View.VISIBLE);
+//			setListener(viewHolder.btnInvite, position);
+//		} else {
+//			viewHolder.btnInvite.setVisibility(View.GONE);
+//			setListener(convertView, position);
+//		}
 		
 		if( invitation.getCreatedAt() != null ){
 			String relativeCreationTime = FancyTimeUtil.getRelativeTimeAgo(invitation.getCreatedAt().toString());
 			viewHolder.tvFriendLocation.setText(relativeCreationTime);
 		}
 		
-		updateVew(viewHolder, invitation);
+		if( isSentView == true){
+			updateVew(viewHolder, invitation.getReceiver());
+		}else{
+			updateVew(viewHolder, invitation.getSender());
+		}
+		
 		
 		return convertView;
 	}
@@ -108,8 +114,9 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 		    }
 		});
 	}
-	private void updateVew(final ViewHolder viewHolder, Invitation invitation) {
-		UserQuery.getUserBySenderId( invitation.getSender(), 
+	private void updateVew(final ViewHolder viewHolder, String  userid) {
+		
+		UserQuery.getUserBySenderId(userid, 
 			new FindCallback<User>(){
 				@Override
 				public void done(

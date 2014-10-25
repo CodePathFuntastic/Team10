@@ -1,6 +1,7 @@
 package org.codepath.team10.charitychallenger.models;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.activities.BaseActivity;
@@ -35,6 +36,9 @@ public class Invitation extends ParseObject implements Parcelable {
 	 * </ol>
 	 * 
 	 */
+	Date created;
+	Date update;
+	
 	public Invitation(){
 //		setOpened(false);
 //		setStatus(InvitationStatusEnum.OPEN.ordinal());
@@ -103,6 +107,53 @@ public class Invitation extends ParseObject implements Parcelable {
 	public List<String> getPhotos(){
 		return getList("photos");
 	}
+	
+	@Override
+	public int hashCode() {
+		if( getObjectId() != null ){
+			return getObjectId().hashCode();
+		}else{
+			return super.hashCode();
+		}
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		boolean result=false;
+		if( o instanceof Invitation){
+			Invitation compared = (Invitation) o;
+			if( getObjectId() != null && compared.getObjectId() != null ){
+				if( hashCode() == compared.hashCode() ){
+					result =true;
+				}
+			}
+		}else{
+			result= super.equals(o);
+		}
+		return result;
+	}
+	
+	public String toString(){
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("objectId=");
+		sb.append( getObjectId());
+		sb.append(", sender=");
+		sb.append( getSender());
+		sb.append(", receiver=");
+		sb.append( getReceiver() );
+		sb.append(", message=");
+		sb.append( getMessage());
+		sb.append(", amount=");
+		sb.append( getAmount());
+		sb.append(", challenge=");
+		sb.append( getChallengeId());
+		sb.append(", status=");
+		sb.append( getStatus());
+		return sb.toString();
+	}
+	
+	
 
 	// methods needed for json to and from
 
@@ -201,6 +252,7 @@ public class Invitation extends ParseObject implements Parcelable {
 			// following two may fail, in that case store in a different field
 			if( !json.isNull("createdAt")){
 				invitation.add("createdAt", json.getString("createdAt"));
+				
 			}
 			if( !json.isNull("updatedAt")){
 				invitation.add("updatedAt", json.getString("updatedAt"));
