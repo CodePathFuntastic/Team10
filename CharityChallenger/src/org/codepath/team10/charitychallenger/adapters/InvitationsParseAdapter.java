@@ -6,7 +6,6 @@ import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.activities.InvitationDetails;
 import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
-import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
 import org.codepath.team10.charitychallenger.models.User;
 import org.codepath.team10.charitychallenger.queries.ChallengeQueries;
 import org.codepath.team10.charitychallenger.queries.UserQuery;
@@ -19,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,61 +25,73 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseQueryAdapter;
 
-public class InvitationsAdapter extends ArrayAdapter<Invitation> {	
-	
-	public InvitationsAdapter(Context context, List<Invitation> objects) {
-		super(context, R.layout.item_invite, objects);
+public class InvitationsParseAdapter extends ParseQueryAdapter<Invitation> {
+
+	public InvitationsParseAdapter(Context context, final String sender) {
+		super(context,  new ParseQueryAdapter.QueryFactory<Invitation>() {
+
+			@Override
+			public ParseQuery<Invitation> create() {
+				ParseQuery<Invitation> query = ParseQuery.getQuery(Invitation.class);
+				query.whereEqualTo("sender",  sender);
+				return query;
+			}
+		});
 	}
 	
 	public static class ViewHolder{
-		private ImageView	ivFriend;
-		private TextView	tvFriendName;
-		public TextView		tvFriendLocation;
-		public Button		btnInvite;
+		ImageView	ivFriend;
+		TextView	tvFriendName;
+		TextView	tvFriendLocation;
+		Button		btnInvite;
 	}
-
-	@Override
-	public View getView(final int position, View convertView, final ViewGroup parent) {
-		// Get the data from position.
-		Invitation invitation = getItem(position);
+	
+	public View getItemView(Invitation invitation, View convertview, ViewGroup parent) {
 		
-		ViewHolder viewHolder =  null;
-		if(convertView == null){
-			viewHolder = new ViewHolder();
-			convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_invite, parent, false);
-			viewHolder.ivFriend = (ImageView)convertView.findViewById(R.id.ivFriend);
-			viewHolder.tvFriendName = (TextView)convertView.findViewById(R.id.tvFriendName);
-			viewHolder.tvFriendLocation = (TextView)convertView.findViewById(R.id.tvFriendLocation);
-			viewHolder.btnInvite = (Button) convertView.findViewById(R.id.btnInviteFriend);
-			convertView.setTag(viewHolder);
-		}else {
-			viewHolder = (ViewHolder) convertView.getTag();
-		}	
 		
-		if(invitation.getStatus() == InvitationStatusEnum.OPEN.ordinal() ){
-			viewHolder.btnInvite.setVisibility(View.VISIBLE);
-			setListener(viewHolder.btnInvite, position);
+		ViewHolder holder = null;
+		if( convertview == null ){
+			convertview = LayoutInflater.from(getContext()).inflate(R.layout.item_invite, parent, false);
+			super.getItemView(invitation, convertview, parent);
+			
+			holder = new ViewHolder();
+			holder.ivFriend = (ImageView)convertview.findViewById(R.id.ivFriend);
+			holder.tvFriendName = (TextView)convertview.findViewById(R.id.tvFriendName);
+			holder.tvFriendLocation = (TextView)convertview.findViewById(R.id.tvFriendLocation);
+			holder.btnInvite = (Button) convertview.findViewById(R.id.btnInviteFriend);
+			convertview.setTag(holder);
+		}else{
+			holder = (ViewHolder) convertview.getTag();
+		}
+		
+		if(invitation.getStatus() == 1){
+			holder.btnInvite.setVisibility(View.VISIBLE);
+			setListener(holder.btnInvite, invitation);
 		} else {
-			viewHolder.btnInvite.setVisibility(View.GONE);
-			setListener(convertView, position);
+			holder.btnInvite.setVisibility(View.GONE);
+			setListener(convertview, invitation);
 		}
 		
 		String relativeCreationTime = FancyTimeUtil.getRelativeTimeAgo(invitation.getCreatedAt().toString());
-		viewHolder.tvFriendLocation.setText(relativeCreationTime);
-		updateVew(viewHolder, invitation);
-		
-		return convertView;
-	}
+		holder.tvFriendLocation.setText(relativeCreationTime);
+		updateVew(holder, invitation);
 
-	private void setListener(View view, final int position){
+		
+		return convertview;
+	}
+	
+	private void setListener(View view, final Invitation invitation){
 		view.setOnClickListener(new OnClickListener() {
 		    
 			@Override
 		    public void onClick(View v) {
+				
 		    	final Intent intent = new Intent(getContext(), InvitationDetails.class);
 		    	
-		    	final Invitation invitation = getItem(position);
+		    	//final Invitation invitation = getItem(position);
 		    	
 		    	ChallengeQueries.getChallengeById( invitation.getChallengeId(), 
 		    						new FindCallback<Challenge>(){
@@ -105,6 +115,8 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 		    }
 		});
 	}
+	
+	
 	private void updateVew(final ViewHolder viewHolder, Invitation invitation) {
 		UserQuery.getUserBySenderId( invitation.getSender(), 
 			new FindCallback<User>(){
@@ -129,4 +141,5 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 		});
 
 	}
+
 }
