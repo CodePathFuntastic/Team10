@@ -25,26 +25,29 @@ public class HomeActivity extends BaseActivity {
         
         setContentView(R.layout.activity_home);
         
+//        Intent intent = new Intent( this, AllInvitationsFragmentActivity.class);
+//		startActivity(intent);
 		
-        mlvChallenges = (ListView) findViewById(R.id.lvListOfChallenges);
-        mChallengesAdapter = new ChallengesViewAdapter(this, "Challenge");
-        mlvChallenges.setAdapter(mChallengesAdapter);
-        
-        //OnItemClickListener
-        mlvChallenges.setOnItemClickListener(new OnItemClickListener() {
-        	
-            public void onItemClick(AdapterView<?> parent, 
-            						View v,
-            						int position, 
-            						long id) {
-                
-            	Intent intent = new Intent(HomeActivity.this, ChallengeDetailsActivity.class);
-               
-                intent.putExtra("challenge", mChallengesAdapter.getItem(position));
-                
-                startActivity(intent);
-            }
-        });
+		
+//        mlvChallenges = (ListView) findViewById(R.id.lvListOfChallenges);
+//        mChallengesAdapter = new ChallengesViewAdapter(this, "Challenge");
+//        mlvChallenges.setAdapter(mChallengesAdapter);
+//        
+//        //OnItemClickListener
+//        mlvChallenges.setOnItemClickListener(new OnItemClickListener() {
+//        	
+//            public void onItemClick(AdapterView<?> parent, 
+//            						View v,
+//            						int position, 
+//            						long id) {
+//                
+//            	Intent intent = new Intent(HomeActivity.this, ChallengeDetailsActivity.class);
+//               
+//                intent.putExtra("challenge", mChallengesAdapter.getItem(position));
+//                
+//                startActivity(intent);
+//            }
+//        });
     }
     
     public void onChallengeDetails(View view){

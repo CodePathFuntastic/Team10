@@ -36,17 +36,17 @@ public class BaseInvitationsListFragment extends Fragment{
 		invitationsAdapter = new InvitationsAdapter( getActivity(), invitations);
 	}
 	
-	@Override
-	public View onCreateView(LayoutInflater inflater,
-			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		super.onCreateView(inflater, container, savedInstanceState);
-		
-		View view = inflater.inflate( R.layout.fragment_all_invitations, container, false);
-		lvInvitations = (ListView) view.findViewById(R.id.lvFragAllInvitations);
-		lvInvitations.setAdapter(invitationsAdapter);
-				
-		return view;
-	}
+//	@Override
+//	public View onCreateView(LayoutInflater inflater,
+//			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//		return super.onCreateView(inflater, container, savedInstanceState);
+//		
+////		View view = inflater.inflate( R.layout.fragment_all_invitations, container, false);
+////		lvInvitations = (ListView) view.findViewById(R.id.lvFragAllInvitations);
+////		lvInvitations.setAdapter(invitationsAdapter);
+////				
+////		return view;
+//	}
 	
 	
 	public void addInvitation(Invitation invitation){

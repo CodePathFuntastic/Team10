@@ -6,14 +6,13 @@ import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.models.Challenge;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.parse.ParseQuery;
+import com.parse.ParseObject;
 import com.parse.ParseQueryAdapter;
 
 public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
@@ -26,17 +25,22 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 		
 	}
 	public ChallengesViewAdapter(Context context, final String tableName) {
-		super(context, new ParseQueryAdapter.QueryFactory<Challenge>() {
-			
-			public ParseQuery<Challenge> create() {
-				Log.d("Constructor: ", tableName);
-				//ParseQuery query = new ParseQuery(tableName);
-				ParseQuery<Challenge> query = ParseQuery.getQuery(Challenge.class);
-				query.whereExists("raised");
-				query.whereExists("target");
-				return query;
-			}
-		});
+//		super(context, new ParseQueryAdapter.QueryFactory<Challenge>() {
+//			
+//			public ParseQuery<Challenge> create() {
+//				Log.d("Constructor: ", tableName);
+//				ParseQuery<Challenge> query = ParseQuery.getQuery(Challenge.class);
+//				query.whereExists("raised");
+//				query.whereExists("target");
+//				return query;
+//			}
+//		});
+		
+		//ParseObject po = null;
+		super(context, tableName);
+		
+
+
 	}
 
 	// Customize the layout by overriding getItemView

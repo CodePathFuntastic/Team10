@@ -57,7 +57,11 @@ public class FacebookLoginActivity extends BaseActivity{
 						        public void onCompleted(Response response) {
 						        	if( response !=null){
 	        		    	        	   GraphObject go = response.getGraphObject();
-	        		    	        	   
+	        		    	        	   if(go == null){
+	        		    	        		   Log.e("Error: ", "Graph Object is null");
+	        		    	        		   return;
+	        		    	        	   }
+	        		    	        		   
 	        		    	        	   User user = new User();
         		    	        		   user.setFacebookId((String) go.asMap().get("id"));
         		    	        		   user.setName( (String) go.asMap().get("name"));
@@ -69,7 +73,7 @@ public class FacebookLoginActivity extends BaseActivity{
 						).executeAsync();
 					
 										
-					Intent intent = new Intent( FacebookLoginActivity.this, HomeActivity.class);
+					Intent intent = new Intent( FacebookLoginActivity.this, ChallengesHomeActivity.class);
 					startActivity(intent);
 
 				}else{
