@@ -81,8 +81,9 @@ public class CharityChallengerApplication extends Application {
 		
 		initImageLoader();
 		
-		ParseRestClient parseClient = ParseRestClient.getInstance();
-		parseClient.getInvitations();
+//		ParseRestClient parseClient = ParseRestClient.getInstance();
+//		parseClient.getInvitations();
+//		
 		
 		//ParseTwitterUtils.initialize( Constants.TWITTER_CONSUMER_KEY, Constants.TWITTER_CONSUMER_SECRET);
 	}

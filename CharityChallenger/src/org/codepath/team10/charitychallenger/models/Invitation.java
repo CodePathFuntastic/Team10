@@ -106,6 +106,54 @@ public class Invitation extends ParseObject implements Parcelable {
 
 	// methods needed for json to and from
 
+	public static JSONObject toJson( Invitation invitation){
+		JSONObject json = new JSONObject();
+		
+		if( invitation != null ){
+			
+				try {
+					
+					if( invitation.getObjectId() != null ){
+						json.put("objectId", invitation.getObjectId());
+					}
+					
+					json.put("amount", invitation.getAmount());
+					json.put("challengeId", invitation.getChallengeId());
+					json.put("inviteId", invitation.getInviteId());
+					json.put("opened_status", invitation.isOpened());
+					
+					if( invitation.getPhotos().size() > 0 ){
+						JSONArray array = new JSONArray();
+						for( String photo : invitation.getPhotos() ){
+							array.put(photo);
+						}
+						json.put("photos", array);
+					}
+					
+					if( invitation.getSender() != null ){
+						json.put("sender",  invitation.getSender());
+					}
+					if( invitation.getReceiver() != null ){
+						json.put("receiver", invitation.getReceiver());
+					}
+					
+					json.put("status",  invitation.getStatus());
+					if( invitation.getCreatedAt() != null ){
+						json.put("createdAt", invitation.getCreatedAt());
+					}
+					if( invitation.getUpdatedAt() != null ){
+						json.put("updatedAt", invitation.getUpdatedAt());
+					}
+					
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+		}
+		
+		return json;
+	}
+	
+	
 	public static Invitation fromJson( JSONObject json ){
 		
 		Invitation invitation=null;
@@ -226,4 +274,69 @@ public class Invitation extends ParseObject implements Parcelable {
 			return new Invitation[size];
 		}
 	};	
+	
+	
+	
+	// Queries for Parse REST api
+	
+	public static String createJsonQuery(String sender, String receiver){
+
+		JSONObject json = new JSONObject();
+		try {
+				if( sender != null ){
+					json.put("sender", sender);
+				}
+				if( receiver != null ){
+					json.put("receiver", receiver);
+				}
+
+		} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}
+		
+		return json.toString();
+	}
+	
+	public static String createJsonQueryStatus(String sender, String receiver, int status){
+		
+		JSONObject json = new JSONObject();
+		try {
+				if( sender != null ){
+					json.put("sender", sender);
+				}
+				if( receiver != null ){
+					json.put("receiver", receiver);
+				}
+				json.put("status", status);
+
+		} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}
+		
+		return json.toString();		
+	}
+	
+	public static String createJsonQueryOpenedStatus(String sender, String receiver, boolean isOpened){
+		
+		JSONObject json = new JSONObject();
+		try {
+				if( sender != null ){
+					json.put("sender", sender);
+				}
+				if( receiver != null ){
+					json.put("receiver", receiver);
+				}
+				json.put("opened_status", isOpened);
+
+		} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}
+		
+		return json.toString();		
+	}
+
+
 }
