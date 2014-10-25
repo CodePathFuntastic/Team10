@@ -3,7 +3,6 @@ package org.codepath.team10.charitychallenger.fragments;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.activities.ChallengeDetailsActivity;
 import org.codepath.team10.charitychallenger.adapters.ChallengesViewAdapter;
-import org.codepath.team10.charitychallenger.models.Challenge;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,21 +21,25 @@ public class ChallengesHomeFragment extends Fragment {
 	private ListView mlvChallenges; 
 	private ChallengesViewAdapter mChallengesAdapter;
 	private ProgressBar mProgressBar;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+		
 		super.onCreate(savedInstanceState);
 		mChallengesAdapter = new ChallengesViewAdapter(getActivity(), "Challenge");
-		Challenge c = new Challenge();
-		c.setAmountRaised(200);
-		c.setTargetAmount(1000);
-		c.setName("New Challenge Name");
-		c.setDescription("new Challenge Description");
+		
+		
+//		Challenge c = new Challenge();
+//		c.setAmountRaised(200);
+//		c.setTargetAmount(1000);
+//		c.setName("New Challenge Name");
+//		c.setDescription("new Challenge Description");
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,
-			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+			@Nullable ViewGroup container, 
+			@Nullable Bundle savedInstanceState) {
 		
 		super.onCreateView(inflater, container, savedInstanceState);
 		

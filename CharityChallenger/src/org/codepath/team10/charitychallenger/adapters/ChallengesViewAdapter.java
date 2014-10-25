@@ -38,9 +38,6 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 		
 		//ParseObject po = null;
 		super(context, tableName);
-		
-
-
 	}
 
 	// Customize the layout by overriding getItemView

@@ -56,6 +56,5 @@ public class ReceivedInvitationsFragment extends BaseInvitationsListFragment imp
 	@Override
 	public void onFailure(String message, Throwable error) {
 		// TODO Auto-generated method stub
-		
 	}
 }
