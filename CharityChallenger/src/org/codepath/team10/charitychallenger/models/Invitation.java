@@ -1,8 +1,12 @@
 package org.codepath.team10.charitychallenger.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.activities.BaseActivity;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -35,6 +39,7 @@ public class Invitation extends ParseObject implements Parcelable {
 //		setOpened(false);
 //		setStatus(InvitationStatusEnum.OPEN.ordinal());
 //		increment("inviteId");
+		
 	}
 	
 	
@@ -100,9 +105,91 @@ public class Invitation extends ParseObject implements Parcelable {
 	}
 
 	// methods needed for json to and from
+
+	public static Invitation fromJson( JSONObject json ){
+		
+		Invitation invitation=null;
+		
+		try {
+		
+			String objectId = json.getString("objectId");
+			invitation = Invitation.createWithoutData(Invitation.class, objectId);
+			
+			if( !json.isNull("amount")){
+				invitation.setAmount( json.getDouble("amount"));
+			}
+			if( !json.isNull("challengeId")){
+				invitation.setChallengeId( json.getInt("challengeId") );
+			}
+
+			if( !json.isNull("inviteId")){
+				invitation.setInviteId(json.getInt("inviteId"));
+			}
+
+			if( !json.isNull("opened_status")){
+				invitation.setOpened(json.getBoolean("opened_status"));
+			}
+			
+			if( !json.isNull("photos")){
+				JSONArray array = json.getJSONArray("photos");
+				for(int i=0 ; i< array.length(); i++){
+					String photo = array.getString(i);
+					invitation.addPhoto(photo);
+				}
+			}
+			
+			if( !json.isNull("receiver")){
+				invitation.setReceiver(json.getString("receiver"));
+			}
+			
+			if( !json.isNull("sender") ){
+				invitation.setSender( json.getString("sender"));
+			}
+			
+			if( !json.isNull("status")){
+				invitation.setStatus(json.getInt("status"));
+			}
+			
+			// following two may fail, in that case store in a different field
+			if( !json.isNull("createdAt")){
+				invitation.add("createdAt", json.getString("createdAt"));
+			}
+			if( !json.isNull("updatedAt")){
+				invitation.add("updatedAt", json.getString("updatedAt"));
+			}
+			
+						
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return invitation;
+	}
+	
+	public static List<Invitation> fromJsonArray( JSONArray array){
+		
+		List<Invitation> invitations = new ArrayList<Invitation>();
+		
+		if( array != null ){
+			for( int i=0; i<array.length() ; i++){
+				try {
+					
+					JSONObject json = array.getJSONObject(i);
+					Invitation invitation = Invitation.fromJson(json);
+					invitations.add(invitation);
+					
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return invitations;
+	}
+	
 	
 	// methods and classes needed for Parcelable
-
+	
 	@Override
 	public int describeContents() {
 		return 0;
@@ -138,6 +225,5 @@ public class Invitation extends ParseObject implements Parcelable {
 		public Invitation[] newArray(int size) {
 			return new Invitation[size];
 		}
-		
 	};	
 }

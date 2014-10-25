@@ -7,6 +7,11 @@ import java.util.List;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.User;
 
+/**
+ * This class is used for caching data from parse directly.
+ * 
+ * @author nsankaran
+ */
 public class ParseData implements Serializable{
 	
 	private static final long serialVersionUID = -5916211427380606124L;

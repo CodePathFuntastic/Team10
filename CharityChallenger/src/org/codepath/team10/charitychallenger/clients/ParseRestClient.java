@@ -1,7 +1,11 @@
 package org.codepath.team10.charitychallenger.clients;
 
-import org.apache.http.client.HttpClient;
+import java.util.List;
+
 import org.codepath.team10.charitychallenger.activities.BaseActivity;
+import org.codepath.team10.charitychallenger.models.Invitation;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
@@ -49,6 +53,15 @@ public class ParseRestClient {
 			public void onSuccess(int paramInt, JSONObject json) {
 				if( json != null ){
 					Log.d(BaseActivity.LOG_TAG, "Json " + json.toString());
+					if( !json.isNull("results")){
+						try {
+							JSONArray array = json.getJSONArray("results");
+							List<Invitation> invitations =Invitation.fromJsonArray(array);
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
 				}
 			}
 		});
