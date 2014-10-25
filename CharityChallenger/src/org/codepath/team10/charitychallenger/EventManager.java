@@ -4,18 +4,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.codepath.team10.charitychallenger.clients.ParseJsonHttpResponseHandler;
 import org.codepath.team10.charitychallenger.clients.ParseRestClient;
 import org.codepath.team10.charitychallenger.listeners.InvitationCompletedListener;
 import org.codepath.team10.charitychallenger.listeners.InvitationReceivedListener;
+import org.codepath.team10.charitychallenger.listeners.InvitationsLoadedListener;
 import org.codepath.team10.charitychallenger.listeners.UserSynchedListener;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.User;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.activeandroid.util.Log;
-import com.loopj.android.http.JsonHttpResponseHandler;
 
 public class EventManager implements Serializable {
 	
@@ -26,6 +25,7 @@ public class EventManager implements Serializable {
 	private List<UserSynchedListener> userSyncedListeners = new ArrayList<UserSynchedListener>();
 	private List<InvitationCompletedListener> invitationCompletedListeners = new ArrayList<InvitationCompletedListener>();
 	private List<InvitationReceivedListener> invitationReceivedListeners = new ArrayList<InvitationReceivedListener>();
+	private List<InvitationsLoadedListener> invitationsLoadedListeners = new ArrayList<InvitationsLoadedListener>();
 
 	private ParseData parseData = ParseData.getInstance();
 	private ParseRestClient restclient = ParseRestClient.getInstance();
@@ -40,6 +40,69 @@ public class EventManager implements Serializable {
 		
 		return SINGLETON;
 	}
+	
+	/////////////////////////////////////////
+	///  method the fetch data
+	/////////////////////////////////////////
+	
+	public void getSentInvitations(){
+		
+		// trigger the call to get all received invitations
+		restclient.getSentInvitations(parseData.getUser().getFacebookId(), new ParseJsonHttpResponseHandler(){
+			
+			@Override
+			public void onSuccess(int status, JSONObject json) {
+				if( status == 200 ){
+					if( json != null ){
+						if( !json.isNull("results")){
+							try {
+								JSONArray array = json.getJSONArray("results");
+								List<Invitation> invites = Invitation.fromJsonArray(array);
+								if( invites.size() >0 ){
+									parseData.getSentInvitations().addAll(invites);
+								}
+								
+								// notify the components that need the data
+								processLoadedInvitationsOnSuccess();
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+				}
+			}
+		});
+	}
+
+	public void getReceivedInvitations(){
+		
+		// trigger the call to get all received invitations
+		restclient.getReceivedInvitations(parseData.getUser().getFacebookId(), new ParseJsonHttpResponseHandler(){
+			
+			@Override
+			public void onSuccess(int status, JSONObject json) {
+				if( status == 200 ){
+					if( json != null ){
+						if( !json.isNull("results")){
+							try {
+								JSONArray array = json.getJSONArray("results");
+								List<Invitation> invites = Invitation.fromJsonArray(array);
+								if( invites.size() >0 ){
+									parseData.getReceivedInvitations().addAll(invites);
+								}
+								
+								// notify the components that need the data
+								processLoadedInvitationsOnSuccess();
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+				}
+			}
+		});
+	}
+	
 	
 	////////////////////
 	// process events
@@ -56,49 +119,6 @@ public class EventManager implements Serializable {
 		}
 	}
 	
-	public void getSentInvitations(){
-		// trigger the call to get all received invitations
-		restclient.getReceivedInvitations(parseData.getUser().getFacebookId(), new JsonHttpResponseHandler(){
-			
-			@Override
-			public void onFailure(Throwable e) {
-				Log.e("Error retrieving sent invitations", e);
-			}
-			
-			@Override
-			public void onFailure(Throwable e,String paramString) {
-				Log.e("Error retrieving sent invitations :" + paramString, e);
-			}
-			
-			@Override
-			public void onFailure(Throwable e,JSONArray paramJSONArray) {
-				Log.e("Error retrieving sent invitations", e);
-			}
-			
-			@Override
-			public void onFailure(Throwable e,JSONObject paramJSONObject) {
-				Log.e("Error retrieving sent invitations", e);
-			}
-			@Override
-			public void onSuccess(int status, JSONObject json) {
-				if( status == 200 ){
-					if( json != null ){
-						if( !json.isNull("results")){
-							try {
-								JSONArray array = json.getJSONArray("results");
-								List<Invitation> invites = Invitation.fromJsonArray(array);
-								if( invites.size() >0 ){
-									parseData.getReceivedInvitations().addAll(invites);
-								}
-							} catch (JSONException e) {
-								e.printStackTrace();
-							}
-						}
-					}
-				}
-			}
-		});
-	}
 	
 	public void processCompletedInvitations( Invitation invitation){
 		if( invitation != null ){
@@ -113,6 +133,12 @@ public class EventManager implements Serializable {
 			for( InvitationReceivedListener listener : invitationReceivedListeners){
 				listener.onReceive(invitation);
 			}
+		}
+	}
+	
+	public void processLoadedInvitationsOnSuccess(){
+		for( InvitationsLoadedListener l : invitationsLoadedListeners ){
+			l.onSuccess();
 		}
 	}
 	
@@ -158,6 +184,22 @@ public class EventManager implements Serializable {
 			for( InvitationReceivedListener l: invitationReceivedListeners){
 				if( l == listener){
 					invitationReceivedListeners.remove(listener);
+				}
+			}
+		}
+	}
+	
+	public void registerInvitationLoadedListener( InvitationsLoadedListener listener){
+		if( listener != null ){
+			invitationsLoadedListeners.add(listener);
+		}
+	}
+	
+	public void unregisterInvitationLoadedListener( InvitationsLoadedListener listener ){
+		if( listener != null ){
+			for( InvitationsLoadedListener l : invitationsLoadedListeners){
+				if( l == listener ){
+					invitationsLoadedListeners.remove(l);
 				}
 			}
 		}

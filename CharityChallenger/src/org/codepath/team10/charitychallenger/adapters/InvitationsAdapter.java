@@ -67,8 +67,11 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 			setListener(convertView, position);
 		}
 		
-		String relativeCreationTime = FancyTimeUtil.getRelativeTimeAgo(invitation.getCreatedAt().toString());
-		viewHolder.tvFriendLocation.setText(relativeCreationTime);
+		if( invitation.getCreatedAt() != null ){
+			String relativeCreationTime = FancyTimeUtil.getRelativeTimeAgo(invitation.getCreatedAt().toString());
+			viewHolder.tvFriendLocation.setText(relativeCreationTime);
+		}
+		
 		updateVew(viewHolder, invitation);
 		
 		return convertView;
@@ -83,24 +86,24 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 		    	
 		    	final Invitation invitation = getItem(position);
 		    	
-		    	ChallengeQueries.getChallengeById( invitation.getChallengeId(), 
-		    						new FindCallback<Challenge>(){
-										@Override
-										public void done(
-												List<Challenge> challenges,
-												ParseException e) {
-												
-											if( e == null ){
-												// it should be only one
-												if( challenges.size()>0 ){
-													Challenge challenge = challenges.get(0);
-													intent.putExtra("challenge", challenge);
-													intent.putExtra("invitation", invitation);
-													getContext().startActivity(intent);
-												}
-											}
-										}
-		    			});
+//		    	ChallengeQueries.getChallengeById( invitation.getChallengeId(), 
+//		    						new FindCallback<Challenge>(){
+//										@Override
+//										public void done(
+//												List<Challenge> challenges,
+//												ParseException e) {
+//												
+//											if( e == null ){
+//												// it should be only one
+//												if( challenges.size()>0 ){
+//													Challenge challenge = challenges.get(0);
+//													intent.putExtra("challenge", challenge);
+//													intent.putExtra("invitation", invitation);
+//													getContext().startActivity(intent);
+//												}
+//											}
+//										}
+//		    			});
 		    		
 		    }
 		});
