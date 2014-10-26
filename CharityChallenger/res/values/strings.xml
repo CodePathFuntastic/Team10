@@ -27,7 +27,7 @@
     <!-- 262193280571643 kevin's facebook id -->
     <!-- 396935243786864 snambi facebook id -->
     <string name="facebook_app_id">370546396320150</string>
-    <string name="title_activity_login">Login</string>
+    <string name="title_activity_login">Charity Challenger</string>
     <string name="title_activity_home">Challenges</string>
     <string name="facebook_login_label">Login to facebook</string>
     <string name="donate_activity_title">Donate to Charity</string>
@@ -78,12 +78,12 @@
     <string name="charity_url_label">Charity URL</string>
     <string name="charity_url_value">http://www.globalgiving.com</string>
     <string name="charity_confirmation_value">Thanks for your donation!!!</string>
-    <string name="title_activity_all_invitations">AllInvitationsActivity</string>
-    <string name="title_activity_invitation_details">Invitations Details</string>
+    <string name="title_activity_all_invitations">Charity Challenger</string>
+    <string name="title_activity_invitation_details">Charity Challenger</string>
     <string name="invite_more_friends">Browse More!!</string>
     <string name="action_home">Home</string>
-    <string name="title_activity_all_invitations_fragment">AllInvitationsFragmentActivity</string>
-    <string name="title_action_accepted_challenges">Accepted Challenges</string>
-    <string name="title_activity_all_accepted">AllAcceptedActivity</string>
-    <string name="title_activity_invitation_accepted">InvitationAcceptedActivity</string>
+    <string name="title_activity_all_invitations_fragment">Charity Challenger</string>
+    <string name="title_action_accepted_challenges">Charity Challenger</string>
+    <string name="title_activity_all_accepted">Charity Challenger</string>
+    <string name="title_activity_invitation_accepted">Charity Challenger</string>
 </resources>
