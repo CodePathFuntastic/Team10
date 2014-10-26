@@ -5,6 +5,7 @@ import java.util.List;
 import org.codepath.team10.charitychallenger.ParseData;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.activities.ChallengeDetailsActivity;
+import org.codepath.team10.charitychallenger.activities.InvitationDetails;
 import org.codepath.team10.charitychallenger.clients.ParseJsonHttpResponseHandler;
 import org.codepath.team10.charitychallenger.clients.ParseRestClient;
 import org.codepath.team10.charitychallenger.models.Challenge;
@@ -17,6 +18,7 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.sax.StartElementListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,8 +66,6 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 		}else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}	
-		
-		
 				
 		if( invitation.getCreatedAt() != null ){
 			String relativeCreationTime = FancyTimeUtil.getRelativeTimeAgo(invitation.getCreatedAt().toString());
@@ -73,6 +73,8 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 		}
 		
 		
+		// all this if-else can be solved by subclassing this adapter
+		// TODO: properly subclass this adapter
 		
 		if( isSentView == true){
 			User friend = parseData.getFriendByFacebookId(invitation.getReceiver());
@@ -93,19 +95,61 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 			}
 		}
 		
-		setListener(viewHolder.btnInvite, position, invitation);
+		if( isSentView ==true){
+			setChallengeListener(viewHolder.btnInvite, position, invitation);
+		}else{
+			setInvitationListener(viewHolder.btnInvite, position, invitation);
+		}
+
 		
 		return convertView;
 	}
 
-	private void setListener(View view, final int position, final Invitation invitation ){
+	private void setInvitationListener(View view, int position,
+										final Invitation invitation) {
+		
+		view.setOnClickListener( new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				ParseRestClient client = ParseRestClient.getInstance();
+				client.getChallengeById(invitation.getChallengeId(), new ParseJsonHttpResponseHandler(){
+					@Override
+					public void onSuccess(int status, JSONObject json) {
+						if( status == 200 && json != null ){
+							if( !json.isNull("results")){
+								try {
+									JSONArray array = json.getJSONArray("results");
+									// it should only 1 in length
+									if( array.length() > 0 ){
+										JSONObject j = array.getJSONObject(0);
+										Challenge c = Challenge.fromJson(j);
+										
+										Intent intent = new Intent(getContext(), InvitationDetails.class);
+										intent.putExtra("challenge", c);
+										intent.putExtra("invitation", invitation);
+										getContext().startActivity(intent);
+									}
+									
+								} catch (JSONException e) {
+									e.printStackTrace();
+								}
+							}
+						}
+					}
+				});
+
+			}
+		});
+	
+	}
+
+	private void setChallengeListener(View view, final int position, final Invitation invitation ){
 		
 		view.setOnClickListener(new OnClickListener() {
 		    
 			@Override
 		    public void onClick(View v) {
-		    	//final Intent intent = new Intent(getContext(), InvitationDetails.class);
-		    	//final Invitation invitation = getItem(position);
 		    	
 				ParseRestClient client = ParseRestClient.getInstance();
 				client.getChallengeById(invitation.getChallengeId(), new ParseJsonHttpResponseHandler(){
