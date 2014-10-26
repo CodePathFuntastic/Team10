@@ -116,7 +116,9 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 		    	final Invitation invitation = getItem(position);
 		    	
 		    	
-		    	ParseRestClient.getInstance().getChallengeDetails(invitation.getChallengeId(), new ParseJsonHttpResponseHandler(){
+		    	ParseRestClient.getInstance().getInvitationDetail(invitation.getChallengeId(), 
+		    			invitation.getSender(), invitation.getReceiver(),
+		    			new ParseJsonHttpResponseHandler(){
 					@Override
 					public void onSuccess(int status, JSONObject json) {
 						if( status == 200 && json != null){
@@ -126,12 +128,14 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 									int size = array.length();
 									//Log.d("Challenge: ", array.getJSONObject(0));
 									// we only care about the first result
-									for(int i=0 ; i < 1; i++ ){
-										JSONObject j = array.getJSONObject(i);
-										Challenge challenge = Challenge.fromJson(j);	
-										Intent intent = new Intent(getContext(), ChallengeDetailsActivity.class);
-										intent.putExtra("challenge", challenge);
-										getContext().startActivity(intent);
+									if (size > 0) {
+										for(int i=0 ; i < 1; i++ ){
+											JSONObject j = array.getJSONObject(i);
+											Challenge challenge = Challenge.fromJson(j);	
+											Intent intent = new Intent(getContext(), ChallengeDetailsActivity.class);
+											intent.putExtra("challenge", challenge);
+											getContext().startActivity(intent);
+										}
 									}
 								} catch (JSONException e) {
 									e.printStackTrace();

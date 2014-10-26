@@ -350,6 +350,26 @@ public class Invitation extends ParseObject implements Parcelable {
 		return json.toString();
 	}
 	
+	public static String createJsonQuery(String sender, String receiver, int challengeId){
+		
+		JSONObject json = new JSONObject();
+		try {
+				if( sender != null ){
+					json.put("sender", sender);
+				}
+				if( receiver != null ){
+					json.put("receiver", receiver);
+				}
+				json.put("challengeId", challengeId);
+
+		} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}
+		
+		return json.toString();		
+	}
+	
 	public static String createJsonQueryStatus(String sender, String receiver, int status){
 		
 		JSONObject json = new JSONObject();

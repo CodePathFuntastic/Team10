@@ -110,33 +110,35 @@ public class EventManager implements Serializable {
 	public void getReceivedOpenInvitations(){
 		
 		// trigger the call to get all received invitations
-		restclient.getReceivedInvitations(parseData.getUser().getFacebookId(), 
-									InvitationStatusEnum.OPEN.ordinal(),
-			new ParseJsonHttpResponseHandler(){
-			
-			@Override
-			public void onSuccess(int status, JSONObject json) {
-				if( status == 200 ){
-					if( json != null ){
-						if( !json.isNull("results")){
-							try {
-								JSONArray array = json.getJSONArray("results");
-								List<Invitation> invites = Invitation.fromJsonArray(array);
-								if( invites.size() >0 ){
-									parseData.getReceivedInvitations().clear();
-									parseData.getReceivedInvitations().addAll(invites);
+		if (parseData !=null && parseData.getUser() !=null) {
+			restclient.getReceivedInvitations(parseData.getUser().getFacebookId(), 
+					InvitationStatusEnum.OPEN.ordinal(),
+					new ParseJsonHttpResponseHandler(){
+
+				@Override
+				public void onSuccess(int status, JSONObject json) {
+					if( status == 200 ){
+						if( json != null ){
+							if( !json.isNull("results")){
+								try {
+									JSONArray array = json.getJSONArray("results");
+									List<Invitation> invites = Invitation.fromJsonArray(array);
+									if( invites.size() >0 ){
+										parseData.getReceivedInvitations().clear();
+										parseData.getReceivedInvitations().addAll(invites);
+									}
+
+									// notify the components that need the data
+									processLoadedInvitationsOnSuccess();
+								} catch (JSONException e) {
+									e.printStackTrace();
 								}
-								
-								// notify the components that need the data
-								processLoadedInvitationsOnSuccess();
-							} catch (JSONException e) {
-								e.printStackTrace();
 							}
 						}
 					}
 				}
-			}
-		});
+			});
+		}
 	}
 
 	public void loadAllUsers(){
