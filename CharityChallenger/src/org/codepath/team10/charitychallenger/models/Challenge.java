@@ -108,6 +108,20 @@ public class Challenge extends ParseObject implements Parcelable{
 		return getList("challenge_pic_urls");
 	}
 
+	public static String createJsonQuery(int challengeId) {
+		
+		String result=null;
+		JSONObject json = new JSONObject();
+		try {
+			json.put("challenge_id", challengeId);
+			result = json.toString();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	// methods needed for json marshalling and unmarshalling
 	public static Challenge fromJson(JSONObject json) {
 		Challenge challenge = null;

@@ -1,5 +1,6 @@
 package org.codepath.team10.charitychallenger.clients;
 
+import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.User;
 
@@ -112,6 +113,21 @@ public class ParseRestClient {
 		}
 		
 		String json = User.createJsonQuery(facebookId);
+		RequestParams params = new RequestParams();
+		params.put("where", json);
+		
+		httpClient.get(PARSE_END_POINT_USER, params, responseHandler);
+	}
+	
+	public void getChallengeDetails( int challengeId, AsyncHttpResponseHandler responseHandler ){
+		if( challengeId <=0 ){
+			throw new NullPointerException("challengeId cannot be 0");
+		}
+		if( responseHandler == null ){
+			throw new NullPointerException("response handler cannot be null");
+		}
+		
+		String json = Challenge.createJsonQuery(challengeId);
 		RequestParams params = new RequestParams();
 		params.put("where", json);
 		

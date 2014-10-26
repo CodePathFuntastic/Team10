@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.codepath.team10.charitychallenger.ParseData;
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.activities.ChallengeDetailsActivity;
 import org.codepath.team10.charitychallenger.activities.InvitationDetails;
 import org.codepath.team10.charitychallenger.clients.ParseJsonHttpResponseHandler;
 import org.codepath.team10.charitychallenger.clients.ParseRestClient;
+import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.User;
 import org.codepath.team10.charitychallenger.utils.FancyTimeUtil;
@@ -64,6 +66,8 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}	
 		
+		setListener(viewHolder.btnInvite, position);
+		
 //		if(invitation.getStatus() == InvitationStatusEnum.OPEN.ordinal() ){
 //			viewHolder.btnInvite.setVisibility(View.VISIBLE);
 //			setListener(viewHolder.btnInvite, position);
@@ -111,24 +115,31 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 		    	
 		    	final Invitation invitation = getItem(position);
 		    	
-//		    	ChallengeQueries.getChallengeById( invitation.getChallengeId(), 
-//		    						new FindCallback<Challenge>(){
-//										@Override
-//										public void done(
-//												List<Challenge> challenges,
-//												ParseException e) {
-//												
-//											if( e == null ){
-//												// it should be only one
-//												if( challenges.size()>0 ){
-//													Challenge challenge = challenges.get(0);
-//													intent.putExtra("challenge", challenge);
-//													intent.putExtra("invitation", invitation);
-//													getContext().startActivity(intent);
-//												}
-//											}
-//										}
-//		    			});
+		    	
+		    	ParseRestClient.getInstance().getChallengeDetails(invitation.getChallengeId(), new ParseJsonHttpResponseHandler(){
+					@Override
+					public void onSuccess(int status, JSONObject json) {
+						if( status == 200 && json != null){
+							if( !json.isNull("results")){
+								try {
+									JSONArray array = json.getJSONArray("results");
+									int size = array.length();
+									//Log.d("Challenge: ", array.getJSONObject(0));
+									// we only care about the first result
+									for(int i=0 ; i < 1; i++ ){
+										JSONObject j = array.getJSONObject(i);
+										Challenge challenge = Challenge.fromJson(j);	
+										Intent intent = new Intent(getContext(), ChallengeDetailsActivity.class);
+										intent.putExtra("challenge", challenge);
+										getContext().startActivity(intent);
+									}
+								} catch (JSONException e) {
+									e.printStackTrace();
+								}
+							}
+						}
+					}
+				});
 		    		
 		    }
 		});
