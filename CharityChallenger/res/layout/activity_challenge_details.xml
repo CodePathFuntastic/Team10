@@ -26,31 +26,32 @@
         android:layout_below="@+id/tvChallengeTitle"
         android:src="@drawable/icons_partnership_170" />
 
-    <Button
-        android:id="@+id/btnInvite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/ivChallengeImage"
-        android:onClick="onClickInvite"
-        android:text="Invite" />
-
-    <Button
-        android:id="@+id/btnDonateNow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/ivChallengeImage"
-        android:onClick="onClickDonate"
-        android:text="Donate" />
-
     <TextView
         android:id="@+id/tvSelectedFriends"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/btnInviewNow"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/btnInvite"/>
+        android:layout_below="@+id/btnSelectFriends" />
+
+    <Button
+        android:id="@+id/btnInviewNow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:enabled="false"
+        android:onClick="onClickDonate"
+        android:text="Invite" />
+
+    <Button
+        android:id="@+id/btnSelectFriends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivChallengeImage"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickInvite"
+        android:text="Select Friends" />
 
 </RelativeLayout>

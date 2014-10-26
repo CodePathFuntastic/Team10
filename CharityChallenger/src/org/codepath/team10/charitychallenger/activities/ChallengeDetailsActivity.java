@@ -63,7 +63,7 @@ public class ChallengeDetailsActivity extends BaseActivity {
 		Log.v( BaseActivity.LOG_TAG, String.format("challenge name: %s", name ));
 		
 		resultsTextView = (TextView) findViewById(R.id.tvSelectedFriends);
-        pickFriendsButton = (Button) findViewById(R.id.btnInvite);
+        pickFriendsButton = (Button) findViewById(R.id.btnSelectFriends);
         pickFriendsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 onClickPickFriends();
