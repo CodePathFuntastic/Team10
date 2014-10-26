@@ -70,4 +70,10 @@ public class ChallengesHomeActivity extends BaseActivity {
 			actionBar.selectTab(homeTab);
 			
 	}
+	
+	@Override
+	public void onBackPressed() {
+	    // should not go back....
+	    return;
+	}
 }

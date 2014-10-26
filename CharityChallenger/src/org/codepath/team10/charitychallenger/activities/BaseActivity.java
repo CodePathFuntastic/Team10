@@ -40,9 +40,7 @@ public class BaseActivity extends FragmentActivity {
 				application = (CharityChallengerApplication) app;
 			}
 		}
-		
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		
+
 		eventManager = EventManager.getInstance();
 		parseData = ParseData.getInstance();
 		
@@ -52,7 +50,6 @@ public class BaseActivity extends FragmentActivity {
 		menufragment = new MenuFragment();
 		fragmentTransaction.add(menufragment, "menu");
 		fragmentTransaction.commit();
-		
 		
 		//application.registerUserSyncedListener(menufragment);
 		eventManager.registerUserSyncedListener(menufragment);
