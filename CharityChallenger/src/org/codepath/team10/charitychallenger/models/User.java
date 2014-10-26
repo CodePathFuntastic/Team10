@@ -130,5 +130,25 @@ public class User extends ParseObject {
 		
 		return user;
 	}
+	
+	@Override
+	public int hashCode() {
+		int result = 0;
+		if( getObjectId() != null ){
+			result = getObjectId().hashCode();
+		}else{
+			result = super.hashCode();
+		}
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		boolean result=false;
+		if( hashCode() == o.hashCode() ){
+			result = true;
+		}
+		return result;
+	}
 }
 

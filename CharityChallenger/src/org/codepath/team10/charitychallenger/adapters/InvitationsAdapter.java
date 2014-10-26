@@ -2,14 +2,13 @@ package org.codepath.team10.charitychallenger.adapters;
 
 import java.util.List;
 
+import org.codepath.team10.charitychallenger.ParseData;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.activities.InvitationDetails;
 import org.codepath.team10.charitychallenger.clients.ParseJsonHttpResponseHandler;
 import org.codepath.team10.charitychallenger.clients.ParseRestClient;
 import org.codepath.team10.charitychallenger.models.Invitation;
-import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
 import org.codepath.team10.charitychallenger.models.User;
-import org.codepath.team10.charitychallenger.queries.UserQuery;
 import org.codepath.team10.charitychallenger.utils.FancyTimeUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,16 +27,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.parse.FindCallback;
-import com.parse.ParseException;
 
 public class InvitationsAdapter extends ArrayAdapter<Invitation> {	
 	
 	private boolean isSentView = false;
+	private ParseData parseData =null;
 	
 	public InvitationsAdapter(Context context, boolean isSentView, List<Invitation> objects) {
 		super(context, R.layout.item_invite, objects);
 		this.isSentView = isSentView;
+		parseData = ParseData.getInstance();
 	}
 	
 	public static class ViewHolder{
@@ -79,9 +78,20 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 		}
 		
 		if( isSentView == true){
-			updateVew(viewHolder, invitation.getReceiver());
+			User friend = parseData.getFriendByFacebookId(invitation.getReceiver());
+			if( friend == null ){
+				updateVew(viewHolder, invitation.getReceiver());
+			}else{
+				updateView(friend, viewHolder);
+			}
+
 		}else{
-			updateVew(viewHolder, invitation.getSender());
+			User friend = parseData.getFriendByFacebookId(invitation.getReceiver());
+			if( friend == null ){
+				updateVew(viewHolder, invitation.getSender());
+			}else{
+				updateView(friend, viewHolder);
+			}
 		}
 		
 		
@@ -119,6 +129,16 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 		    }
 		});
 	}
+	
+	private void updateView( User user, ViewHolder viewHolder){
+		if(user.getImageUrl() != null){
+			viewHolder.ivFriend.setImageResource(android.R.color.transparent);
+			ImageLoader.getInstance().displayImage(user.getImageUrl(), viewHolder.ivFriend);
+		}
+		Log.d("InvitationsAdapter: name - ", user.getName());
+		viewHolder.tvFriendName.setText(user.getName());
+	}
+	
 	private void updateVew(final ViewHolder viewHolder, String  userid) {
 		
 		ParseRestClient.getInstance().getUserDetails(userid, new ParseJsonHttpResponseHandler(){
@@ -133,6 +153,8 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 							for(int i=0 ; i < 1; i++ ){
 								JSONObject j = array.getJSONObject(i);
 								User user = User.fromJson(j);
+								// save the user in memory
+								ParseData.getInstance().addFriend(user);
 								if(user.getImageUrl() != null){
 									viewHolder.ivFriend.setImageResource(android.R.color.transparent);
 									ImageLoader.getInstance().displayImage(user.getImageUrl(), viewHolder.ivFriend);

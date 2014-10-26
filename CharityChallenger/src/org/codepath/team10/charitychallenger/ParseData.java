@@ -18,6 +18,8 @@ public class ParseData implements Serializable{
 	
 	private List<Invitation> receivedInvitations = new ArrayList<Invitation>();
 	private List<Invitation> sentInvitations = new ArrayList<Invitation>();
+	private List<User> friends = new ArrayList<User>();
+	
 	private User user;
 	
 	private static ParseData SINGLETON = null;
@@ -41,5 +43,30 @@ public class ParseData implements Serializable{
 	}
 	public List<Invitation> getSentInvitations(){
 		return sentInvitations;
+	}
+	
+	public void addFriend( User user){
+		boolean match = false;
+		for( User u : friends ){
+			if( u.equals(user) ){
+				match =true;
+				break;
+			}
+		}
+		
+		if( match == false ){
+			friends.add(user);
+		}
+	}
+	
+	public User getFriendByFacebookId( String facebookId){
+		User user=null;
+		for( User u : friends ){
+			if( u.getFacebookId().equals(facebookId) ){
+				user = u;
+				break;
+			}
+		}
+		return user;
 	}
 }
