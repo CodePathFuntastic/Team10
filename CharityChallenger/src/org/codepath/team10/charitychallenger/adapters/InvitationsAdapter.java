@@ -86,7 +86,7 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 			}
 
 		}else{
-			User friend = parseData.getFriendByFacebookId(invitation.getReceiver());
+			User friend = parseData.getFriendByFacebookId(invitation.getSender());
 			if( friend == null ){
 				updateVew(viewHolder, invitation.getSender());
 			}else{

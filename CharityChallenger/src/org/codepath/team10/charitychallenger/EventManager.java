@@ -138,7 +138,33 @@ public class EventManager implements Serializable {
 		});
 	}
 
+	public void loadAllUsers(){
+		restclient.getAllUserDetails( new ParseJsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int status, JSONObject json) {
+				if( status == 200 && json != null ){
+					if( !json.isNull("results") ){
+						try {
+							JSONArray array = json.getJSONArray("results");
+							for( int i=0; i<array.length() ; i++){
+								JSONObject j = array.getJSONObject(i);
+								User u = User.fromJson(j);
+								parseData.addFriend(u);
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		});
+	}
 	
+	public void loadAllChallenges() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	////////////////////
 	// process events
@@ -241,4 +267,5 @@ public class EventManager implements Serializable {
 			}
 		}
 	}
+
 }

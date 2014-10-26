@@ -118,6 +118,15 @@ public class ParseRestClient {
 		httpClient.get(PARSE_END_POINT_USER, params, responseHandler);
 	}
 	
+	public void getAllUserDetails(  AsyncHttpResponseHandler responseHandler ){
+		if( responseHandler == null ){
+			throw new NullPointerException("response handler cannot be null");
+		}
+				
+		httpClient.get(PARSE_END_POINT_USER, null, responseHandler);
+	}
+
+	
 	/*
 	public void getInvitations( ){
 		String endPoint = PARSE_BASE_URL + "Invitation";

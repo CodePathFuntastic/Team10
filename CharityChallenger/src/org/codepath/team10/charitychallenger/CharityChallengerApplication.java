@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.codepath.team10.charitychallenger.clients.ParseRestClient;
 import org.codepath.team10.charitychallenger.clients.TwitterRestClient;
 import org.codepath.team10.charitychallenger.listeners.UserSynchedListener;
 import org.codepath.team10.charitychallenger.models.Challenge;
@@ -81,10 +80,8 @@ public class CharityChallengerApplication extends Application {
 		
 		initImageLoader();
 		
-//		ParseRestClient parseClient = ParseRestClient.getInstance();
-//		parseClient.getInvitations();
-//		
-		
+		eventManager.loadAllUsers();
+		eventManager.loadAllChallenges();
 		//ParseTwitterUtils.initialize( Constants.TWITTER_CONSUMER_KEY, Constants.TWITTER_CONSUMER_SECRET);
 	}
 	
