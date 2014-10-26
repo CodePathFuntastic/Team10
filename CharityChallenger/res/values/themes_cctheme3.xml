@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="cctheme3" parent="@style/_cctheme3"/>
+
+  <style name="_cctheme3" parent="android:Theme.Holo.Light.DarkActionBar">
+
+    <item name="android:editTextBackground">@drawable/cctheme3_edit_text_holo_light</item>
+
+    <item name="android:textColorHighlight">#99f38630</item>
+    <item name="android:textSelectHandleLeft">@drawable/cctheme3_text_select_handle_left</item>
+    <item name="android:textSelectHandleRight">@drawable/cctheme3_text_select_handle_right</item>
+    <item name="android:textSelectHandle">@drawable/cctheme3_text_select_handle_middle</item>
+
+    <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewcctheme3</item>
+
+    <item name="android:listChoiceIndicatorMultiple">@drawable/cctheme3_btn_check_holo_light</item>
+
+    <item name="android:listChoiceIndicatorSingle">@drawable/cctheme3_btn_radio_holo_light</item>
+
+    <item name="android:buttonStyle">@style/Buttoncctheme3</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtoncctheme3</item>
+
+    <item name="android:dropDownSpinnerStyle">@style/Spinnercctheme3</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarcctheme3</item>
+
+    <item name="android:seekBarStyle">@style/SeekBarcctheme3</item>
+
+    <item name="android:ratingBarStyle">@style/RatingBarcctheme3</item>
+
+    <item name="android:ratingBarStyleIndicator">@style/RatingBarBigcctheme3</item>
+
+    <item name="android:ratingBarStyleSmall">@style/RatingBarSmallcctheme3</item>
+
+    <item name="android:buttonStyleToggle">@style/Togglecctheme3</item>
+
+    <item name="android:listChoiceBackgroundIndicator">@drawable/cctheme3_list_selector_holo_light</item>
+
+    <item name="android:activatedBackgroundIndicator">@drawable/cctheme3_activated_background_holo_light</item>
+
+    <item name="android:fastScrollThumbDrawable">@drawable/cctheme3_fastscroll_thumb_holo</item>
+
+  </style>
+
+</resources>
