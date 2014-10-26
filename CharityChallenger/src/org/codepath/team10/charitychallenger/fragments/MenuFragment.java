@@ -3,11 +3,8 @@ package org.codepath.team10.charitychallenger.fragments;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
-import org.codepath.team10.charitychallenger.activities.AllAcceptedActivity;
-import org.codepath.team10.charitychallenger.activities.AllInvitationsActivity;
-import org.codepath.team10.charitychallenger.activities.ChallengesHomeActivity;
 import org.codepath.team10.charitychallenger.activities.BaseActivity;
-import org.codepath.team10.charitychallenger.activities.InvitationAcceptedActivity;
+import org.codepath.team10.charitychallenger.activities.ChallengesHomeActivity;
 import org.codepath.team10.charitychallenger.activities.InvitationDetails;
 import org.codepath.team10.charitychallenger.listeners.InvitationCompletedListener;
 import org.codepath.team10.charitychallenger.listeners.InvitationReceivedListener;
@@ -18,6 +15,7 @@ import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
 import org.codepath.team10.charitychallenger.models.User;
 import org.codepath.team10.charitychallenger.queries.ChallengeQueries;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -104,12 +102,8 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
 	        	        		}
 	        	        });
 	        		}else if( numInvitations > 1 ){
-	        			
-	            		// if more that invitations are available, show all invitations, 
-	        			// so that user can pick one
-
-	        			Intent intent = new Intent( getActivity(), ChallengesHomeActivity.class);
-	        			startActivity(intent);
+	        			ActionBar actionBar = getActivity().getActionBar();
+	        			actionBar.selectTab(actionBar.getTabAt(2));
 	        		}
         		}
         	}
