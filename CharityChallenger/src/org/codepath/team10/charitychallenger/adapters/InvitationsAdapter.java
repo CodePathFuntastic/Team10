@@ -77,8 +77,11 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 			viewHolder.tvFriendLocation.setText(relativeCreationTime);
 		}
 		
+		
+		
 		if( isSentView == true){
 			User friend = parseData.getFriendByFacebookId(invitation.getReceiver());
+			viewHolder.tvFriendName.setText( invitation.getReceiver());
 			if( friend == null ){
 				updateVew(viewHolder, invitation.getReceiver());
 			}else{
@@ -87,6 +90,7 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 
 		}else{
 			User friend = parseData.getFriendByFacebookId(invitation.getSender());
+			viewHolder.tvFriendName.setText( invitation.getSender());
 			if( friend == null ){
 				updateVew(viewHolder, invitation.getSender());
 			}else{
