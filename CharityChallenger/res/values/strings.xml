@@ -86,4 +86,10 @@
     <string name="title_action_accepted_challenges">Charity Challenger</string>
     <string name="title_activity_all_accepted">Charity Challenger</string>
     <string name="title_activity_invitation_accepted">Charity Challenger</string>
+    
+    <string-array name="theme_array">
+        <item>cctheme1</item>
+        <item>cctheme2</item>
+    </string-array>
+    
 </resources>
