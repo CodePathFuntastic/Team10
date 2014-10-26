@@ -152,6 +152,19 @@ public class ParseRestClient {
 		
 		httpClient.get(PARSE_END_POINT_CHALLENGE, null, responseHandler);
 	}
+	
+	public void getChallengeById(int challengeId, AsyncHttpResponseHandler responseHandler  ){
+		if( responseHandler == null ){
+			throw new NullPointerException("response handler cannot be null");
+		}
+		
+		String query = Challenge.createJsonQueryChallengeId( challengeId);
+		
+		RequestParams params = new RequestParams();
+		params.put("where", query);
+		
+		httpClient.get(PARSE_END_POINT_CHALLENGE, params, responseHandler);
+	}
 
 	
 	/*

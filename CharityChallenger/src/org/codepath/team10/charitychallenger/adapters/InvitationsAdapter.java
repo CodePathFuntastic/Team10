@@ -5,7 +5,6 @@ import java.util.List;
 import org.codepath.team10.charitychallenger.ParseData;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.activities.ChallengeDetailsActivity;
-import org.codepath.team10.charitychallenger.activities.InvitationDetails;
 import org.codepath.team10.charitychallenger.clients.ParseJsonHttpResponseHandler;
 import org.codepath.team10.charitychallenger.clients.ParseRestClient;
 import org.codepath.team10.charitychallenger.models.Challenge;
@@ -66,16 +65,8 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}	
 		
-		setListener(viewHolder.btnInvite, position);
 		
-//		if(invitation.getStatus() == InvitationStatusEnum.OPEN.ordinal() ){
-//			viewHolder.btnInvite.setVisibility(View.VISIBLE);
-//			setListener(viewHolder.btnInvite, position);
-//		} else {
-//			viewHolder.btnInvite.setVisibility(View.GONE);
-//			setListener(convertView, position);
-//		}
-		
+				
 		if( invitation.getCreatedAt() != null ){
 			String relativeCreationTime = FancyTimeUtil.getRelativeTimeAgo(invitation.getCreatedAt().toString());
 			viewHolder.tvFriendLocation.setText(relativeCreationTime);
@@ -102,41 +93,38 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 			}
 		}
 		
+		setListener(viewHolder.btnInvite, position, invitation);
 		
 		return convertView;
 	}
 
-	private void setListener(View view, final int position){
+	private void setListener(View view, final int position, final Invitation invitation ){
+		
 		view.setOnClickListener(new OnClickListener() {
 		    
 			@Override
 		    public void onClick(View v) {
-		    	final Intent intent = new Intent(getContext(), InvitationDetails.class);
+		    	//final Intent intent = new Intent(getContext(), InvitationDetails.class);
+		    	//final Invitation invitation = getItem(position);
 		    	
-		    	final Invitation invitation = getItem(position);
-		    	
-		    	
-		    	ParseRestClient.getInstance().getInvitationDetail(invitation.getChallengeId(), 
-		    			invitation.getSender(), invitation.getReceiver(),
-		    			new ParseJsonHttpResponseHandler(){
+				ParseRestClient client = ParseRestClient.getInstance();
+				client.getChallengeById(invitation.getChallengeId(), new ParseJsonHttpResponseHandler(){
 					@Override
 					public void onSuccess(int status, JSONObject json) {
-						if( status == 200 && json != null){
+						if( status == 200 && json != null ){
 							if( !json.isNull("results")){
 								try {
 									JSONArray array = json.getJSONArray("results");
-									int size = array.length();
-									//Log.d("Challenge: ", array.getJSONObject(0));
-									// we only care about the first result
-									if (size > 0) {
-										for(int i=0 ; i < 1; i++ ){
-											JSONObject j = array.getJSONObject(i);
-											Challenge challenge = Challenge.fromJson(j);	
-											Intent intent = new Intent(getContext(), ChallengeDetailsActivity.class);
-											intent.putExtra("challenge", challenge);
-											getContext().startActivity(intent);
-										}
+									// it should only 1 in length
+									if( array.length() > 0 ){
+										JSONObject j = array.getJSONObject(0);
+										Challenge c = Challenge.fromJson(j);
+										
+										Intent intent = new Intent(getContext(), ChallengeDetailsActivity.class);
+										intent.putExtra("challenge", c);
+										getContext().startActivity(intent);
 									}
+									
 								} catch (JSONException e) {
 									e.printStackTrace();
 								}
@@ -144,7 +132,7 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 						}
 					}
 				});
-		    		
+		    	
 		    }
 		});
 	}
@@ -189,28 +177,5 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 			}
 		});
 		
-		/*
-		UserQuery.getUserBySenderId(userid, 
-			new FindCallback<User>(){
-				@Override
-				public void done(
-						List<User> users,
-						ParseException e) {
-						
-					if( e == null ){
-						// it should be only one
-						if( users.size()>0 ){
-							User user = users.get(0);
-							if(user.getImageUrl() != null){
-								viewHolder.ivFriend.setImageResource(android.R.color.transparent);
-								ImageLoader.getInstance().displayImage(user.getImageUrl(), viewHolder.ivFriend);
-							}
-							Log.d("InvitationsAdapter: name - ", user.getName());
-							viewHolder.tvFriendName.setText(user.getName());
-						}
-					}
-				}
-		});
-		*/
 	}
 }

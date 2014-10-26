@@ -206,4 +206,19 @@ public class Challenge extends ParseObject implements Parcelable{
 		}
 	};
 
+	
+	/////////////////////////////////////////////////////
+	////// Query methods are here
+	/////////////////////////////////////////////////////
+	public static String createJsonQueryChallengeId(int challengeId) {
+		JSONObject json = new JSONObject();
+		
+		try {
+			json.put("challenge_id", challengeId);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return json.toString();
+	}
+
 }
