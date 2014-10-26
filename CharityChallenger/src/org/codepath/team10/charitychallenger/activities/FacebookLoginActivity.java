@@ -73,7 +73,7 @@ public class FacebookLoginActivity extends BaseActivity{
 						).executeAsync();
 					
 										
-					Intent intent = new Intent( FacebookLoginActivity.this, ChallengesHomeActivity.class);
+					Intent intent = new Intent( FacebookLoginActivity.this, ChallengesHomeSwipeActivity.class);
 					startActivity(intent);
 
 				}else{

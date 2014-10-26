@@ -191,6 +191,12 @@
             android:name=".activities.InvitationAcceptedActivity"
             android:label="@string/title_activity_invitation_accepted" >
         </activity>
+        
+        <activity
+            android:name=".activities.ChallengesHomeSwipeActivity"
+            android:label="@string/title_activity_invitation_accepted" >
+        </activity>
+        
     </application>
 
 </manifest>
