@@ -11,6 +11,11 @@
             backward-compatibility can go here.
         -->
     </style>
+    
+   <!-- =============================================================== -->
+    <!-- cc_theme1 styles -->
+    <!-- =============================================================== -->    
+    
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
