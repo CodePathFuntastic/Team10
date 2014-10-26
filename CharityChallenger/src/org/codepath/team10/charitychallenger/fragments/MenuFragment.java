@@ -54,10 +54,11 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
     }
 
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    	menu.clear();
+   	
+    	inflater.inflate(R.menu.home_activity_menu, menu);
     	super.onCreateOptionsMenu(menu, inflater);
     	
-    	inflater.inflate(R.menu.home_activity_menu, menu);
-
         RelativeLayout badgeLayout = (RelativeLayout) menu.findItem(R.id.badge).getActionView();
         mTvNotificationsBadge = (TextView) badgeLayout.findViewById(R.id.actionbar_notifcation_textview);
         mTvNotificationsBadge.setVisibility(View.GONE);
