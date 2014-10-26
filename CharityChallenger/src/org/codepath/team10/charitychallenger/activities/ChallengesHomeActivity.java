@@ -38,7 +38,7 @@ public class ChallengesHomeActivity extends BaseActivity {
 	
 		Tab receivedTab = actionBar
 				.newTab()
-				.setText("Received")
+				.setText("Invitations")
 				//.setIcon(R.drawable.ic_home)
 				.setTag("ReceivedInvitationsFragment")
 				.setTabListener(
@@ -65,8 +65,9 @@ public class ChallengesHomeActivity extends BaseActivity {
 					    		ChallengesHomeFragment.class, bundle ));
 			
 			actionBar.addTab(homeTab);
+			actionBar.addTab(receivedTab);
 			actionBar.addTab(sentTab);
 			actionBar.selectTab(homeTab);
-			actionBar.addTab(receivedTab);
+			
 	}
 }

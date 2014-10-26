@@ -269,7 +269,8 @@ public class PaymentConfirmationActivity extends BaseActivity {
 //		getActivity().setResult(Activity.RESULT_OK, data);
 //		getActivity().finish();
 		
-		Intent intent = new Intent( this, FunActivity.class);
+		//Intent intent = new Intent( this, FunActivity.class);
+		Intent intent = new Intent( this, ChallengesHomeActivity.class);
 		intent.putExtra("invitation", invitation);
 		intent.putExtra("challenge", challenge);
 		
