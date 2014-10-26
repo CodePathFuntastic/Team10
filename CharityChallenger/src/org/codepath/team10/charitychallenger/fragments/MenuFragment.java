@@ -40,6 +40,7 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
 	TextView mTvNotificationsBadge;
 	String username;
 	boolean hasNewInvitationArrived = false;
+	boolean isRequestProcessing = false;
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,7 +105,8 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
 	        	        });
 	        		}else if( numInvitations > 1 ){
 	        			ActionBar actionBar = getActivity().getActionBar();
-	        			actionBar.selectTab(actionBar.getTabAt(2));
+	        			if(actionBar.getTabCount() == 3)
+	        				actionBar.selectTab(actionBar.getTabAt(2));
 	        		}
         		}
         	}
@@ -131,7 +133,6 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
     
     public void updateInvitationBadge(){
         ParseQuery<Invitation> query = ParseQuery.getQuery(Invitation.class);
-        
         String userId = activity.getUser().getFacebookId();
         query.whereEqualTo("receiver", userId);
         query.whereEqualTo("status", InvitationStatusEnum.OPEN.ordinal() );
@@ -143,7 +144,12 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
 								ParseException e) {
 				if( e == null){
 					if( invites != null && invites.size() > 0){
-						activity.getInvitations().addAll(invites);
+						List<Invitation> invts = activity.getInvitations();
+						for(Invitation invite : invites){ // Hack. ignoring duplicates. updateInvitationBadge being called twice on Application start. needs to be fixed.
+							if(!invts.contains(invite)){
+								invts.add(invite);
+							}
+						}
 						displayInvitaionBadge();
 					}
 				}else{
