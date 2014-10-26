@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.parse.ParseObject;
 import com.parse.ParseQueryAdapter;
 
 public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.User;
 
@@ -19,6 +20,7 @@ public class ParseData implements Serializable{
 	private List<Invitation> receivedInvitations = new ArrayList<Invitation>();
 	private List<Invitation> sentInvitations = new ArrayList<Invitation>();
 	private List<User> friends = new ArrayList<User>();
+	private List<Challenge> challenges = new ArrayList<Challenge>();
 	
 	private User user;
 	
@@ -68,5 +70,30 @@ public class ParseData implements Serializable{
 			}
 		}
 		return user;
+	}
+	
+	public Challenge getChallenge( int challengeId){
+		Challenge result=null;
+		for( Challenge c : challenges ){
+			if( c.getChallengeId() == challengeId ){
+				result = c;
+				break;
+			}
+		}
+		return result;
+	}
+	
+	public void addChallenge( Challenge c){
+		boolean match=false;
+		for( Challenge i : challenges ){
+			if( i.getChallengeId() == c.getChallengeId()){
+				match =true;
+				break;
+			}
+		}
+		
+		if( match == false){
+			challenges.add(c);
+		}
 	}
 }

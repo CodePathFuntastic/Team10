@@ -3,6 +3,9 @@ package org.codepath.team10.charitychallenger.models;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.activities.BaseActivity;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -17,6 +20,7 @@ import com.parse.ParseObject;
 public class Challenge extends ParseObject implements Parcelable{
 
 	//private static final long serialVersionUID = -8485164036593158312L;
+
 
 	/**
 	 * Data needed for a challenge
@@ -97,12 +101,52 @@ public class Challenge extends ParseObject implements Parcelable{
 	public void addChallengePictureUrls( List<String> urls){
 		addAllUnique("challenge_pic_urls", urls);
 	}
+	public void addChallengePictureUrl( String url){
+		addUnique("challenge_pic_urls", url);
+	}
 	public List<String> getChallengesPictureUrls(){
 		return getList("challenge_pic_urls");
 	}
 
 	// methods needed for json marshalling and unmarshalling
-	
+	public static Challenge fromJson(JSONObject json) {
+		Challenge challenge = null;
+		
+		try {
+		
+			if( !json.isNull("objectId")){
+				challenge = Challenge.createWithoutData(Challenge.class, json.getString("objectId"));
+			}
+			
+			challenge.setChallengeId(json.getInt("challenge_id") );
+			
+			if( !json.isNull("challenge_pic_urls" ) ){
+				JSONArray array = json.getJSONArray("challenge_pic_urls");
+				for( int i=0 ; i<array.length() ; i++ ){
+					String a = array.getString(i);
+					challenge.addChallengePictureUrl(a);
+				}
+			}
+			challenge.setClosedInvitations(json.getInt("closed_invitations"));
+			if( !json.isNull("description")){
+				challenge.setDescription(json.getString("description") );
+			}
+			if( !json.isNull("name")){
+				challenge.setName(json.getString("name"));
+			}
+			challenge.setOpenInvitation(json.getInt("open_invitations"));
+			challenge.setOpenInvitation(json.getInt("orgId"));
+			challenge.setPaidInvitations(json.getInt("paid_invitations"));
+			challenge.setAmountRaised(json.getDouble("raised"));
+			challenge.setTargetAmount(json.getDouble("target"));
+			
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return challenge;
+	}
+
 	
 	// methods and classes needed for parcelable
 	@Override
@@ -145,4 +189,5 @@ public class Challenge extends ParseObject implements Parcelable{
 			return new Challenge[size];
 		}
 	};
+
 }

@@ -125,6 +125,14 @@ public class ParseRestClient {
 				
 		httpClient.get(PARSE_END_POINT_USER, null, responseHandler);
 	}
+	
+	public void getAllChallenges( AsyncHttpResponseHandler responseHandler ){
+		if(responseHandler == null){
+			throw new NullPointerException("response handler cannot be null");
+		}
+		
+		httpClient.get(PARSE_END_POINT_CHALLENGE, null, responseHandler);
+	}
 
 	
 	/*

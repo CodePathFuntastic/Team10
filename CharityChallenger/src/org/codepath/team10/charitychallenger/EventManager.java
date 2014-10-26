@@ -10,6 +10,7 @@ import org.codepath.team10.charitychallenger.listeners.InvitationCompletedListen
 import org.codepath.team10.charitychallenger.listeners.InvitationReceivedListener;
 import org.codepath.team10.charitychallenger.listeners.InvitationsLoadedListener;
 import org.codepath.team10.charitychallenger.listeners.UserSynchedListener;
+import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
 import org.codepath.team10.charitychallenger.models.User;
@@ -161,8 +162,27 @@ public class EventManager implements Serializable {
 	}
 	
 	public void loadAllChallenges() {
-		// TODO Auto-generated method stub
-		
+		restclient.getAllChallenges( new ParseJsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int status, JSONObject json) {
+				if( status == 200 && json != null ){
+					if( !json.isNull("results")){
+						try {
+							JSONArray array = json.getJSONArray("results");
+							for( int i=0; i<array.length() ;i++){
+								JSONObject j = array.getJSONObject(i);
+								Challenge c = Challenge.fromJson(j);
+								parseData.addChallenge(c);
+							}
+							
+						} catch (JSONException e) {
+							
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		});
 	}
 
 	
