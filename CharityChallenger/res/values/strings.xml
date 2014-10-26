@@ -66,9 +66,9 @@
     <string name="expiry_date_value">Nov 20th, 2014</string>
     <string name="donate_now_value">Donate Now!</string>
     <string name="title_activity_achievement">AchievementActivity</string>
-    <string name="title_activity_challenge_details">ChallengeDetailsActivity</string>
-    <string name="title_activity_invite_friends">InviteFriendsActivity</string>
-    <string name="title_activity_fun">FunActivity</string>
+    <string name="title_activity_challenge_details">Challenge Details</string>
+    <string name="title_activity_invite_friends">Friends Invitations</string>
+    <string name="title_activity_fun">Fun Thing to See</string>
     <string name="title_action_received_challenges">Received Challenges</string>
     <string name="exception">Exception: %1$s</string>
     <string name="ok_button">OK</string>

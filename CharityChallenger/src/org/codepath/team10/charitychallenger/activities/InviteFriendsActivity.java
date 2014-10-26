@@ -112,45 +112,4 @@ public class InviteFriendsActivity extends BaseActivity {
 			onError(ex);
 		}
 	}
-//
-//	@Override
-//	protected void onCreate(Bundle savedInstanceState) {
-//		super.onCreate(savedInstanceState);
-//		setContentView(R.layout.activity_invite_friends);
-//		
-//		ArrayList<String> friends = new ArrayList<String>();
-//		
-//		friends.add("Joe");
-//		friends.add("Mary");
-//		friends.add("Martha");
-//		friends.add("Nathan");
-//		friends.add("Syed");
-//		friends.add("Kevin");
-//		friends.add("Nambi");
-//		friends.add("Shiva");
-//		friends.add("Jim");
-//		
-//		ArrayAdapter<String> friendsAdapter = 
-//			    new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, friends);
-//		
-//		ListView list = (ListView)findViewById(R.id.lvListOfFriends);
-//		list.setAdapter(friendsAdapter);
-//		
-//		//setOnItemClickListener
-//		list.setOnItemClickListener( new OnItemClickListener(){
-//
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View view,
-//					int position, long id) {
-//				Intent intent = new Intent(InviteFriendsActivity.this, FunActivity.class);
-//				startActivity(intent);
-//			}
-//			
-//		});
-//	}
-//	
-//	public void onClickInvite( View view){
-//		Intent intent = new Intent(this, FunActivity.class);
-//		startActivity(intent);
-//	}
 }
