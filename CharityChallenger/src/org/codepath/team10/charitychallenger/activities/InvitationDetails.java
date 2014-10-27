@@ -7,16 +7,28 @@ import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.User;
 import org.codepath.team10.charitychallenger.utils.RoundTransform;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParsePush;
+import com.parse.ParseQuery;
+import com.parse.SaveCallback;
+import com.parse.SendCallback;
 import com.squareup.picasso.Picasso;
 
 public class InvitationDetails extends BaseActivity {
@@ -79,6 +91,13 @@ public class InvitationDetails extends BaseActivity {
 		intent.putExtra("invitation", mInvitation);
 		intent.putExtra("challenge", mChallenge);
 		startActivityForResult(intent, 120);
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == Activity.RESULT_OK && requestCode == 110) {
+			Log.i(LOG_TAG, "Get back from the activity");
+		}
 	}
 	
 	@Override
