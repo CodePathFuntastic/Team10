@@ -10,7 +10,7 @@
     <string name="action_favorite">Favorites</string>
     <string name="action_new">Add an Picture</string>
     <string name="picture_title">Pictures</string>
-    <string name="picture_label">Add a Picture</string>
+    <string name="picture_label">Please Take a Challenged Picture!</string>
     <string name="save_button_text">Send</string>
     <string name="cancel_button_text">Cancel</string>
 

@@ -71,15 +71,15 @@ public class NewPictureFragment extends Fragment {
 
 		pictureName = ((EditText) v.findViewById(R.id.picture_name));
 
-		pictureRating = ((Spinner) v.findViewById(R.id.rating_spinner));
+		//pictureRating = ((Spinner) v.findViewById(R.id.rating_spinner));
 		
 		picture = ((NewPictureActivity) getActivity()).getCurrentPicture();
 		
-		ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter
-				.createFromResource(getActivity(), R.array.ratings_array,
-						android.R.layout.simple_spinner_dropdown_item);
+//		ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter
+//				.createFromResource(getActivity(), R.array.ratings_array,
+//						android.R.layout.simple_spinner_dropdown_item);
 		
-		pictureRating.setAdapter(spinnerAdapter);
+		//pictureRating.setAdapter(spinnerAdapter);
 
 		photoButton = ((ImageButton) v.findViewById(R.id.photo_button));
 		photoButton.setOnClickListener(new View.OnClickListener() {
