@@ -51,7 +51,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:enabled="false"
-        android:onClick="onClickDonate"
+        android:onClick="onClickInvite"
         android:text="Invite" />
 
     <Button
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivChallengeImage"
         android:layout_centerHorizontal="true"
-        android:onClick="onClickInvite"
+        android:onClick="onClickSelectFriends"
         android:text="Select Friends" />
 
 

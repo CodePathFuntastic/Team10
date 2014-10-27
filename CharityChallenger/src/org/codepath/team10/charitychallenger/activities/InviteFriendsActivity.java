@@ -106,9 +106,9 @@ public class InviteFriendsActivity extends BaseActivity {
 								}
 							}
 						});
-						
-						users.add(ccuser);
 					}
+					
+					users.add(ccuser);
 				}
 								
 				User[] array = new User[users.size()];

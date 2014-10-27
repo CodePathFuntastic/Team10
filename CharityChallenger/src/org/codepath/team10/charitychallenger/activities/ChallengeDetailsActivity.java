@@ -16,8 +16,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.facebook.Session;
@@ -33,10 +35,15 @@ public class ChallengeDetailsActivity extends BaseActivity {
     private TextView resultsTextView;
     private TextView tvChallengeTitle;
     private UiLifecycleHelper lifecycleHelper;
+    private ListView lvSelectedFriends;
+    private Button btnInviteNow;
+    
     boolean pickFriendsWhenSessionOpened;
     private ImageView ivChallengeImage;
-    //private ParseProxyObject ppo;
     private Challenge challenge;
+    
+    private ArrayAdapter<String> friendsAdapter;
+    private ArrayList<String> friends;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +53,8 @@ public class ChallengeDetailsActivity extends BaseActivity {
 		
 		ivChallengeImage = (ImageView)findViewById(R.id.ivChallengeImage);
 	    tvChallengeTitle = (TextView) findViewById(R.id.tvChallengeTitle);
-		
+	    lvSelectedFriends = (ListView) findViewById(R.id.lvSelectedFriends);
+	    btnInviteNow = (Button) findViewById(R.id.btnInviewNow);
 		
 		Intent intent = getIntent();
 		
@@ -81,6 +89,9 @@ public class ChallengeDetailsActivity extends BaseActivity {
         lifecycleHelper.onCreate(savedInstanceState);
 
         ensureOpenSession();
+        
+        friends = new ArrayList<String>();
+        friendsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, friends);
 	}
 	
 	   public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -118,26 +129,36 @@ public class ChallengeDetailsActivity extends BaseActivity {
 
 	    private void displaySelectedFriends(int resultCode, Intent data) {
 	        String results = "";
-	        CharityChallengerApplication application = (CharityChallengerApplication) getApplication();
-	        Collection<GraphUser> selection = application.getSelectedUsers();
 	        
-	        if (selection != null && selection.size() > 0) {
-	            ArrayList<String> names = new ArrayList<String>();
-	            for (GraphUser user : selection) {
-	                names.add(user.getName());
-	            }
-	            results = TextUtils.join(", ", names);
-	        } else {
-	            results = "<No friends selected>";
-	        }
+//	        CharityChallengerApplication application = (CharityChallengerApplication) getApplication();
+//	        Collection<GraphUser> selection = application.getSelectedUsers();
+//	        
+//	        if (selection != null && selection.size() > 0) {
+//	            ArrayList<String> names = new ArrayList<String>();
+//	            for (GraphUser user : selection) {
+//	                names.add(user.getName());
+//	            }
+//	            results = TextUtils.join(", ", names);
+//	        } else {
+//	            results = "<No friends selected>";
+//	        }
 	        
-	        Parcelable[] array = data.getParcelableArrayExtra("users");
 	        ArrayList<User> users = data.getParcelableArrayListExtra("array");
-	        if( array != null && array.length > 0){
-	        	Log.d(BaseActivity.LOG_TAG, "Users : " + array );
-	        }
-
-	        resultsTextView.setText(results);
+	        if( users != null && users.size() > 0){
+	        	//Log.d(BaseActivity.LOG_TAG, "Users : " + array );
+	        	
+	        	friends.clear();
+	        	
+	        	for( User u : users){
+	        		friends.add(u.getName());
+	        	}
+	        	
+	        	// now display the selected friends in the list view
+		        lvSelectedFriends.setAdapter(friendsAdapter);
+		        friendsAdapter.notifyDataSetChanged();
+		        
+		        btnInviteNow.setEnabled(true);
+	        }	        
 	    }
 
 	    private void onClickPickFriends() {
@@ -159,12 +180,12 @@ public class ChallengeDetailsActivity extends BaseActivity {
 	        }
 	    }
 	
-	public void onClickInvite( View view){
+	public void onClickSelectFriends( View view){
 		Intent intent = new Intent(this, InviteFriendsActivity.class);
 		startActivity(intent);
 	}
 	
-	public void onClickDonate(View view){
+	public void onClickInvite(View view){
 		Intent intent = new Intent(this, DonateActivity.class);
         intent.putExtra("challenge", challenge);
 		startActivity(intent);
