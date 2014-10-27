@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:background="@drawable/fragment_background">
 
     <!--
      <FrameLayout
@@ -121,7 +122,8 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/invitation_detail_fragment"
         android:onClick="onClickAccept"
-        android:text="@string/accept_challenege"/>
+        android:text="@string/accept_challenege"
+        android:layout_margin="15dp"/>
 
     <Button
         android:id="@+id/btnDonate"
@@ -130,6 +132,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/invitation_detail_fragment"
         android:onClick="onDonate"
-        android:text="@string/donoate" />
+        android:text="@string/donoate" 
+        android:layout_margin="15dp"/>
 
 </RelativeLayout>

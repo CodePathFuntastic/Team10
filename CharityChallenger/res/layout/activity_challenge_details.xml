@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="${relativePackage}.${activityClass}" >
+    tools:context="${relativePackage}.${activityClass}" 
+    android:background="@drawable/fragment_background">
 
     <FrameLayout
         android:id="@+id/challenge_detail_fragment"
@@ -61,7 +62,8 @@
         android:layout_centerHorizontal="true"
         android:enabled="false"
         android:onClick="onClickInvite"
-        android:text="Invite" />
+        android:text="Invite" 
+        android:layout_marginBottom="10dp"/>
 
     <Button
         android:id="@+id/btnSelectFriends"
