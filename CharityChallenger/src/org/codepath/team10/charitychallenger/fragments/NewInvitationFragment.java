@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class NewInvitationFragment extends Fragment {
@@ -27,6 +28,7 @@ public class NewInvitationFragment extends Fragment {
 	private TextView tvTargetAmount;
 	private TextView tvRaised;
 	private Challenge challenge;
+	ProgressBar challengeProgressBar;
 	private Invitation invitation;
 	
 	@Override
@@ -48,6 +50,8 @@ public class NewInvitationFragment extends Fragment {
 		tvChallengeName = (TextView) view.findViewById(R.id.tvChallengeName);
 		tvTargetAmount = (TextView) view.findViewById(R.id.tvTargetAmount);
 		tvRaised = (TextView) view.findViewById(R.id.tvRaised);
+		challengeProgressBar = (ProgressBar) view.findViewById(R.id.challengeProgressBar);
+
 		
 		if(tvChallengeName != null){
 			tvChallengeName.setText(challenge.getString("name"));
@@ -63,6 +67,11 @@ public class NewInvitationFragment extends Fragment {
 		if(ivCharityChallenge != null){
 			List<String> url = challenge.getList("challenge_pic_urls");
 			ImageLoader.getInstance().displayImage(url.get(0), ivCharityChallenge);
+		}
+		
+		if(challengeProgressBar != null){
+			int progress = (int)((double)challenge.getInt("raised")/(double)challenge.getInt("target") * 100);
+			challengeProgressBar.setProgress(progress);
 		}
 		return view;
 	}

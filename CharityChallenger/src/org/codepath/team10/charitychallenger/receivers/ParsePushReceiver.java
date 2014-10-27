@@ -65,7 +65,7 @@ public class ParsePushReceiver extends BroadcastReceiver{
 						
 						JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
 						receiverInvitationFromPush(json);
-						Toast.makeText(context, "InviteReceived. channel :" + channel + ", data: "+json, Toast.LENGTH_SHORT).show();
+						//Toast.makeText(context, "InviteReceived. channel :" + channel + ", data: "+json, Toast.LENGTH_SHORT).show();
 					}
 					if( channel.equals("")){
 						
