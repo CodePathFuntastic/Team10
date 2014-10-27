@@ -93,16 +93,16 @@ public class NewPictureFragment extends Fragment {
 			}
 		});
 
-		donateButton = ((Button) v.findViewById(R.id.donate_button));
-		donateButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view){
-				Intent intent = new Intent(getActivity(), DonateActivity.class);
-				intent.putExtra("invitation", invitation);
-				intent.putExtra("challenge", challenge);
-				startActivityForResult(intent, 120);
-			}
-		});
+//		donateButton = ((Button) v.findViewById(R.id.donate_button));
+//		donateButton.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View view){
+//				Intent intent = new Intent(getActivity(), DonateActivity.class);
+//				intent.putExtra("invitation", invitation);
+//				intent.putExtra("challenge", challenge);
+//				startActivityForResult(intent, 120);
+//			}
+//		});
 		
 		saveButton = ((Button) v.findViewById(R.id.save_button));
 		saveButton.setOnClickListener(new View.OnClickListener() {

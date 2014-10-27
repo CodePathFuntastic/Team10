@@ -59,7 +59,7 @@ public class ParsePushReceiver extends BroadcastReceiver{
 						
 						String data = intent.getExtras().getString("com.parse.Data");
 						completedInvitationsFromPush(data);
-						Toast.makeText(context, "InvitComplete : "+ data, Toast.LENGTH_SHORT).show();
+						//Toast.makeText(context, "InvitComplete : "+ data, Toast.LENGTH_SHORT).show();
 					}
 					if( channel.equals(CharityChallengerApplication.INVITATION_RECEIVE) ){
 						

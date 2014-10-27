@@ -57,29 +57,11 @@
         android:layout_height="wrap_content"
         android:text="@string/cancel_button_text" />
     
-        <Button
-        android:id="@+id/donate_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/donoate" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
 
             <com.parse.ParseImageView
                 android:id="@+id/picture_preview_image"
                 android:layout_width="155dp"
                 android:layout_height="113dp" />
-
-
-            <GridView
-                android:id="@+id/gvSample"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:numColumns="1"/>
-
-        </LinearLayout>
     
     
 
