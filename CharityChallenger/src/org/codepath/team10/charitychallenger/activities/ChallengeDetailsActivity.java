@@ -14,7 +14,6 @@ import org.codepath.team10.charitychallenger.models.User;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -26,7 +25,6 @@ import android.widget.TextView;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
-import com.squareup.picasso.Picasso;
 
 public class ChallengeDetailsActivity extends BaseActivity {
 
@@ -53,7 +51,7 @@ public class ChallengeDetailsActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_challenge_details);
-		//getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		Intent intent = getIntent();
 
