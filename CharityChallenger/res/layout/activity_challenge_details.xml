@@ -30,10 +30,19 @@
         android:id="@+id/tvSelectedFriends"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btnInviewNow"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/btnSelectFriends" />
+    
+    <ListView
+        android:id="@+id/lvSelectedFriends"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnInviewNow"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvSelectedFriends" >
+    </ListView>
+    
 
     <Button
         android:id="@+id/btnInviewNow"
@@ -53,5 +62,6 @@
         android:layout_centerHorizontal="true"
         android:onClick="onClickInvite"
         android:text="Select Friends" />
+
 
 </RelativeLayout>

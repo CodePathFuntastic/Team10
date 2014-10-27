@@ -2,15 +2,22 @@ package org.codepath.team10.charitychallenger.models;
 
 import java.util.List;
 
+import org.codepath.team10.charitychallenger.activities.BaseActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.util.Log;
+
+import com.parse.GetCallback;
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 
 @ParseClassName(value="User")
-public class User extends ParseObject {
+public class User extends ParseObject implements Parcelable{
 	
 	/**
 	 * <ol>
@@ -81,6 +88,8 @@ public class User extends ParseObject {
 		addAllUnique("friends", friends);
 	}
 
+	
+	// Queries
 	public static String createJsonQuery(String facebookId) {
 		
 		String result=null;
@@ -95,6 +104,7 @@ public class User extends ParseObject {
 		return result;
 	}
 	
+	// JSON methods
 	public static User fromJson( JSONObject json ){
 		User user=null;
 		if( json != null ){
@@ -123,13 +133,53 @@ public class User extends ParseObject {
 				}
 			
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		
 		return user;
 	}
+	
+	// methods related parcelable
+	
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(getObjectId());
+		pinInBackground();
+	}
+	
+	public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+
+		@Override
+		public User createFromParcel(Parcel source) {
+			User user = ParseObject.createWithoutData(User.class, source.readString());
+			user.fetchFromLocalDatastoreInBackground( new GetCallback<User>(){
+
+				@Override
+				public void done(User user,
+									ParseException e) {
+					if( e == null ){
+						
+					}else{
+						Log.e(BaseActivity.LOG_TAG, "Unable to retrieve user from localDB", e);
+					}
+				}
+			});
+			return user;
+		}
+
+		@Override
+		public User[] newArray(int size) {
+			return new User[size];
+		}
+	};
+	
 	
 	@Override
 	public int hashCode() {
@@ -150,5 +200,6 @@ public class User extends ParseObject {
 		}
 		return result;
 	}
+
 }
 

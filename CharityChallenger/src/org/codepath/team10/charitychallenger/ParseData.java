@@ -64,7 +64,7 @@ public class ParseData implements Serializable{
 	public User getFriendByFacebookId( String facebookId){
 		User user=null;
 		for( User u : friends ){
-			if( u.getFacebookId().equals(facebookId) ){
+			if( u.getFacebookId() != null && u.getFacebookId().equals(facebookId) ){
 				user = u;
 				break;
 			}
