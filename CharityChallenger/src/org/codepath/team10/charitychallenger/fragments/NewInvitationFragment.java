@@ -3,12 +3,7 @@ package org.codepath.team10.charitychallenger.fragments;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
-import org.codepath.team10.charitychallenger.adapters.InvitationsAdapter;
-import org.codepath.team10.charitychallenger.adapters.ChallengesViewAdapter.ViewHolder;
 import org.codepath.team10.charitychallenger.models.Challenge;
-import org.codepath.team10.charitychallenger.models.Invitation;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,9 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class NewInvitationFragment extends Fragment {
 	
@@ -29,7 +25,6 @@ public class NewInvitationFragment extends Fragment {
 	private TextView tvRaised;
 	private Challenge challenge;
 	ProgressBar challengeProgressBar;
-	private Invitation invitation;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +38,6 @@ public class NewInvitationFragment extends Fragment {
 		Bundle arguments = getArguments();
 		
 		challenge = (Challenge)arguments.get("challenge");
-		invitation = (Invitation)arguments.get("invitation");
 		
 		View view = inflater.inflate(R.layout.item_challenge_new, container, false); 
 		ivCharityChallenge = (ImageView)view.findViewById(R.id.ivCharityChallenge);

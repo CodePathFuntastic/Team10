@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.fragments.NewInvitationFragment;
 import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
@@ -12,6 +13,7 @@ import org.codepath.team10.charitychallenger.models.User;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,13 +40,14 @@ public class ChallengeDetailsActivity extends BaseActivity {
     
     boolean pickFriendsWhenSessionOpened;
     private ImageView ivChallengeImage;
-    private Challenge challenge;
     
     private CharityChallengerApplication application;
     
     private ArrayAdapter<String> friendsAdapter;
     private ArrayList<String> friends;
     private ArrayList<User> friends1;
+    
+    private Challenge challenge;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,30 +55,28 @@ public class ChallengeDetailsActivity extends BaseActivity {
 		setContentView(R.layout.activity_challenge_details);
 		//getActionBar().setDisplayHomeAsUpEnabled(true);
 		
-		ivChallengeImage = (ImageView)findViewById(R.id.ivChallengeImage);
-	    tvChallengeTitle = (TextView) findViewById(R.id.tvChallengeTitle);
+		Intent intent = getIntent();
+
+		if( intent.hasExtra("challenge") ){
+			challenge = (Challenge) intent.getParcelableExtra("challenge");
+		}
+		
+		// Begin the transaction
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		// Replace the container with the new fragment
+		NewInvitationFragment newInvitationFragment = new NewInvitationFragment();
+	    Bundle bundle = new Bundle();
+	    bundle.putParcelable("challenge", challenge);
+	    newInvitationFragment.setArguments(bundle);
+		ft.replace(R.id.challenge_detail_fragment, newInvitationFragment);
+		ft.commit();		
+		
 	    lvSelectedFriends = (ListView) findViewById(R.id.lvSelectedFriends);
 	    btnInviteNow = (Button) findViewById(R.id.btnInviewNow);
 	    
 	    if( getApplication() instanceof CharityChallengerApplication ){
 	    	application = (CharityChallengerApplication) getApplication();
 	    }
-		
-		Intent intent = getIntent();
-		
-		challenge = (Challenge) intent.getParcelableExtra("challenge");
-		String name = challenge.getName();
-		List<String> arrayList = challenge.getChallengesPictureUrls();
-		
-		Log.d(BaseActivity.LOG_TAG, "Challenge = " + challenge.toString() );
-		Log.d(BaseActivity.LOG_TAG, "Testing");
-		
-		tvChallengeTitle.setText(name);
-		if (arrayList != null && arrayList.size() > 0) {
-	        Picasso.with(this).load(arrayList.get(0)).into(ivChallengeImage);
-		}
-		
-		Log.v( BaseActivity.LOG_TAG, String.format("challenge name: %s", name ));
 		
 		resultsTextView = (TextView) findViewById(R.id.tvSelectedFriends);
         pickFriendsButton = (Button) findViewById(R.id.btnSelectFriends);

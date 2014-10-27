@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
+    <FrameLayout
+        android:id="@+id/challenge_detail_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
+    </FrameLayout>
+<!--      
     <TextView
         android:id="@+id/tvChallengeTitle"
         android:layout_width="wrap_content"
@@ -25,7 +34,7 @@
         android:adjustViewBounds="true"
         android:layout_below="@+id/tvChallengeTitle"
         android:src="@drawable/icons_partnership_170" />
-
+-->
     <TextView
         android:id="@+id/tvSelectedFriends"
         android:layout_width="wrap_content"
@@ -58,9 +67,9 @@
         android:id="@+id/btnSelectFriends"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ivChallengeImage"
         android:layout_centerHorizontal="true"
         android:onClick="onClickSelectFriends"
+        android:layout_below="@+id/challenge_detail_fragment"
         android:text="Select Friends" />
 
 
