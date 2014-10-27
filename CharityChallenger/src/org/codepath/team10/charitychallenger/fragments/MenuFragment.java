@@ -78,12 +78,7 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
         		{
 	        		// if only one invitation is available, directly open that invitation
 	        		if( numInvitations == 1){
-	        			
-//	        			intent = new Intent(getActivity(), InvitationDetails.class);
-//	        			Invitation invitation = (Invitation)activity.getInvitations().get(0);
-//	        			intent.putExtra("invitation", invitation);
 	        			final Intent intent = new Intent(getActivity(), InvitationDetails.class);
-//	        			final Intent intent = new Intent(getActivity(), InvitationAcceptedActivity.class);
 	        	        Invitation invitation = (Invitation)activity.getInvitations().get(0);
 	        	        intent.putExtra("invitation", invitation);
 
@@ -105,8 +100,13 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
 	        	        });
 	        		}else if( numInvitations > 1 ){
 	        			ActionBar actionBar = getActivity().getActionBar();
-	        			if(actionBar.getTabCount() == 3)
-	        				actionBar.selectTab(actionBar.getTabAt(1));
+	        			int count = actionBar.getTabCount();
+	        			if(actionBar.getTabCount() == 0){
+	        				getActivity().finish();
+	        			}
+	        			if(actionBar.getTabCount() == 3){
+        					actionBar.selectTab(actionBar.getTabAt(1));
+        				}
 	        		}
         		}
         	}
