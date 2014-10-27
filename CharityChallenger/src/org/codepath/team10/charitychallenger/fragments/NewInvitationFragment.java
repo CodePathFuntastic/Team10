@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.models.Challenge;
+import org.codepath.team10.charitychallenger.models.Invitation;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,6 +25,7 @@ public class NewInvitationFragment extends Fragment {
 	private TextView tvTargetAmount;
 	private TextView tvRaised;
 	private Challenge challenge;
+	private Invitation invitation;
 	ProgressBar challengeProgressBar;
 	
 	@Override
@@ -38,6 +40,7 @@ public class NewInvitationFragment extends Fragment {
 		Bundle arguments = getArguments();
 		
 		challenge = (Challenge)arguments.get("challenge");
+		invitation = (Invitation)arguments.get("invitation");
 		
 		View view = inflater.inflate(R.layout.item_challenge_new, container, false); 
 		ivCharityChallenge = (ImageView)view.findViewById(R.id.ivCharityChallenge);
@@ -46,7 +49,6 @@ public class NewInvitationFragment extends Fragment {
 		tvRaised = (TextView) view.findViewById(R.id.tvRaised);
 		challengeProgressBar = (ProgressBar) view.findViewById(R.id.challengeProgressBar);
 
-		
 		if(tvChallengeName != null){
 			tvChallengeName.setText(challenge.getString("name"));
 		}

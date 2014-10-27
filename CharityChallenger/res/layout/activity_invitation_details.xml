@@ -120,7 +120,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/invitation_detail_fragment"
+        android:layout_below="@+id/etUserName"
         android:onClick="onClickAccept"
         android:text="@string/accept_challenege"
         android:layout_margin="15dp"/>
@@ -130,9 +130,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/invitation_detail_fragment"
+        android:layout_below="@+id/etUserName"
         android:onClick="onDonate"
         android:text="@string/donoate" 
         android:layout_margin="15dp"/>
+    
+        <ImageView
+        android:id="@+id/ivSenderImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/invitation_detail_fragment"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/etUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivSenderImage"
+            android:layout_centerHorizontal="true"
+        />
 
 </RelativeLayout>
