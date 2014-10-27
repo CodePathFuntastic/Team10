@@ -63,7 +63,7 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 			viewHolder.tvChallengeName.setText(challenge.getString("name"));
 		}
 		if(viewHolder.tvTargetAmount != null){
-			viewHolder.tvTargetAmount.setText("/$" + challenge.getInt("target"));
+			viewHolder.tvTargetAmount.setText("/ $" + challenge.getInt("target"));
 		}
 		
 		if(viewHolder.tvRaised != null){
