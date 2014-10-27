@@ -1,101 +1,99 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-     android:layout_margin="10dp">
+    android:layout_height="match_parent">
+
     <ImageView
         android:id="@+id/ivCharity"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
         android:src="@drawable/ic_launcher" />
-
-    <TextView
-        android:id="@+id/tvTargetAmountRaised"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvCharityChallengeName"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/ivCharity"
-        android:layout_marginTop="24dp"
-        android:text="@string/target_amount_raised" />
-
-    <TextView
-        android:id="@+id/tvAmountRaised"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvTargetAmountRaised"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvTargetAmountRaised"
-        android:layout_marginTop="19dp"
-        android:text="@string/amount_raised" />
-
-    <TextView
-        android:id="@+id/tvTargetAmountLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tvTargetAmountRaised"
-        android:layout_alignBottom="@+id/tvTargetAmountRaised"
-        android:layout_alignLeft="@+id/ivCharity"
-        android:text="@string/target_amount_label" />
-
-    <TextView
-        android:id="@+id/tvAmountRaisedLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tvAmountRaised"
-        android:layout_alignBottom="@+id/tvAmountRaised"
-        android:layout_alignLeft="@+id/tvTargetAmountLabel"
-        android:text="@string/amount_raised_label" />
-
-    <Button
-        android:id="@+id/btnDonate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvAmountRaised"
-        android:layout_marginTop="17dp"
-        android:text="@string/donoate" 
-        android:onClick="onDonate"/>
-
-    <Button
-        android:id="@+id/btnAcceptChallenge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btnDonate"
-        android:layout_alignBottom="@+id/btnDonate"
-        android:layout_marginRight="19dp"
-        android:layout_toLeftOf="@+id/btnDonate"
-        android:onClick="onClickAccept"
-        android:text="@string/accept_challenege" />
 
     <TextView
         android:id="@+id/tvCharityChallengeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/ivCharity"
-        android:layout_marginTop="41dp"
+        android:layout_below="@+id/ivCharity"
+        android:layout_centerHorizontal="true"
         android:text="@string/charity_challenge_name" />
-
-    <TextView
-        android:id="@+id/tvDescriptionLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/btnAcceptChallenge"
-        android:layout_marginTop="14dp"
-        android:text="@string/description_label" />
 
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvDescriptionLabel"
+        android:layout_below="@+id/tvCharityChallengeName"
+        android:layout_marginTop="20dp"
         android:text="@string/challenege_description" />
+
+    <Button
+        android:id="@+id/btnDonate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnAcceptChallenge"
+        android:layout_alignBottom="@+id/btnAcceptChallenge"
+        android:layout_alignParentRight="true"
+        android:onClick="onDonate"
+        android:text="@string/donoate" />
+
+    <Button
+        android:id="@+id/btnAcceptChallenge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="99dp"
+        android:layout_toLeftOf="@+id/tvTargetAmountLabel"
+        android:onClick="onClickAccept"
+        android:text="@string/accept_challenege" />
+
+    <TextView
+        android:id="@+id/tvAmountRaised"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvCharityChallengeName"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:text="@string/amount_raised"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvAmountRaisedLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvTargetAmountLabel"
+        android:layout_alignTop="@+id/tvTargetAmountRaised"
+        android:layout_toLeftOf="@+id/tvAmountRaised"
+        android:layout_toRightOf="@+id/tvTargetAmountRaised"
+        android:gravity="center"
+        android:text="@string/amount_raised_label"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvTargetAmountRaised"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvCharityChallengeName"
+        android:layout_toLeftOf="@+id/btnDonate"
+        android:gravity="center"
+        android:text="@string/target_amount_raised"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvTargetAmountLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvCharityChallengeName"
+        android:layout_toLeftOf="@+id/tvTargetAmountRaised"
+        android:gravity="center"
+        android:text="@string/target_amount_label"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
 
 </RelativeLayout>

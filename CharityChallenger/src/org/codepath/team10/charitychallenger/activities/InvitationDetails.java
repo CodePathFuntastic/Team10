@@ -6,6 +6,7 @@ import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.queries.ChallengeQueries;
+import org.codepath.team10.charitychallenger.utils.RoundTransform;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,6 +30,7 @@ import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 import com.parse.SendCallback;
+import com.squareup.picasso.Picasso;
 
 public class InvitationDetails extends BaseActivity {
 	
@@ -87,6 +89,9 @@ public class InvitationDetails extends BaseActivity {
 						List<String> imageUrls = c.getChallengesPictureUrls();
 						if( imageUrls.size() > 0){
 							String image = imageUrls.get(0);
+//					        Picasso.with(getApplicationContext()).load(image)
+//					        .error(R.drawable.ic_launcher).transform(new RoundTransform())
+//					        .into(mIvCharity);						
 							ImageLoader.getInstance().displayImage(image, mIvCharity);
 						}
 					}
