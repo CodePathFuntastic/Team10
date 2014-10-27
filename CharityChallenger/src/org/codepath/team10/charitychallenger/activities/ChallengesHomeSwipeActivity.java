@@ -59,4 +59,10 @@ public class ChallengesHomeSwipeActivity extends BaseActivity implements ActionB
 	public void onTabReselected(Tab tab, android.app.FragmentTransaction ft) {
 		// TODO Auto-generated method stub
 	}
+	
+	@Override
+	public void onBackPressed() {
+	    // should not go back....
+	    return;
+	}
 }
