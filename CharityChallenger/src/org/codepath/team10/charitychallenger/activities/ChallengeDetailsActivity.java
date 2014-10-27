@@ -1,18 +1,17 @@
 package org.codepath.team10.charitychallenger.activities;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.models.Challenge;
+import org.codepath.team10.charitychallenger.models.Invitation;
+import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
 import org.codepath.team10.charitychallenger.models.User;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +24,6 @@ import android.widget.TextView;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
-import com.facebook.model.GraphUser;
 import com.squareup.picasso.Picasso;
 
 public class ChallengeDetailsActivity extends BaseActivity {
@@ -42,8 +40,11 @@ public class ChallengeDetailsActivity extends BaseActivity {
     private ImageView ivChallengeImage;
     private Challenge challenge;
     
+    private CharityChallengerApplication application;
+    
     private ArrayAdapter<String> friendsAdapter;
     private ArrayList<String> friends;
+    private ArrayList<User> friends1;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,10 @@ public class ChallengeDetailsActivity extends BaseActivity {
 	    tvChallengeTitle = (TextView) findViewById(R.id.tvChallengeTitle);
 	    lvSelectedFriends = (ListView) findViewById(R.id.lvSelectedFriends);
 	    btnInviteNow = (Button) findViewById(R.id.btnInviewNow);
+	    
+	    if( getApplication() instanceof CharityChallengerApplication ){
+	    	application = (CharityChallengerApplication) getApplication();
+	    }
 		
 		Intent intent = getIntent();
 		
@@ -129,27 +134,14 @@ public class ChallengeDetailsActivity extends BaseActivity {
 
 	    private void displaySelectedFriends(int resultCode, Intent data) {
 	        String results = "";
-	        
-//	        CharityChallengerApplication application = (CharityChallengerApplication) getApplication();
-//	        Collection<GraphUser> selection = application.getSelectedUsers();
-//	        
-//	        if (selection != null && selection.size() > 0) {
-//	            ArrayList<String> names = new ArrayList<String>();
-//	            for (GraphUser user : selection) {
-//	                names.add(user.getName());
-//	            }
-//	            results = TextUtils.join(", ", names);
-//	        } else {
-//	            results = "<No friends selected>";
-//	        }
-	        
-	        ArrayList<User> users = data.getParcelableArrayListExtra("array");
-	        if( users != null && users.size() > 0){
+	        	        
+	        friends1 = data.getParcelableArrayListExtra("array");
+	        if( friends1 != null && friends1.size() > 0){
 	        	//Log.d(BaseActivity.LOG_TAG, "Users : " + array );
 	        	
 	        	friends.clear();
 	        	
-	        	for( User u : users){
+	        	for( User u : friends1){
 	        		friends.add(u.getName());
 	        	}
 	        	
@@ -167,7 +159,6 @@ public class ChallengeDetailsActivity extends BaseActivity {
 
 	    private void startPickFriendsActivity() {
 	        if (ensureOpenSession()) {
-	        	CharityChallengerApplication application = (CharityChallengerApplication) getApplication();
 	            application.setSelectedUsers(null);
 
 	            Intent intent = new Intent(this, InviteFriendsActivity.class);
@@ -186,9 +177,31 @@ public class ChallengeDetailsActivity extends BaseActivity {
 	}
 	
 	public void onClickInvite(View view){
-		Intent intent = new Intent(this, DonateActivity.class);
-        intent.putExtra("challenge", challenge);
-		startActivity(intent);
+//		Intent intent = new Intent(this, DonateActivity.class);
+//        intent.putExtra("challenge", challenge);
+//		startActivity(intent);
+		
+		// send an invitation to selected friends
+		List<Invitation> invitations = new ArrayList<Invitation>();
+		if( friends != null && friends.size()>0 ){
+			for( User f : friends1){
+				Invitation i = new Invitation();
+				i.setReceiver(f.getFacebookId());
+				i.setSender( parseData.getUser().getFacebookId());
+				
+				// TODO: challenge should have an amount
+				i.setAmount( 10.00);
+				i.setStatus(InvitationStatusEnum.OPEN.ordinal());
+				i.setOpened(false);
+				i.setChallengeId(challenge.getChallengeId());
+				
+				invitations.add(i);
+			}
+			application.sendInvitations( invitations);
+		}
+		
+		setResult(RESULT_OK);
+		finish();
 	}
 	
 	@Override

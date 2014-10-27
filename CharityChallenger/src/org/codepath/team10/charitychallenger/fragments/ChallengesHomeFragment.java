@@ -27,13 +27,6 @@ public class ChallengesHomeFragment extends Fragment {
 		
 		super.onCreate(savedInstanceState);
 		mChallengesAdapter = new ChallengesViewAdapter(getActivity(), "Challenge");
-		
-		
-//		Challenge c = new Challenge();
-//		c.setAmountRaised(200);
-//		c.setTargetAmount(1000);
-//		c.setName("New Challenge Name");
-//		c.setDescription("new Challenge Description");
 	}
 
 	@Override
@@ -58,8 +51,9 @@ public class ChallengesHomeFragment extends Fragment {
 		          						long id) {
 		              
 				Intent intent = new Intent(getActivity(), ChallengeDetailsActivity.class);   
-				intent.putExtra("challenge", mChallengesAdapter.getItem(position));      
-				startActivity(intent);
+				intent.putExtra("challenge", mChallengesAdapter.getItem(position)); 
+				startActivityForResult(intent, 201);
+				//startActivity(intent);
 			}
 		});
 	      
