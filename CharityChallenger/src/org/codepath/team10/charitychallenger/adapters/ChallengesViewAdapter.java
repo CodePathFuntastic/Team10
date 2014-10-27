@@ -9,6 +9,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -21,21 +22,9 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 		TextView tvChallengeName;
 		TextView tvTargetAmount;
 		TextView tvRaised;
-		
+		ProgressBar challengeProgressBar;
 	}
 	public ChallengesViewAdapter(Context context, final String tableName) {
-//		super(context, new ParseQueryAdapter.QueryFactory<Challenge>() {
-//			
-//			public ParseQuery<Challenge> create() {
-//				Log.d("Constructor: ", tableName);
-//				ParseQuery<Challenge> query = ParseQuery.getQuery(Challenge.class);
-//				query.whereExists("raised");
-//				query.whereExists("target");
-//				return query;
-//			}
-//		});
-		
-		//ParseObject po = null;
 		super(context, tableName);
 	}
 
@@ -51,6 +40,7 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 			viewHolder.tvChallengeName = (TextView) v.findViewById(R.id.tvChallengeName);
 			viewHolder.tvTargetAmount = (TextView) v.findViewById(R.id.tvTargetAmount);
 			viewHolder.tvRaised = (TextView) v.findViewById(R.id.tvRaised);
+			viewHolder.challengeProgressBar = (ProgressBar) v.findViewById(R.id.challengeProgressBar);
 			v.setTag(viewHolder);
 			
 		} else {
@@ -75,6 +65,10 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 			ImageLoader.getInstance().displayImage(url.get(0), viewHolder.ivCharityChallenge);
 		}
 		
+		if(viewHolder.challengeProgressBar != null){
+			int progress = (int)((double)challenge.getInt("raised")/(double)challenge.getInt("target") * 100);
+			viewHolder.challengeProgressBar.setProgress(progress);
+		}
 		return v;
 	}
 

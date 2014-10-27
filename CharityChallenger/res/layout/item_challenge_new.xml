@@ -64,7 +64,7 @@
 		        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 		    <ProgressBar
-		        android:id="@+id/progressBar1"
+		        android:id="@+id/challengeProgressBar"
 		        style="?android:attr/progressBarStyleHorizontal"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
@@ -76,8 +76,8 @@
 		        android:id="@+id/tvTargetAmount"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:layout_alignRight="@+id/progressBar1"
-		        android:layout_below="@+id/progressBar1"
+		        android:layout_alignRight="@+id/challengeProgressBar"
+		        android:layout_below="@+id/challengeProgressBar"
 		        android:layout_marginTop="10dp"
 		        android:text="@string/target_amount_raised"
 		        android:textAppearance="?android:attr/textAppearanceMedium" 
@@ -89,7 +89,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_alignBaseline="@+id/tvTargetAmount"
 		        android:layout_alignBottom="@+id/tvTargetAmount"
-		        android:layout_alignLeft="@+id/progressBar1"
+		        android:layout_alignLeft="@+id/challengeProgressBar"
 		        android:layout_marginTop="10dp"
 		        android:text="@string/amount_raised"
 		        android:textAppearance="?android:attr/textAppearanceMedium" 
