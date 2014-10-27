@@ -42,7 +42,7 @@ public class NewInvitationFragment extends Fragment {
 		challenge = (Challenge)arguments.get("challenge");
 		invitation = (Invitation)arguments.get("invitation");
 		
-		View view = inflater.inflate(R.layout.item_challenge_new, container, false); 
+		View view = inflater.inflate(R.layout.item_challenge_new_for_other_activities, container, false); 
 		ivCharityChallenge = (ImageView)view.findViewById(R.id.ivCharityChallenge);
 		tvChallengeName = (TextView) view.findViewById(R.id.tvChallengeName);
 		tvTargetAmount = (TextView) view.findViewById(R.id.tvTargetAmount);
