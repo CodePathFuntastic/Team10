@@ -34,9 +34,9 @@
     <string name="payment_confirmation">Donation Confirmation</string>
     <string name="welcome_user">Welcome: </string>
     <string name="charity_challenge_name">Global Giving Challenge</string>
-    <string name="target_amount_label">Target Amount:</string>
+    <string name="target_amount_label">Target</string>
     <string name="target_amount_raised">$ 2000</string>
-    <string name="amount_raised_label">Amount Raised:</string>
+    <string name="amount_raised_label">Raised</string>
     <string name="amount_raised">$ 500</string>
     <string name="donoate">Donate Now</string>
     <string name="accept_challenege">Accept!</string>
@@ -66,9 +66,9 @@
     <string name="expiry_date_value">Nov 20th, 2014</string>
     <string name="donate_now_value">Donate Now!</string>
     <string name="title_activity_achievement">AchievementActivity</string>
-    <string name="title_activity_challenge_details">ChallengeDetailsActivity</string>
-    <string name="title_activity_invite_friends">InviteFriendsActivity</string>
-    <string name="title_activity_fun">FunActivity</string>
+    <string name="title_activity_challenge_details">Challenge Details</string>
+    <string name="title_activity_invite_friends">Friends Invitations</string>
+    <string name="title_activity_fun">Fun Thing to See</string>
     <string name="title_action_received_challenges">Received Challenges</string>
     <string name="exception">Exception: %1$s</string>
     <string name="ok_button">OK</string>
