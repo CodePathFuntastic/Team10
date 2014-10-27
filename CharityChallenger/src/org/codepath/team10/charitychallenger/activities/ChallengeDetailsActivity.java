@@ -7,9 +7,11 @@ import java.util.List;
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.models.Challenge;
+import org.codepath.team10.charitychallenger.models.User;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -84,7 +86,7 @@ public class ChallengeDetailsActivity extends BaseActivity {
 	   public void onActivityResult(int requestCode, int resultCode, Intent data) {
 	        switch (requestCode) {
 	            case PICK_FRIENDS_ACTIVITY:
-	                displaySelectedFriends(resultCode);
+	                displaySelectedFriends(resultCode, data);
 	                break;
 	            default:
 	                Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
@@ -114,11 +116,11 @@ public class ChallengeDetailsActivity extends BaseActivity {
 	        }
 	    }
 
-	    private void displaySelectedFriends(int resultCode) {
+	    private void displaySelectedFriends(int resultCode, Intent data) {
 	        String results = "";
 	        CharityChallengerApplication application = (CharityChallengerApplication) getApplication();
-
 	        Collection<GraphUser> selection = application.getSelectedUsers();
+	        
 	        if (selection != null && selection.size() > 0) {
 	            ArrayList<String> names = new ArrayList<String>();
 	            for (GraphUser user : selection) {
@@ -127,6 +129,12 @@ public class ChallengeDetailsActivity extends BaseActivity {
 	            results = TextUtils.join(", ", names);
 	        } else {
 	            results = "<No friends selected>";
+	        }
+	        
+	        Parcelable[] array = data.getParcelableArrayExtra("users");
+	        ArrayList<User> users = data.getParcelableArrayListExtra("array");
+	        if( array != null && array.length > 0){
+	        	Log.d(BaseActivity.LOG_TAG, "Users : " + array );
 	        }
 
 	        resultsTextView.setText(results);

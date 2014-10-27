@@ -78,7 +78,7 @@ public class InviteFriendsActivity extends BaseActivity {
 				
 				List<GraphUser> fbUsers = friendPickerFragment.getSelection();
 				
-				List<User> users = new ArrayList<User>();
+				ArrayList<User> users = new ArrayList<User>();
 				for( GraphUser u : fbUsers ){
 					
 					User ccuser = ParseData.getInstance().getFriendByFacebookId(u.getId());
@@ -116,6 +116,7 @@ public class InviteFriendsActivity extends BaseActivity {
 				
 				Intent data = new Intent();
 				data.putExtra("users", array);
+				data.putParcelableArrayListExtra("array", users);
 				setResult(RESULT_OK, data);
 				finish();
 				
