@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
     android:layout_marginBottom="10dp"
-    android:background="@drawable/lv_item_layer_list">
+    android:background="@drawable/lv_item_challenge_background">
 
     <ImageView
         android:id="@+id/ivCharityChallenge"

@@ -18,7 +18,7 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 
 	public static class ViewHolder{
 		ImageView ivCharityChallenge;
-		TextView tvCharityName;
+		TextView tvChallengeName;
 		TextView tvTargetAmount;
 		TextView tvRaised;
 		
@@ -46,9 +46,9 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 		ViewHolder viewHolder = null;
 		if (v == null) {
 			viewHolder = new ViewHolder();
-			v = View.inflate(getContext(), R.layout.item_challenge, null);
+			v = View.inflate(getContext(), R.layout.item_challenge_new, null);
 			viewHolder.ivCharityChallenge = (ImageView)v.findViewById(R.id.ivCharityChallenge);
-			viewHolder.tvCharityName = (TextView) v.findViewById(R.id.tvCharityName);
+			viewHolder.tvChallengeName = (TextView) v.findViewById(R.id.tvChallengeName);
 			viewHolder.tvTargetAmount = (TextView) v.findViewById(R.id.tvTargetAmount);
 			viewHolder.tvRaised = (TextView) v.findViewById(R.id.tvRaised);
 			v.setTag(viewHolder);
@@ -59,11 +59,21 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 
 		super.getItemView(challenge, v, parent);
 
-		viewHolder.tvCharityName.setText(challenge.getString("name"));
-		viewHolder.tvTargetAmount.setText("$ " + challenge.getInt("target"));
-		viewHolder.tvRaised.setText("$ " + challenge.getInt("raised"));
-		List<String> url = challenge.getList("challenge_pic_urls");
-		ImageLoader.getInstance().displayImage(url.get(0), viewHolder.ivCharityChallenge);
+		if(viewHolder.tvChallengeName != null){
+			viewHolder.tvChallengeName.setText(challenge.getString("name"));
+		}
+		if(viewHolder.tvTargetAmount != null){
+			viewHolder.tvTargetAmount.setText("/$" + challenge.getInt("target"));
+		}
+		
+		if(viewHolder.tvRaised != null){
+			viewHolder.tvRaised.setText("$" + challenge.getInt("raised") + " Raised");
+		}
+		
+		if(viewHolder.ivCharityChallenge != null){
+			List<String> url = challenge.getList("challenge_pic_urls");
+			ImageLoader.getInstance().displayImage(url.get(0), viewHolder.ivCharityChallenge);
+		}
 		
 		return v;
 	}

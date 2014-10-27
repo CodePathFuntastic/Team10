@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    
+    android:background="@drawable/lv_item_challenge_background">
+
+    <FrameLayout
+        android:id="@+id/flProfile"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" 
+        android:layout_margin="8dp">
+
+        <ImageView
+            android:id="@id/ivCharityChallenge"
+            android:layout_width="match_parent"
+            android:layout_height="175dp"
+            android:adjustViewBounds="true"
+			android:scaleType="centerCrop"
+			/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="175dp" 
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvChallengeName"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_alignParentLeft="true"
+                android:background="#00000000"
+                android:gravity="center_horizontal|center_vertical"
+                android:padding="2dp"
+                android:text="Ice bucket \nChallenge "
+                android:textColor="@android:color/white" 
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
+        </RelativeLayout>
+    
+	</FrameLayout>
+
+		<RelativeLayout
+		    android:layout_width="wrap_content"
+		    android:layout_height="90dp"
+		    android:layout_alignParentLeft="true"
+		    android:layout_alignParentRight="true"
+		    android:layout_below="@+id/flProfile"
+		    android:background="#FFFFFF"
+		    android:layout_margin="8dp">
+
+		    <TextView
+		        android:id="@+id/tvChallengeProgressLabel"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentLeft="true"
+		        android:layout_alignParentRight="true"
+		        android:layout_alignParentTop="true"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginRight="10dp"
+		        android:layout_marginTop="10dp"
+		        android:text="@string/challenge_progress_label"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		    <ProgressBar
+		        android:id="@+id/progressBar1"
+		        style="?android:attr/progressBarStyleHorizontal"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignLeft="@+id/tvChallengeProgressLabel"
+		        android:layout_alignRight="@+id/tvChallengeProgressLabel"
+		        android:layout_below="@+id/tvChallengeProgressLabel" />
+
+		    <TextView
+		        android:id="@+id/tvTargetAmount"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignRight="@+id/progressBar1"
+		        android:layout_below="@+id/progressBar1"
+		        android:layout_marginTop="10dp"
+		        android:text="@string/target_amount_raised"
+		        android:textAppearance="?android:attr/textAppearanceMedium" 
+		        android:textColor="@color/facebook_gary_3"/>
+
+		    <TextView
+		        android:id="@+id/tvRaised"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignBaseline="@+id/tvTargetAmount"
+		        android:layout_alignBottom="@+id/tvTargetAmount"
+		        android:layout_alignLeft="@+id/progressBar1"
+		        android:layout_marginTop="10dp"
+		        android:text="@string/amount_raised"
+		        android:textAppearance="?android:attr/textAppearanceMedium" 
+		        android:textColor="#00FF00"/>
+
+		</RelativeLayout>
+
+</RelativeLayout>
