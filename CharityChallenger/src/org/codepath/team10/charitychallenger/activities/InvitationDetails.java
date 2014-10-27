@@ -3,18 +3,16 @@ package org.codepath.team10.charitychallenger.activities;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.adapters.ChallengesViewAdapter.ViewHolder;
+import org.codepath.team10.charitychallenger.fragments.NewPictureFragment;
 import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.queries.ChallengeQueries;
-import org.codepath.team10.charitychallenger.utils.RoundTransform;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,17 +21,11 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParsePush;
-import com.parse.ParseQuery;
-import com.parse.SaveCallback;
-import com.parse.SendCallback;
-import com.squareup.picasso.Picasso;
 
 public class InvitationDetails extends BaseActivity {
 	
+	private Fragment fragment;
 	private TextView mTvChallengeName;
 	private TextView mTvTarget;
 	private TextView mTvRaised;
@@ -63,12 +55,26 @@ public class InvitationDetails extends BaseActivity {
 		if( intent.hasExtra("challenge") ){
 			mChallenge = (Challenge) intent.getParcelableExtra("challenge");
 		}
+		
+		FragmentManager manager = getFragmentManager();
+		Fragment fragment = manager.findFragmentById(R.id.invitation_detail_fragment);
+		
+		if (fragment == null) {
+			fragment = new NewPictureFragment();
+			
+		    Bundle bundle = new Bundle();
+		    fragment.setArguments(bundle);
+
+			manager.beginTransaction()
+					.add(R.id.fragmentContainer, fragment)
+					.commit();
+		}		
 				
-		mTvChallengeName = (TextView) findViewById(R.id.tvCharityChallengeName);
-		mTvTarget = (TextView) findViewById(R.id.tvTargetAmountRaised);
-		mTvRaised = (TextView) findViewById(R.id.tvAmountRaised);
-		mTvDesc = (TextView) findViewById(R.id.tvDescription);
-		mIvCharity = (ImageView) findViewById(R.id.ivCharity); 
+//		mTvChallengeName = (TextView) findViewById(R.id.tvCharityChallengeName);
+//		mTvTarget = (TextView) findViewById(R.id.tvTargetAmountRaised);
+//		mTvRaised = (TextView) findViewById(R.id.tvAmountRaised);
+//		mTvDesc = (TextView) findViewById(R.id.tvDescription);
+//		mIvCharity = (ImageView) findViewById(R.id.ivCharity); 
 		
 		if(challengeId != 0){
 			
@@ -97,27 +103,6 @@ public class InvitationDetails extends BaseActivity {
 					}
 				}
 			});
-			
-			/*
-			ParseQuery<ParseObject> query = ParseQuery.getQuery("Challenge");
-			query.whereEqualTo("challenge_id", challengeId);
-			
-			query.findInBackground(new FindCallback<ParseObject>() {
-		        public void done(List<ParseObject> records, ParseException e) {
-		        	if(e == null){
-		        		mTvChallengeName.setText(records.get(0).getString("name"));
-		        		int num = records.get(0).getInt("target");
-		        		mTvTarget.setText("$ "+num);
-		        		mTvRaised.setText("$ "+records.get(0).getInt("raised"));
-		        		mTvDesc.setText(""+records.get(0).getString("description"));	
-		        		List<String> url = records.get(0).getList("challenge_pic_urls");
-		        		ImageLoader.getInstance().displayImage(url.get(0), mIvCharity);
-		        	} else {
-		        		e.printStackTrace();
-		        	}
-		        }
-	        });
-	        */
 		}
 	}
 		
@@ -133,79 +118,6 @@ public class InvitationDetails extends BaseActivity {
 		intent.putExtra("invitation", mInvitation);
 		intent.putExtra("challenge", mChallenge);
 		startActivityForResult(intent, 120);
-	}
-	
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == Activity.RESULT_OK && requestCode == 110) {
-			Log.i(LOG_TAG, "Get back from the activity");
-			
-			Challenge challenge = (Challenge)data.getParcelableExtra("challenge");
-			Invitation invitation = (Invitation)data.getParcelableExtra("invitation");
-			final String newPhotoUrl = (String) data.getStringExtra("newPhotoUrl");
-
-//			ParseProxyObject incomingPPo = (ParseProxyObject)data.getSerializableExtra("parseObject");
-//			final int challengeId = incomingPPo.getInt("challenge_Id");
-			// get the ParseFile URL
-			//ParseFile newPhoto = (ParseFile)data.getSerializableExtra("photo");
-			//final String newPhotoUrl = newPhoto.getUrl();
-			ParseQuery<ParseObject> queryInvitation = ParseQuery.getQuery("Invitation");
-			queryInvitation.whereEqualTo("challengeId", invitation.getChallengeId());
-			queryInvitation.whereEqualTo("sender", invitation.getSender());
-			queryInvitation.whereEqualTo("receiver", invitation.getReceiver());
-			queryInvitation.getFirstInBackground(new GetCallback<ParseObject>() {
-				public void done(ParseObject parseObject, ParseException ParseError) {
-					Log.d("Log","inside done :"+parseObject.getInt("challengeId"));
-					if(ParseError == null){
-						JSONArray photos = parseObject.getJSONArray("photos");
-						JSONArray newPhotos;
-						if (photos == null) {
-							photos = new JSONArray();
-						} 
-						photos.put(newPhotoUrl);
-						parseObject.put("photos", photos);
-						final String sender = parseObject.getString("sender");
-						parseObject.saveInBackground(new SaveCallback() {
-							public void done(ParseException e) {
-								if (e == null) {
-									Log.d("Log","EXCELENT");   
-									// fire the push message
-									ParsePush push = new ParsePush();
-									push.setMessage(sender + " has accepted your Challenge");
-									JSONObject data = new JSONObject();
-									try {
-										data.put("sender", sender);
-									} catch (JSONException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
-									push.setData(data);
-									push.setChannel(MAIN_CHANNEL);
-									push.sendInBackground( new SendCallback(){
-							
-										@Override
-										public void done(ParseException paramParseException) {
-											if(paramParseException != null){
-												Log.e("org.codepath.team10.charitychallenger", "Push Exception", paramParseException);
-											}else{
-												Log.d("org.codepath.team10.charitychallenger", "Push Done");
-											}
-											
-										}});
-								} else {
-
-									Log.d("Log","Failed boss: "+e);
-									System.out.println(e.getCause());
-									System.out.println("VERY BAD");     
-								}
-							}
-						});
-					}else{
-						Log.d("Log", "Bombed error is :"+ParseError);
-					}
-				}
-			});	
-		}
 	}
 	
 	@Override

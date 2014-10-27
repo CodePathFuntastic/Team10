@@ -1,7 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?><RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
 
+    <!--
+     <FrameLayout
+            android:id="@+id/activity_invitation_fragment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+    -->
+    <!--
     <ImageView
         android:id="@+id/ivCharity"
         android:layout_width="wrap_content"
@@ -46,7 +55,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="99dp"
-        android:layout_toLeftOf="@+id/tvTargetAmountLabel"
         android:onClick="onClickAccept"
         android:text="@string/accept_challenege" />
 
@@ -95,5 +103,33 @@
         android:text="@string/target_amount_label"
         android:textColor="#FFFFFF"
         android:textSize="20sp" />
+    -->
+
+    <FrameLayout
+        android:id="@+id/invitation_detail_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btnAcceptChallenge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/invitation_detail_fragment"
+        android:onClick="onClickAccept"
+        android:text="@string/accept_challenege"/>
+
+    <Button
+        android:id="@+id/btnDonate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/invitation_detail_fragment"
+        android:onClick="onDonate"
+        android:text="@string/donoate" />
 
 </RelativeLayout>
