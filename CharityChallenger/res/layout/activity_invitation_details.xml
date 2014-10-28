@@ -115,13 +115,14 @@
         android:layout_alignParentTop="true" >
     </FrameLayout>
 
-    <Button
+    <ImageButton
         android:id="@+id/btnAcceptChallenge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/etUserName"
         android:onClick="onClickAccept"
+        android:src="@drawable/ic_action_photo"
         android:text="@string/accept_challenege"
         android:layout_margin="15dp"/>
 
