@@ -2,5 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="org.codepath.team10.charitychallenger.NewPictureActivity" >
 
+      <item android:id="@+id/action_photo"
+    android:icon="@drawable/ic_action_photo"
+    android:title="Take photo"
+    android:showAsAction="ifRoom" />
+  <item android:id="@+id/action_cancel"
+    android:title="Cancel"
+    android:showAsAction="ifRoom" />
 
 </menu>
