@@ -104,7 +104,7 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
 	        			if(actionBar.getTabCount() == 0){
 	        				getActivity().finish();
 	        			}
-	        			if(actionBar.getTabCount() == 3){
+	        			if(actionBar.getTabCount() == 2){
         					actionBar.selectTab(actionBar.getTabAt(1));
         				}
 	        		}

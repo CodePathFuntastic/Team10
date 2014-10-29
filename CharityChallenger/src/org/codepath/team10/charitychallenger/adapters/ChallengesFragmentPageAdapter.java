@@ -22,8 +22,8 @@ public class ChallengesFragmentPageAdapter extends FragmentPagerAdapter {
 	      return new ChallengesHomeFragment();
 	  case 1:
 	      return new ReceivedInvitationsFragment();
-	  case 2:
-	     return new SentInvitationsFragment();
+//	  case 2:
+//	     return new SentInvitationsFragment();
 	  default:
 	   break;
 	  }
@@ -33,7 +33,7 @@ public class ChallengesFragmentPageAdapter extends FragmentPagerAdapter {
 	 @Override
 	 public int getCount() {
 	  // TODO Auto-generated method stub
-	  return 3;
+	  return 2;
 	 }
 
 

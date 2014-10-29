@@ -92,5 +92,6 @@
         <item>cctheme2</item>
     </string-array>
         <string name="challenge_progress_label">Challenge Progress</string>
+        <string name="time_ago">2d</string>
     
 </resources>

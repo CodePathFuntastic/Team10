@@ -2,17 +2,26 @@ package org.codepath.team10.charitychallenger.activities;
 
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.adapters.ChallengesFragmentPageAdapter;
+import org.codepath.team10.charitychallenger.fragments.ReceivedInvitationsFragment;
+import org.codepath.team10.charitychallenger.fragments.SentInvitationsFragment;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Switch;
 
 public class ChallengesHomeSwipeActivity extends BaseActivity implements ActionBar.TabListener{
 	 private ActionBar mActionbar;
 	 private ViewPager mViewpager;
 	 private ChallengesFragmentPageAdapter mFragmentAdatper;
+	 private Switch mSwitch; // switch button
 	 
 	 @Override
 	 protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +36,23 @@ public class ChallengesHomeSwipeActivity extends BaseActivity implements ActionB
 		 mActionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		 mActionbar.addTab(mActionbar.newTab().setText("Home").setTabListener(this));
 		 mActionbar.addTab(mActionbar.newTab().setText("Received").setTabListener(this));
-		 mActionbar.addTab(mActionbar.newTab().setText("Sent").setTabListener(this));
-	  
+		 
+//		 Tab tab = mActionbar.newTab();
+//		 tab.setCustomView(R.layout.toggle_button);
+//		 mSwitch = (Switch)tab.getCustomView().findViewById(R.id.switch1);
+//		 mActionbar.addTab(tab.setTabListener(this));		 
+//		 mSwitch.setChecked(true);	 
+//		 mSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//		    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//		    	if(isChecked){
+//		    		Log.d("omg", "Button is ON");
+//		    	} else {
+//		    		Log.d("omg", "Button is OFF");
+//		    	}
+//		    }
+//		});
+		 
+		 
 		 mViewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			 @Override
 			 public void onPageSelected(int index) {
@@ -65,4 +89,11 @@ public class ChallengesHomeSwipeActivity extends BaseActivity implements ActionB
 	    // should not go back....
 	    return;
 	}
+	
+	public void replaceFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.layout.fragment_all_invitations, fragment);
+        transaction.commit();
+        getSupportFragmentManager().executePendingTransactions();
+    }
 }

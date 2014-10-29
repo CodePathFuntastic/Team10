@@ -92,7 +92,7 @@
             android:layout_alignLeft="@+id/challengeProgressBar"
             android:text="@string/amount_raised"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#00FF00" />
+            android:textColor="@color/app_secondary_color" />
     </RelativeLayout>
 
 </RelativeLayout>

@@ -37,7 +37,6 @@ public class InvitationsAcceptedAdapter extends ArrayAdapter<Invitation> {
 		private ImageView	ivFriend;
 		private TextView	tvFriendName;
 		public TextView		tvFriendLocation;
-		public Button		btnInvite;
 	}
 
 	@Override
@@ -51,20 +50,17 @@ public class InvitationsAcceptedAdapter extends ArrayAdapter<Invitation> {
 			convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_invite, parent, false);
 			viewHolder.ivFriend = (ImageView)convertView.findViewById(R.id.ivFriend);
 			viewHolder.tvFriendName = (TextView)convertView.findViewById(R.id.tvFriendName);
-			viewHolder.tvFriendLocation = (TextView)convertView.findViewById(R.id.tvFriendLocation);
-			viewHolder.btnInvite = (Button) convertView.findViewById(R.id.btnInviteFriend);
+			viewHolder.tvFriendLocation = (TextView)convertView.findViewById(R.id.tvTimeAgo);
 			convertView.setTag(viewHolder);
 		}else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}	
 		
-		if(invitation.getStatus() == 1){
-			viewHolder.btnInvite.setVisibility(View.VISIBLE);
-			setListener(viewHolder.btnInvite, position);
-		} else {
-			viewHolder.btnInvite.setVisibility(View.GONE);
+//		if(invitation.getStatus() == 1){
+//			setListener(viewHolder, position);
+//		} else {
 			setListener(convertView, position);
-		}
+		//}
 		
 		String relativeCreationTime = FancyTimeUtil.getRelativeTimeAgo(invitation.getCreatedAt().toString());
 		viewHolder.tvFriendLocation.setText(relativeCreationTime);

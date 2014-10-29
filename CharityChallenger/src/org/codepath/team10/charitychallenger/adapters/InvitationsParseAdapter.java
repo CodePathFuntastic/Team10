@@ -60,8 +60,7 @@ public class InvitationsParseAdapter extends ParseQueryAdapter<Invitation> {
 			holder = new ViewHolder();
 			holder.ivFriend = (ImageView)convertview.findViewById(R.id.ivFriend);
 			holder.tvFriendName = (TextView)convertview.findViewById(R.id.tvFriendName);
-			holder.tvFriendLocation = (TextView)convertview.findViewById(R.id.tvFriendLocation);
-			holder.btnInvite = (Button) convertview.findViewById(R.id.btnInviteFriend);
+			holder.tvFriendLocation = (TextView)convertview.findViewById(R.id.tvTimeAgo);
 			convertview.setTag(holder);
 		}else{
 			holder = (ViewHolder) convertview.getTag();

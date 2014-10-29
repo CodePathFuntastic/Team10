@@ -10,30 +10,30 @@
         android:layout_height="45dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/charity_3" />
-
-    <TextView
-        android:id="@+id/tvFriendName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/ivFriend"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_toRightOf="@+id/ivFriend"
-        android:text="@string/friend_name" />
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="7dp"
+        android:src="@drawable/ic_launcher" 
+        />
 
     <TextView
         android:id="@+id/tvTimeAgo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvSender"
+        android:layout_alignBottom="@+id/tvSender"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvSender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/ivFriend"
-        android:layout_alignLeft="@+id/tvFriendName"
-        android:layout_alignRight="@+id/tvFriendName"
-        android:text="@string/friend_location" 
-        android:layout_marginBottom="5dp"/>
+        android:layout_toLeftOf="@+id/tvTimeAgo"
+        android:layout_toRightOf="@+id/ivFriend"
+        android:layout_marginLeft="10dp"
+        android:text="TextView" />
     
 </RelativeLayout>

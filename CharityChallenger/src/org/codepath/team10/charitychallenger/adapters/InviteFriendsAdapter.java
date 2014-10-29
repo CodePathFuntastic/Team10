@@ -36,7 +36,7 @@ public class InviteFriendsAdapter extends ArrayAdapter<AAUser> {
 			convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_invite, parent, false);
 			viewHolder.ivFriend = (ImageView)convertView.findViewById(R.id.ivFriend);
 			viewHolder.tvFriendName = (TextView)convertView.findViewById(R.id.tvFriendName);
-			viewHolder.tvFriendLocation = (TextView)convertView.findViewById(R.id.tvFriendLocation);
+			viewHolder.tvFriendLocation = (TextView)convertView.findViewById(R.id.tvTimeAgo);
 			
 			convertView.setTag(viewHolder);
 		}else {

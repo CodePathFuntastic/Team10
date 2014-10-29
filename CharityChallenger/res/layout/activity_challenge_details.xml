@@ -50,7 +50,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnInviewNow"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tvSelectedFriends" >
+        android:layout_below="@+id/tvSelectedFriends" 
+        android:background="@drawable/fragment_background">
     </ListView>
     
 

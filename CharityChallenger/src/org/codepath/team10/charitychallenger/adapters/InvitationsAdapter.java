@@ -32,21 +32,18 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class InvitationsAdapter extends ArrayAdapter<Invitation> {	
-	
-	private boolean isSentView = false;
 	private ParseData parseData =null;
 	
 	public InvitationsAdapter(Context context, boolean isSentView, List<Invitation> objects) {
 		super(context, R.layout.item_invite, objects);
-		this.isSentView = isSentView;
 		parseData = ParseData.getInstance();
 	}
 	
 	public static class ViewHolder{
 		private ImageView	ivFriend;
-		private TextView	tvFriendName;
-		public TextView		tvFriendLocation;
-		public Button		btnInvite;
+		private TextView	tvSender;
+		private TextView	tvName;
+		private TextView 	tvTimeAgo;
 	}
 
 	@Override
@@ -57,11 +54,11 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 		ViewHolder viewHolder =  null;
 		if(convertView == null){
 			viewHolder = new ViewHolder();
-			convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_invite, parent, false);
+			convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_invite_received, parent, false);
 			viewHolder.ivFriend = (ImageView)convertView.findViewById(R.id.ivFriend);
-			viewHolder.tvFriendName = (TextView)convertView.findViewById(R.id.tvFriendName);
-			viewHolder.tvFriendLocation = (TextView)convertView.findViewById(R.id.tvFriendLocation);
-			viewHolder.btnInvite = (Button) convertView.findViewById(R.id.btnInviteFriend);
+			viewHolder.tvSender = (TextView)convertView.findViewById(R.id.tvSender);
+			viewHolder.tvTimeAgo = (TextView)convertView.findViewById(R.id.tvTimeAgo);
+			//viewHolder.tvName = (TextView)convertView.findViewById(R.id.tvName); // challenge name.
 			convertView.setTag(viewHolder);
 		}else {
 			viewHolder = (ViewHolder) convertView.getTag();
@@ -69,38 +66,10 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 				
 		if( invitation.getCreatedAt() != null ){
 			String relativeCreationTime = FancyTimeUtil.getRelativeTimeAgo(invitation.getCreatedAt().toString());
-			viewHolder.tvFriendLocation.setText(relativeCreationTime);
+			viewHolder.tvTimeAgo.setText(relativeCreationTime);
 		}
-		
-		
-		// all this if-else can be solved by subclassing this adapter
-		// TODO: properly subclass this adapter
-		
-		if( isSentView == true){
-			User friend = parseData.getFriendByFacebookId(invitation.getReceiver());
-			viewHolder.tvFriendName.setText( invitation.getReceiver());
-			if( friend == null ){
-				updateVew(viewHolder, invitation.getReceiver());
-			}else{
-				updateView(friend, viewHolder);
-			}
-
-		}else{
-			User friend = parseData.getFriendByFacebookId(invitation.getSender());
-			viewHolder.tvFriendName.setText( invitation.getSender());
-			if( friend == null ){
-				updateVew(viewHolder, invitation.getSender());
-			}else{
-				updateView(friend, viewHolder);
-			}
-		}
-		
-		if( isSentView ==true){
-			setChallengeListener(viewHolder.btnInvite, position, invitation);
-		}else{
-			setInvitationListener(viewHolder.btnInvite, position, invitation);
-		}
-
+		updateVew(viewHolder, invitation.getSender());
+		setInvitationListener(convertView, position, invitation);
 		
 		return convertView;
 	}
@@ -141,55 +110,8 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 
 			}
 		});
-	
 	}
 
-	private void setChallengeListener(View view, final int position, final Invitation invitation ){
-		
-		view.setOnClickListener(new OnClickListener() {
-		    
-			@Override
-		    public void onClick(View v) {
-		    	
-				ParseRestClient client = ParseRestClient.getInstance();
-				client.getChallengeById(invitation.getChallengeId(), new ParseJsonHttpResponseHandler(){
-					@Override
-					public void onSuccess(int status, JSONObject json) {
-						if( status == 200 && json != null ){
-							if( !json.isNull("results")){
-								try {
-									JSONArray array = json.getJSONArray("results");
-									// it should only 1 in length
-									if( array.length() > 0 ){
-										JSONObject j = array.getJSONObject(0);
-										Challenge c = Challenge.fromJson(j);
-										
-										Intent intent = new Intent(getContext(), ChallengeDetailsActivity.class);
-										intent.putExtra("challenge", c);
-										getContext().startActivity(intent);
-									}
-									
-								} catch (JSONException e) {
-									e.printStackTrace();
-								}
-							}
-						}
-					}
-				});
-		    	
-		    }
-		});
-	}
-	
-	private void updateView( User user, ViewHolder viewHolder){
-		if(user.getImageUrl() != null){
-			viewHolder.ivFriend.setImageResource(android.R.color.transparent);
-			ImageLoader.getInstance().displayImage(user.getImageUrl(), viewHolder.ivFriend);
-		}
-		Log.d("InvitationsAdapter: name - ", user.getName());
-		viewHolder.tvFriendName.setText(user.getName());
-	}
-	
 	private void updateVew(final ViewHolder viewHolder, String  userid) {
 		
 		ParseRestClient.getInstance().getUserDetails(userid, new ParseJsonHttpResponseHandler(){
@@ -211,7 +133,8 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 									ImageLoader.getInstance().displayImage(user.getImageUrl(), viewHolder.ivFriend);
 								}
 								Log.d("InvitationsAdapter: name - ", user.getName());
-								viewHolder.tvFriendName.setText(user.getName());
+								viewHolder.tvSender.setText("");
+								viewHolder.tvSender.setText(user.getName());
 							}
 						} catch (JSONException e) {
 							e.printStackTrace();
