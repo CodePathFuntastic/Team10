@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.codepath.team10.charitychallenger.ParseData;
 import org.codepath.team10.charitychallenger.R;
-import org.codepath.team10.charitychallenger.activities.ChallengeDetailsActivity;
 import org.codepath.team10.charitychallenger.activities.InvitationDetails;
 import org.codepath.team10.charitychallenger.clients.ParseJsonHttpResponseHandler;
 import org.codepath.team10.charitychallenger.clients.ParseRestClient;
@@ -12,24 +11,24 @@ import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.User;
 import org.codepath.team10.charitychallenger.utils.FancyTimeUtil;
+import org.codepath.team10.charitychallenger.utils.RoundTransform;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.Intent;
-import android.sax.StartElementListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.squareup.picasso.Picasso;
 
 public class InvitationsAdapter extends ArrayAdapter<Invitation> {	
 	private ParseData parseData =null;
@@ -130,7 +129,9 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 								ParseData.getInstance().addFriend(user);
 								if(user.getImageUrl() != null){
 									viewHolder.ivFriend.setImageResource(android.R.color.transparent);
-									ImageLoader.getInstance().displayImage(user.getImageUrl(), viewHolder.ivFriend);
+									Picasso.with(getContext()).load(user.getImageUrl())
+									 .error(R.drawable.ic_launcher)
+									 .transform(new RoundTransform()).into(viewHolder.ivFriend);
 								}
 								Log.d("InvitationsAdapter: name - ", user.getName());
 								viewHolder.tvSender.setText("");
