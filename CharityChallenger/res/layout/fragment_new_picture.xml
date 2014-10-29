@@ -32,7 +32,19 @@
         android:inputType="textMultiLine"
         android:text="My Picture Challenge"
         android:visibility="gone" />
-
+    
+        <ImageView
+        android:id="@+id/picture_preview_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/photo_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_weight="0.09"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
+<!--  
     <com.parse.ParseImageView
         android:id="@+id/picture_preview_image"
         android:layout_width="match_parent"
@@ -44,6 +56,8 @@
         android:layout_weight="0.09"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop" />
+    
+    -->
 
     <!--
     <Spinner

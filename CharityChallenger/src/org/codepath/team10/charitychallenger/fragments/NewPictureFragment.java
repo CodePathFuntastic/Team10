@@ -1,8 +1,10 @@
 package org.codepath.team10.charitychallenger.fragments;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
-import org.codepath.team10.charitychallenger.activities.DonateActivity;
 import org.codepath.team10.charitychallenger.activities.FunActivity;
 import org.codepath.team10.charitychallenger.activities.NewPictureActivity;
 import org.codepath.team10.charitychallenger.models.Challenge;
@@ -10,31 +12,31 @@ import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
 import org.codepath.team10.charitychallenger.models.Picture;
 import org.codepath.team10.charitychallenger.utils.InvitationMessageUtils;
+import org.json.JSONArray;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.GetCallback;
-import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseImageView;
 import com.parse.ParsePush;
 import com.parse.SaveCallback;
 import com.parse.SendCallback;
@@ -44,14 +46,17 @@ public class NewPictureFragment extends Fragment {
 	private ImageButton photoButton;
 	private Button saveButton;
 	private Button cancelButton;
-	private Button donateButton;
+
 	private TextView pictureName;
-	private Spinner pictureRating;
-	private ParseImageView picturePreview;
+
+	private ImageView ivPreview;
 	private Challenge challenge;
 	private Invitation invitation;
-	
+	public final String APP_TAG = "MyCustomApp";
+	public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
+	public String photoFileName = "photo.jpg";
 	private Picture picture;
+	private ParseFile photoFile;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -70,39 +75,20 @@ public class NewPictureFragment extends Fragment {
 		View v = inflater.inflate(R.layout.fragment_new_picture, parent, false);
 
 		pictureName = ((EditText) v.findViewById(R.id.picture_name));
-
-		//pictureRating = ((Spinner) v.findViewById(R.id.rating_spinner));
 		
 		picture = ((NewPictureActivity) getActivity()).getCurrentPicture();
-		
-//		ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter
-//				.createFromResource(getActivity(), R.array.ratings_array,
-//						android.R.layout.simple_spinner_dropdown_item);
-		
-		//pictureRating.setAdapter(spinnerAdapter);
 
 		photoButton = ((ImageButton) v.findViewById(R.id.photo_button));
 		photoButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				InputMethodManager imm = (InputMethodManager) getActivity()
-												.getSystemService(Context.INPUT_METHOD_SERVICE);
-				imm.hideSoftInputFromWindow(pictureName.getWindowToken(), 0);
-				startCamera();
+			    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+			    intent.putExtra(MediaStore.EXTRA_OUTPUT, getPhotoFileUri(photoFileName));
+			    // Start the image capture intent to take photo
+			    startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);				
 			}
 		});
-
-//		donateButton = ((Button) v.findViewById(R.id.donate_button));
-//		donateButton.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view){
-//				Intent intent = new Intent(getActivity(), DonateActivity.class);
-//				intent.putExtra("invitation", invitation);
-//				intent.putExtra("challenge", challenge);
-//				startActivityForResult(intent, 120);
-//			}
-//		});
 		
 		saveButton = ((Button) v.findViewById(R.id.save_button));
 		saveButton.setOnClickListener(new View.OnClickListener() {
@@ -144,10 +130,46 @@ public class NewPictureFragment extends Fragment {
 			}
 		});
 
-		picturePreview = (ParseImageView) v.findViewById(R.id.picture_preview_image);
-		picturePreview.setVisibility(View.INVISIBLE);
-
+		ivPreview = (ImageView) v.findViewById(R.id.picture_preview_image);
+		ivPreview.setVisibility(View.INVISIBLE);
 		return v;
+	}
+	
+	private void addPhotoToPictureAndReturn(ParseFile photoFile) {
+		((NewPictureActivity) getActivity()).getCurrentPicture().setPhotoFile(
+				photoFile);
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+	         Uri takenPhotoUri = getPhotoFileUri(photoFileName);
+	         // by this point we have the camera photo on disk
+	         Bitmap takenImage = BitmapFactory.decodeFile(takenPhotoUri.getPath());
+	         ivPreview.setImageBitmap(takenImage);  
+	         ivPreview.setVisibility(View.VISIBLE);
+
+	         ByteArrayOutputStream stream = new ByteArrayOutputStream();
+	         takenImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
+	         byte[] byteArray = stream.toByteArray();
+	         
+	         
+	 		photoFile = new ParseFile("picture_photo.jpg", byteArray);
+	 		addPhotoToPictureAndReturn(photoFile);
+	    }
+	}
+	
+	// Returns the Uri for a photo stored on disk given the fileName
+	public Uri getPhotoFileUri(String fileName) {
+	    // Get safe storage directory for photos
+	    File mediaStorageDir = new File(
+	        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), APP_TAG);
+
+	    if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+	        Log.d(APP_TAG, "failed to create directory");
+	    }
+
+	    return Uri.fromFile(new File(mediaStorageDir.getPath() + File.separator + fileName));
 	}
 	
 	public void refreshFromParse(){
@@ -186,7 +208,10 @@ public class NewPictureFragment extends Fragment {
 		// at this point the picture should have the URL.
 		ParseFile photo = picture.getPhotoFile();
 		String photourl = photo.getUrl();
-		
+		JSONArray photos = new JSONArray();
+		photos.put(photourl);
+		//invitation.put("photos", photos);
+		//invitation.put("status",InvitationStatusEnum.PIC_SENT.ordinal());
 		invitation.addPhoto(photourl);
 		invitation.setStatus(InvitationStatusEnum.PIC_SENT.ordinal());
 		
@@ -244,44 +269,10 @@ public class NewPictureFragment extends Fragment {
 		});
 		
 		// start to fun activity
-//		Intent data = new Intent();
-//		data.putExtra("invitation", invitation);
-//		data.putExtra("challenge", challenge);
-//		data.putExtra("newPhotoUrl", picture.getPhotoFile().getUrl());
-//
-//		
-//		getActivity().setResult(Activity.RESULT_OK, data);
-//		getActivity().finish();
-		
 		Intent intent = new Intent( getActivity(), FunActivity.class);
 		intent.putExtra("invitation", invitation);
 		intent.putExtra("challenge", challenge);
 		
 		startActivity(intent);
-	}
-
-	public void startCamera() {
-		Fragment cameraFragment = new CameraFragment();
-		FragmentTransaction transaction = getActivity().getFragmentManager()
-				.beginTransaction();
-		transaction.replace(R.id.fragmentContainer, cameraFragment);
-		transaction.addToBackStack("NewPictureFragment");
-		transaction.commit();
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		ParseFile photoFile = ((NewPictureActivity) getActivity())
-				.getCurrentPicture().getPhotoFile();
-		if (photoFile != null) {
-			picturePreview.setParseFile(photoFile);
-			picturePreview.loadInBackground(new GetDataCallback() {
-				@Override
-				public void done(byte[] data, ParseException e) {
-					picturePreview.setVisibility(View.VISIBLE);
-				}
-			});
-		}
 	}
 }
