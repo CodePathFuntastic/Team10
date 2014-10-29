@@ -178,18 +178,17 @@ public class NewPictureFragment extends Fragment {
 		invitation.fetchInBackground( new GetCallback<Invitation>(){
 
 			@Override
-			public void done(Invitation invitation,
+			public void done(final Invitation qInvitation,
 					ParseException e) {
 				
 				if( e == null ){
-					
 					// refresh the challenge
 					challenge.fetchInBackground( new GetCallback<Challenge>() {
 						@Override
 						public void done(Challenge c,
 								ParseException e) {
 							if( e == null ){
-								saveInParse();
+								saveInParse(qInvitation);
 							}else{
 								// handle exception
 							}
@@ -203,20 +202,24 @@ public class NewPictureFragment extends Fragment {
 		} );
 	}
 	
-	public void saveInParse(){
+	public void saveInParse(Invitation qInvitation){
 		
 		// at this point the picture should have the URL.
 		ParseFile photo = picture.getPhotoFile();
 		String photourl = photo.getUrl();
-		JSONArray photos = new JSONArray();
+		JSONArray photos = qInvitation.getJSONArray("photos");
+		JSONArray newPhotos;
+		if (photos == null) {
+			photos = new JSONArray();
+		} 
 		photos.put(photourl);
-		//invitation.put("photos", photos);
-		//invitation.put("status",InvitationStatusEnum.PIC_SENT.ordinal());
-		invitation.addPhoto(photourl);
-		invitation.setStatus(InvitationStatusEnum.PIC_SENT.ordinal());
+		qInvitation.put("photos", photos);
+		qInvitation.put("status",InvitationStatusEnum.PIC_SENT.ordinal());
+		//invitation.addPhoto(photourl);
+		//invitation.setStatus(InvitationStatusEnum.PIC_SENT.ordinal());
 		
 		// update the invitation and challenge
-		invitation.saveInBackground( new SaveCallback() {
+		qInvitation.saveInBackground( new SaveCallback() {
 			@Override
 			public void done(ParseException e) {
 				if( e == null ){
