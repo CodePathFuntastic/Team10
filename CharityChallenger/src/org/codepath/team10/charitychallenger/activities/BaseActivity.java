@@ -14,6 +14,7 @@ import android.app.Application;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
@@ -39,6 +40,8 @@ public class BaseActivity extends FragmentActivity {
 			}
 		}
 
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		
 		eventManager = EventManager.getInstance();
 		parseData = ParseData.getInstance();
 		
