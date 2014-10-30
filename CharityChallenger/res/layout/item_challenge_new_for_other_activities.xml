@@ -80,7 +80,7 @@
 			android:layout_marginTop="5dp"
             android:text="@string/target_amount_raised"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/facebook_gary_3" />
+            android:textColor="@color/app_progressbar_gray" />
 
         <TextView
             android:id="@+id/tvRaised"

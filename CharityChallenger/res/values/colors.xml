@@ -3,7 +3,10 @@
     <color name="facebook_blue">#55ACEE</color>
     <color name="facebook_gary_1">#292f33</color>
     <color name="facebook_gary_2">#66757F</color>
-    <color name="facebook_gary_3">#8899A6</color>
+    <color name="app_progressbar_gray">#D7DDE0</color>
+    <color name="app_border_gray">#E6E6E6</color>
+    <color name="app_bg_gray">#F0F0F0</color>
+    
     <color name="facebook_gary_4">#CCD6DD</color>
     <color name="app_secondary_color">#29E3D3</color> 
 </resources>
