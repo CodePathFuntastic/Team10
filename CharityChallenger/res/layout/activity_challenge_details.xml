@@ -13,36 +13,13 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" >
     </FrameLayout>
-<!--      
-    <TextView
-        android:id="@+id/tvChallengeTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="Large Text"
-        android:gravity="center_vertical"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <ImageView
-        android:id="@+id/ivChallengeImage"
-		android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true"
-        android:layout_below="@+id/tvChallengeTitle"
-        android:src="@drawable/icons_partnership_170" />
--->
     <TextView
         android:id="@+id/tvSelectedFriends"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/challenge_detail_fragment"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/btnSelectFriends" />
+        android:layout_alignParentRight="true"/>
     
     <ListView
         android:id="@+id/lvSelectedFriends"
@@ -50,11 +27,12 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnInviewNow"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tvSelectedFriends" 
-        android:background="@drawable/fragment_background">
+        android:layout_below="@+id/tvSelectedFriends"
+        android:background="@drawable/fragment_background" >
+
     </ListView>
     
-
+ <!--
     <Button
         android:id="@+id/btnInviewNow"
         android:layout_width="wrap_content"
@@ -64,6 +42,7 @@
         android:enabled="false"
         android:onClick="onClickInvite"
         android:text="Invite" 
+        android:layout_below="@+id/lvSelectedFriends"
         android:background="#e35683"
         android:layout_marginBottom="10dp"/>
 
@@ -74,8 +53,29 @@
         android:layout_centerHorizontal="true"
         android:onClick="onClickSelectFriends"
         android:background="#e35683"
-        android:layout_below="@+id/challenge_detail_fragment"
+        android:layout_below="@+id/lvSelectedFriends"
         android:text="Select Friends" />
+-->
 
+    <Button
+        android:id="@+id/btnInviewNow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="#e35683"
+        android:enabled="false"
+        android:onClick="onClickInvite"
+        android:text="Invite"/>
+
+    <Button
+        android:id="@+id/btnSelectFriends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="#e35683"
+        android:onClick="onClickSelectFriends"
+        android:text="Select Friends" />
 
 </RelativeLayout>
