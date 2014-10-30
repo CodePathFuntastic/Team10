@@ -6,6 +6,7 @@ import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.models.Challenge;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,6 +14,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.parse.ParseQueryAdapter;
 
 public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
@@ -23,6 +26,7 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 		TextView tvTargetAmount;
 		TextView tvRaised;
 		ProgressBar challengeProgressBar;
+		ProgressBar progressBarLoadImage;
 	}
 	public ChallengesViewAdapter(Context context, final String tableName) {
 		super(context, tableName);
@@ -41,6 +45,8 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 			viewHolder.tvTargetAmount = (TextView) v.findViewById(R.id.tvTargetAmount);
 			viewHolder.tvRaised = (TextView) v.findViewById(R.id.tvRaised);
 			viewHolder.challengeProgressBar = (ProgressBar) v.findViewById(R.id.challengeProgressBar);
+			viewHolder.progressBarLoadImage = (ProgressBar) v.findViewById(R.id.progressBarLoadImage);
+			
 			v.setTag(viewHolder);
 			
 		} else {
@@ -58,11 +64,13 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 		
 		if(viewHolder.tvRaised != null){
 			viewHolder.tvRaised.setText("$" + challenge.getInt("raised") + " Raised");
+			
 		}
 		
 		if(viewHolder.ivCharityChallenge != null){
 			List<String> url = challenge.getList("challenge_pic_urls");
-			ImageLoader.getInstance().displayImage(url.get(0), viewHolder.ivCharityChallenge);
+			display(viewHolder.ivCharityChallenge, url.get(0), viewHolder.progressBarLoadImage);
+			
 		}
 		
 		if(viewHolder.challengeProgressBar != null){
@@ -72,4 +80,29 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 		return v;
 	}
 
+	public void display(ImageView img, String url, final ProgressBar spinner)
+	{
+		ImageLoader.getInstance().displayImage(url, img, new ImageLoadingListener(){
+	
+	        @Override
+	        public void onLoadingStarted(String imageUri, View view) {
+	         spinner.setVisibility(View.VISIBLE); // set the spinner visible
+	        }
+	        @Override
+	        public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+	         spinner.setVisibility(View.GONE); // set the spinenr visibility to gone
+
+
+	        }
+	        @Override
+	        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+	         spinner.setVisibility(View.GONE); //  loading completed set the spinenr visibility to gone
+	        }
+	        @Override
+	        public void onLoadingCancelled(String imageUri, View view) {
+
+	        }
+
+	});
+	}
 }
