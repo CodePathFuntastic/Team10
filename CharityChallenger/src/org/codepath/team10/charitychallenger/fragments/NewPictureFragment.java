@@ -5,6 +5,7 @@ import java.io.File;
 
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.activities.ChallengesHomeSwipeActivity;
 import org.codepath.team10.charitychallenger.activities.FunActivity;
 import org.codepath.team10.charitychallenger.activities.NewPictureActivity;
 import org.codepath.team10.charitychallenger.clients.PutPhotoAsyncTask;
@@ -299,8 +300,14 @@ public class NewPictureFragment extends Fragment {
 	}
 	
 	private void setPictureForInvitation(Invitation qInvitation) {
-		PutPhotoAsyncTask async= new PutPhotoAsyncTask();
-		async.setInvitation(qInvitation);
+		PutPhotoAsyncTask async= new PutPhotoAsyncTask( qInvitation, new PutPhotoAsyncTask.InvitationUpdateCallBack() {
+			@Override
+			public void onUpdate() {
+				sendPushNotification();
+			}
+		});
+
+		//async.setInvitation(qInvitation);
 		String[] ids = { invitation.getObjectId() };
 		async.execute(ids);	
 	}
@@ -327,7 +334,7 @@ public class NewPictureFragment extends Fragment {
 		});
 		
 		// start to fun activity
-		Intent intent = new Intent( getActivity(), FunActivity.class);
+		Intent intent = new Intent( getActivity(), ChallengesHomeSwipeActivity.class);
 		intent.putExtra("invitation", invitation);
 		intent.putExtra("challenge", challenge);
 		

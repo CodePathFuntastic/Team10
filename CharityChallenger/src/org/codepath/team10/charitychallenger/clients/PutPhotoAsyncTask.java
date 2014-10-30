@@ -19,9 +19,11 @@ import android.util.Log;
 public class PutPhotoAsyncTask extends AsyncTask<String, Integer, Void> {
 	
 	private Invitation invitation;
+	private InvitationUpdateCallBack callback;
 	
-	public void setInvitation(Invitation invitation) {
+	public PutPhotoAsyncTask(final Invitation invitation, final InvitationUpdateCallBack callback) {
 		this.invitation = invitation;
+		this.callback = callback;
 	}
 
 	@Override
@@ -81,6 +83,14 @@ public class PutPhotoAsyncTask extends AsyncTask<String, Integer, Void> {
 
 	@Override
 	protected void onPostExecute(Void handler) {
-		super.onPostExecute(handler);
+		if( callback != null ){
+			callback.onUpdate();
+		}
+	}
+	
+	
+	// callback to execute tasks after update
+	public interface InvitationUpdateCallBack{
+		public void onUpdate();
 	}
 }
