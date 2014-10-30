@@ -72,6 +72,7 @@ public class ChallengeDetailsActivity extends BaseActivity {
 		
 	    lvSelectedFriends = (ListView) findViewById(R.id.lvSelectedFriends);
 	    btnInviteNow = (Button) findViewById(R.id.btnInviewNow);
+	    btnInviteNow.setVisibility(View.INVISIBLE);
 	    
 	    if( getApplication() instanceof CharityChallengerApplication ){
 	    	application = (CharityChallengerApplication) getApplication();
@@ -103,6 +104,8 @@ public class ChallengeDetailsActivity extends BaseActivity {
 	        switch (requestCode) {
 	            case PICK_FRIENDS_ACTIVITY:
 	                displaySelectedFriends(resultCode, data);
+	        	    btnInviteNow.setVisibility(View.VISIBLE);
+	        	    pickFriendsButton.setVisibility(View.INVISIBLE);
 	                break;
 	            default:
 	                Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);

@@ -25,9 +25,9 @@
         android:id="@+id/lvSelectedFriends"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btnInviewNow"
+        android:layout_above="@+id/btnSelectFriends"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tvSelectedFriends">
+        android:layout_below="@+id/tvSelectedFriends" >
 
     </ListView>
     
@@ -56,35 +56,14 @@
         android:text="Select Friends" />
 -->
 
-    <Button
-        android:id="@+id/btnInviewNow"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:background="@drawable/buttonshape"
-        android:gravity="center_horizontal|center_vertical"
-        android:padding="2dp"
-        android:shadowColor="#A8A8A8"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:enabled="false"
-        android:onClick="onClickInvite"
-        android:text="Invite"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp" 
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        android:paddingBottom="3dp"/>
 
     <Button
         android:id="@+id/btnSelectFriends"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/buttonshape"
         android:gravity="center_horizontal|center_vertical"
         android:onClick="onClickSelectFriends"
@@ -94,6 +73,26 @@
         android:shadowDy="0"
         android:shadowRadius="1"
         android:text="Friends"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btnInviewNow"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignBaseline="@+id/btnSelectFriends"
+        android:layout_alignBottom="@+id/btnSelectFriends"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/buttonshape"
+        android:enabled="false"
+        android:gravity="center_horizontal|center_vertical"
+        android:onClick="onClickInvite"
+        android:padding="2dp"
+        android:paddingBottom="3dp"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:text="Invite"
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
 
