@@ -120,11 +120,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/etUserName"
         android:layout_below="@+id/etUserName"
-        android:onClick="onClickAccept"
-        android:text="@string/accept_challenege"
+        android:layout_margin="15dp"
         android:background="#e35683"
-        android:layout_margin="15dp"/>
+        android:onClick="onClickAccept"
+        android:text="@string/accept_challenege" />
 
     <Button
         android:id="@+id/btnDonate"
@@ -132,10 +133,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/etUserName"
-        android:onClick="onDonate"
+        android:layout_margin="15dp"
+        android:layout_toRightOf="@+id/ivSenderImage"
         android:background="#e35683"
-        android:text="@string/donoate" 
-        android:layout_margin="15dp"/>
+        android:onClick="onDonate"
+        android:text="@string/donoate" />
     
         <ImageView
         android:id="@+id/ivSenderImage"
