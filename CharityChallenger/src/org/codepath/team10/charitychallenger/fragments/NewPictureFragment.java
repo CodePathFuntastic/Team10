@@ -162,7 +162,7 @@ public class NewPictureFragment extends Fragment {
 	 				0, takenImage.getWidth(), takenImage.getHeight(),
 	 				matrix, true);
 	         
-	         ivPreview.setImageBitmap(takenImage);  
+	         ivPreview.setImageBitmap(rotatedScaledpictureImage);  
 	         ivPreview.setVisibility(View.VISIBLE);
 
 	         ByteArrayOutputStream stream = new ByteArrayOutputStream();
