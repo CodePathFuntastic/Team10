@@ -12,16 +12,17 @@
         android:layout_alignParentTop="true"
         android:layout_margin="8dp" >
 
-        <ImageView
+		<ImageView
             android:id="@id/ivCharityChallenge"
             android:layout_width="match_parent"
-            android:layout_height="175dp"
+            android:layout_height="250dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop" />
+            android:scaleType="fitXY" 
+            />
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="175dp"
+            android:layout_height="250dp"
             android:gravity="center_vertical" >
 
             <TextView
@@ -35,6 +36,15 @@
                 android:text="Ice bucket \nChallenge "
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@android:color/white" />
+
+            <ProgressBar
+                android:id="@+id/progressBarLoadImage1"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tvChallengeName"
+                android:layout_centerHorizontal="true" />
+
         </RelativeLayout>
     </FrameLayout>
 
@@ -80,7 +90,7 @@
 			android:layout_marginTop="5dp"
             android:text="@string/target_amount_raised"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/app_progressbar_gray" />
+             />
 
         <TextView
             android:id="@+id/tvRaised"

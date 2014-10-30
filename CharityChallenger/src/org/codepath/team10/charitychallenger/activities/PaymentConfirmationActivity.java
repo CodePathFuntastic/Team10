@@ -1,14 +1,18 @@
 package org.codepath.team10.charitychallenger.activities;
 
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
+import org.codepath.team10.charitychallenger.ParseData;
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.fragments.NewDonationFragment;
 import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
+import org.codepath.team10.charitychallenger.models.User;
 import org.codepath.team10.charitychallenger.utils.InvitationMessageUtils;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -56,11 +60,15 @@ public class PaymentConfirmationActivity extends BaseActivity {
 		}
 
 		
+		parseData = ParseData.getInstance();
+		
+		User sender = parseData.getFriendByFacebookId(invitation.getSender());		
+		
 		Log.v(LOG_TAG, String.format("challenge description: %s", challenge.getName() ));
 		
-		tvCharityNameOnConfirmation = (TextView) findViewById(R.id.tvCharityNameOnConfirmation);
-		tvCharityAddressOnConfirmation = (TextView) findViewById(R.id.tvCharityAddressOnConfirmation);
-		tvCharityConfirmationUrl = (TextView) findViewById(R.id.tvCharityConfirmationUrl);
+//		tvCharityNameOnConfirmation = (TextView) findViewById(R.id.tvCharityNameOnConfirmation);
+//		tvCharityAddressOnConfirmation = (TextView) findViewById(R.id.tvCharityAddressOnConfirmation);
+//		tvCharityConfirmationUrl = (TextView) findViewById(R.id.tvCharityConfirmationUrl);
 		tvDonationAmount = (TextView) findViewById(R.id.tvDonationAmount);
 		tvDonationAmount.setText(donateAmount);
 
@@ -87,9 +95,22 @@ public class PaymentConfirmationActivity extends BaseActivity {
 	}
 	
 	private void updateView(ParseObject parseObject) {
-		tvCharityNameOnConfirmation.setText(parseObject.getString("name"));
-		tvCharityConfirmationUrl.setText(parseObject.getString("url"));
-		tvCharityAddressOnConfirmation.setText(parseObject.getString("address"));
+//		tvCharityNameOnConfirmation.setText(parseObject.getString("name"));
+//		tvCharityConfirmationUrl.setText(parseObject.getString("url"));
+//		tvCharityAddressOnConfirmation.setText(parseObject.getString("address"));
+		// Begin the transaction
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		// Replace the container with the new fragment
+		NewDonationFragment newDonationFragment = new NewDonationFragment();
+	    Bundle bundle = new Bundle();
+	    bundle.putParcelable("challenge", challenge);
+	    bundle.putParcelable("invitation", invitation);
+	    bundle.putString("name", parseObject.getString("name"));
+	    bundle.putString("url", parseObject.getString("url"));
+	    bundle.putString("address", parseObject.getString("address"));
+	    newDonationFragment.setArguments(bundle);
+		ft.replace(R.id.payment_confirm_fragment, newDonationFragment);
+		ft.commit();
 	}
 		
 	@Override
