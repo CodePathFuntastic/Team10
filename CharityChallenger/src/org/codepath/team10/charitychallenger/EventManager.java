@@ -128,6 +128,9 @@ public class EventManager implements Serializable {
 										parseData.getReceivedInvitations().addAll(invites);
 									}
 
+									// reverse the order of invites
+									parseData.orderReceivedInvitationsByReverseChronological();
+									
 									// notify the components that need the data
 									processLoadedInvitationsOnSuccess();
 								} catch (JSONException e) {

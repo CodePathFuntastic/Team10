@@ -2,6 +2,7 @@ package org.codepath.team10.charitychallenger;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.models.Challenge;
@@ -42,6 +43,11 @@ public class ParseData implements Serializable{
 	}
 	public List<Invitation> getReceivedInvitations(){
 		return receivedInvitations;
+	}
+	public void orderReceivedInvitationsByReverseChronological(){
+		if( receivedInvitations != null && receivedInvitations.size()>0 ){
+			Collections.reverse(receivedInvitations);
+		}
 	}
 	public List<Invitation> getSentInvitations(){
 		return sentInvitations;

@@ -187,7 +187,12 @@ public class Invitation extends ParseObject implements Parcelable {
 					if( invitation.getReceiver() != null ){
 						json.put("receiver", invitation.getReceiver());
 					}
-					
+					if(invitation.getSubject() != null ){
+						json.put("subject", invitation.getSubject());
+					}
+					if( invitation.getMessage() != null ){
+						json.put("message", invitation.getMessage());
+					}
 					json.put("status",  invitation.getStatus());
 					if( invitation.getCreatedAt() != null ){
 						json.put("createdAt", invitation.getCreatedAt());
@@ -244,7 +249,12 @@ public class Invitation extends ParseObject implements Parcelable {
 			if( !json.isNull("sender") ){
 				invitation.setSender( json.getString("sender"));
 			}
-			
+			if( !json.isNull("message")){
+				invitation.setMessage( json.getString("message"));
+			}
+			if( !json.isNull("subject")){
+				invitation.setSubject(json.getString("subject"));
+			}
 			if( !json.isNull("status")){
 				invitation.setStatus(json.getInt("status"));
 			}

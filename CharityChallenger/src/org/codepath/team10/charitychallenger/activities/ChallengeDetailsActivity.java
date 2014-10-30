@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
+import org.codepath.team10.charitychallenger.ParseData;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.fragments.NewInvitationFragment;
 import org.codepath.team10.charitychallenger.models.Challenge;
@@ -179,6 +180,7 @@ public class ChallengeDetailsActivity extends BaseActivity {
 //		Intent intent = new Intent(this, DonateActivity.class);
 //        intent.putExtra("challenge", challenge);
 //		startActivity(intent);
+		User user = ParseData.getInstance().getUser();
 		
 		// send an invitation to selected friends
 		List<Invitation> invitations = new ArrayList<Invitation>();
@@ -195,12 +197,13 @@ public class ChallengeDetailsActivity extends BaseActivity {
 				i.setChallengeId(challenge.getChallengeId());
 				
 				StringBuilder sb = new StringBuilder();
-				sb.append("You have an invitation from ");
-				sb.append( f.getName());
+				sb.append("You have an invitation from @");
+				sb.append( user.getName());
 				i.setSubject( sb.toString());
 				
 				StringBuilder msg = new StringBuilder();
-				msg.append( f.getName() );
+				msg.append( "@");
+				msg.append( user.getName() );
 				msg.append( " has invited you to take ");
 				msg.append( challenge.getName() );
 				msg.append(" challenge");
