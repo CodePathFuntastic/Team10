@@ -27,8 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnInviewNow"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tvSelectedFriends"
-        android:background="@drawable/fragment_background" >
+        android:layout_below="@+id/tvSelectedFriends">
 
     </ListView>
     
@@ -60,22 +59,30 @@
     <Button
         android:id="@+id/btnInviewNow"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:background="#e35683"
         android:enabled="false"
         android:onClick="onClickInvite"
-        android:text="Invite"/>
+        android:text="Invite"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:paddingBottom="3dp"/>
 
     <Button
         android:id="@+id/btnSelectFriends"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:background="#e35683"
         android:onClick="onClickSelectFriends"
-        android:text="Select Friends" />
+        android:text="Select Friends" 
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal|center_vertical"
+        />
 
 </RelativeLayout>
