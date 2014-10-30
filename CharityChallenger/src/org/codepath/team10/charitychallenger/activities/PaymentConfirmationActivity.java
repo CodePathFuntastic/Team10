@@ -302,7 +302,7 @@ public class PaymentConfirmationActivity extends BaseActivity {
 //		getActivity().finish();
 		
 		//Intent intent = new Intent( this, FunActivity.class);
-		Intent intent = new Intent( this, ChallengesHomeActivity.class);
+		Intent intent = new Intent( this, ChallengesHomeSwipeActivity.class);
 		intent.putExtra("invitation", invitation);
 		intent.putExtra("challenge", challenge);
 		
