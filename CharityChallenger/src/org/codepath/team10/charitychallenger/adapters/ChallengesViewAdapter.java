@@ -18,6 +18,28 @@ import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.parse.ParseQueryAdapter;
 
+class BitmapScaler
+{
+	// Scale and maintain aspect ratio given a desired width
+	// BitmapScaler.scaleToFitWidth(bitmap, 100);
+	public static Bitmap scaleToFitWidth(Bitmap b, int width)
+	{
+		float factor = width / (float) b.getWidth();
+		return Bitmap.createScaledBitmap(b, width, (int) (b.getHeight() * factor), true);
+	}
+
+
+	// Scale and maintain aspect ratio given a desired height
+	// BitmapScaler.scaleToFitHeight(bitmap, 100);
+	public static Bitmap scaleToFitHeight(Bitmap b, int height)
+	{
+		float factor = height / (float) b.getHeight();
+		return Bitmap.createScaledBitmap(b, (int) (b.getWidth() * factor), height, true);
+	}
+
+        // ...
+}
+
 public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 
 	public static class ViewHolder{
@@ -97,12 +119,13 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 	        @Override
 	        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
 	         spinner.setVisibility(View.GONE); //  loading completed set the spinenr visibility to gone
+	         BitmapScaler.scaleToFitHeight(loadedImage, view.getWidth());
+	         BitmapScaler.scaleToFitWidth(loadedImage, view.getWidth());
 	        }
 	        @Override
 	        public void onLoadingCancelled(String imageUri, View view) {
 
 	        }
-
 	});
 	}
 }

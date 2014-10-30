@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
   <item android:id="@android:id/background">
     <shape>
-      <corners android:radius="0dp" />
+      <corners android:radius="1dp" />
       <solid android:color="@color/app_progressbar_gray" />
     </shape>
   </item>
