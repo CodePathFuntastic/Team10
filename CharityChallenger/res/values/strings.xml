@@ -29,8 +29,8 @@
     <string name="facebook_app_id">370546396320150</string>
     <string name="title_activity_login">Charity Challenger</string>
     <string name="title_activity_home">Challenges</string>
-    <string name="facebook_login_label">Login to facebook</string>
-    <string name="donate_activity_title">Donate to Charity</string>
+    <string name="facebook_login_label">Login</string>
+    <string name="donate_activity_title">Charity Donation</string>
     <string name="payment_confirmation">Donation Confirmation</string>
     <string name="welcome_user">Welcome: </string>
     <string name="charity_challenge_name">Global Giving Challenge</string>
