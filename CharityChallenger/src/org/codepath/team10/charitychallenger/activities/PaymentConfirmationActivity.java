@@ -108,7 +108,7 @@ public class PaymentConfirmationActivity extends BaseActivity {
 	    bundle.putString("name", parseObject.getString("name"));
 	    bundle.putString("url", parseObject.getString("url"));
 	    bundle.putString("address", parseObject.getString("address"));
-	    bundle.putString("amount",donateAmount);
+	    bundle.putString("donateAmount",donateAmount);
 	    newDonationFragment.setArguments(bundle);
 		ft.replace(R.id.payment_confirm_fragment, newDonationFragment);
 		ft.commit();

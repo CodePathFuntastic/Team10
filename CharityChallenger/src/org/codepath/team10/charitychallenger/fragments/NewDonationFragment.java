@@ -58,13 +58,18 @@ public class NewDonationFragment extends Fragment {
 		
 		
 		ivDonateCharityChallenge = (ImageView)view.findViewById(R.id.ivDonateCharityChallenge);
-		tvDonateCharityNameValue = (TextView) view.findViewById(R.id.tvDonateCharityNameValue);
+		tvDonateCharityNameValue = (TextView) view.findViewById(R.id.tvDonateChallengeName);
 		tvDonateTargetAmount = (TextView) view.findViewById(R.id.tvDonateTargetAmount);
 		tvDonateRaised = (TextView) view.findViewById(R.id.tvDonateRaised);
 		challengeDonateProgressBar = (ProgressBar) view.findViewById(R.id.challengeDonateProgressBar);
 
+		String thankyou = 
+				 "Thank you for your donation $" 
+				+ donateAmount + " to " + name + " at "
+				+ "Address: " + address;
+		
 		if(tvDonateCharityNameValue != null){
-			tvDonateCharityNameValue.setText(challenge.getString("name"));
+			tvDonateCharityNameValue.setText(thankyou);
 		}
 		if(tvDonateTargetAmount != null){
 			tvDonateTargetAmount.setText("/ $" + challenge.getInt("target"));

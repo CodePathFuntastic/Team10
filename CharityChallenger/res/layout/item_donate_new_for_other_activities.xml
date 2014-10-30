@@ -12,67 +12,34 @@
         android:layout_alignParentTop="true"
         android:layout_margin="8dp" >
 
-        <ImageView
+		<ImageView
             android:id="@+id/ivDonateCharityChallenge"
             android:layout_width="match_parent"
-            android:layout_height="175dp"
+            android:layout_height="250dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop" />
+            android:scaleType="fitXY" 
+            />
 
-        <RelativeLayout
+       <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="175dp"
+            android:layout_height="250dp"
             android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/tvDonateChallengeName"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="#00000000"
+                android:padding="2dp"
+				android:gravity="center_horizontal|center_vertical"
+                android:text="Ice bucket \nChallenge "
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@android:color/white" />
 
         </RelativeLayout>
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical" >
-
-            <TableRow
-                android:id="@+id/tableRow1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:id="@+id/tvDonateCharityNameValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:ems="10" />
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/tableRow2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:id="@+id/tvDonateCharityUrlValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10" />
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/tableRow3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:id="@+id/tvDonateAddressValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10" />
-
-            </TableRow>
-
-        </TableLayout>
-
     </FrameLayout>
 
     <RelativeLayout
@@ -103,29 +70,29 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="wrap_content"
             android:layout_height="10dp"
-            android:layout_alignLeft="@+id/tvChallengeProgressLabel"
-            android:layout_alignRight="@+id/tvChallengeProgressLabel"
-            android:layout_below="@+id/tvChallengeProgressLabel"
+            android:layout_alignLeft="@+id/tvDonateChallengeProgressLabel"
+            android:layout_alignRight="@+id/tvDonateChallengeProgressLabel"
+            android:layout_below="@+id/tvDonateChallengeProgressLabel"
             android:progressDrawable="@drawable/progressbar2" />
 
         <TextView
             android:id="@+id/tvDonateTargetAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/challengeProgressBar"
-            android:layout_below="@+id/challengeProgressBar"
+            android:layout_alignRight="@+id/challengeDonateProgressBar"
+            android:layout_below="@+id/challengeDonateProgressBar"
 			android:layout_marginTop="5dp"
             android:text="@string/target_amount_raised"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/app_progressbar_gray" />
+             />
 
         <TextView
             android:id="@+id/tvDonateRaised"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/tvTargetAmount"
-            android:layout_alignBottom="@+id/tvTargetAmount"
-            android:layout_alignLeft="@+id/challengeProgressBar"
+            android:layout_alignBaseline="@+id/tvDonateTargetAmount"
+            android:layout_alignBottom="@+id/tvDonateTargetAmount"
+            android:layout_alignLeft="@+id/challengeDonateProgressBar"
             android:text="@string/amount_raised"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/app_secondary_color" />
