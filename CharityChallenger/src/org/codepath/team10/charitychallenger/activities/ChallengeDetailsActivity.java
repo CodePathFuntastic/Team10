@@ -208,6 +208,7 @@ public class ChallengeDetailsActivity extends BaseActivity {
 		int id = item.getItemId();
 		if (id == android.R.id.home) {
 			this.finish();
+			overridePendingTransition(R.anim.left_in, R.anim.right_out);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

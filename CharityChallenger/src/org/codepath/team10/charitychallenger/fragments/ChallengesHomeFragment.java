@@ -53,7 +53,7 @@ public class ChallengesHomeFragment extends Fragment {
 				Intent intent = new Intent(getActivity(), ChallengeDetailsActivity.class);   
 				intent.putExtra("challenge", mChallengesAdapter.getItem(position)); 
 				startActivityForResult(intent, 201);
-				//startActivity(intent);
+				getActivity().overridePendingTransition(R.anim.right_in, R.anim.left_out);
 			}
 		});
 	      
