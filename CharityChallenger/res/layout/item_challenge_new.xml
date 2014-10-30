@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="300dp"
             android:gravity="center_vertical" 
-            android:background="#DD545454">
+            android:background="#EE545454">
 
             <TextView
                 android:id="@+id/tvChallengeName"
@@ -42,9 +42,8 @@
                 android:id="@+id/progressBarLoadImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp" />
+                android:layout_centerVertical="true" />
 
         </RelativeLayout>
     </FrameLayout>
