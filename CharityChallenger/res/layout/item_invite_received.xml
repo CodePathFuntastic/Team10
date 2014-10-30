@@ -15,7 +15,23 @@
         android:layout_marginBottom="7dp"
         android:src="@drawable/ic_launcher" 
         />
-
+    
+    <TextView
+        android:id="@+id/tvInviteSubject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/ivFriend"
+        android:layout_alignTop="@+id/ivFriend"
+        android:text="Subject" />
+    
+    <TextView
+        android:id="@+id/tvSender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvInviteSubject"
+        android:layout_below="@+id/tvInviteSubject"
+        android:text="Sender" />
+    
     <TextView
         android:id="@+id/tvTimeAgo"
         android:layout_width="wrap_content"
@@ -24,26 +40,8 @@
         android:layout_alignBottom="@+id/tvSender"
         android:layout_alignParentRight="true"
         android:layout_marginRight="15dp"
-        android:text="TextView" />
+        android:text="Time" />
+    
 
-    <TextView
-        android:id="@+id/tvSender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ivFriend"
-        android:layout_toLeftOf="@+id/tvTimeAgo"
-        android:layout_toRightOf="@+id/ivFriend"
-        android:layout_marginLeft="10dp"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/tvInvitationMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tvTimeAgo"
-        android:layout_alignLeft="@+id/tvSender"
-        android:layout_alignRight="@+id/tvTimeAgo"
-        android:layout_alignTop="@+id/ivFriend"
-        android:text="TextView" />
     
 </RelativeLayout>
