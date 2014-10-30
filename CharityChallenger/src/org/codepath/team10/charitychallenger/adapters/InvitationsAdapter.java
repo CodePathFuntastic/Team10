@@ -27,7 +27,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.squareup.picasso.Picasso;
 
 public class InvitationsAdapter extends ArrayAdapter<Invitation> {	
@@ -124,7 +123,22 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 	}
 
 	private void updateVew(final ViewHolder viewHolder, String  userid) {
-		
+	
+		if( ParseData.getInstance().getFriendByFacebookId(userid) != null ){
+			User friend = ParseData.getInstance().getFriendByFacebookId(userid);
+			if( friend.getImageUrl() != null ){
+				viewHolder.ivFriend.setImageResource(android.R.color.transparent);
+				Picasso.with(getContext()).load(friend.getImageUrl())
+				 							.error(R.drawable.ic_launcher)
+				 							.transform(new RoundTransform())
+				 							.into(viewHolder.ivFriend);
+			}
+			
+			Log.d("InvitationsAdapter: name - ", friend.getName());
+			viewHolder.tvSender.setText("");
+			viewHolder.tvSender.setText(friend.getName());
+		}else{
+	
 		ParseRestClient.getInstance().getUserDetails(userid, new ParseJsonHttpResponseHandler(){
 			@Override
 			public void onSuccess(int status, JSONObject json) {
@@ -156,6 +170,7 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 				}
 			}
 		});
+		}
 		
 	}
 }
