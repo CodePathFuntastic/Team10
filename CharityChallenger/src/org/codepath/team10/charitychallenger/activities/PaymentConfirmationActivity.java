@@ -101,7 +101,7 @@ public class PaymentConfirmationActivity extends BaseActivity {
 	        									 .transform(new RoundTransform()).into(ivChallengerImage);
 
 	        tvInvitedBy = (TextView) findViewById(R.id.etSenderDonateName);
-	        tvInvitedBy.setText(sender.getName());
+	        tvInvitedBy.setText("Invited by " + sender.getName());
 		
 	}
 	
@@ -235,7 +235,7 @@ public class PaymentConfirmationActivity extends BaseActivity {
 							}
 						});
 					}else{
-						// TODO: handle exception
+						sendPushNotification();
 					}
 				}
 			});
