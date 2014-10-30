@@ -172,8 +172,10 @@ public class MenuFragment extends Fragment implements UserSynchedListener, Invit
 				newinvites++;
 			}
 		}
-		mTvNotificationsBadge.setVisibility(View.VISIBLE);
-    	mTvNotificationsBadge.setText("" + newinvites);
+		if(mTvNotificationsBadge != null ){
+			mTvNotificationsBadge.setVisibility(View.VISIBLE);
+	    	mTvNotificationsBadge.setText("" + newinvites);
+		}
 	}
 
     

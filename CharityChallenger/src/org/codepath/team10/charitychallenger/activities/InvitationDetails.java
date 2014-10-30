@@ -82,47 +82,7 @@ public class InvitationDetails extends BaseActivity {
 		
 		PutAsyncTask async= new PutAsyncTask();
 		String[] ids = { invitation.getObjectId() };
-		async.execute(ids);
-		
-		
-//		ParseQuery<ParseObject> query = ParseQuery.getQuery("Invitation");
-//		query.getInBackground(invitation.getObjectId(), new GetCallback<ParseObject>() {
-//			
-//			@Override
-//			public void done(ParseObject po, ParseException e) {
-//				if( e == null ){
-//					po.put("opened_status", true);
-//					po.saveInBackground(new SaveCallback() {
-//						
-//						@Override
-//						public void done(ParseException e) {
-//							if( e != null ){
-//								Log.e(BaseActivity.LOG_TAG, "Unable save Invitation", e);
-//							}
-//						}
-//					});
-//				}
-//			}
-//		});
-		
-//		Invitation invite = Invitation.createWithoutData(Invitation.class, invitation.getObjectId());
-//		invite.refreshInBackground( new RefreshCallback(){
-//			@Override
-//			public void done(ParseObject po, ParseException e) {
-//				if( e == null && po !=null ){
-//					po.put("opened_status", true);
-//					Log.d(BaseActivity.LOG_TAG, "Saving message " + po.getObjectId());
-//					po.saveInBackground(new SaveCallback() {
-//						@Override
-//						public void done( ParseException e) {
-//							if( e != null ){
-//								Log.e(BaseActivity.LOG_TAG, "Unable to save object", e);
-//							}
-//						}
-//					});
-//				}
-//			}
-//		});
+		async.execute(ids);		
 	}
 		
 	public void onClickAccept(View v) {

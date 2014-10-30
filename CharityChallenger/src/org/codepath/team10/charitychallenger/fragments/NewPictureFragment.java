@@ -5,6 +5,7 @@ import java.io.File;
 
 import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.activities.BaseActivity;
 import org.codepath.team10.charitychallenger.activities.ChallengesHomeSwipeActivity;
 import org.codepath.team10.charitychallenger.activities.FunActivity;
 import org.codepath.team10.charitychallenger.activities.NewPictureActivity;
@@ -329,6 +330,7 @@ public class NewPictureFragment extends Fragment {
 					
 				}else{
 					// handle error
+					Log.e(BaseActivity.LOG_TAG, "unable to update", e);
 				}
 			}
 		});

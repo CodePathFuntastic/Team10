@@ -86,7 +86,6 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 		
 		if(viewHolder.tvRaised != null){
 			viewHolder.tvRaised.setText("$" + challenge.getInt("raised") + " Raised");
-			
 		}
 		
 		if(viewHolder.ivCharityChallenge != null){
@@ -119,8 +118,27 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 	        @Override
 	        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
 	         spinner.setVisibility(View.GONE); //  loading completed set the spinenr visibility to gone
-	         BitmapScaler.scaleToFitHeight(loadedImage, view.getWidth());
-	         BitmapScaler.scaleToFitWidth(loadedImage, view.getWidth());
+	         int width=0;
+	         if( view.getWidth() == 0){
+	        	 width = view.getMeasuredWidth();
+	         }else{
+	        	 width = view.getWidth();
+	         }
+	         if( width == 0){
+	        	 width = loadedImage.getWidth();
+	         }
+	         
+	         int height=0;
+	         if( view.getHeight() == 0){
+	        	 height = view.getMeasuredHeight();
+	         }else{
+	        	 height = view.getHeight();
+	         }
+	         if( height == 0 ){
+	        	 height = loadedImage.getHeight();
+	         }
+	         BitmapScaler.scaleToFitHeight(loadedImage, height);
+	         BitmapScaler.scaleToFitWidth(loadedImage, width);
 	        }
 	        @Override
 	        public void onLoadingCancelled(String imageUri, View view) {
