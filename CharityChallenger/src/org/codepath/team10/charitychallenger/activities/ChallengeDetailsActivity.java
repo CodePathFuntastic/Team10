@@ -18,6 +18,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.Session;
 import com.facebook.SessionState;
@@ -155,8 +158,6 @@ public class ChallengeDetailsActivity extends BaseActivity {
 	        	// now display the selected friends in the list view
 		        lvSelectedFriends.setAdapter(friendsAdapter);
 		        friendsAdapter.notifyDataSetChanged();
-		        
-		        btnInviteNow.setEnabled(true);
 	        }	        
 	    }
 
@@ -219,6 +220,34 @@ public class ChallengeDetailsActivity extends BaseActivity {
 				invitations.add(i);
 			}
 			application.sendInvitations( invitations);
+		}
+		
+		
+		// get your custom_toast.xml ayout
+		LayoutInflater inflater = getLayoutInflater();
+
+		View layout = inflater.inflate(R.layout.custom_toast,
+		  (ViewGroup) findViewById(R.id.custom_toast_layout_id));
+
+		if (friends.size() != 0) {
+			// set a dummy image
+			ImageView image = (ImageView) layout.findViewById(R.id.image);
+			image.setImageResource(R.drawable.invited);
+
+			// set a message
+			TextView text = (TextView) layout.findViewById(R.id.text);
+			StringBuffer str = new StringBuffer("Challenge\n");
+			for (String invitedFriend : friends) {
+				str.append(invitedFriend + "\n");
+			}
+			text.setText(str.toString());
+
+			// Toast...
+			Toast toast = new Toast(getApplicationContext());
+			toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+			toast.setDuration(Toast.LENGTH_SHORT);
+			toast.setView(layout);
+			toast.show();
 		}
 		
 		setResult(RESULT_OK);
