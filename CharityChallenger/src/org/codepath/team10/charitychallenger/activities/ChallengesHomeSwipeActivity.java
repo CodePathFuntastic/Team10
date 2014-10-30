@@ -34,8 +34,8 @@ public class ChallengesHomeSwipeActivity extends BaseActivity implements ActionB
 	  
 		 mActionbar = getActionBar();
 		 mActionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		 mActionbar.addTab(mActionbar.newTab().setText("Home").setTabListener(this));
-		 mActionbar.addTab(mActionbar.newTab().setText("Received").setTabListener(this));
+		 mActionbar.addTab(mActionbar.newTab().setText("Challenges").setTabListener(this));
+		 mActionbar.addTab(mActionbar.newTab().setText("Invitations").setTabListener(this));
 		 
 //		 Tab tab = mActionbar.newTab();
 //		 tab.setCustomView(R.layout.toggle_button);
