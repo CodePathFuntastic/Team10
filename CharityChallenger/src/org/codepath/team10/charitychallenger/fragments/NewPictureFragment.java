@@ -154,6 +154,14 @@ public class NewPictureFragment extends Fragment {
 	         Uri takenPhotoUri = getPhotoFileUri(photoFileName);
 	         // by this point we have the camera photo on disk
 	         Bitmap takenImage = BitmapFactory.decodeFile(takenPhotoUri.getPath());
+	         
+	 		// Override Android default landscape orientation and save portrait
+	 		Matrix matrix = new Matrix();
+	 		matrix.postRotate(90);
+	 		Bitmap rotatedScaledpictureImage = Bitmap.createBitmap(takenImage, 0,
+	 				0, takenImage.getWidth(), takenImage.getHeight(),
+	 				matrix, true);
+	         
 	         ivPreview.setImageBitmap(takenImage);  
 	         ivPreview.setVisibility(View.VISIBLE);
 
