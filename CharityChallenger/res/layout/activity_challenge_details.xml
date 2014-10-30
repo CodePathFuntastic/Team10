@@ -84,7 +84,6 @@
         android:layout_alignBottom="@+id/btnSelectFriends"
         android:layout_centerHorizontal="true"
         android:background="@drawable/buttonshape"
-        android:enabled="false"
         android:gravity="center_horizontal|center_vertical"
         android:onClick="onClickInvite"
         android:padding="2dp"

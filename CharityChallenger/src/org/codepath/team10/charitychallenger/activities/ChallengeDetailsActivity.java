@@ -151,8 +151,6 @@ public class ChallengeDetailsActivity extends BaseActivity {
 	        	// now display the selected friends in the list view
 		        lvSelectedFriends.setAdapter(friendsAdapter);
 		        friendsAdapter.notifyDataSetChanged();
-		        
-		        btnInviteNow.setEnabled(true);
 	        }	        
 	    }
 
