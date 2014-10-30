@@ -11,7 +11,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" >
     </FrameLayout>
-    
+    <!-- 
     <TextView
         android:id="@+id/tvConfirmationHeader"
         android:layout_width="wrap_content"
@@ -50,7 +50,8 @@
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:text="@string/charity_address_value" />
-
+-->
+<!--
         <TextView
             android:id="@+id/tvDonationAmount"
             android:layout_width="wrap_content"
@@ -69,25 +70,17 @@
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:text="@string/payment_type_value" />
+-->
 
         <Button
             android:id="@+id/btnDonateOnConfirmation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvDonationMethodLabel"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="18dp"
-            android:onClick="onClickConfirm"
+            android:layout_marginBottom="20dp"
             android:background="#e35683"
+            android:onClick="onClickConfirm"
             android:text="@string/invite_more_friends" />
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true" >
-
-        </FrameLayout>
 
 </RelativeLayout>

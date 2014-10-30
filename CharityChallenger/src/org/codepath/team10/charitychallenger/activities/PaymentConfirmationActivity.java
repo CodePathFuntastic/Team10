@@ -69,8 +69,8 @@ public class PaymentConfirmationActivity extends BaseActivity {
 //		tvCharityNameOnConfirmation = (TextView) findViewById(R.id.tvCharityNameOnConfirmation);
 //		tvCharityAddressOnConfirmation = (TextView) findViewById(R.id.tvCharityAddressOnConfirmation);
 //		tvCharityConfirmationUrl = (TextView) findViewById(R.id.tvCharityConfirmationUrl);
-		tvDonationAmount = (TextView) findViewById(R.id.tvDonationAmount);
-		tvDonationAmount.setText(donateAmount);
+//		tvDonationAmount = (TextView) findViewById(R.id.tvDonationAmount);
+//		tvDonationAmount.setText(donateAmount);
 
 		//final int orgId = ppo.getInt("orgId");
 		
@@ -108,6 +108,7 @@ public class PaymentConfirmationActivity extends BaseActivity {
 	    bundle.putString("name", parseObject.getString("name"));
 	    bundle.putString("url", parseObject.getString("url"));
 	    bundle.putString("address", parseObject.getString("address"));
+	    bundle.putString("amount",donateAmount);
 	    newDonationFragment.setArguments(bundle);
 		ft.replace(R.id.payment_confirm_fragment, newDonationFragment);
 		ft.commit();
