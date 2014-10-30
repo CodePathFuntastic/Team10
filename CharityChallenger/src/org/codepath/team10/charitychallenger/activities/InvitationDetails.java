@@ -10,22 +10,20 @@ import org.codepath.team10.charitychallenger.models.User;
 import org.codepath.team10.charitychallenger.utils.RoundTransform;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.RefreshCallback;
-import com.parse.SaveCallback;
 import com.squareup.picasso.Picasso;
 
 public class InvitationDetails extends BaseActivity {
@@ -34,6 +32,9 @@ public class InvitationDetails extends BaseActivity {
 	private Challenge mChallenge;
 	private ImageView ivChallengerImage;
 	private TextView tvUserName;
+	private LinearLayout llButtons;
+	private Button btnDonate;
+	private Button btnAccept;
 	private ParseData parseData;
 	
 	@Override
@@ -73,10 +74,17 @@ public class InvitationDetails extends BaseActivity {
         									 .transform(new RoundTransform()).into(ivChallengerImage);
 
         tvUserName = (TextView) findViewById(R.id.etUserName);
+         llButtons = (LinearLayout) findViewById(R.id.llInvitationDetails);
+         btnDonate = (Button) findViewById(R.id.btnDonate);
+         btnAccept =( Button) findViewById(R.id.btnAcceptChallenge);
+        
+       
+        
         tvUserName.setText("Invited by " + sender.getName());
      
         setInvitationToOpened( mInvitation);
 	}
+	
 	
 	public void setInvitationToOpened( final Invitation invitation){
 		
