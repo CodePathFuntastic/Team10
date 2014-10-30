@@ -115,15 +115,15 @@
         android:layout_alignParentTop="true" >
     </FrameLayout>
 
-    <ImageButton
+    <Button
         android:id="@+id/btnAcceptChallenge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/etUserName"
         android:onClick="onClickAccept"
-        android:src="@drawable/ic_action_photo"
         android:text="@string/accept_challenege"
+        android:background="#e35683"
         android:layout_margin="15dp"/>
 
     <Button
@@ -133,7 +133,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/etUserName"
         android:onClick="onDonate"
-        android:background="#FF0000"
+        android:background="#e35683"
         android:text="@string/donoate" 
         android:layout_margin="15dp"/>
     

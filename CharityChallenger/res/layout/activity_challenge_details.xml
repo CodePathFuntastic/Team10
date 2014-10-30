@@ -64,6 +64,7 @@
         android:enabled="false"
         android:onClick="onClickInvite"
         android:text="Invite" 
+        android:background="#e35683"
         android:layout_marginBottom="10dp"/>
 
     <Button
@@ -72,6 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:onClick="onClickSelectFriends"
+        android:background="#e35683"
         android:layout_below="@+id/challenge_detail_fragment"
         android:text="Select Friends" />
 

@@ -172,6 +172,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:onClick="onDonateNow"
+        android:background="#e35683"
         android:src="@drawable/paypal"/>
     
 
