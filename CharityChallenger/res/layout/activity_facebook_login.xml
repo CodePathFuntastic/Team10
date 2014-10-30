@@ -3,19 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
-
-    <Button
-        android:id="@+id/btnFacebookLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="15dp"
-        android:layout_marginTop="17dp"
-        android:onClick="onLoginToFacebook"
-        android:text="@string/facebook_login_label"/>
-
+-->
     <!-- 
     <TextView
         android:id="@+id/tvUsername"
@@ -34,5 +22,18 @@
         android:layout_below="@+id/btnFacebookLogin"
         android:background="#FFAADD" >
     </FrameLayout> -->
+
+    <Button
+        android:id="@+id/btnFacebookLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/buttonshape"
+        android:gravity="center_vertical|center_horizontal"
+        android:onClick="onLoginToFacebook"
+        android:text="@string/facebook_login_label"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
     
 </RelativeLayout>
