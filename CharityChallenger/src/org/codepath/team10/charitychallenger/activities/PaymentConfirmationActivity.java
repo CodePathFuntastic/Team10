@@ -9,6 +9,7 @@ import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
 import org.codepath.team10.charitychallenger.models.User;
 import org.codepath.team10.charitychallenger.utils.InvitationMessageUtils;
+import org.codepath.team10.charitychallenger.utils.RoundTransform;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.GetCallback;
@@ -26,6 +28,7 @@ import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 import com.parse.SendCallback;
+import com.squareup.picasso.Picasso;
 
 public class PaymentConfirmationActivity extends BaseActivity {
 	
@@ -35,6 +38,8 @@ public class PaymentConfirmationActivity extends BaseActivity {
     private TextView tvDonationAmount;
     private TextView tvCharityAddressOnConfirmation;
     private TextView tvCharityConfirmationUrl;
+    private ImageView ivChallengerImage;
+    private TextView tvInvitedBy;
     
     private Challenge challenge;
     private Invitation invitation;
@@ -90,7 +95,13 @@ public class PaymentConfirmationActivity extends BaseActivity {
 		        }
 		    });	
 		   
-		   
+			ivChallengerImage = (ImageView) findViewById(R.id.ivSenderDonation);
+	        Picasso.with(getApplicationContext()).load(sender.getImageUrl())
+	        									 .error(R.drawable.ic_launcher)
+	        									 .transform(new RoundTransform()).into(ivChallengerImage);
+
+	        tvInvitedBy = (TextView) findViewById(R.id.etSenderDonateName);
+	        tvInvitedBy.setText(sender.getName());
 		
 	}
 	

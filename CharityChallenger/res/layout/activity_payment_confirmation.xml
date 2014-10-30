@@ -83,4 +83,21 @@
             android:onClick="onClickConfirm"
             android:text="@string/invite_more_friends" />
 
+        <ImageView
+            android:id="@+id/ivSenderDonation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/payment_confirm_fragment"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            android:src="@drawable/ic_launcher" />
+
+        <EditText
+            android:id="@+id/etSenderDonateName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView1"
+            android:layout_centerHorizontal="true"
+            android:ems="10" />
+
 </RelativeLayout>
