@@ -39,7 +39,7 @@
     <string name="amount_raised_label">Raised</string>
     <string name="amount_raised">$500 Raised</string>
     <string name="donoate">Donate</string>
-    <string name="accept_challenege">Take Photo</string>
+    <string name="accept_challenege">Photo</string>
     <string name="description_label">More Details:</string>
     <string name="challenege_description">Here are more challenge details... Please do this and take your picture and send back to sender .. have fun...</string>
     <string name="challenge_details_label">Challenge Details</string>

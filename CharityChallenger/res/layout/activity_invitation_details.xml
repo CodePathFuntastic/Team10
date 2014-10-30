@@ -114,30 +114,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" >
     </FrameLayout>
-
-    <Button
-        android:id="@+id/btnAcceptChallenge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/etUserName"
-        android:layout_below="@+id/etUserName"
-        android:layout_margin="15dp"
-        android:background="#e35683"
-        android:onClick="onClickAccept"
-        android:text="@string/accept_challenege" />
-
-    <Button
-        android:id="@+id/btnDonate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/etUserName"
-        android:layout_margin="15dp"
-        android:layout_toRightOf="@+id/ivSenderImage"
-        android:background="#e35683"
-        android:onClick="onDonate"
-        android:text="@string/donoate" />
     
         <ImageView
         android:id="@+id/ivSenderImage"
@@ -154,5 +130,39 @@
             android:layout_below="@+id/ivSenderImage"
             android:layout_centerHorizontal="true"
         />
+
+        <Button
+            android:id="@+id/btnAcceptChallenge"
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/etUserName"
+            android:background="@drawable/buttonshape"
+            android:onClick="onClickAccept"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="@string/accept_challenege"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/btnDonate"
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:layout_alignLeft="@+id/etUserName"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/buttonshape"
+            android:onClick="onDonate"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="@string/donoate"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
 
 </RelativeLayout>
