@@ -20,6 +20,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -159,9 +160,46 @@ public class NewPictureFragment extends Fragment {
 	         byte[] byteArray = stream.toByteArray();
 	         
 	         
-	 		photoFile = new ParseFile("picture_photo.jpg", byteArray);
-	 		addPhotoToPictureAndReturn(photoFile);
+	 		//photoFile = new ParseFile("picture_photo.jpg", byteArray);
+	 		//addPhotoToPictureAndReturn(photoFile);
+	         saveScaledPhoto(byteArray);
 	    }
+	}
+	
+	private void saveScaledPhoto(byte[] data) {
+
+		// Resize photo from camera byte array
+		Bitmap pictureImage = BitmapFactory.decodeByteArray(data, 0, data.length);
+		Bitmap pictureImageScaled = Bitmap.createScaledBitmap(pictureImage, 200, 200
+				* pictureImage.getHeight() / pictureImage.getWidth(), false);
+
+		// Override Android default landscape orientation and save portrait
+		Matrix matrix = new Matrix();
+		matrix.postRotate(90);
+		Bitmap rotatedScaledpictureImage = Bitmap.createBitmap(pictureImageScaled, 0,
+				0, pictureImageScaled.getWidth(), pictureImageScaled.getHeight(),
+				matrix, true);
+
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		rotatedScaledpictureImage.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+
+		byte[] scaledData = bos.toByteArray();
+
+		// Save the scaled image to Parse
+		photoFile = new ParseFile("picture_photo.jpg", scaledData);
+		addPhotoToPictureAndReturn(photoFile);
+//		photoFile.saveInBackground(new SaveCallback() {
+//
+//			public void done(ParseException e) {
+//				if (e != null) {
+//					Toast.makeText(getActivity(),
+//							"Error saving: " + e.getMessage(),
+//							Toast.LENGTH_LONG).show();
+//				} else {
+//					addPhotoToPictureAndReturn(photoFile);
+//				}
+//			}
+//		});
 	}
 	
 	// Returns the Uri for a photo stored on disk given the fileName
