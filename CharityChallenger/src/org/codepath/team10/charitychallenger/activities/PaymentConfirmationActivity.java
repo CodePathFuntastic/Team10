@@ -235,7 +235,6 @@ public class PaymentConfirmationActivity extends BaseActivity {
 							}
 						});
 					}else{
-						sendPushNotification();
 					}
 				}
 			});
