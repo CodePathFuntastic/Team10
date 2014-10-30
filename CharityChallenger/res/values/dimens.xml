@@ -14,4 +14,9 @@
     <dimen name="spinner_margin_left">10dp</dimen>
     <dimen name="card_margin_top">40dp</dimen>
 
+    
+    <dimen name="padding_small">4dp</dimen>
+  	<dimen name="padding_medium">8dp</dimen>
+  	<dimen name="padding_large">16dp</dimen>
+    
 </resources>

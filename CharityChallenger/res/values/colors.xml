@@ -9,4 +9,5 @@
     
     <color name="facebook_gary_4">#CCD6DD</color>
     <color name="app_secondary_color">#29E3D3</color> 
+    <color name="overscroll">#33b5e5</color>
 </resources>
