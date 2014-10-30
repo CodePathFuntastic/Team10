@@ -102,6 +102,8 @@
             android:text="@string/amount_raised"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/app_secondary_color" />
+        
+        
     </RelativeLayout>
 
 </RelativeLayout>

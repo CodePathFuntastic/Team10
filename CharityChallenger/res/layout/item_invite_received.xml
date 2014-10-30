@@ -21,8 +21,9 @@
         android:id="@+id/tvInviteSubject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/ivFriend"
+        android:layout_alignRight="@+id/tvTimeAgo"
         android:layout_alignTop="@+id/ivFriend"
+        android:layout_toRightOf="@+id/ivFriend"
         android:text="Subject" />
     
     <TextView

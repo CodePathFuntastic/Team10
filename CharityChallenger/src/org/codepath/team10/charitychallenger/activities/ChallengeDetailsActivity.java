@@ -204,9 +204,9 @@ public class ChallengeDetailsActivity extends BaseActivity {
 				StringBuilder msg = new StringBuilder();
 				msg.append( "@");
 				msg.append( user.getName() );
-				msg.append( " has invited you to take ");
+				msg.append( " has challenged you to \"");
 				msg.append( challenge.getName() );
-				msg.append(" challenge");
+				msg.append("\"");
 				i.setMessage(msg.toString());
 				
 				invitations.add(i);
