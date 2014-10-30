@@ -77,7 +77,7 @@ public class NewInvitationFragment extends Fragment {
 		tvChallengeName = (TextView) view.findViewById(R.id.tvChallengeName);
 		tvTargetAmount = (TextView) view.findViewById(R.id.tvTargetAmount);
 		tvRaised = (TextView) view.findViewById(R.id.tvRaised);
-		//challengeProgressBar = (ProgressBar) view.findViewById(R.id.challengeProgressBar);
+		challengeProgressBar = (ProgressBar) view.findViewById(R.id.challengeProgressBar);
 		//progressBarLoadImage = (ProgressBar) view.findViewById(R.id.progressBarLoadImage1);
 		if(tvChallengeName != null){
 			tvChallengeName.setText(challenge.getString("name"));
@@ -97,10 +97,10 @@ public class NewInvitationFragment extends Fragment {
 			
 		}*/
 		
-//		if(challengeProgressBar != null){
-//			int progress = (int)((double)challenge.getInt("raised")/(double)challenge.getInt("target") * 100);
-//			challengeProgressBar.setProgress(progress);
-//		}
+		if(challengeProgressBar != null){
+			int progress = (int)((double)challenge.getInt("raised")/(double)challenge.getInt("target") * 100);
+			challengeProgressBar.setProgress(progress);
+		}
 		
 		ViewPager viewPager = (ViewPager) view.findViewById(R.id.view_pager);
 		
@@ -176,6 +176,7 @@ public class NewInvitationFragment extends Fragment {
 	      Picasso.with(context)
 	      			.load(imageUrl)
 					.error(R.drawable.ic_launcher)
+					.fit()
 					.into(imageView);
 	      
 	      ((ViewPager) container).addView(imageView, 0);
