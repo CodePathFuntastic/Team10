@@ -31,7 +31,7 @@ public class ChallengeUploader {
 		c2.setChallengeId(101);
 		c2.setOrganization(101);
 		c2.setName("Jump into water");
-		c2.setDescription("Raise funds to purchase computers for low income kids. We have 300 kids.");
+		c2.setDescription("Raise funds to purchase computers for low income kids. We are based in mexico where drug violence is high and kids need a safe environment to grow.");
 		c2.setTargetAmount(5000);
 		c2.setAmountRaised(300);
 		c2.setOpenInvitation(100);
@@ -61,7 +61,7 @@ public class ChallengeUploader {
 		c4.setChallengeId(103);
 		c4.setOrganization(103);
 		c4.setName("Dress up like a pirate");
-		c4.setDescription("Save the tropical forests of the world from loggers.");
+		c4.setDescription("Save the tropical forests of the world from loggers. Every years 1000s of acres of pristine forest is lost logging and farming. We educate loggers and farmers to refrain from logging.");
 		c4.setTargetAmount(5000);
 		c4.setAmountRaised(300);
 		c4.setOpenInvitation(100);
@@ -92,7 +92,7 @@ public class ChallengeUploader {
 		c6.setChallengeId(105);
 		c6.setOrganization(105);
 		c6.setName("Carry your dog");
-		c6.setDescription("We rescue animals and offer them shelter");
+		c6.setDescription("We rescue animals and offer them shelter. We find new owners for these lost pets.");
 		c6.setTargetAmount(3000);
 		c6.setAmountRaised(500);
 		c6.setOpenInvitation(500);

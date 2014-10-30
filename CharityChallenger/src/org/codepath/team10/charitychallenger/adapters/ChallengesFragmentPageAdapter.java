@@ -2,7 +2,6 @@ package org.codepath.team10.charitychallenger.adapters;
 
 import org.codepath.team10.charitychallenger.fragments.ChallengesHomeFragment;
 import org.codepath.team10.charitychallenger.fragments.ReceivedInvitationsFragment;
-import org.codepath.team10.charitychallenger.fragments.SentInvitationsFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

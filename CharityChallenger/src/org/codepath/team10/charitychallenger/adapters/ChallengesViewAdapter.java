@@ -49,6 +49,7 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 		TextView tvRaised;
 		ProgressBar challengeProgressBar;
 		ProgressBar progressBarLoadImage;
+		TextView tvChallengeDesc;
 	}
 	public ChallengesViewAdapter(Context context, final String tableName) {
 		super(context, tableName);
@@ -68,6 +69,8 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 			viewHolder.tvRaised = (TextView) v.findViewById(R.id.tvRaised);
 			viewHolder.challengeProgressBar = (ProgressBar) v.findViewById(R.id.challengeProgressBar);
 			viewHolder.progressBarLoadImage = (ProgressBar) v.findViewById(R.id.progressBarLoadImage);
+			viewHolder.tvChallengeDesc= (TextView) v.findViewById(R.id.tvChallengeDesc);
+			
 			
 			v.setTag(viewHolder);
 			
@@ -82,6 +85,11 @@ public class ChallengesViewAdapter extends ParseQueryAdapter<Challenge> {
 		}
 		if(viewHolder.tvTargetAmount != null){
 			viewHolder.tvTargetAmount.setText("/ $" + challenge.getInt("target"));
+		}
+		if( viewHolder.tvChallengeDesc != null ){
+			if( challenge.getDescription() != null ){
+				viewHolder.tvChallengeDesc.setText( challenge.getDescription() );
+			}
 		}
 		
 		if(viewHolder.tvRaised != null){

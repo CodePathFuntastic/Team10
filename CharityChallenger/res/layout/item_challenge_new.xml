@@ -10,22 +10,20 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_margin="9dp"
-        >
+        android:layout_margin="9dp" >
 
         <ImageView
             android:id="@id/ivCharityChallenge"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:adjustViewBounds="true"
-            android:scaleType="fitXY" 
-            />
+            android:scaleType="fitXY" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="300dp"
-            android:gravity="center_vertical" 
-            android:background="#EE545454">
+            android:background="#EE545454"
+            android:gravity="center_vertical" >
 
             <TextView
                 android:id="@+id/tvChallengeName"
@@ -44,19 +42,19 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true" />
-
         </RelativeLayout>
     </FrameLayout>
 
     <RelativeLayout
+        android:id="@+id/rlProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="90dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/flProfile"
+        android:layout_marginBottom="1dp"
         android:layout_marginLeft="9dp"
         android:layout_marginRight="9dp"
-        android:layout_marginBottom="1dp"
         android:background="#FFFFFF" >
 
         <TextView
@@ -66,9 +64,9 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft = "10dp"
-            android:layout_marginRight ="10dp"
-            android:layout_marginBottom ="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:text="@string/challenge_progress_label"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -88,10 +86,9 @@
             android:layout_height="wrap_content"
             android:layout_alignRight="@+id/challengeProgressBar"
             android:layout_below="@+id/challengeProgressBar"
-			android:layout_marginTop="5dp"
+            android:layout_marginTop="5dp"
             android:text="@string/target_amount_raised"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/tvRaised"
@@ -103,6 +100,35 @@
             android:text="@string/amount_raised"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/app_secondary_color" />
+        
+        
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlChallengeDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/rlProgressBar"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/rlProgressBar"
+        android:layout_below="@id/rlProgressBar"
+        android:layout_marginBottom="1dp"
+        android:background="#F0F0F0"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/tvChallengeDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Description of the challange"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#AEB4B9" />
+
     </RelativeLayout>
 
 </RelativeLayout>
