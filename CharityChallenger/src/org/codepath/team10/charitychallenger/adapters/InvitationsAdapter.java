@@ -73,7 +73,7 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 		if( viewHolder.tvInvitationSubject != null){
 			
 			if( invitation.getSubject() != null ){
-				viewHolder.tvInvitationSubject.setText( invitation.getSubject());
+				viewHolder.tvInvitationSubject.setText( invitation.getMessage());
 			}else{
 				viewHolder.tvInvitationSubject.setText( "");
 			}
