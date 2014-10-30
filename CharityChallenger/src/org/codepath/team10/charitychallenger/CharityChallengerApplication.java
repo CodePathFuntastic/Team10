@@ -12,6 +12,7 @@ import org.codepath.team10.charitychallenger.models.Organization;
 import org.codepath.team10.charitychallenger.models.Picture;
 import org.codepath.team10.charitychallenger.models.PictureUrl;
 import org.codepath.team10.charitychallenger.models.User;
+import org.codepath.team10.charitychallenger.parseuploads.ChallengeUploader;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -79,6 +80,8 @@ public class CharityChallengerApplication extends Application {
 		ActiveAndroid.initialize(this);
 		
 		initImageLoader();
+		
+		//ChallengeUploader.upload(context);
 		
 		eventManager.loadAllUsers();
 		eventManager.loadAllChallenges();
