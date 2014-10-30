@@ -177,6 +177,7 @@ public class NewInvitationFragment extends Fragment {
 	      			.load(imageUrl)
 					.error(R.drawable.ic_launcher)
 					.fit()
+					.centerCrop()
 					.into(imageView);
 	      
 	      ((ViewPager) container).addView(imageView, 0);
