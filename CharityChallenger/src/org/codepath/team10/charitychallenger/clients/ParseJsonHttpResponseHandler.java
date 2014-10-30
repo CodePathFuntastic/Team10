@@ -11,22 +11,22 @@ public class ParseJsonHttpResponseHandler extends JsonHttpResponseHandler {
 
 	@Override
 	public void onFailure(Throwable e) {
-		Log.e( BaseActivity.LOG_TAG, "Error retrieving sent invitations", e);
+		Log.e( BaseActivity.LOG_TAG, "Error completing action", e);
 	}
 	
 	@Override
 	public void onFailure(Throwable e,String paramString) {
-		Log.e(BaseActivity.LOG_TAG, "Error retrieving sent invitations :" + paramString, e);
+		Log.e(BaseActivity.LOG_TAG, "Error completing action :" + paramString, e);
 	}
 	
 	@Override
 	public void onFailure(Throwable e,JSONArray paramJSONArray) {
-		Log.e( BaseActivity.LOG_TAG, "Error retrieving sent invitations", e);
+		Log.e( BaseActivity.LOG_TAG, "Error completing action", e);
 	}
 	
 	@Override
 	public void onFailure(Throwable e,JSONObject paramJSONObject) {
-		Log.e(BaseActivity.LOG_TAG, "Error retrieving sent invitations", e);
+		Log.e(BaseActivity.LOG_TAG, "Error completing action", e);
 	}
 
 }

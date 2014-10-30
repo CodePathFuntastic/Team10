@@ -10,15 +10,17 @@ import com.loopj.android.http.RequestParams;
 
 public class ParseRestClient {
 	
-	private static final String APPLICATION_ID = "9e0wpyP9qg9UvX1g2cz65Qs2h2EkUkno88bzctFL";
-	private static final String REST_API_KEY = "QFEwPbowXUwEkgTvCsLvN23y8kb88kNmLMAJ4Gi8";
-	private static final String HEADER_APPLICATION_ID = "X-Parse-Application-Id";
-	private static final String HEADER_REST_API_KEY = "X-Parse-REST-API-Key";
+	public static final String APPLICATION_ID = "9e0wpyP9qg9UvX1g2cz65Qs2h2EkUkno88bzctFL";
+	public static final String REST_API_KEY = "QFEwPbowXUwEkgTvCsLvN23y8kb88kNmLMAJ4Gi8";
+	public static final String HEADER_APPLICATION_ID = "X-Parse-Application-Id";
+	public static final String HEADER_REST_API_KEY = "X-Parse-REST-API-Key";
+	public static final String HEADER_CONTENT_TYPE = "Content-Type";
+	public static final String HEADER_CONTENT_VALUE = "application/json";
 	
-	private static final String PARSE_BASE_URL = "https://api.parse.com/1/classes/";
-	private static final String PARSE_END_POINT_INVITATION = PARSE_BASE_URL + "Invitation";
-	private static final String PARSE_END_POINT_CHALLENGE = PARSE_BASE_URL + "Challenge";
-	private static final String PARSE_END_POINT_USER = PARSE_BASE_URL + "User";
+	public static final String PARSE_BASE_URL = "https://api.parse.com/1/classes/";
+	public static final String PARSE_END_POINT_INVITATION = PARSE_BASE_URL + "Invitation";
+	public static final String PARSE_END_POINT_CHALLENGE = PARSE_BASE_URL + "Challenge";
+	public static final String PARSE_END_POINT_USER = PARSE_BASE_URL + "User";
 	
 	AsyncHttpClient httpClient = new AsyncHttpClient();
 	
@@ -102,6 +104,16 @@ public class ParseRestClient {
 		params.put("where", json);
 		
 		httpClient.get(PARSE_END_POINT_INVITATION, params, responseHandler);
+	}
+	
+	public void setInvitationToOpened( Invitation invitation, boolean status, AsyncHttpResponseHandler handler ){
+		if( handler == null ){
+			throw new NullPointerException("handler cannot be null");
+		}
+		
+		String json = "{ \"opened_status\": true }";
+		String endPoint = PARSE_END_POINT_INVITATION + "/" + invitation.getObjectId();
+		
 	}
 	
 	public void getUserDetails( String facebookId, AsyncHttpResponseHandler responseHandler ){

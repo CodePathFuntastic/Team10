@@ -2,14 +2,12 @@ package org.codepath.team10.charitychallenger.activities;
 
 import org.codepath.team10.charitychallenger.ParseData;
 import org.codepath.team10.charitychallenger.R;
+import org.codepath.team10.charitychallenger.clients.PutAsyncTask;
 import org.codepath.team10.charitychallenger.fragments.NewInvitationFragment;
 import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.User;
 import org.codepath.team10.charitychallenger.utils.RoundTransform;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,10 +23,9 @@ import android.widget.TextView;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.ParsePush;
 import com.parse.ParseQuery;
+import com.parse.RefreshCallback;
 import com.parse.SaveCallback;
-import com.parse.SendCallback;
 import com.squareup.picasso.Picasso;
 
 public class InvitationDetails extends BaseActivity {
@@ -77,6 +74,55 @@ public class InvitationDetails extends BaseActivity {
 
         tvUserName = (TextView) findViewById(R.id.etUserName);
         tvUserName.setText("Invited by " + sender.getName());
+     
+        setInvitationToOpened( mInvitation);
+	}
+	
+	public void setInvitationToOpened( final Invitation invitation){
+		
+		PutAsyncTask async= new PutAsyncTask();
+		String[] ids = { invitation.getObjectId() };
+		async.execute(ids);
+		
+		
+//		ParseQuery<ParseObject> query = ParseQuery.getQuery("Invitation");
+//		query.getInBackground(invitation.getObjectId(), new GetCallback<ParseObject>() {
+//			
+//			@Override
+//			public void done(ParseObject po, ParseException e) {
+//				if( e == null ){
+//					po.put("opened_status", true);
+//					po.saveInBackground(new SaveCallback() {
+//						
+//						@Override
+//						public void done(ParseException e) {
+//							if( e != null ){
+//								Log.e(BaseActivity.LOG_TAG, "Unable save Invitation", e);
+//							}
+//						}
+//					});
+//				}
+//			}
+//		});
+		
+//		Invitation invite = Invitation.createWithoutData(Invitation.class, invitation.getObjectId());
+//		invite.refreshInBackground( new RefreshCallback(){
+//			@Override
+//			public void done(ParseObject po, ParseException e) {
+//				if( e == null && po !=null ){
+//					po.put("opened_status", true);
+//					Log.d(BaseActivity.LOG_TAG, "Saving message " + po.getObjectId());
+//					po.saveInBackground(new SaveCallback() {
+//						@Override
+//						public void done( ParseException e) {
+//							if( e != null ){
+//								Log.e(BaseActivity.LOG_TAG, "Unable to save object", e);
+//							}
+//						}
+//					});
+//				}
+//			}
+//		});
 	}
 		
 	public void onClickAccept(View v) {
