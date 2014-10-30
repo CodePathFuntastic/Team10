@@ -35,5 +35,15 @@
         android:layout_toRightOf="@+id/ivFriend"
         android:layout_marginLeft="10dp"
         android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvInvitationMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvTimeAgo"
+        android:layout_alignLeft="@+id/tvSender"
+        android:layout_alignRight="@+id/tvTimeAgo"
+        android:layout_alignTop="@+id/ivFriend"
+        android:text="TextView" />
     
 </RelativeLayout>

@@ -194,6 +194,18 @@ public class ChallengeDetailsActivity extends BaseActivity {
 				i.setOpened(false);
 				i.setChallengeId(challenge.getChallengeId());
 				
+				StringBuilder sb = new StringBuilder();
+				sb.append("You have an invitation from ");
+				sb.append( f.getName());
+				i.setSubject( sb.toString());
+				
+				StringBuilder msg = new StringBuilder();
+				msg.append( f.getName() );
+				msg.append( " has invited you to take ");
+				msg.append( challenge.getName() );
+				msg.append(" challenge");
+				i.setMessage(msg.toString());
+				
 				invitations.add(i);
 			}
 			application.sendInvitations( invitations);

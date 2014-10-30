@@ -42,6 +42,7 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 		private ImageView	ivFriend;
 		private TextView	tvSender;
 		private TextView	tvName;
+		private TextView 	tvInvitationMsg;
 		private TextView 	tvTimeAgo;
 	}
 
@@ -57,6 +58,7 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 			viewHolder.ivFriend = (ImageView)convertView.findViewById(R.id.ivFriend);
 			viewHolder.tvSender = (TextView)convertView.findViewById(R.id.tvSender);
 			viewHolder.tvTimeAgo = (TextView)convertView.findViewById(R.id.tvTimeAgo);
+			viewHolder.tvInvitationMsg = (TextView) convertView.findViewById(R.id.tvInvitationMessage);
 			//viewHolder.tvName = (TextView)convertView.findViewById(R.id.tvName); // challenge name.
 			convertView.setTag(viewHolder);
 		}else {
@@ -66,6 +68,10 @@ public class InvitationsAdapter extends ArrayAdapter<Invitation> {
 		if( invitation.getCreatedAt() != null ){
 			String relativeCreationTime = FancyTimeUtil.getRelativeTimeAgo(invitation.getCreatedAt().toString());
 			viewHolder.tvTimeAgo.setText(relativeCreationTime);
+		}
+		
+		if( viewHolder.tvInvitationMsg != null && invitation.getMessage() != null ){
+			viewHolder.tvInvitationMsg.setText( invitation.getMessage());
 		}
 		updateVew(viewHolder, invitation.getSender());
 		setInvitationListener(convertView, position, invitation);
