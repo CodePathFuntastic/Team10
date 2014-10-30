@@ -133,6 +133,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/etUserName"
         android:onClick="onDonate"
+        android:background="#FF0000"
         android:text="@string/donoate" 
         android:layout_margin="15dp"/>
     

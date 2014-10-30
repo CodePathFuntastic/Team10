@@ -7,6 +7,7 @@ import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.activities.FunActivity;
 import org.codepath.team10.charitychallenger.activities.NewPictureActivity;
+import org.codepath.team10.charitychallenger.clients.PutPhotoAsyncTask;
 import org.codepath.team10.charitychallenger.models.Challenge;
 import org.codepath.team10.charitychallenger.models.Invitation;
 import org.codepath.team10.charitychallenger.models.InvitationStatusEnum;
@@ -99,6 +100,10 @@ public class NewPictureFragment extends Fragment {
 				// TODO: create a listener
 				final Picture picture = ((NewPictureActivity) getActivity()).getCurrentPicture();
 				if(picture==null || picture.getPhotoFile() == null){
+					Toast.makeText(
+							getActivity().getApplicationContext(),
+							"Please take the picture first",
+							Toast.LENGTH_SHORT).show();
 					Log.e("Error: ", "Please take the picture first");
 					return;
 				}
@@ -213,12 +218,17 @@ public class NewPictureFragment extends Fragment {
 			photos = new JSONArray();
 		} 
 		photos.put(photourl);
-		qInvitation.put("photos", photos);
-		qInvitation.put("status",InvitationStatusEnum.PIC_SENT.ordinal());
-		//invitation.addPhoto(photourl);
-		//invitation.setStatus(InvitationStatusEnum.PIC_SENT.ordinal());
+		//qInvitation.add("photos", photos);
+		//qInvitation.setStatus("status",InvitationStatusEnum.PIC_SENT.ordinal());
+		invitation.addPhoto(photourl);
+		invitation.setStatus(InvitationStatusEnum.PIC_SENT.ordinal());
 		
-		// update the invitation and challenge
+        setPictureForInvitation( qInvitation);
+        
+ //       sendPushNotification();
+
+		
+//		// update the invitation and challenge
 		qInvitation.saveInBackground( new SaveCallback() {
 			@Override
 			public void done(ParseException e) {
@@ -250,6 +260,13 @@ public class NewPictureFragment extends Fragment {
 		});
 	}
 	
+	private void setPictureForInvitation(Invitation qInvitation) {
+		PutPhotoAsyncTask async= new PutPhotoAsyncTask();
+		async.setInvitation(qInvitation);
+		String[] ids = { invitation.getObjectId() };
+		async.execute(ids);	
+	}
+
 	private void sendPushNotification() {
 		
 		// send push notification
