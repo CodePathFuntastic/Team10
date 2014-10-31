@@ -185,7 +185,7 @@ public class NewPictureFragment extends Fragment {
 
 		// Override Android default landscape orientation and save portrait
 		Matrix matrix = new Matrix();
-		matrix.postRotate(90);
+		matrix.postRotate(180);
 		Bitmap rotatedScaledpictureImage = Bitmap.createBitmap(pictureImageScaled, 0,
 				0, pictureImageScaled.getWidth(), pictureImageScaled.getHeight(),
 				matrix, true);
