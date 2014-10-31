@@ -7,7 +7,6 @@ import org.codepath.team10.charitychallenger.CharityChallengerApplication;
 import org.codepath.team10.charitychallenger.R;
 import org.codepath.team10.charitychallenger.activities.BaseActivity;
 import org.codepath.team10.charitychallenger.activities.ChallengesHomeSwipeActivity;
-import org.codepath.team10.charitychallenger.activities.FunActivity;
 import org.codepath.team10.charitychallenger.activities.NewPictureActivity;
 import org.codepath.team10.charitychallenger.clients.PutPhotoAsyncTask;
 import org.codepath.team10.charitychallenger.models.Challenge;
@@ -28,6 +27,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -125,6 +125,28 @@ public class NewPictureFragment extends Fragment {
 						}
 					}
 				});
+				
+				// get your custom_toast.xml ayout
+				LayoutInflater inflater = ((NewPictureActivity) getActivity()).getLayoutInflater();
+
+				View layout = inflater.inflate(R.layout.custom_toast,
+				  (ViewGroup) ((NewPictureActivity) getActivity()).findViewById(R.id.custom_toast_layout_id));
+
+					// set a dummy image
+					ImageView image = (ImageView) layout.findViewById(R.id.image);
+					image.setImageResource(R.drawable.invited);
+
+					// set a message
+					TextView text = (TextView) layout.findViewById(R.id.text);
+					StringBuffer str = new StringBuffer("Woo Hoo! Photo sent!\n");
+					text.setText(str.toString());
+
+					// Toast...
+					Toast toast = new Toast(((NewPictureActivity) getActivity()).getApplicationContext());
+					toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+					toast.setDuration(Toast.LENGTH_SHORT);
+					toast.setView(layout);
+					toast.show();
 			}
 		});
 
